@@ -1,0 +1,252 @@
+ 
+@{  
+    ViewData["Title"] = "Crear";  
+}  
+<h1>@ViewData["Title"]</h1>
+     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+   
+<hr />  
+  @using (Html.BeginForm("Save", "Calendario", FormMethod.Post))
+    {
+	
+	 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Styling a SignUp Form</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <div class="card">
+  <div class="card-header">
+    Featured
+  </div>
+    <div class="card-body">
+        <div class="row g-4 align-items-center">
+            <div class="col-auto">
+                <label for="inputPassword6" class="col-form-label">IDCRONTAB</label>
+            </div>
+            <div class="col-auto">
+                <label for="inputPassword6" class="col-form-label">01</label>
+            </div>
+            <div class="col-auto">
+                <span id="passwordHelpInline" class="form-text">
+                Hora Inicio
+                </span>
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" readonly="">
+            </div>
+            <div class="col-auto">
+                <span id="passwordHelpInline" class="form-text">
+                Hora Fin
+                </span>
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" readonly="">
+            </div>
+        </div>
+    </div>
+    
+<a href="#" class="link-success">Días</a>
+<div class="row g-4 align-items-center">
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes">
+      <label class="form-check-label" for="flexCheckLunes">
+        Lunes
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes">
+      <label class="form-check-label" for="flexCheckMartes">
+        Martes
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles">
+      <label class="form-check-label" for="flexCheckMiercoles">
+        Miercoles
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves">
+      <label class="form-check-label" for="flexCheckJueves">
+        Jueves
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes">
+      <label class="form-check-label" for="flexCheckViernes">
+        Viernes
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado">
+      <label class="form-check-label" for="flexCheckSabado">
+        Sabado
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo">
+      <label class="form-check-label" for="flexCheckDomingo">
+        Domingo
+      </label>
+    </div>
+  </div>
+</div>
+
+<a href="#" class="link-info">Meses</a>
+<div class="row g-4 align-items-center"><div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckEnero">
+      <label class="form-check-label" for="flexCheckEnero">
+        Enero
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckFebrero">
+      <label class="form-check-label" for="flexCheckFebrero">
+        Febrero
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckMarzo">
+      <label class="form-check-label" for="flexCheckMarzo">
+        Marzo
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckAbril">
+      <label class="form-check-label" for="flexCheckAbril">
+        Abril
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckMayo">
+      <label class="form-check-label" for="flexCheckMayo">
+        Mayo
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckJunio">
+      <label class="form-check-label" for="flexCheckJunio">
+        Junio
+      </label>
+    </div>
+  </div>
+</div>
+<div class="row g-4 align-items-center">
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckJulio">
+      <label class="form-check-label" for="flexCheckJulio">
+        Julio
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckAgost">
+      <label class="form-check-label" for="flexCheckAgost">
+        Agosto
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckSept">
+      <label class="form-check-label" for="flexCheckSept">
+        Septiembre
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckOct">
+      <label class="form-check-label" for="flexCheckOct">
+        Octubre
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckNov">
+      <label class="form-check-label" for="flexCheckNov">
+        Noviembre
+      </label>
+    </div>
+  </div>
+  <div class="col-auto">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckDic">
+      <label class="form-check-label" for="flexCheckDic">
+        Diciembre
+      </label>
+    </div>
+  </div>
+</div>
+<div class="row g-4 align-items-center">
+  <div class="col-auto">
+    <span id="RepeatEveryMins" class="form-text">
+      REPEAT_EVERY_MINS
+    </span>
+  </div>
+  <div class="col-auto">
+    <input type="text" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" readonly="">
+  </div>
+  <div class="col-auto">
+    <span id="RepeatAfterFin" class="form-text">
+      REPEAT_AFTER_FINISH
+    </span>
+  </div>
+  <div class="col-auto">
+    <select id="inputState" class="form-control">
+      <option selected>Seleccionar</option>
+      <option>0</option>
+      <option>1</option>
+    </select>
+  </div>
+</div>
+
+<button type="submit" class="btn btn-primary">Guardar</button>
+</div>
+
+  @*
+  <form>
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <div class="col-auto">
+    <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+  </div>
+</form> 
+*@
+	<script type="text/javascript">
+  $('.clockpicker').clockpicker();
+</script>
+}
