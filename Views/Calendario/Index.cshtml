@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <script src="~/lib/jquery/dist/jquery.min.js"></script>
-  <link href="~/lib/datatables/dist/css/datatables.min.css" rel="stylesheet">
-  <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="~/lib/datatables/dist/js/pdfmake.min.js"></script>
-  <script src="~/lib/datatables/dist/js/vfs_fonts.js"></script>
-  <script src="~/lib/datatables/dist/js/datatables.min.js"></script>
+  <link rel="stylesheet" href="~/css/datatables.min.css" />
+  <script src="~/js/jquery-1.11.3.min.js"></script>
+  <script src="~/js/pdfmake.min.js"></script>
+  <script src="~/js/vfs_fonts.js"></script>
+  <script src="~/js/datatables.min.js"></script>
 
 <style>
   .container{
@@ -118,9 +117,6 @@
   
   <h1>Calendarios</h1>
   <div class="card">
-    <div class="card-header">
-      <button type="button" class="btn btn-primary">Nuevo</button>
-    </div>
     <div class="card-body">
       <div class="row g-4 align-items-center">
         <div class="col-auto">
@@ -136,6 +132,7 @@
         </div>
         <div class="col-auto">
           <select class="form-select" name="horaIni" id="horaIni">
+            <option value="cero">00</option>
             <option value="uno">01</option>
             <option value="dos">02</option>
             <option value="tres">03</option>
@@ -159,7 +156,6 @@
             <option value="veintiuno">21</option>
             <option value="veintidos">22</option>
             <option value="veintires">23</option>
-            <option value="veinticuatro">24</option>
           </select>
         </div>
         <div class="col-auto">
@@ -233,6 +229,7 @@
         </div>
         <div class="col-auto">
           <select class="form-select" name="horaFin" id="horaFin">
+            <option value="cero">00</option>
             <option value="uno">01</option>
             <option value="dos">02</option>
             <option value="tres">03</option>
@@ -256,7 +253,6 @@
             <option value="veintiuno">21</option>
             <option value="veintidos">22</option>
             <option value="veintires">23</option>
-            <option value="veinticuatro">24</option>
           </select>
         </div>
         <div class="col-auto">
@@ -390,263 +386,279 @@
       <div class="row g-4 align-items-center">
         <div class="col-auto">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckTodosExe">
-            <label class="form-check-label" for="flexCheckTodosExe">
-              Todos
-            </label>
+            <input class="form-check-input" type="checkbox" onClick="toggle(this)" /> Seleccionar/Deseleccionar todos<br><br>
           </div>
         </div>
       </div>
-      <div class="row g-4 align-items-center">
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckUnoExe">
+      
+      <table id="tbl-dias-exe" class="display nowrap" width="100%">
+        <thead>
+        <tr>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckUnoExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckUnoExe">
               1
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDosExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDosExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckDosExe">
               2
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckTresExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckTresExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckTresExe">
               3
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckCuatroExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckCuatroExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckCuatroExe">
               4
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckCincoExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckCincoExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckCincoExe">
               5
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckSeisExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckSeisExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckSeisExe">
               6
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckSieteExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckSieteExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckSieteExe">
               7
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckOchoExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckOchoExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckOchoExe">
               8
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckNueveExe">
-            <label class="form-check-label" for="flexCheckNueveExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexChecknueveExe" name="dinamico" >
+          </td>
+          <td>
+            <label class="form-check-label" for="flexChecknueveExe">
               9
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiezExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiezExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckDiezExe">
               10
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckOnceExe">
+          </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckOnceExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckOnceExe">
               11
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDoceExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDoceExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckDoceExe">
               12
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckTreceExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckTreceExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckTreceExe">
               13
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckCatorceExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckCatorceExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckCatorceExe">
               14
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckQuinceExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckQuinceExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckQuinceExe">
               15
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiezsiseisExe">
-            <label class="form-check-label" for="flexCheckDiezsiseisExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiesiseisExe" name="dinamico" >
+          </td>
+          <td>
+            <label class="form-check-label" for="flexCheckDiesiseisExe">
               16
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiezsieteExe">
-            <label class="form-check-label" for="flexCheckDiezsieteExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiesicieteExe" name="dinamico" >
+          </td>
+          <td>
+            <label class="form-check-label" for="flexCheckDiesicieteExe">
               17
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiezsiochoExe">
-            <label class="form-check-label" for="flexCheckDiezsiochoExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiesiochoExe" name="dinamico" >
+          </td>
+          <td>
+            <label class="form-check-label" for="flexCheckDiesiochoExe">
               18
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiezcinueveExe">
-            <label class="form-check-label" for="flexCheckDiezcinueveExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDiecinueveExe" name="dinamico" >
+          </td>
+          <td>
+            <label class="form-check-label" for="flexCheckDiecinueveExe">
               19
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinteExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinteExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeinteExe">
               20
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiunoExe">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <table id="tbl-dias-exe" class="display nowrap" width="100%">
+        <thead>
+        <tr>
+          <th>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiunoExe" name="dinamico" >
+          </th>
+          <td>
             <label class="form-check-label" for="flexCheckVeintiunoExe">
               21
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintidosExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintidosExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeintidosExe">
               22
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintitresExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintitresExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeintitresExe">
               23
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinticuatroExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinticuatroExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeinticuatroExe">
               24
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinticincoExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinticincoExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeinticincoExe">
               25
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiseisExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiseisExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeintiseisExe">
               26
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintisieteExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintisieteExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeintisieteExe">
               27
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiochoExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiochoExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeintiochoExe">
               28
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintinueveExe">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintinueveExe" name="dinamico" >
+          </td>
+          <td>
             <label class="form-check-label" for="flexCheckVeintinueveExe">
               29
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckTreinta">
-            <label class="form-check-label" for="flexCheckTreinta">
+          </td>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckTreintaExe" name="dinamico" >
+          </td>
+          <td>
+            <label class="form-check-label" for="flexCheckTreintaExe">
               30
             </label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckTreintauno">
-            <label class="form-check-label" for="flexCheckTreintauno">
+          </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckTreintaunoExe" name="dinamico" >
+          </td>
+          <td>
+            <label class="form-check-label" for="flexCheckTreintaunoExe">
               31
             </label>
-          </div>
-        </div>
-      </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
       <hr />
 
       <a href="#" class="link-info">Meses</a>
@@ -748,9 +760,9 @@
           </div>
         </div>
       </div>
-
+      
+      <hr />
       <div class="accordion accordion-flush" id="accordionFlushExample">
-        <hr />
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <span id="RepeatEveryMins" class="form-text">
@@ -772,498 +784,205 @@
       </div>
     </div>
     <div class="card-footer text-muted">
-      <a  id="btnSave" class="btn btn-primary">Guardar</a>
+      <a href="#" class="btn btn-primary">Guardar</a>
     </div>
   </div>
   
-<div class="container">
-    
-  <table id="example" class="display nowrap" width="100%">
-    <thead>
-      <tr>
-        <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all"></th>
-        
-        <th>IDCRONTAB</th>
-        <th>FECHA</th>
-        <th>HORA INICIO</th>
-        <th>HORA FIN</th>
-        <th>RECURRENCIA</th>
-        <th>WDAY_M2S_EX</th>
-        <th>DAY_EX</th>
-        <th>MONTH_EX</th>
-        <th>REPEAT_EVERY_MINS</th>
-        <th>REPEAT_AFTER_FINISH</th>
-        <th>ACCION</th>
-      </tr>
-    </thead>
+  <div class="container">
+    <table id="dt-calendario" class="display nowrap" width="100%">
+      <thead>
+        <tr>
+          <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="dt-calendario-select-all"></th>
+          <th>IDCRONTAB</th>
+          <th>FECHA</th>
+          <th>HORA INICIO</th>
+          <th>HORA FIN</th>
+          <th>RECURRENCIA</th>
+          <th>WDAY_M2S_EX</th>
+          <th>DAY_EX</th>
+          <th>MONTH_EX</th>
+          <th>REPEAT_EVERY_MINS</th>
+          <th>REPEAT_AFTER_FINISH</th>
+          <th>ACCION</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</body>
 
-    <tbody>
-      
-        
-    </tbody>
-  </table>
-</div>
 <script> 
-  function recargartabla(objeto)
-{
+  function toggle(source) {
+    checkboxes = document.getElementsByName('dinamico');
 
-	objeto.ajax.reload(null,false); //reload datatable ajax 
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+      checkboxes[i].checked = source.checked;
+    }
+  }
 
-}
+  $(document).ready( function () {
 
-
-$(document).ready( function () {
-
-  var table = $('#example').DataTable( {
-        "processing": true,
-        "serverSide": true,
-        "filter": true,
-		"scrollX":          true,
+    var table = $('#dt-calendario').DataTable( {
+      "processing": true,
+      "serverSide": true,
+      "filter": true,
+      "scrollX":          true,
         "sScrollX":         "50%",
         "scrollY":            $(document).height() - 300,
         "scrollCollapse":     true,
         "ajax": {
-            "url": "@Url.Action("ListarCrontabs","Calendario")",
-            "type": "POST",
-            "datatype": "json"
+          "url": "@Url.Action("ListarCrontabs","Calendario")",
+          "type": "POST",
+          "datatype": "json"
         },
         "columnDefs": [{
-            'targets': 0,
-			  orderable: false,
-        
-         'render': function (data, type, full, meta){
-             return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-         }
-         }],
+          'targets': 0,
+        orderable: false,
+          'render': function (data, type, full, meta){
+            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+          }
+          }],
         "columns": [
-            {
-                "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
-            },
-            { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
+          {
+            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
+          },
+          { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
             { "data": "fecha", "name": "fecha", "autoWidth": true },
             { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
             { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
             { "data": "recurrencia", "name": "recurrencia", "autoWidth": true },
             { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
-             { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
-             { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
+            { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
+            { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
             { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
             { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
             {
-                "render": function (data,row) { return '<a class="btn btn-success">tst</a>&nbsp;<a class="btn btn-info">tst</a>&nbsp;<a class="btn btn-danger">tst</a>';   }
-            },
+              "render": function (data,row) { return '<a class="btn btn-success">tst</a>&nbsp;<a class="btn btn-info">tst</a>&nbsp;<a class="btn btn-danger">tst</a>';   }
+          },
         ],
-		
-	   select: {
-      style:    'os',   //default but you have to specify it, no idea why
-      selector: 'tr,a:not(.btn)'
-    }  ,language: {
-    "processing": "Procesando...",
-    "lengthMenu": "Mostrar _MENU_ registros",
-    "zeroRecords": "No se encontraron resultados",
-    "emptyTable": "Ningún dato disponible en esta tabla",
-    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "search": "Buscar:",
-    "loadingRecords": "Cargando...",
-    "paginate": {
-      "first": "Primero",
-      "last": "Último",
-      "next": "Siguiente",
-      "previous": "Anterior"
-    },
-    "aria": {
-      "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-      "sortDescending": ": Activar para ordenar la columna de manera descendente"
-    },
-    "buttons": {
-      "copy": "Copiar",
-      "colvis": "Visibilidad",
-      "collection": "Colección",
-      "colvisRestore": "Restaurar visibilidad",
-      "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
-      "copySuccess": {
-        "1": "Copiada 1 fila al portapapeles",
-        "_": "Copiadas %ds fila al portapapeles"
-      },
-      "copyTitle": "Copiar al portapapeles",
-      "csv": "CSV",
-      "excel": "Excel",
-        "pageLength": {
-          "-1": "Mostrar todas las filas",
-          "_": "Mostrar %d filas"
-        },
-      "pdf": "PDF",
-      "print": "Imprimir",
-      "renameState": "Cambiar nombre",
-      "updateState": "Actualizar",
-      "createState": "Crear Estado",
-      "removeAllStates": "Remover Estados",
-      "removeState": "Remover",
-      "savedStates": "Estados Guardados",
-      "stateRestore": "Estado %d"
-    },
-    "autoFill": {
-      "cancel": "Cancelar",
-      "fill": "Rellene todas las celdas con <i>%d<\/i>",
-      "fillHorizontal": "Rellenar celdas horizontalmente",
-      "fillVertical": "Rellenar celdas verticalmente"
-    },
-    "decimal": ",",
-    "searchBuilder": {
-        "add": "Añadir condición",
-        "button": {
-        "0": "Constructor de búsqueda",
-        "_": "Constructor de búsqueda (%d)"
-        },
-        "clearAll": "Borrar todo",
-        "condition": "Condición",
-        "conditions": {
-          "date": {
-            "before": "Antes",
-            "between": "Entre",
-            "empty": "Vacío",
-            "equals": "Igual a",
-            "notBetween": "No entre",
-            "not": "Diferente de",
-            "after": "Después",
-            "notEmpty": "No Vacío"
-          },
-          "number": {
-            "between": "Entre",
-            "equals": "Igual a",
-            "gt": "Mayor a",
-            "gte": "Mayor o igual a",
-            "lt": "Menor que",
-            "lte": "Menor o igual que",
-            "notBetween": "No entre",
-            "notEmpty": "No vacío",
-            "not": "Diferente de",
-            "empty": "Vacío"
-          },
-          "string": {
-            "contains": "Contiene",
-            "empty": "Vacío",
-            "endsWith": "Termina en",
-            "equals": "Igual a",
-            "startsWith": "Empieza con",
-            "not": "Diferente de",
-            "notContains": "No Contiene",
-            "notStartsWith": "No empieza con",
-            "notEndsWith": "No termina con",
-            "notEmpty": "No Vacío"
-          },
-          "array": {
-            "not": "Diferente de",
-            "equals": "Igual",
-            "empty": "Vacío",
-            "contains": "Contiene",
-            "notEmpty": "No Vacío",
-            "without": "Sin"
-          }
-        },
-        "data": "Data",
-        "deleteTitle": "Eliminar regla de filtrado",
-        "leftTitle": "Criterios anulados",
-        "logicAnd": "Y",
-        "logicOr": "O",
-        "rightTitle": "Criterios de sangría",
-        "title": {
-          "0": "Constructor de búsqueda",
-          "_": "Constructor de búsqueda (%d)"
-        },
-        "value": "Valor"
-    },
-    "searchPanes": {
-      "clearMessage": "Borrar todo",
-      "collapse": {
-          "0": "Paneles de búsqueda",
-          "_": "Paneles de búsqueda (%d)"
-      },
-      "count": "{total}",
-      "countFiltered": "{shown} ({total})",
-      "emptyPanes": "Sin paneles de búsqueda",
-      "loadMessage": "Cargando paneles de búsqueda",
-      "title": "Filtros Activos - %d",
-      "showMessage": "Mostrar Todo",
-      "collapseMessage": "Colapsar Todo"
-    },
-    "select": {
-      /*  "cells": {
-            "1": "1 celda seleccionada",
-            "_": "%d celdas seleccionadas"
-        },
-        "columns": {
-            "1": "1 columna seleccionada",
-            "_": "%d columnas seleccionadas"
-        },*/
-        "rows": {
-          "1": "1 fila seleccionada",
-          "_": "%d filas seleccionadas"
-        }
-    },
-    "thousands": ".",
-    "datetime": {
-      "previous": "Anterior",
-      "hours": "Horas",
-      "minutes": "Minutos",
-      "seconds": "Segundos",
-      "unknown": "-",
-      "amPm": [
-        "AM",
-        "PM"
-      ],
-      "months": {
-        "0": "Enero",
-        "1": "Febrero",
-        "10": "Noviembre",
-        "11": "Diciembre",
-        "2": "Marzo",
-        "3": "Abril",
-        "4": "Mayo",
-        "5": "Junio",
-        "6": "Julio",
-        "7": "Agosto",
-        "8": "Septiembre",
-        "9": "Octubre"
-      },
-      "weekdays": {
-        "0": "Dom",
-        "1": "Lun",
-        "2": "Mar",
-        "4": "Jue",
-        "5": "Vie",
-        "3": "Mié",
-        "6": "Sáb"
-      },
-      "next": "Próximo"
-    },
-    "editor": {
-      "close": "Cerrar",
-      "create": {
-        "button": "Nuevo",
-        "title": "Crear Nuevo Registro",
-        "submit": "Crear"
-      },
-      "edit": {
-        "button": "Editar",
-        "title": "Editar Registro",
-        "submit": "Actualizar"
-      },
-      "remove": {
-        "button": "Eliminar",
-        "title": "Eliminar Registro",
-        "submit": "Eliminar",
-        "confirm": {
-          "_": "¿Está seguro de que desea eliminar %d filas?",
-          "1": "¿Está seguro de que desea eliminar 1 fila?"
-        }
-      },
-      "error": {
-        "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
-      },
-      "multi": {
-        "title": "Múltiples Valores",
-        "restore": "Deshacer Cambios",
-        "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo.",
-        "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, haga clic o pulse aquí, de lo contrario conservarán sus valores individuales."
+      
+      select: {
+        style:    'os',   //default but you have to specify it, no idea why
+        selector: 'tr,a:not(.btn)'
       }
-    },
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-    "stateRestore": {
-      "creationModal": {
-        "button": "Crear",
-        "name": "Nombre:",
-        "order": "Clasificación",
-        "paging": "Paginación",
-        "select": "Seleccionar",
-        "columns": {
-          "search": "Búsqueda de Columna",
-          "visible": "Visibilidad de Columna"
-        },
-        "title": "Crear Nuevo Estado",
-        "toggleLabel": "Incluir:",
-        "scroller": "Posición de desplazamiento",
-        "search": "Búsqueda",
-        "searchBuilder": "Búsqueda avanzada"
-      },
-      "removeJoiner": "y",
-      "removeSubmit": "Eliminar",
-      "renameButton": "Cambiar Nombre",
-      "duplicateError": "Ya existe un Estado con este nombre.",
-      "emptyStates": "No hay Estados guardados",
-      "removeTitle": "Remover Estado",
-      "renameTitle": "Cambiar Nombre Estado",
-      "emptyError": "El nombre no puede estar vacío.",
-      "removeConfirm": "¿Seguro que quiere eliminar %s?",
-      "removeError": "Error al eliminar el Estado",
-      "renameLabel": "Nuevo nombre para %s:"
-    },
-    "infoThousands": "."
-  } ,
+      });
+
+    table.on('select', function (e, dt, type, indexes) {
+    console.log(e.target);
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
+        });
+        //.find(':checkbox', 'td:first-child').checked = true; 
+      }
     });
 
-  table.on('select', function (e, dt, type, indexes) {
-  console.log(e.target);
-    if (type === 'row'   ) {
-      var nodes = table
-      .rows(indexes)
-      .nodes()
-      .each(function () { 
-        $('td:first-child', this).find('input').prop('checked', true); 
-      });
-      //.find(':checkbox', 'td:first-child').checked = true; 
-    }
-  });
+    table.on('deselect', function (e, dt, type, indexes) {
+      if (type === 'row') {
+      $('#example-select-all').prop("checked",false);
+        table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', false); 
+        });
+      }
+    });
+    
+    // Handle click on "Select all" control
+    $('#example-select-all').on('click', function(){
+        
+      console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+      // Get all rows with search applied
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else 
+      {
+      var selData =   table.rows().deselect();
+      }
+    });
 
-  table.on('deselect', function (e, dt, type, indexes) {
-    if (type === 'row') {
-	$('#example-select-all').prop("checked",false);
-	
-      table
-      .rows(indexes)
-      .nodes()
-      .each(function () { 
-        $('td:first-child', this).find('input').prop('checked', false); 
-      });
-    }
-  });
-  
-   // Handle click on "Select all" control
-   $('#example-select-all').on('click', function(){
-      
-	  console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-	  // Get all rows with search applied
-      var rows = table.rows({ 'search': 'applied' }).nodes();
-      // Check/uncheck checkboxes for all rows in the table
-	  if(this.checked){
-      $('input[type="checkbox"]', rows).prop('checked', this.checked);
-	    
-	    var selData =   table.rows().select();
-	    var selData =   table.rows(".selected").data();
-		}
-		else 
-		{
-		var selData =   table.rows().deselect();
-		}
-   });
-
-   // Handle click on checkbox to set state of "Select all" control
-   $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-      // If checkbox is not checked
-      if(!this.checked){
-         var el = $('#example-select-all').get(0);
-         // If "Select all" control is checked and has 'indeterminate' property
-         if(el && el.checked && ('indeterminate' in el)){
+    // Handle click on checkbox to set state of "Select all" control
+    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+        // If checkbox is not checked
+        if(!this.checked){
+          var el = $('#example-select-all').get(0);
+          // If "Select all" control is checked and has 'indeterminate' property
+          if(el && el.checked && ('indeterminate' in el)){
             // Set visual state of "Select all" control
             // as 'indeterminate'
             el.indeterminate = true;
-         }
+          }
+        }
+    });
+    
+    table.on('select', function (e, dt, type, indexes) {
+    console.log(e.target);
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
+        });
+        //.find(':checkbox', 'td:first-child').checked = true; 
       }
-   });
-   
-   
-   
-  table.on('select', function (e, dt, type, indexes) {
-  console.log(e.target);
-    if (type === 'row'   ) {
-      var nodes = table
-      .rows(indexes)
-      .nodes()
-      .each(function () { 
-        $('td:first-child', this).find('input').prop('checked', true); 
-      });
-      //.find(':checkbox', 'td:first-child').checked = true; 
-    }
-  });
+    });
 
-  table.on('deselect', function (e, dt, type, indexes) {
-    if (type === 'row') {
-	$('#example-select-all').prop("checked",false);
-	
-      table
-      .rows(indexes)
-      .nodes()
-      .each(function () { 
-        $('td:first-child', this).find('input').prop('checked', false); 
-      });
-    }
-  });
-  
-   // Handle click on "Select all" control
-   $('#example-select-all').on('click', function(){
-      
-	  console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-	  // Get all rows with search applied
-      var rows = table.rows({ 'search': 'applied' }).nodes();
-      // Check/uncheck checkboxes for all rows in the table
-	  if(this.checked){
-      $('input[type="checkbox"]', rows).prop('checked', this.checked);
-	    
-	    var selData =   table.rows().select();
-	    var selData =   table.rows(".selected").data();
-		}
-		else 
-		{
-		var selData =   table.rows().deselect();
-		}
-   });
-
-   // Handle click on checkbox to set state of "Select all" control
-   $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-      // If checkbox is not checked
-      if(!this.checked){
-         var el = $('#example-select-all').get(0);
-         // If "Select all" control is checked and has 'indeterminate' property
-         if(el && el.checked && ('indeterminate' in el)){
-            // Set visual state of "Select all" control
-            // as 'indeterminate'
-            el.indeterminate = true;
-         }
+    table.on('deselect', function (e, dt, type, indexes) {
+      if (type === 'row') {
+      $('#example-select-all').prop("checked",false);
+        table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', false); 
+        });
       }
-   });
+    });
+    
+    // Handle click on "Select all" control
+    $('#example-select-all').on('click', function(){
+        
+      console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+      // Get all rows with search applied
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else 
+      {
+      var selData =   table.rows().deselect();
+      }
+    });
 
-
-
-   
-$('#btnSave').on('click',function(){
-
- var data_cron={
-  "oCrontab": {
-       /*"IDCRONTAB":,*/
-       "FECHA":"00000000",
-       "HORA_INICIO":"0000",
-       "HORA_FIN":"0000",
-       "RECURRENCIA":"0000",
-       "WDAY_M2S_EX":"1111111",
-       "DAY_EX":"0",
-       "MONTH_EX":"0",
-       "REPEAT_EVERY_MINS":"0",
-       "REPEAT_AFTER_FINISH":"0"
-  }
- };
-
-  $.ajax({
-                type: "POST",
-                url: '@Url.Action("Save", "Calendario")' ,
-                data: JSON.stringify(data_cron),
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function () {
-                   // alert("Data has been added successfully.");
-                    recargartabla(table);
-                },
-                error: function () {
-                    alert("Error while inserting data");
-                }
-            });
-
-});
-  
-  
-} );
+    // Handle click on checkbox to set state of "Select all" control
+    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+        // If checkbox is not checked
+        if(!this.checked){
+          var el = $('#example-select-all').get(0);
+          // If "Select all" control is checked and has 'indeterminate' property
+          if(el && el.checked && ('indeterminate' in el)){
+          // Set visual state of "Select all" control
+          // as 'indeterminate'
+          el.indeterminate = true;
+        }
+      }
+    });
+  });
 </script> 
-
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
- </body>
 </html>

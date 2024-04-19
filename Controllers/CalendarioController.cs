@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ using Oracle.ManagedDataAccess.Client;
 using WebAdminScheduler.Models;
 using WebAdminScheduler.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
- 
+
 namespace WebAdminScheduler.Controllers
 {
     public class CalendarioController : Controller
@@ -24,7 +24,7 @@ namespace WebAdminScheduler.Controllers
         }
         public IActionResult Index()
         {
-           var data = (from s in _DBContext.CP_CRONTABS select s).ToList();  
+            var data = (from s in _DBContext.CP_CRONTABS select s).ToList();  
             ViewBag.CP_CRONTAB = data;  
             return View();
         }
@@ -34,7 +34,7 @@ namespace WebAdminScheduler.Controllers
         }
 		
 		[HttpPost]
-		public JsonResult Save(Cp_CrontabVM vcrontab)
+		public JsonResult Save(Cp_CrontabVM user)
 		{
            CP_CRONTAB crontabt = new CP_CRONTAB();
            
@@ -56,8 +56,7 @@ namespace WebAdminScheduler.Controllers
 		[HttpPost]
         public JsonResult ListarCrontabs()
         {
-		  int NroPeticion = Convert.ToInt32(Request.Form["draw"].FirstOrDefault() ?? "0");
-
+            int NroPeticion = Convert.ToInt32(Request.Form["draw"].FirstOrDefault() ?? "0");
 
             //cuantos registros va a devolver
             int CantidadRegistros = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
@@ -68,30 +67,20 @@ namespace WebAdminScheduler.Controllers
             //el texto de busqueda
             string ValorBuscado = Request.Form["search[value]"].FirstOrDefault() ?? "";
 
-             IQueryable<CP_CRONTAB> queryCrontab = _DBContext.CP_CRONTABS;
-             // Total de registros antes de filtrar.
+            IQueryable<CP_CRONTAB> queryCrontab = _DBContext.CP_CRONTABS;
+            // Total de registros antes de filtrar.
             int TotalRegistros = queryCrontab.Count();
 
-            //queryCrontab = queryCrontab;
-               // .Where(e => e.IDCRONTAB.Co(ValorBuscado));
-
-            // Total de registros ya filtrados.
             int TotalRegistrosFiltrados = queryCrontab.Count();
-
 
             var listaCrons = queryCrontab/*.Skip(OmitirRegistros).Take(CantidadRegistros).*/.ToList();
 
-
-           return Json(new {
-                
+            return Json(new {
                 draw = NroPeticion,
                 recordsTotal = TotalRegistros,
                 recordsFiltered = TotalRegistros,
                 data=listaCrons
-                 
             });
         }
-        
-		 
     }
 }

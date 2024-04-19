@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebAdminScheduler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7fee34a273bc623218cd2469f9b79fd3ca1c84c")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebAdminScheduler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebAdminScheduler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

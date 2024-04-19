@@ -2,19 +2,16 @@
 <html>
 
   <head>
-    <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.2/af-2.7.0/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.1/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.2/af-2.7.0/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.1/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.js"></script>
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script src="~/js/pdfmake.min.js"></script>
+    <script src="~/js/vfs_fonts.js"></script>
+    <script src="~/js/datatables.min.js"></script>
   </head>
 
   <body>
     <h1>Jobs</h1>
     <div class="card">
-      <div class="card-header">
-        <button type="button" class="btn btn-primary">Nuevo</button>
-      </div>
       <div class="card-body">
         <div class="row g-4 align-items-center">
           <div class="col-auto">
@@ -37,6 +34,7 @@
           </div>
         </div>
 
+        <br/>
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <label for="TittleDescrpcion" class="col-form-label">DESCRIPCIÓN</label>
@@ -99,6 +97,11 @@
             <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
           </div>
           <div class="col-auto">
+            <span id="RepeatEstado" class="form-text">
+              ESTADO
+            </span>
+          </div>
+          <div class="col-auto">
             <select class="form-select" name="estado" id="estado">
               <option value="act">ACTIVO</option>
               <option value="inact">INACTIVO</option>
@@ -114,12 +117,12 @@
             </div>
           </div>
           <div class="col-auto">
-            <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
-          </div>
-          <div class="col-auto">
             <span id="idHost" class="form-text">
               IDHOST
             </span>
+          </div>
+          <div class="col-auto">
+            <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
           </div>
           <div class="col-auto">
             <div class="form-check">
@@ -130,12 +133,12 @@
             </div>
           </div>
           <div class="col-auto">
-            <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
-          </div>
-          <div class="col-auto">
             <span id="Node" class="form-text">
               NODE
             </span>
+          </div>
+          <div class="col-auto">
+            <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
           </div>
         </div>
       </div>
@@ -143,378 +146,209 @@
         <a href="#" class="btn btn-primary">Guardar</a>
       </div>
     </div>
-    
-      <div class="container">
-        <table id="example" class="display nowrap" width="100%">
-          <thead>
-            <tr>
-              <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all"></th>
-              <th>IDCRONTAB</th>
-              <th>FECHA</th>
-              <th>HORA INICIO</th>
-              <th>HORA FIN</th>
-              <th>RECURRENCIA</th>
-              <th>WDAY_M2S_EX</th>
-              <th>DAY_EX</th>
-              <th>MONTH_EX</th>
-              <th>REPEAT_EVERY_MINS</th>
-              <th>REPEAT_AFTER_FINISH</th>
-              <th>ACCION</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>1000</td>
-              <td>00000000</td>
-              <td>0000</td>
-              <td>0000</td>
-              <td>0000</td>
-              <td>1111111</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  
+    <div class="container">
+      <table id="dt-jobs" class="display nowrap" width="100%">
+        <thead>
+          <tr>
+            <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="dt-jobs-select-all"></th>
+            <th>IDPROC</th>
+            <th>IDCONEX</th>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>PATH</th>  
+            <th>PARAMETRO1</th>
+            <th>PARAMETRO2</th>
+            <th>PARAMETRO3</th>
+            <th>PARAMETRO4</th>
+            <th>DEPENDENCIA</th>
+            <th>INTENTOS</th>
+            <th>ESPERA INTENTO</th>
+            <th>ESTADO</th>
+            <th>FTP</th>
+            <th>IDHOST</th>
+            <th>COMPRESIÓN</th>
+            <th>IDCRONTAB</th>
+            <th>NODE</th>
+            <th>ACCIÓN</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </body>
 
 <script>
-$(document).ready( function () {
-  var table = $('#example').DataTable({
-    // dom: 't',
-	  // responsive: true,
-	 //  pageLength: 10,
-      "scrollX":  true,
-        "sScrollX": "50%",
-		    "scrollY":  $(document).height() - 300,
-        "scrollCollapse": true,
-	    'columnDefs': [
-      {
-        'targets': 0,
-			  orderable: false,
-        'className': 'dt-body-center',
-        'render': function (data, type, full, meta){
-        return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-        }
+  $(document).ready( function () {
+    var table = $('#dt-jobs').DataTable( {
+      "processing": true,
+      "serverSide": true,
+      "filter": true,
+      "scrollX":          true,
+        "sScrollX":         "50%",
+        "scrollY":            $(document).height() - 300,
+        "scrollCollapse":     true,
+        "ajax": {
+          "url": "@Url.Action("ListarProcesos","Jobs")",
+          "type": "POST",
+          "datatype": "json"
         },
-		 {
-			"targets": -1, //la ultima columna
-			"data": null,
-			"name":"botonesAccion",
-			"defaultContent": '<a class="btn btn-success">tst</a>&nbsp;<a class="btn btn-info">tst</a>&nbsp;<a class="btn btn-danger">tst</a>',
-			"render": function ( data, type, row, meta ) {   		  
-				/*if(data[55]==1)
-				return '<a disabled title="Editar Producto" class="btn btn-mini btn-xs btn-success"><i  class="icon-pencil bigger-130"></i></a>&nbsp;'
-                else*/
-              // return '<a  id="editar" title="Editar Producto" class="btn btn-mini btn-xs btn-success"><i  class="icon-pencil bigger-130"></i></a>&nbsp;';					
-			}					
-			
-		} 
-    ],
-	  select: {
-      style:    'os',   //default but you have to specify it, no idea why
-      selector: 'tr,a:not(.btn)'
-    }
-	  ,language: {
-    "processing": "Procesando...",
-    "lengthMenu": "Mostrar _MENU_ registros",
-    "zeroRecords": "No se encontraron resultados",
-    "emptyTable": "Ningún dato disponible en esta tabla",
-    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "search": "Buscar:",
-    "loadingRecords": "Cargando...",
-    "paginate": {
-      "first": "Primero",
-      "last": "Último",
-      "next": "Siguiente",
-      "previous": "Anterior"
-    },
-    "aria": {
-      "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-      "sortDescending": ": Activar para ordenar la columna de manera descendente"
-    },
-    "buttons": {
-      "copy": "Copiar",
-      "colvis": "Visibilidad",
-      "collection": "Colección",
-      "colvisRestore": "Restaurar visibilidad",
-      "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
-      "copySuccess": {
-        "1": "Copiada 1 fila al portapapeles",
-        "_": "Copiadas %ds fila al portapapeles"
-      },
-      "copyTitle": "Copiar al portapapeles",
-      "csv": "CSV",
-      "excel": "Excel",
-        "pageLength": {
-          "-1": "Mostrar todas las filas",
-          "_": "Mostrar %d filas"
-        },
-      "pdf": "PDF",
-      "print": "Imprimir",
-      "renameState": "Cambiar nombre",
-      "updateState": "Actualizar",
-      "createState": "Crear Estado",
-      "removeAllStates": "Remover Estados",
-      "removeState": "Remover",
-      "savedStates": "Estados Guardados",
-      "stateRestore": "Estado %d"
-    },
-    "autoFill": {
-      "cancel": "Cancelar",
-      "fill": "Rellene todas las celdas con <i>%d<\/i>",
-      "fillHorizontal": "Rellenar celdas horizontalmente",
-      "fillVertical": "Rellenar celdas verticalmente"
-    },
-    "decimal": ",",
-    "searchBuilder": {
-        "add": "Añadir condición",
-        "button": {
-        "0": "Constructor de búsqueda",
-        "_": "Constructor de búsqueda (%d)"
-        },
-        "clearAll": "Borrar todo",
-        "condition": "Condición",
-        "conditions": {
-          "date": {
-            "before": "Antes",
-            "between": "Entre",
-            "empty": "Vacío",
-            "equals": "Igual a",
-            "notBetween": "No entre",
-            "not": "Diferente de",
-            "after": "Después",
-            "notEmpty": "No Vacío"
-          },
-          "number": {
-            "between": "Entre",
-            "equals": "Igual a",
-            "gt": "Mayor a",
-            "gte": "Mayor o igual a",
-            "lt": "Menor que",
-            "lte": "Menor o igual que",
-            "notBetween": "No entre",
-            "notEmpty": "No vacío",
-            "not": "Diferente de",
-            "empty": "Vacío"
-          },
-          "string": {
-            "contains": "Contiene",
-            "empty": "Vacío",
-            "endsWith": "Termina en",
-            "equals": "Igual a",
-            "startsWith": "Empieza con",
-            "not": "Diferente de",
-            "notContains": "No Contiene",
-            "notStartsWith": "No empieza con",
-            "notEndsWith": "No termina con",
-            "notEmpty": "No Vacío"
-          },
-          "array": {
-            "not": "Diferente de",
-            "equals": "Igual",
-            "empty": "Vacío",
-            "contains": "Contiene",
-            "notEmpty": "No Vacío",
-            "without": "Sin"
+        "columnDefs": [{
+          'targets': 0,
+        orderable: false,
+          'render': function (data, type, full, meta){
+            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
           }
-        },
-        "data": "Data",
-        "deleteTitle": "Eliminar regla de filtrado",
-        "leftTitle": "Criterios anulados",
-        "logicAnd": "Y",
-        "logicOr": "O",
-        "rightTitle": "Criterios de sangría",
-        "title": {
-          "0": "Constructor de búsqueda",
-          "_": "Constructor de búsqueda (%d)"
-        },
-        "value": "Valor"
-    },
-    "searchPanes": {
-      "clearMessage": "Borrar todo",
-      "collapse": {
-          "0": "Paneles de búsqueda",
-          "_": "Paneles de búsqueda (%d)"
-      },
-      "count": "{total}",
-      "countFiltered": "{shown} ({total})",
-      "emptyPanes": "Sin paneles de búsqueda",
-      "loadMessage": "Cargando paneles de búsqueda",
-      "title": "Filtros Activos - %d",
-      "showMessage": "Mostrar Todo",
-      "collapseMessage": "Colapsar Todo"
-    },
-    "select": {
-        "rows": {
-          "1": "1 fila seleccionada",
-          "_": "%d filas seleccionadas"
-        }
-    },
-    "thousands": ".",
-    "datetime": {
-      "previous": "Anterior",
-      "hours": "Horas",
-      "minutes": "Minutos",
-      "seconds": "Segundos",
-      "unknown": "-",
-      "amPm": [
-        "AM",
-        "PM"
-      ],
-      "months": {
-        "0": "Enero",
-        "1": "Febrero",
-        "10": "Noviembre",
-        "11": "Diciembre",
-        "2": "Marzo",
-        "3": "Abril",
-        "4": "Mayo",
-        "5": "Junio",
-        "6": "Julio",
-        "7": "Agosto",
-        "8": "Septiembre",
-        "9": "Octubre"
-      },
-      "weekdays": {
-        "0": "Dom",
-        "1": "Lun",
-        "2": "Mar",
-        "4": "Jue",
-        "5": "Vie",
-        "3": "Mié",
-        "6": "Sáb"
-      },
-      "next": "Próximo"
-    },
-    "editor": {
-      "close": "Cerrar",
-      "create": {
-        "button": "Nuevo",
-        "title": "Crear Nuevo Registro",
-        "submit": "Crear"
-      },
-      "edit": {
-        "button": "Editar",
-        "title": "Editar Registro",
-        "submit": "Actualizar"
-      },
-      "remove": {
-        "button": "Eliminar",
-        "title": "Eliminar Registro",
-        "submit": "Eliminar",
-        "confirm": {
-          "_": "¿Está seguro de que desea eliminar %d filas?",
-          "1": "¿Está seguro de que desea eliminar 1 fila?"
-        }
-      },
-      "error": {
-        "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
-      },
-      "multi": {
-        "title": "Múltiples Valores",
-        "restore": "Deshacer Cambios",
-        "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo.",
-        "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, haga clic o pulse aquí, de lo contrario conservarán sus valores individuales."
-      }
-    },
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-    "stateRestore": {
-      "creationModal": {
-        "button": "Crear",
-        "name": "Nombre:",
-        "order": "Clasificación",
-        "paging": "Paginación",
-        "select": "Seleccionar",
-        "columns": {
-          "search": "Búsqueda de Columna",
-          "visible": "Visibilidad de Columna"
-        },
-        "title": "Crear Nuevo Estado",
-        "toggleLabel": "Incluir:",
-        "scroller": "Posición de desplazamiento",
-        "search": "Búsqueda",
-        "searchBuilder": "Búsqueda avanzada"
-      },
-      "removeJoiner": "y",
-      "removeSubmit": "Eliminar",
-      "renameButton": "Cambiar Nombre",
-      "duplicateError": "Ya existe un Estado con este nombre.",
-      "emptyStates": "No hay Estados guardados",
-      "removeTitle": "Remover Estado",
-      "renameTitle": "Cambiar Nombre Estado",
-      "emptyError": "El nombre no puede estar vacío.",
-      "removeConfirm": "¿Seguro que quiere eliminar %s?",
-      "removeError": "Error al eliminar el Estado",
-      "renameLabel": "Nuevo nombre para %s:"
-    },
-    "infoThousands": "."
-  } ,
-});
-
-  table.on('select', function (e, dt, type, indexes) {
-  console.log(e.target);
-    if (type === 'row'   ) {
-      var nodes = table
-      .rows(indexes)
-      .nodes()
-      .each(function () { 
-        $('td:first-child', this).find('input').prop('checked', true); 
-      });
-      //.find(':checkbox', 'td:first-child').checked = true; 
-    }
-  });
-
-  table.on('deselect', function (e, dt, type, indexes) {
-    if (type === 'row') {
-	$('#example-select-all').prop("checked",false);
-	
-      table
-      .rows(indexes)
-      .nodes()
-      .each(function () { 
-        $('td:first-child', this).find('input').prop('checked', false); 
-      });
-    }
-  });
-  
-   // Handle click on "Select all" control
-   $('#example-select-all').on('click', function(){
+          }],
+        "columns": [
+          {
+            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">'; }
+          },
+            { "data": "idproc", "name": "idproc", "autoWidth": true },
+            { "data": "idconex", "name": "idconex", "autoWidth": true },
+            { "data": "nombre", "name": "nombre", "autoWidth": true },
+            { "data": "descripcion", "name": "descripcion", "autoWidth": true },
+            { "data": "path", "name": "path", "autoWidth": true },
+            { "data": "parametro1", "name": "parametro1", "autoWidth": true },
+            { "data": "parametro2", "name": "parametro2", "autoWidth": true },
+            { "data": "parametro3", "name": "parametro3", "autoWidth": true },
+            { "data": "parametro4", "name": "parametro4", "autoWidth": true },
+            { "data": "dependencia", "name": "dependencia", "autoWidth": true },
+            { "data": "intentos", "name": "intentos", "autoWidth": true },
+            { "data": "espera_intento", "name": "espera_intento", "autoWidth": true },
+            { "data": "estado", "name": "estado", "autoWidth": true },
+            { "data": "ftp", "name": "ftp", "autoWidth": true },
+            { "data": "id_Host", "name": "id_Host", "autoWidth": true },
+            { "data": "comprension", "name": "comprension", "autoWidth": true },
+            { "data": "id_crontab", "name": "id_crontab", "autoWidth": true },
+            { "data": "node", "name": "node", "autoWidth": true },
+            {
+              "render": function (data,row) { return '<a class="btn btn-success">tst</a>&nbsp;<a class="btn btn-info">tst</a>&nbsp;<a class="btn btn-danger">tst</a>';   }
+            },
+        ],
       
-	  console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-	  // Get all rows with search applied
-      var rows = table.rows({ 'search': 'applied' }).nodes();
-      // Check/uncheck checkboxes for all rows in the table
-	  if(this.checked){
-      $('input[type="checkbox"]', rows).prop('checked', this.checked);
-	    
-	    var selData =   table.rows().select();
-	    var selData =   table.rows(".selected").data();
-		}
-		else 
-		{
-		var selData =   table.rows().deselect();
-		}
-   });
+      select: {
+        style:    'os',   //default but you have to specify it, no idea why
+        selector: 'tr,a:not(.btn)'
+      }
+      });
 
-   // Handle click on checkbox to set state of "Select all" control
-   $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-      // If checkbox is not checked
-      if(!this.checked){
-         var el = $('#example-select-all').get(0);
-         // If "Select all" control is checked and has 'indeterminate' property
-         if(el && el.checked && ('indeterminate' in el)){
+    table.on('select', function (e, dt, type, indexes) {
+    console.log(e.target);
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
+        });
+        //.find(':checkbox', 'td:first-child').checked = true; 
+      }
+    });
+
+    table.on('deselect', function (e, dt, type, indexes) {
+      if (type === 'row') {
+      $('#example-select-all').prop("checked",false);
+        table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', false); 
+        });
+      }
+    });
+    
+    // Handle click on "Select all" control
+    $('#example-select-all').on('click', function(){
+        
+      console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+      // Get all rows with search applied
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else 
+      {
+      var selData =   table.rows().deselect();
+      }
+    });
+
+    // Handle click on checkbox to set state of "Select all" control
+    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+        // If checkbox is not checked
+        if(!this.checked){
+          var el = $('#example-select-all').get(0);
+          // If "Select all" control is checked and has 'indeterminate' property
+          if(el && el.checked && ('indeterminate' in el)){
             // Set visual state of "Select all" control
             // as 'indeterminate'
             el.indeterminate = true;
-         }
+          }
+        }
+    });
+    
+    table.on('select', function (e, dt, type, indexes) {
+    console.log(e.target);
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
+        });
+        //.find(':checkbox', 'td:first-child').checked = true; 
       }
-   });
-} );
+    });
+
+    table.on('deselect', function (e, dt, type, indexes) {
+      if (type === 'row') {
+      $('#example-select-all').prop("checked",false);
+        table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', false); 
+        });
+      }
+    });
+    
+    // Handle click on "Select all" control
+    $('#example-select-all').on('click', function(){
+        
+      console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+      // Get all rows with search applied
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else 
+      {
+      var selData =   table.rows().deselect();
+      }
+    });
+
+    // Handle click on checkbox to set state of "Select all" control
+    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+        // If checkbox is not checked
+        if(!this.checked){
+          var el = $('#example-select-all').get(0);
+          // If "Select all" control is checked and has 'indeterminate' property
+          if(el && el.checked && ('indeterminate' in el)){
+          // Set visual state of "Select all" control
+          // as 'indeterminate'
+          el.indeterminate = true;
+        }
+      }
+    });
+  });
 </script>
 </html>

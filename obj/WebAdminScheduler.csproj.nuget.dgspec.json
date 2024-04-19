@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\njt33770\\Downloads\\WebAdminScheduler\\WebAdminScheduler.csproj": {}
+    "C:\\Users\\njt33770\\Documents\\WebAdmingit\\WebAdminScheduler.csproj": {}
   },
   "projects": {
-    "C:\\Users\\njt33770\\Downloads\\WebAdminScheduler\\WebAdminScheduler.csproj": {
+    "C:\\Users\\njt33770\\Documents\\WebAdmingit\\WebAdminScheduler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\njt33770\\Downloads\\WebAdminScheduler\\WebAdminScheduler.csproj",
+        "projectUniqueName": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\WebAdminScheduler.csproj",
         "projectName": "WebAdminScheduler",
-        "projectPath": "C:\\Users\\njt33770\\Downloads\\WebAdminScheduler\\WebAdminScheduler.csproj",
+        "projectPath": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\WebAdminScheduler.csproj",
         "packagesPath": "C:\\Users\\njt33770\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\njt33770\\Downloads\\WebAdminScheduler\\obj\\",
+        "outputPath": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\njt33770\\AppData\\Roaming\\NuGet\\NuGet.Config",
