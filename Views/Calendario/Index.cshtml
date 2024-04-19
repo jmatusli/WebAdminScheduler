@@ -1246,7 +1246,7 @@ $('#btnSave').on('click',function(){
   $.ajax({
                 type: "POST",
                 url: '@Url.Action("Save", "Calendario")' ,
-                data: data_cron,
+                data: JSON.stringify(data_cron),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function () {
