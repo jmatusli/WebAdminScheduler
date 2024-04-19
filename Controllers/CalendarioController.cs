@@ -34,7 +34,7 @@ namespace WebAdminScheduler.Controllers
         }
 		
 		[HttpPost]
-		public JsonResult Save(Cp_CrontabVM user)
+		public JsonResult Save(Cp_CrontabVM vcrontab)
 		{
            CP_CRONTAB crontabt = new CP_CRONTAB();
            
@@ -53,44 +53,45 @@ namespace WebAdminScheduler.Controllers
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);
             return Json(crontabt);
 		}
-		[HttpGet]
+		[HttpPost]
         public JsonResult ListarCrontabs()
         {
-		    var listaCrons = (from s in _DBContext.CP_CRONTABS select s).ToList();  
-            return Json(new {data = listaCrons });
+		  int NroPeticion = Convert.ToInt32(Request.Form["draw"].FirstOrDefault() ?? "0");
+
+
+            //cuantos registros va a devolver
+            int CantidadRegistros = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
+
+            //cuantos registros va a omitir
+            int OmitirRegistros = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
+
+            //el texto de busqueda
+            string ValorBuscado = Request.Form["search[value]"].FirstOrDefault() ?? "";
+
+             IQueryable<CP_CRONTAB> queryCrontab = _DBContext.CP_CRONTABS;
+             // Total de registros antes de filtrar.
+            int TotalRegistros = queryCrontab.Count();
+
+            //queryCrontab = queryCrontab;
+               // .Where(e => e.IDCRONTAB.Co(ValorBuscado));
+
+            // Total de registros ya filtrados.
+            int TotalRegistrosFiltrados = queryCrontab.Count();
+
+
+            var listaCrons = queryCrontab/*.Skip(OmitirRegistros).Take(CantidadRegistros).*/.ToList();
+
+
+           return Json(new {
+                
+                draw = NroPeticion,
+                recordsTotal = TotalRegistros,
+                recordsFiltered = TotalRegistros,
+                data=listaCrons
+                 
+            });
         }
         
-		[HttpGet]
-        public JsonResult ListarCrontabs0()
-        {
-            List<CP_CRONTAB> listaCrons = new List<CP_CRONTAB>();
-            var sqlQuery = "";
-			var oracleParameters = new List<OracleParameter>();
-            
-            //Llamado getCrontabs que devuelve un objeto de tipo cursor Y recibe como parametros un id
-			sqlQuery = @"BEGIN APP_SCL_ALTAMIRA.getCrontabs(:id, :p_cursor1, :p_cursor2, :p_cursor3);END;";
-			
-			oracleParameters = new List<OracleParameter>
-            {
-                new OracleParameter("p_idcrontab", 10),
-                new OracleParameter("p_recordset", OracleDbType.RefCursor, ParameterDirection.Output),        
-            };
-			
-            var connection = _DBContext.Database.GetDbConnection();            
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = sqlQuery;
-            command.Parameters.AddRange(oracleParameters.ToArray());
-            using (var reader = command.ExecuteReader())
-            {
-                /*listaCrons = ((IObjectContextAdapter)_DBContext).ObjectContext
-                .Translate<CP_CRONTAB>(reader)
-                .ToList();*/
-            }
-            connection.Close();
- 
-            return Json(new {data = listaCrons });
-        }
-
+		 
     }
 }

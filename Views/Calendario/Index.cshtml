@@ -772,7 +772,7 @@
       </div>
     </div>
     <div class="card-footer text-muted">
-      <a href="#" class="btn btn-primary">Guardar</a>
+      <a  id="btnSave" class="btn btn-primary">Guardar</a>
     </div>
   </div>
   
@@ -804,7 +804,16 @@
   </table>
 </div>
 <script> 
+  function recargartabla(objeto)
+{
+
+	objeto.ajax.reload(null,false); //reload datatable ajax 
+
+}
+
+
 $(document).ready( function () {
+
   var table = $('#example').DataTable( {
         "processing": true,
         "serverSide": true,
@@ -1213,6 +1222,43 @@ $(document).ready( function () {
          }
       }
    });
+
+
+
+   
+$('#btnSave').on('click',function(){
+
+ var data_cron={
+  "oCrontab": {
+       /*"IDCRONTAB":,*/
+       "FECHA":"00000000",
+       "HORA_INICIO":"0000",
+       "HORA_FIN":"0000",
+       "RECURRENCIA":"0000",
+       "WDAY_M2S_EX":"1111111",
+       "DAY_EX":"0",
+       "MONTH_EX":"0",
+       "REPEAT_EVERY_MINS":"0",
+       "REPEAT_AFTER_FINISH":"0"
+  }
+ };
+
+  $.ajax({
+                type: "POST",
+                url: '@Url.Action("Save", "Calendario")' ,
+                data: data_cron,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                   // alert("Data has been added successfully.");
+                    recargartabla(table);
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+
+});
   
   
 } );
