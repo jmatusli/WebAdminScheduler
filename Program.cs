@@ -5,7 +5,6 @@ using Oracle.ManagedDataAccess.Types;
 using Oracle.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 builder.Services.AddRazorPages();
     Console.WriteLine("intentamos recuperar la configuracion "+(builder.Configuration.GetConnectionString("DefaultConnection") ?? ""));
