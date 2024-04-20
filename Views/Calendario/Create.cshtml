@@ -1,252 +1,810 @@
- 
 @{  
-    ViewData["Title"] = "Crear";  
-}  
-<h1>@ViewData["Title"]</h1>
-     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-   
+  ViewData["Title"] = "Crear";  
+}
+ <head>
+  <link rel="stylesheet" href="~/css/datatables.min.css" />
+  <script src="~/js/jquery-1.11.3.min.js"></script>
+  <script src="~/js/pdfmake.min.js"></script>
+  <script src="~/js/vfs_fonts.js"></script>
+  <script src="~/js/datatables.min.js"></script>
+
+  <style>
+    .container{
+      width:100%!important;
+    }
+    .btn {
+      font-size: 14px;
+      padding: 6px 12px;
+      margin-bottom: 0;
+
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+    }
+
+    .btn:focus,
+    .btn:active:focus {
+      outline: thin dotted;
+      outline: 5px auto -webkit-focus-ring-color;
+      outline-offset: -2px;
+    }
+    .btn:hover,
+    .btn:focus {
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .btn:active {
+      background-image: none;
+      outline: 0;
+      -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    }
+  /* default
+  ---------------------------- */
+    .btn-default {
+      color: #333;
+      background-color: #fff;
+      border-color: #ccc;
+    }
+    .btn-default:focus {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: #8c8c8c;
+    }
+    
+    .btn-default:hover {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: #adadad;
+    }
+    .btn-default:active {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: #adadad;
+    }
+  .btn-primary {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-success {
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-warning {
+      color: #212529;
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-info {
+      color: #fff;
+      background-color: #17a2b8;
+      border-color: #17a2b8;  
+    }
+
+    .btn-light {
+      color: #212529;
+      background-color: #f8f9fa;
+      border-color: #f8f9fa;
+    }
+  </style>
+
+    <meta charset=utf-8 />
+    <title>Crear Calendario</title>
+  </head>
+
 <hr />  
   @using (Html.BeginForm("Save", "Calendario", FormMethod.Post))
-    {
+  {
 	
-	 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Styling a SignUp Form</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    </head>
+  <body>
+    <h1>Calendarios</h1>
     <div class="card">
-  <div class="card-header">
-    Featured
-  </div>
-    <div class="card-body">
+      <div class="card-header">
+        Registro
+      </div>
+      <div class="card-body">
         <div class="row g-4 align-items-center">
-            <div class="col-auto">
-                <label for="inputPassword6" class="col-form-label">IDCRONTAB</label>
+          <div class="col-auto">
+            <label for="TittleCrontab" class="col-form-label">IDCRONTAB</label>
+          </div>
+          <div class="col-auto">
+            <label for="txtCrontab" class="col-form-label">01</label>
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+              Hora Inicio
+            </span>
+          </div>
+          <div class="col-auto">
+            <select class="form-select" name="horaIni" id="horaIni">
+              <option value="cero">00</option>
+              <option value="uno">01</option>
+              <option value="dos">02</option>
+              <option value="tres">03</option>
+              <option value="cuatro">04</option>
+              <option value="cinco">05</option>
+              <option value="seis">06</option>
+              <option value="siete">07</option>
+              <option value="ocho">08</option>
+              <option value="nueve">09</option>
+              <option value="diez">10</option>
+              <option value="once">11</option>
+              <option value="doce">12</option>
+              <option value="trece">13</option>
+              <option value="catorce">14</option>
+              <option value="quince">15</option>
+              <option value="dieciseis">16</option>
+              <option value="diecisiete">17</option>
+              <option value="dieciocho">18</option>
+              <option value="diecinueve">19</option>
+              <option value="veinte">20</option>
+              <option value="veintiuno">21</option>
+              <option value="veintidos">22</option>
+              <option value="veintires">23</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <select class="form-select" name="minutoIni" id="minutoIni">
+              <option value="cero">00</option>
+              <option value="uno">01</option>
+              <option value="dos">02</option>
+              <option value="tres">03</option>
+              <option value="cuatro">04</option>
+              <option value="cinco">05</option>
+              <option value="seis">06</option>
+              <option value="siete">07</option>
+              <option value="ocho">08</option>
+              <option value="nueve">09</option>
+              <option value="diez">10</option>
+              <option value="once">11</option>
+              <option value="doce">12</option>
+              <option value="trece">13</option>
+              <option value="catorce">14</option>
+              <option value="quince">15</option>
+              <option value="dieciseis">16</option>
+              <option value="diecisiete">17</option>
+              <option value="dieciocho">18</option>
+              <option value="diecinueve">19</option>
+              <option value="veinte">20</option>
+              <option value="veintiuno">21</option>
+              <option value="veintidos">22</option>
+              <option value="veintitres">23</option>
+              <option value="veinticuatro">24</option>
+              <option value="veinticinco">25</option>
+              <option value="veintiseis">26</option>
+              <option value="veintisiete">27</option>
+              <option value="veintiocho">28</option>
+              <option value="veintinueve">29</option>
+              <option value="treinta">30</option>
+              <option value="treintauno">31</option>
+              <option value="treintados">32</option>
+              <option value="treintatres">33</option>
+              <option value="treintacuatro">34</option>
+              <option value="treintacinco">35</option>
+              <option value="treintaseis">36</option>
+              <option value="treintasiete">37</option>
+              <option value="treintaocho">38</option>
+              <option value="treintanueve">39</option>
+              <option value="cuarenta">40</option>
+              <option value="cuarentauno">41</option>
+              <option value="cuarentados">42</option>
+              <option value="cuarentatres">43</option>
+              <option value="cuarentacuatro">44</option>
+              <option value="cuarentacinco">45</option>
+              <option value="cuarentaseis">46</option>
+              <option value="cuarentasiete">47</option>
+              <option value="cuarentaocho">48</option>
+              <option value="cuarentanueve">49</option>
+              <option value="cincuenta">50</option>
+              <option value="cincuentauno">51</option>
+              <option value="cincuentados">52</option>
+              <option value="cincuentatres">53</option>
+              <option value="cincuentacuatro">54</option>
+              <option value="cincuentacinco">55</option>
+              <option value="cincuentaseis">56</option>
+              <option value="cincuentasiete">57</option>
+              <option value="cincuentaocho">58</option>
+              <option value="cincuentanueve">59</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+              Hora Fin
+            </span>
+          </div>
+          <div class="col-auto">
+            <select class="form-select" name="horaFin" id="horaFin">
+              <option value="cero">00</option>
+              <option value="uno">01</option>
+              <option value="dos">02</option>
+              <option value="tres">03</option>
+              <option value="cuatro">04</option>
+              <option value="cinco">05</option>
+              <option value="seis">06</option>
+              <option value="siete">07</option>
+              <option value="ocho">08</option>
+              <option value="nueve">09</option>
+              <option value="diez">10</option>
+              <option value="once">11</option>
+              <option value="doce">12</option>
+              <option value="trece">13</option>
+              <option value="catorce">14</option>
+              <option value="quince">15</option>
+              <option value="dieciseis">16</option>
+              <option value="diecisiete">17</option>
+              <option value="dieciocho">18</option>
+              <option value="diecinueve">19</option>
+              <option value="veinte">20</option>
+              <option value="veintiuno">21</option>
+              <option value="veintidos">22</option>
+              <option value="veintires">23</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <select class="form-select" name="minutoFin" id="minutoFin">
+              <option value="cero">00</option>
+              <option value="uno">01</option>
+              <option value="dos">02</option>
+              <option value="tres">03</option>
+              <option value="cuatro">04</option>
+              <option value="cinco">05</option>
+              <option value="seis">06</option>
+              <option value="siete">07</option>
+              <option value="ocho">08</option>
+              <option value="nueve">09</option>
+              <option value="diez">10</option>
+              <option value="once">11</option>
+              <option value="doce">12</option>
+              <option value="trece">13</option>
+              <option value="catorce">14</option>
+              <option value="quince">15</option>
+              <option value="dieciseis">16</option>
+              <option value="diecisiete">17</option>
+              <option value="dieciocho">18</option>
+              <option value="diecinueve">19</option>
+              <option value="veinte">20</option>
+              <option value="veintiuno">21</option>
+              <option value="veintidos">22</option>
+              <option value="veintitres">23</option>
+              <option value="veinticuatro">24</option>
+              <option value="veinticinco">25</option>
+              <option value="veintiseis">26</option>
+              <option value="veintisiete">27</option>
+              <option value="veintiocho">28</option>
+              <option value="veintinueve">29</option>
+              <option value="treinta">30</option>
+              <option value="treintauno">31</option>
+              <option value="treintados">32</option>
+              <option value="treintatres">33</option>
+              <option value="treintacuatro">34</option>
+              <option value="treintacinco">35</option>
+              <option value="treintaseis">36</option>
+              <option value="treintasiete">37</option>
+              <option value="treintaocho">38</option>
+              <option value="treintanueve">39</option>
+              <option value="cuarenta">40</option>
+              <option value="cuarentauno">41</option>
+              <option value="cuarentados">42</option>
+              <option value="cuarentatres">43</option>
+              <option value="cuarentacuatro">44</option>
+              <option value="cuarentacinco">45</option>
+              <option value="cuarentaseis">46</option>
+              <option value="cuarentasiete">47</option>
+              <option value="cuarentaocho">48</option>
+              <option value="cuarentanueve">49</option>
+              <option value="cincuenta">50</option>
+              <option value="cincuentauno">51</option>
+              <option value="cincuentados">52</option>
+              <option value="cincuentatres">53</option>
+              <option value="cincuentacuatro">54</option>
+              <option value="cincuentacinco">55</option>
+              <option value="cincuentaseis">56</option>
+              <option value="cincuentasiete">57</option>
+              <option value="cincuentaocho">58</option>
+              <option value="cincuentanueve">59</option>
+            </select>
+          </div>
+        </div><hr />
+
+        <a href="#" class="link-info">Días</a>
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes">
+              <label class="form-check-label" for="flexCheckLunes">
+                Lunes
+              </label>
             </div>
-            <div class="col-auto">
-                <label for="inputPassword6" class="col-form-label">01</label>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes">
+              <label class="form-check-label" for="flexCheckMartes">
+                Martes
+              </label>
             </div>
-            <div class="col-auto">
-                <span id="passwordHelpInline" class="form-text">
-                Hora Inicio
-                </span>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles">
+              <label class="form-check-label" for="flexCheckMiercoles">
+                Miercoles
+              </label>
             </div>
-            <div class="col-auto">
-                <input type="text" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" readonly="">
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves">
+              <label class="form-check-label" for="flexCheckJueves">
+                Jueves
+              </label>
             </div>
-            <div class="col-auto">
-                <span id="passwordHelpInline" class="form-text">
-                Hora Fin
-                </span>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes">
+              <label class="form-check-label" for="flexCheckViernes">
+                Viernes
+              </label>
             </div>
-            <div class="col-auto">
-                <input type="text" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" readonly="">
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado">
+              <label class="form-check-label" for="flexCheckSabado">
+                Sabado
+              </label>
             </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo">
+              <label class="form-check-label" for="flexCheckDomingo">
+                Domingo
+              </label>
+            </div>
+          </div>
         </div>
-    </div>
-    
-<a href="#" class="link-success">Días</a>
-<div class="row g-4 align-items-center">
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes">
-      <label class="form-check-label" for="flexCheckLunes">
-        Lunes
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes">
-      <label class="form-check-label" for="flexCheckMartes">
-        Martes
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles">
-      <label class="form-check-label" for="flexCheckMiercoles">
-        Miercoles
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves">
-      <label class="form-check-label" for="flexCheckJueves">
-        Jueves
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes">
-      <label class="form-check-label" for="flexCheckViernes">
-        Viernes
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado">
-      <label class="form-check-label" for="flexCheckSabado">
-        Sabado
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo">
-      <label class="form-check-label" for="flexCheckDomingo">
-        Domingo
-      </label>
-    </div>
-  </div>
-</div>
+        <hr />
 
-<a href="#" class="link-info">Meses</a>
-<div class="row g-4 align-items-center"><div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckEnero">
-      <label class="form-check-label" for="flexCheckEnero">
-        Enero
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckFebrero">
-      <label class="form-check-label" for="flexCheckFebrero">
-        Febrero
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckMarzo">
-      <label class="form-check-label" for="flexCheckMarzo">
-        Marzo
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckAbril">
-      <label class="form-check-label" for="flexCheckAbril">
-        Abril
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckMayo">
-      <label class="form-check-label" for="flexCheckMayo">
-        Mayo
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckJunio">
-      <label class="form-check-label" for="flexCheckJunio">
-        Junio
-      </label>
-    </div>
-  </div>
-</div>
-<div class="row g-4 align-items-center">
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckJulio">
-      <label class="form-check-label" for="flexCheckJulio">
-        Julio
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckAgost">
-      <label class="form-check-label" for="flexCheckAgost">
-        Agosto
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckSept">
-      <label class="form-check-label" for="flexCheckSept">
-        Septiembre
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckOct">
-      <label class="form-check-label" for="flexCheckOct">
-        Octubre
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckNov">
-      <label class="form-check-label" for="flexCheckNov">
-        Noviembre
-      </label>
-    </div>
-  </div>
-  <div class="col-auto">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckDic">
-      <label class="form-check-label" for="flexCheckDic">
-        Diciembre
-      </label>
-    </div>
-  </div>
-</div>
-<div class="row g-4 align-items-center">
-  <div class="col-auto">
-    <span id="RepeatEveryMins" class="form-text">
-      REPEAT_EVERY_MINS
-    </span>
-  </div>
-  <div class="col-auto">
-    <input type="text" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" readonly="">
-  </div>
-  <div class="col-auto">
-    <span id="RepeatAfterFin" class="form-text">
-      REPEAT_AFTER_FINISH
-    </span>
-  </div>
-  <div class="col-auto">
-    <select id="inputState" class="form-control">
-      <option selected>Seleccionar</option>
-      <option>0</option>
-      <option>1</option>
-    </select>
-  </div>
-</div>
+        <a href="#" class="link-info">Días Ejecución</a>
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" onClick="toggle(this)" /> Seleccionar/Deseleccionar todos<br><br>
+            </div>
+          </div>
+        </div>
+        
+        <table id="tbl-dias-exe" class="display nowrap" width="100%">
+          <thead>
+          <tr>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckUnoExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckUnoExe">
+                1
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDosExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckDosExe">
+                2
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTresExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckTresExe">
+                3
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckCuatroExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckCuatroExe">
+                4
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckCincoExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckCincoExe">
+                5
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckSeisExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckSeisExe">
+                6
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckSieteExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckSieteExe">
+                7
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckOchoExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckOchoExe">
+                8
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexChecknueveExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexChecknueveExe">
+                9
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDiezExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckDiezExe">
+                10
+              </label>
+            </td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckOnceExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckOnceExe">
+                11
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDoceExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckDoceExe">
+                12
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTreceExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckTreceExe">
+                13
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckCatorceExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckCatorceExe">
+                14
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckQuinceExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckQuinceExe">
+                15
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDiesiseisExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckDiesiseisExe">
+                16
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDiesicieteExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckDiesicieteExe">
+                17
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDiesiochoExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckDiesiochoExe">
+                18
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDiecinueveExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckDiecinueveExe">
+                19
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinteExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeinteExe">
+                20
+              </label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <table id="tbl-dias-exe" class="display nowrap" width="100%">
+          <thead>
+          <tr>
+            <th>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiunoExe" name="dinamico" >
+            </th>
+            <td>
+              <label class="form-check-label" for="flexCheckVeintiunoExe">
+                21
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintidosExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeintidosExe">
+                22
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintitresExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeintitresExe">
+                23
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinticuatroExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeinticuatroExe">
+                24
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeinticincoExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeinticincoExe">
+                25
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiseisExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeintiseisExe">
+                26
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintisieteExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeintisieteExe">
+                27
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintiochoExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeintiochoExe">
+                28
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckVeintinueveExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckVeintinueveExe">
+                29
+              </label>
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTreintaExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckTreintaExe">
+                30
+              </label>
+            </td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTreintaunoExe" name="dinamico" >
+            </td>
+            <td>
+              <label class="form-check-label" for="flexCheckTreintaunoExe">
+                31
+              </label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <hr />
 
-<button type="submit" class="btn btn-primary">Guardar</button>
-</div>
-
-  @*
-  <form>
-  <div class="form-row">
-    <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+        <a href="#" class="link-info">Meses</a>
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckEnero">
+              <label class="form-check-label" for="flexCheckEnero">
+                Enero
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckFebrero">
+              <label class="form-check-label" for="flexCheckFebrero">
+                Febrero
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMarzo">
+              <label class="form-check-label" for="flexCheckMarzo">
+                Marzo
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckAbril">
+              <label class="form-check-label" for="flexCheckAbril">
+                Abril
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMayo">
+              <label class="form-check-label" for="flexCheckMayo">
+                Mayo
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckJunio">
+              <label class="form-check-label" for="flexCheckJunio">
+                Junio
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckJulio">
+              <label class="form-check-label" for="flexCheckJulio">
+                Julio
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckAgost">
+              <label class="form-check-label" for="flexCheckAgost">
+                Agosto
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckSept">
+              <label class="form-check-label" for="flexCheckSept">
+                Septiembre
+              </label>
+            </div>
+          </div>        
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckOct">
+              <label class="form-check-label" for="flexCheckOct">
+                Octubre
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckNov">
+              <label class="form-check-label" for="flexCheckNov">
+                Noviembre
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDic">
+              <label class="form-check-label" for="flexCheckDic">
+                Diciembre
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <hr />
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="row g-4 align-items-center">
+            <div class="col-auto">
+              <span id="RepeatEveryMins" class="form-text">
+                REPEAT_EVERY_MINS
+              </span>
+            </div>
+            <div class="col-auto">
+              <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+            </div>
+            <div class="col-auto">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="IdRepeatAfterFin">
+                <label class="form-check-label" for="RepeatAfterFin">
+                  REPEAT_AFTER_FINISH
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <a href="#" class="btn btn-primary">Guardar</a>
+      </div>
     </div>
-  </div>
-  <div class="col-auto">
-    <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-  </div>
-</form> 
-*@
-	<script type="text/javascript">
-  $('.clockpicker').clockpicker();
-</script>
-}
+  </body>
+
+  }
+  
+  <script> 
+    function toggle(source) {
+      checkboxes = document.getElementsByName('dinamico');
+
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+  </script>

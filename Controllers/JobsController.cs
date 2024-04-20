@@ -19,6 +19,10 @@ namespace WebAdminScheduler.Controllers
             ViewBag.CP_PROCESOS = data;  
             return View();
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
         public JsonResult ListarProcesos() {
 
             int NroPeticion = Convert.ToInt32(Request.Form["draw"].FirstOrDefault() ?? "0");
