@@ -56,7 +56,7 @@ namespace WebAdminScheduler.Controllers
 
  
 		[HttpPost]
-        public JsonResult ListarCrontabss()
+        public JsonResult ListarCrontabs()
         {
                 int totalRecord = 0;
     int filterRecord = 0;
