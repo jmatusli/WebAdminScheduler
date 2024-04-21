@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +11,8 @@ using Microsoft.Extensions.Logging;
 using Oracle.ManagedDataAccess.Client;
 using WebAdminScheduler.Models;
 using WebAdminScheduler.Models.ViewModels;
-using Microsoft.EntityFrameworkCore;
-
+using DataTablesParser;
+using System.Linq.Expressions;
 namespace WebAdminScheduler.Controllers
 {
     public class CalendarioController : Controller
@@ -53,34 +54,40 @@ namespace WebAdminScheduler.Controllers
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);
             return Json(crontabt);
 		}
+
+ 
 		[HttpPost]
-        public JsonResult ListarCrontabs()
+        public JsonResult ListarCrontabss()
         {
-            int NroPeticion = Convert.ToInt32(Request.Form["draw"].FirstOrDefault() ?? "0");
-
-            //cuantos registros va a devolver
-            int CantidadRegistros = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
-
-            //cuantos registros va a omitir
-            int OmitirRegistros = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
-
-            //el texto de busqueda
-            string ValorBuscado = Request.Form["search[value]"].FirstOrDefault() ?? "";
-
-            IQueryable<CP_CRONTAB> queryCrontab = _DBContext.CP_CRONTABS;
-            // Total de registros antes de filtrar.
-            int TotalRegistros = queryCrontab.Count();
-
-            int TotalRegistrosFiltrados = queryCrontab.Count();
-
-            var listaCrons = queryCrontab/*.Skip(OmitirRegistros).Take(CantidadRegistros).*/.ToList();
-
-            return Json(new {
-                draw = NroPeticion,
-                recordsTotal = TotalRegistros,
-                recordsFiltered = TotalRegistros,
-                data=listaCrons
-            });
-        }
+                int totalRecord = 0;
+    int filterRecord = 0;
+    var draw = Request.Form["draw"].FirstOrDefault();
+    var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+    var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+    var searchValue = Request.Form["search[value]"].FirstOrDefault();
+    int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
+    int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
+    IQueryable<CP_CRONTAB>  data = _DBContext.Set < CP_CRONTAB > ().AsQueryable();
+    //get total count of data in table
+    totalRecord = data.Count();
+    // search data when search value found
+    if (!string.IsNullOrEmpty(searchValue)) {
+        data = data.Where(x => x.FECHA.ToLower().Contains(searchValue.ToLower()) );
     }
+    // get total count of records after search
+    filterRecord = data.Count();
+     
+    
+    if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)) data = data.OrderBy(sortColumn+" "+sortColumnDirection);
+    
+    //pagination
+    var crontabList = data.Skip(skip).Take(pageSize).ToList();
+    var returnObj = new {
+        draw = draw, recordsTotal = totalRecord, recordsFiltered = filterRecord, data = crontabList
+    };
+  
+        return Json(returnObj);
+    }
+}
+
 }

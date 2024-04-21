@@ -3,6 +3,7 @@ using WebAdminScheduler.Models;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using Oracle.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,8 +11,10 @@ builder.Services.AddRazorPages();
     Console.WriteLine("intentamos recuperar la configuracion "+(builder.Configuration.GetConnectionString("DefaultConnection") ?? ""));
 
 builder.Services.AddDbContext<WebAdminSchedulerContext>(options => 
-    options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection") ?? "")
+    options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+ 
 
 var app = builder.Build();
 
