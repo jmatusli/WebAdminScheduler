@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 using Oracle.ManagedDataAccess.Client;
 using WebAdminScheduler.Models;
 using WebAdminScheduler.Models.ViewModels;
-using DataTablesParser;
 using System.Linq.Expressions;
 namespace WebAdminScheduler.Controllers
 {
