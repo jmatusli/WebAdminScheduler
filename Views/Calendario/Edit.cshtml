@@ -16,14 +16,14 @@
 <div>
     <a asp-action="Index" class="btn btn-primary">Inicio</a>
 </div>
-Id CALENDARIO A EDITAR: @ViewBag.IDCRONTAB
+Id A EDITAR CALENDARIO: @ViewBag.IDCRONTAB
 @using (Html.BeginForm("Save", "Calendario", FormMethod.Post))
   {
     <body>
         <h1>Calendarios</h1>
         <div class="card">
             <div class="card-header">
-                Registro
+                Editar
             </div>
             <div class="card-body">
                 <div class="row g-4 align-items-center">
@@ -719,7 +719,6 @@ Id CALENDARIO A EDITAR: @ViewBag.IDCRONTAB
                     <th>COMPRESIÓN</th>
                     <th>IDCRONTAB</th>
                     <th>NODE</th>
-                    <th>ACCIÓN</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -740,7 +739,7 @@ Id CALENDARIO A EDITAR: @ViewBag.IDCRONTAB
 
     $(document).on("ready",function() {
 
-        var table = $('#dt-calendario').DataTable( {
+    var table = $('#dt-jobs').DataTable( {
       "processing": true,
       "serverSide": true,
       "filter": true,
@@ -749,7 +748,7 @@ Id CALENDARIO A EDITAR: @ViewBag.IDCRONTAB
       "scrollY":            $(document).height() - 300,
       "scrollCollapse":     true,
       "ajax": {
-        "url": "@Url.Action("ListarCrontabs","Calendario")",
+        "url": "@Url.Action("ListarJobsAsoc","Calendario")",
         "type": "POST",
         "datatype": "json"
       },
@@ -764,19 +763,24 @@ Id CALENDARIO A EDITAR: @ViewBag.IDCRONTAB
           {
             "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
           },
-          { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
-            { "data": "fecha", "name": "fecha", "autoWidth": true },
-            { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
-            { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
-            { "data": "recurrencia", "name": "recurrencia", "autoWidth": true },
-            { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
-            { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
-            { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
-            { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
-            { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
-            {
-              "render": function (data,row) { return '<a class="btn btn-success">Editar</a>&nbsp;<a class="btn btn-info">Detalle</a>';   }
-          },
+            { "data": "idproc", "name": "idproc", "autoWidth": true },
+            { "data": "idconex", "name": "idconex", "autoWidth": true },
+            { "data": "nombre", "name": "nombre", "autoWidth": true },
+            { "data": "descripcion", "name": "descripcion", "autoWidth": true },
+            { "data": "path", "name": "path", "autoWidth": true },
+            { "data": "parametro1", "name": "parametro1", "autoWidth": true },
+            { "data": "parametro2", "name": "parametro2", "autoWidth": true },
+            { "data": "parametro3", "name": "parametro3", "autoWidth": true },
+            { "data": "parametro4", "name": "parametro4", "autoWidth": true },
+            { "data": "dependencia", "name": "dependencia", "autoWidth": true },
+            { "data": "intentos", "name": "intentos", "autoWidth": true },
+            { "data": "espera_intento", "name": "espera_intento", "autoWidth": true },
+            { "data": "estado", "name": "estado", "autoWidth": true },
+            { "data": "ftp", "name": "ftp", "autoWidth": true },
+            { "data": "id_Host", "name": "id_Host", "autoWidth": true },
+            { "data": "comprension", "name": "comprension", "autoWidth": true },
+            { "data": "id_crontab", "name": "id_crontab", "autoWidth": true },
+            { "data": "node", "name": "node", "autoWidth": true },
         ],
         
         select: {
@@ -797,7 +801,6 @@ Id CALENDARIO A EDITAR: @ViewBag.IDCRONTAB
           .each(function () { 
             $('td:first-child', this).find('input').prop('checked', true); 
           });
-          //.find(':checkbox', 'td:first-child').checked = true; 
         }
       });
 
@@ -828,7 +831,7 @@ Id CALENDARIO A EDITAR: @ViewBag.IDCRONTAB
         }
         else 
         {
-        var selData =   table.rows().deselect();
+            var selData =   table.rows().deselect();
         }
       });
 

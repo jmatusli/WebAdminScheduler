@@ -53,7 +53,11 @@ namespace WebAdminScheduler.Controllers
 		}
 		public IActionResult Edit(int id)
         {
-			
+			ViewBag.IDCRONTAB = id;  
+            return View();
+        }
+        public IActionResult Detalle(int id)
+        {
 			ViewBag.IDCRONTAB = id;  
             return View();
         }
@@ -108,42 +112,37 @@ namespace WebAdminScheduler.Controllers
 			int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
 			int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
 			IQueryable<CP_CRONTAB>  data = _DBContext.Set < CP_CRONTAB > ().AsQueryable();
-			//get total count of data in table
+			//Obtener el total de los datos de la tabla
 			totalRecord = data.Count();
-			// search data when search value found
+			// Buscar datos cuando se encuentre el valor de búsqueda
 			if (!string.IsNullOrEmpty(searchValue)) {
-			textSearch =" AND ((FECHA like '%"+searchValue.ToLower()+"%')";  
-			textSearch +=" OR (HORA_INICIO like '%"+searchValue.ToLower()+"%')";  
-			textSearch +=" OR (RECURRENCIA like '%"+searchValue.ToLower()+"%')";  
-			textSearch +=" OR (HORA_FIN like '%"+searchValue.ToLower()+"%')";  
-			textSearch +=" OR (WDAY_M2S_EX like '%"+searchValue.ToLower()+"%')";  
-			textSearch +=" OR (DAY_EX like '%"+searchValue.ToLower()+"%')";  
+                textSearch =" AND ((FECHA like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (HORA_INICIO like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (RECURRENCIA like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (HORA_FIN like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (WDAY_M2S_EX like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (DAY_EX like '%"+searchValue.ToLower()+"%')";  
 
-			textSearch +=" OR (MONTH_EX like '%"+searchValue.ToLower()+"%')";  
-			textSearch +=" OR (REPEAT_EVERY_MINS like '%"+searchValue.ToLower()+"%')";  
-			textSearch +=" OR (REPEAT_AFTER_FINISH like '%"+searchValue.ToLower()+"%'))";  
-		 
-
+                textSearch +=" OR (MONTH_EX like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (REPEAT_EVERY_MINS like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (REPEAT_AFTER_FINISH like '%"+searchValue.ToLower()+"%'))";  
 			}
 			// get total count of records after search
 			  
-			
 			if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)) 
 			 textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
 			 
 			_DBContext.Database.OpenConnection();
-		String _query="SELECT * FROM (SELECT cc.*,row_number() over "
-		+"(ORDER BY cc.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_CRONTAB cc ) "
-		+" WHERE line_number BETWEEN  "+(skip+1)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
+            String _query="SELECT * FROM (SELECT cc.*,row_number() over "
+            +"(ORDER BY cc.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_CRONTAB cc ) "
+            +" WHERE line_number BETWEEN  "+(skip+1)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
 	
-
 			OracleCommand oraCommand = new OracleCommand(_query, 
 			(OracleConnection)_DBContext.Database.GetDbConnection());
 
 		   OracleDataReader oraReader = oraCommand.ExecuteReader();
 		   List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
 		   
-		 
 			if (oraReader.HasRows)
 			{
 				while (oraReader.Read())
@@ -173,17 +172,14 @@ namespace WebAdminScheduler.Controllers
 			oraReader.Close();
 			_DBContext.Database.CloseConnection();
 		   return Json(new {
-						
-						draw = draw, 
-						iTotalRecords = totalRecord,
-						iDisplayLength=10,
-						iTotalDisplayRecords=totalRecord,
-						aaData = cp_contrabList,
-					});
+                draw = draw, 
+                iTotalRecords = totalRecord,
+                iDisplayLength=10,
+                iTotalDisplayRecords=totalRecord,
+                aaData = cp_contrabList,
+            });
 
-				  
-				
-			}
-}
+		}
+    }
 
 }
