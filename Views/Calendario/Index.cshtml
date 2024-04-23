@@ -16,18 +16,7 @@
   <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
   </p>
-  <div class="col-sm-3">
-            <span id="estadoInline" class="form-text">
-              Estado
-            </span>
-          </div>
-  <div class="col-sm-3">
-            <select class="form-select" name="estado" id="estado">
-              <option value="1">ACTIVO</option>
-              <option value="2">INACTIVO</option>
-              
-            </select>
-          </div>
+ 
   <div class="container">
     <table id="dt-calendario" class="display nowrap" width="100%">
       <thead>
@@ -90,6 +79,13 @@ function recargartabla(objeto,value)
           'render': function (data, type, full, meta){
             return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
           }
+        },{
+          'targets': -1,
+        orderable: false,
+          'render': function (data, type, full, meta){
+		  console.log("son los datos ",data);
+            return   '<a class="btn btn-success" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info" asp-route-idProc="'+data.idcrontab+'">Detalle</a>';
+          }
         }],
         "columns": [
           {
@@ -105,9 +101,7 @@ function recargartabla(objeto,value)
             { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
             { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
             { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
-            {
-              "render": function (data,row) { return '<a class="btn btn-success">Editar</a>&nbsp;<a class="btn btn-info">Detalle</a>';   }
-          },
+            { "data":null },
         ],
         
         
@@ -234,11 +228,8 @@ function recargartabla(objeto,value)
         }
       }
     });
-	$("#estado").on("change",function(e){
-	e.preventDefault();
-	recargartabla(table,$(this).val());
 	
-	});
+	
   });
 </script> 
 </html>

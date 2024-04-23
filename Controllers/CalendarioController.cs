@@ -51,19 +51,11 @@ namespace WebAdminScheduler.Controllers
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);
             return Json(crontabt);
 		}
-        public async Task<IActionResult> Edit(int? id)
+		public IActionResult Edit(int id)
         {
-            if (id == null || _DBContext.CP_CRONTABS == null)
-            {
-                return NotFound();
-            }
-
-            var calendario = await _DBContext.CP_CRONTABS.FindAsync(id);
-            if (calendario == null)
-            {
-                return NotFound();
-            }
-            return View(calendario);
+			
+			ViewBag.IDCRONTAB = id;  
+            return View();
         }
 
 /*   REVISAR EDIT 
