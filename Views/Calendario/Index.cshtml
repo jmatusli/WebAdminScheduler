@@ -16,6 +16,18 @@
   <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
   </p>
+  <div class="col-sm-3">
+            <span id="estadoInline" class="form-text">
+              Estado
+            </span>
+          </div>
+  <div class="col-sm-3">
+            <select class="form-select" name="estado" id="estado">
+              <option value="1">ACTIVO</option>
+              <option value="2">INACTIVO</option>
+              
+            </select>
+          </div>
   <div class="container">
     <table id="dt-calendario" class="display nowrap" width="100%">
       <thead>
@@ -41,12 +53,24 @@
 </body>
 
 <script> 
+var params={};
+ 
+function recargartabla(objeto,value)
+{
+ 
+	params.estado=value;
+ 
+	objeto.ajax.reload(null,false); //reload datatable ajax 
+
+}
+
   $(document).ready( function () {
 
     var table = $('#dt-calendario').DataTable( {
       "processing": true,
       "serverSide": true,
       "paging": true,
+	  "deferLoading": 0, // here
       "scrollX":          true,
       "sScrollX":         "50%",
       "scrollY":            $(document).height() - 300,
@@ -54,7 +78,11 @@
       "ajax": {
         "url": "@Url.Action("ListarCrontabs","Calendario")",
         "type": "POST",
-        "datatype": "json"
+        "datatype": "json",
+		"data": function(d){
+                   $.extend( d, params);    
+                },
+		 
       },
         "columnDefs": [{
           'targets': 0,
@@ -206,6 +234,11 @@
         }
       }
     });
+	$("#estado").on("change",function(e){
+	e.preventDefault();
+	recargartabla(table,$(this).val());
+	
+	});
   });
 </script> 
 </html>
