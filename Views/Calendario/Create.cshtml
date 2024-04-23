@@ -810,10 +810,9 @@
     }
 
     $(document).on("ready",function(){
-
-    $('#btnSave').on('click',function(){
-      var data_cron={
-        "oCrontab": {
+      $('#btnSave').on('click',function(){
+        var data_cron={
+          "oCrontab": {
             /*"IDCRONTAB":,*/
             "FECHA":"00000000",
             "HORA_INICIO":"0000",
@@ -824,33 +823,32 @@
             "MONTH_EX":"0",
             "REPEAT_EVERY_MINS":"0",
             "REPEAT_AFTER_FINISH":"0"
+          }
+        };
+
+        $.ajax({
+          type: "POST",
+          url: '@Url.Action("Save", "Calendario")' ,
+          data: JSON.stringify(data_cron),
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          success: function () {
+            Swal.fire({
+            title: "Calendario registrado!",
+            text: "Click en aceptar para ver calendarios registrados!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          }).then((result) => {
+          if (result.isConfirmed) {
+            $(location).attr("href","@Url.Action("Index","Calendario")")
+          }  
+      });
+      },
+        error: function () {
+          alert("Error while inserting data");
         }
-      };
-
-      $.ajax({
-        type: "POST",
-        url: '@Url.Action("Save", "Calendario")' ,
-        data: JSON.stringify(data_cron),
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        success: function () {
-          Swal.fire({
-          title: "Calendario registrado!",
-          text: "Click en aceptar para ver calendarios registrados!",
-          icon: "success",
-          confirmButtonText: "Aceptar",
-        }).then((result) => {
-        if (result.isConfirmed) {
-          $(location).attr("href","@Url.Action("Index","Calendario")")
-        }  
     });
-    },
-      error: function () {
-        alert("Error while inserting data");
-      }
-  });
 
-})
-
+  })
 })
 </script>

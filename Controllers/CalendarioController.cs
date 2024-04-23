@@ -58,11 +58,9 @@ namespace WebAdminScheduler.Controllers
             return View();
         }
 
-/*   REVISAR EDIT 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IDCRONTAB,HORA_INICIO,HORA_FIN,WDAY_M2S_EX,REPEAT_EVERY_MINS,REPEAT_AFTER_FINISH")] calendario CP_CRONTABS)
+        public async Task<IActionResult> Edit(int id, [Bind("IDCRONTAB,HORA_INICIO,HORA_FIN,WDAY_M2S_EX,REPEAT_EVERY_MINS,REPEAT_AFTER_FINISH")] CP_CRONTAB CP_CRONTABS)
         {
             if (id != CP_CRONTABS.IDCRONTAB)
             {
@@ -89,9 +87,8 @@ namespace WebAdminScheduler.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(calendario);
+            return View(CP_CRONTABS);
         }
-    */
         private bool CrontabsExists(int id)
         {
           return (_DBContext.CP_CRONTABS?.Any(e => e.IDCRONTAB == id)).GetValueOrDefault();
