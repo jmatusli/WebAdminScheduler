@@ -107,63 +107,97 @@ namespace WebAdminScheduler.Controllers
           return (_DBContext.CP_CRONTABS?.Any(e => e.IDCRONTAB == id)).GetValueOrDefault();
         }
 
-		[HttpPost]
+	   [HttpPost]
         public JsonResult ListarCrontabs()
         {
-            int totalRecord = 0;
-            int filterRecord = 0;
-            var draw = Request.Form["draw"].FirstOrDefault();
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-            var searchValue = Request.Form["search[value]"].FirstOrDefault();
-            int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
-            int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
-            IQueryable<CP_CRONTAB>  data = _DBContext.Set < CP_CRONTAB > ().AsQueryable();
-            //get total count of data in table
-            totalRecord = data.Count();
-            
-            _DBContext.Database.OpenConnection();
-            OracleCommand oraCommand = new OracleCommand("SELECT * FROM ("
-            +"SELECT cc.*,row_number() over (ORDER BY cc.idcrontab ASC) line_number " 
-            +"FROM APP_SCL_ALTAMIRA.CP_CRONTAB cc) "
-            +"WHERE line_number BETWEEN 0 AND 10  ORDER BY line_number", (OracleConnection)_DBContext.Database.GetDbConnection());
+			int totalRecord = 0;
+			int filterRecord = 0;
+			string textOrder="";
+			string textSearch="";
+			var draw = Request.Form["draw"].FirstOrDefault();
+			var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+			var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+			var searchValue = Request.Form["search[value]"].FirstOrDefault();
+			int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
+			int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
+			IQueryable<CP_CRONTAB>  data = _DBContext.Set < CP_CRONTAB > ().AsQueryable();
+			//get total count of data in table
+			totalRecord = data.Count();
+			// search data when search value found
+			if (!string.IsNullOrEmpty(searchValue)) {
+			textSearch =" AND ((FECHA like '%"+searchValue.ToLower()+"%')";  
+			textSearch +=" OR (HORA_INICIO like '%"+searchValue.ToLower()+"%')";  
+			textSearch +=" OR (RECURRENCIA like '%"+searchValue.ToLower()+"%')";  
+			textSearch +=" OR (HORA_FIN like '%"+searchValue.ToLower()+"%')";  
+			textSearch +=" OR (WDAY_M2S_EX like '%"+searchValue.ToLower()+"%')";  
+			textSearch +=" OR (DAY_EX like '%"+searchValue.ToLower()+"%')";  
 
-            OracleDataReader oraReader = oraCommand.ExecuteReader();
-            List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
-    
-            if (oraReader.HasRows)
-            {
-                while (oraReader.Read())
-                {
-                    CP_CRONTAB cp_crontab = new CP_CRONTAB();
-                    cp_crontab.IDCRONTAB = oraReader.GetInt32(0);
-                    cp_crontab.FECHA = oraReader.GetString(1);
-                    cp_crontab.HORA_INICIO = oraReader.GetString(2);
-                    cp_crontab.RECURRENCIA= oraReader.GetString(3);
-                    cp_crontab.HORA_FIN= oraReader.GetString(4);
-                    cp_crontab.WDAY_M2S_EX= oraReader.GetString(5);
-                    cp_crontab.DAY_EX= oraReader.GetString(6);
-                    cp_crontab.MONTH_EX= oraReader.GetString(7);
-                    cp_crontab.REPEAT_EVERY_MINS= oraReader.GetInt32(8);
-                    cp_crontab.REPEAT_AFTER_FINISH= oraReader.GetInt32(8);
-                    cp_contrabList.Add(cp_crontab);
-                }
-                filterRecord = cp_contrabList.Count();
-        
-            }
-            else
-            {
-                return Json(null);
-            }
+			textSearch +=" OR (MONTH_EX like '%"+searchValue.ToLower()+"%')";  
+			textSearch +=" OR (REPEAT_EVERY_MINS like '%"+searchValue.ToLower()+"%')";  
+			textSearch +=" OR (REPEAT_AFTER_FINISH like '%"+searchValue.ToLower()+"%'))";  
+		 
 
-            oraReader.Close();
-            _DBContext.Database.CloseConnection();
-            var returnObj = new {
-                draw = draw, recordsTotal = totalRecord, recordsFiltered = filterRecord, data = cp_contrabList
-            };
-        
-            return Json(returnObj); 
-        }
+			}
+			// get total count of records after search
+			  
+			
+			if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)) 
+			 textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
+			 
+			_DBContext.Database.OpenConnection();
+		String _query="SELECT * FROM (SELECT cc.*,row_number() over "
+		+"(ORDER BY cc.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_CRONTAB cc ) "
+		+" WHERE line_number BETWEEN  "+(skip)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
+		 
+		Console.WriteLine(" esto ejecutamos "+_query);
+
+			OracleCommand oraCommand = new OracleCommand(_query, 
+			(OracleConnection)_DBContext.Database.GetDbConnection());
+
+		   OracleDataReader oraReader = oraCommand.ExecuteReader();
+		   List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
+		   
+		 
+			if (oraReader.HasRows)
+			{
+				while (oraReader.Read())
+				{
+					CP_CRONTAB cp_crontab = new CP_CRONTAB();
+					cp_crontab.IDCRONTAB = oraReader.GetInt32(0);
+					cp_crontab.FECHA = oraReader.GetString(1);
+					cp_crontab.HORA_INICIO = oraReader.GetString(2);
+					cp_crontab.RECURRENCIA= oraReader.GetString(3);
+					cp_crontab.HORA_FIN= oraReader.GetString(4);
+					cp_crontab.WDAY_M2S_EX= oraReader.GetString(5);
+					cp_crontab.DAY_EX= oraReader.GetString(6);
+					cp_crontab.MONTH_EX= oraReader.GetString(7);
+					cp_crontab.REPEAT_EVERY_MINS= oraReader.GetInt32(8);
+					cp_crontab.REPEAT_AFTER_FINISH= oraReader.GetInt32(8);
+					cp_contrabList.Add(cp_crontab);
+					
+				}
+				filterRecord = cp_contrabList.Count();
+		   
+			}
+			else
+			{
+				return Json(null);
+			}
+
+			oraReader.Close();
+			_DBContext.Database.CloseConnection();
+		   return Json(new {
+						
+						draw = draw, 
+						iTotalRecords = totalRecord,
+						iDisplayLength=10,
+						iTotalDisplayRecords=totalRecord,
+						aaData = cp_contrabList,
+					});
+
+				  
+				
+			}
 }
 
 }
