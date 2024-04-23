@@ -24,8 +24,6 @@ namespace WebAdminScheduler.Controllers
         }
         public IActionResult Index()
         {
-            var data = (from s in _DBContext.CP_CRONTABS select s).ToList();  
-            ViewBag.CP_CRONTAB = data;  
             return View();
         }
         public IActionResult Create()

@@ -82,17 +82,18 @@
           },
         ],
         
-        select: {
-          style:    'os',   //default but you have to specify it, no idea why
-          selector: 'tr,a:not(.btn)'
-        },
+        
+		select: {
+		style: 'single',
+		selector: 'td:not(:last-child)' // no row selection on last column
+         },
         "language": {
         "url": "/lib/datatables/dist/locales/es/es.json"
         }
       });
 
       table.on('select', function (e, dt, type, indexes) {
-      console.log(e.target);
+     
         if (type === 'row'   ) {
           var nodes = table
           .rows(indexes)
@@ -119,8 +120,7 @@
       // Handle click on "Select all" control
       $('#example-select-all').on('click', function() {
           
-        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-        // Get all rows with search applied
+         // Get all rows with search applied
           var rows = table.rows({ 'search': 'applied' }).nodes();
           // Check/uncheck checkboxes for all rows in the table
         if(this.checked){
@@ -150,7 +150,7 @@
       });
       
       table.on('select', function (e, dt, type, indexes) {
-      console.log(e.target);
+      
         if (type === 'row'   ) {
           var nodes = table
           .rows(indexes)
@@ -177,7 +177,7 @@
       // Handle click on "Select all" control
       $('#example-select-all').on('click', function(){
           
-        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+        
         // Get all rows with search applied
           var rows = table.rows({ 'search': 'applied' }).nodes();
           // Check/uncheck checkboxes for all rows in the table
