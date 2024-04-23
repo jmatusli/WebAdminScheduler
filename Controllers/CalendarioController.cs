@@ -171,7 +171,7 @@ namespace WebAdminScheduler.Controllers
 
 			oraReader.Close();
 			_DBContext.Database.CloseConnection();
-		   return Json(new {
+		    return Json(new {
                 draw = draw, 
                 iTotalRecords = totalRecord,
                 iDisplayLength=10,
@@ -180,6 +180,12 @@ namespace WebAdminScheduler.Controllers
             });
 
 		}
+        public JsonResult ListarJobsAsoc(int idCrontab) {
+            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idCrontab)
+            select s).ToList();  
+                ViewBag.CP_PROCESOS = data;
+                return ListarJobsAsoc(idCrontab);
+        }
     }
 
 }

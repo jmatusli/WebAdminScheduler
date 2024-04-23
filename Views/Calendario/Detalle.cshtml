@@ -16,9 +16,6 @@
 <div>
     <a asp-action="Index" class="btn btn-primary">Inicio</a>
 </div>
-Id AL DETALLE CALENDARIO: @ViewBag.IDCRONTAB
-@using (Html.BeginForm("Save", "Calendario", FormMethod.Post))
-  {
     <body>
         <h1>Calendarios</h1>
         <div class="card">
@@ -31,7 +28,7 @@ Id AL DETALLE CALENDARIO: @ViewBag.IDCRONTAB
                         <label for="TittleCrontab" class="col-form-label">IDCRONTAB</label>
                     </div>
                 <div class="col-auto">
-                    <label for="txtCrontab" class="col-form-label" id="updIdCrontab">01</label>
+                    <label for="txtCrontab" class="col-form-label" id="updIdCrontab">@ViewBag.IDCRONTAB</label>
                 </div>
                 <div class="col-auto">
                     <span id="passwordHelpInline" class="form-text">
@@ -40,94 +37,94 @@ Id AL DETALLE CALENDARIO: @ViewBag.IDCRONTAB
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="updhoraIni" id="updhoraIni">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintires">23</option>
+                        <option value="cero">00</option>
+                        <option value="uno">01</option>
+                        <option value="dos">02</option>
+                        <option value="tres">03</option>
+                        <option value="cuatro">04</option>
+                        <option value="cinco">05</option>
+                        <option value="seis">06</option>
+                        <option value="siete">07</option>
+                        <option value="ocho">08</option>
+                        <option value="nueve">09</option>
+                        <option value="diez">10</option>
+                        <option value="once">11</option>
+                        <option value="doce">12</option>
+                        <option value="trece">13</option>
+                        <option value="catorce">14</option>
+                        <option value="quince">15</option>
+                        <option value="dieciseis">16</option>
+                        <option value="diecisiete">17</option>
+                        <option value="dieciocho">18</option>
+                        <option value="diecinueve">19</option>
+                        <option value="veinte">20</option>
+                        <option value="veintiuno">21</option>
+                        <option value="veintidos">22</option>
+                        <option value="veintires">23</option>
                     </select>
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="uptminutoIni" id="uptminutoIni">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintitres">23</option>
-                    <option value="veinticuatro">24</option>
-                    <option value="veinticinco">25</option>
-                    <option value="veintiseis">26</option>
-                    <option value="veintisiete">27</option>
-                    <option value="veintiocho">28</option>
-                    <option value="veintinueve">29</option>
-                    <option value="treinta">30</option>
-                    <option value="treintauno">31</option>
-                    <option value="treintados">32</option>
-                    <option value="treintatres">33</option>
-                    <option value="treintacuatro">34</option>
-                    <option value="treintacinco">35</option>
-                    <option value="treintaseis">36</option>
-                    <option value="treintasiete">37</option>
-                    <option value="treintaocho">38</option>
-                    <option value="treintanueve">39</option>
-                    <option value="cuarenta">40</option>
-                    <option value="cuarentauno">41</option>
-                    <option value="cuarentados">42</option>
-                    <option value="cuarentatres">43</option>
-                    <option value="cuarentacuatro">44</option>
-                    <option value="cuarentacinco">45</option>
-                    <option value="cuarentaseis">46</option>
-                    <option value="cuarentasiete">47</option>
-                    <option value="cuarentaocho">48</option>
-                    <option value="cuarentanueve">49</option>
-                    <option value="cincuenta">50</option>
-                    <option value="cincuentauno">51</option>
-                    <option value="cincuentados">52</option>
-                    <option value="cincuentatres">53</option>
-                    <option value="cincuentacuatro">54</option>
-                    <option value="cincuentacinco">55</option>
-                    <option value="cincuentaseis">56</option>
-                    <option value="cincuentasiete">57</option>
-                    <option value="cincuentaocho">58</option>
-                    <option value="cincuentanueve">59</option>
+                        <option value="cero">00</option>
+                        <option value="uno">01</option>
+                        <option value="dos">02</option>
+                        <option value="tres">03</option>
+                        <option value="cuatro">04</option>
+                        <option value="cinco">05</option>
+                        <option value="seis">06</option>
+                        <option value="siete">07</option>
+                        <option value="ocho">08</option>
+                        <option value="nueve">09</option>
+                        <option value="diez">10</option>
+                        <option value="once">11</option>
+                        <option value="doce">12</option>
+                        <option value="trece">13</option>
+                        <option value="catorce">14</option>
+                        <option value="quince">15</option>
+                        <option value="dieciseis">16</option>
+                        <option value="diecisiete">17</option>
+                        <option value="dieciocho">18</option>
+                        <option value="diecinueve">19</option>
+                        <option value="veinte">20</option>
+                        <option value="veintiuno">21</option>
+                        <option value="veintidos">22</option>
+                        <option value="veintitres">23</option>
+                        <option value="veinticuatro">24</option>
+                        <option value="veinticinco">25</option>
+                        <option value="veintiseis">26</option>
+                        <option value="veintisiete">27</option>
+                        <option value="veintiocho">28</option>
+                        <option value="veintinueve">29</option>
+                        <option value="treinta">30</option>
+                        <option value="treintauno">31</option>
+                        <option value="treintados">32</option>
+                        <option value="treintatres">33</option>
+                        <option value="treintacuatro">34</option>
+                        <option value="treintacinco">35</option>
+                        <option value="treintaseis">36</option>
+                        <option value="treintasiete">37</option>
+                        <option value="treintaocho">38</option>
+                        <option value="treintanueve">39</option>
+                        <option value="cuarenta">40</option>
+                        <option value="cuarentauno">41</option>
+                        <option value="cuarentados">42</option>
+                        <option value="cuarentatres">43</option>
+                        <option value="cuarentacuatro">44</option>
+                        <option value="cuarentacinco">45</option>
+                        <option value="cuarentaseis">46</option>
+                        <option value="cuarentasiete">47</option>
+                        <option value="cuarentaocho">48</option>
+                        <option value="cuarentanueve">49</option>
+                        <option value="cincuenta">50</option>
+                        <option value="cincuentauno">51</option>
+                        <option value="cincuentados">52</option>
+                        <option value="cincuentatres">53</option>
+                        <option value="cincuentacuatro">54</option>
+                        <option value="cincuentacinco">55</option>
+                        <option value="cincuentaseis">56</option>
+                        <option value="cincuentasiete">57</option>
+                        <option value="cincuentaocho">58</option>
+                        <option value="cincuentanueve">59</option>
                     </select>
                 </div>
                 <div class="col-auto">
@@ -137,96 +134,96 @@ Id AL DETALLE CALENDARIO: @ViewBag.IDCRONTAB
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="upthoraFin" id="upthoraFin">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintires">23</option>
-                    </select>
-                </div>
-                <div class="col-auto">
-                    <select class="form-select" name="uptminutoFin" id="uptminutoFin">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintitres">23</option>
-                    <option value="veinticuatro">24</option>
-                    <option value="veinticinco">25</option>
-                    <option value="veintiseis">26</option>
-                    <option value="veintisiete">27</option>
-                    <option value="veintiocho">28</option>
-                    <option value="veintinueve">29</option>
-                    <option value="treinta">30</option>
-                    <option value="treintauno">31</option>
-                    <option value="treintados">32</option>
-                    <option value="treintatres">33</option>
-                    <option value="treintacuatro">34</option>
-                    <option value="treintacinco">35</option>
-                    <option value="treintaseis">36</option>
-                    <option value="treintasiete">37</option>
-                    <option value="treintaocho">38</option>
-                    <option value="treintanueve">39</option>
-                    <option value="cuarenta">40</option>
-                    <option value="cuarentauno">41</option>
-                    <option value="cuarentados">42</option>
-                    <option value="cuarentatres">43</option>
-                    <option value="cuarentacuatro">44</option>
-                    <option value="cuarentacinco">45</option>
-                    <option value="cuarentaseis">46</option>
-                    <option value="cuarentasiete">47</option>
-                    <option value="cuarentaocho">48</option>
-                    <option value="cuarentanueve">49</option>
-                    <option value="cincuenta">50</option>
-                    <option value="cincuentauno">51</option>
-                    <option value="cincuentados">52</option>
-                    <option value="cincuentatres">53</option>
-                    <option value="cincuentacuatro">54</option>
-                    <option value="cincuentacinco">55</option>
-                    <option value="cincuentaseis">56</option>
-                    <option value="cincuentasiete">57</option>
-                    <option value="cincuentaocho">58</option>
-                    <option value="cincuentanueve">59</option>
-                    </select>
-                </div>
+                        <option value="cero">00</option>
+                        <option value="uno">01</option>
+                        <option value="dos">02</option>
+                        <option value="tres">03</option>
+                        <option value="cuatro">04</option>
+                        <option value="cinco">05</option>
+                        <option value="seis">06</option>
+                        <option value="siete">07</option>
+                        <option value="ocho">08</option>
+                        <option value="nueve">09</option>
+                        <option value="diez">10</option>
+                        <option value="once">11</option>
+                        <option value="doce">12</option>
+                        <option value="trece">13</option>
+                        <option value="catorce">14</option>
+                        <option value="quince">15</option>
+                        <option value="dieciseis">16</option>
+                        <option value="diecisiete">17</option>
+                        <option value="dieciocho">18</option>
+                        <option value="diecinueve">19</option>
+                        <option value="veinte">20</option>
+                        <option value="veintiuno">21</option>
+                        <option value="veintidos">22</option>
+                        <option value="veintires">23</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select" name="uptminutoFin" id="uptminutoFin">
+                            <option value="cero">00</option>
+                            <option value="uno">01</option>
+                            <option value="dos">02</option>
+                            <option value="tres">03</option>
+                            <option value="cuatro">04</option>
+                            <option value="cinco">05</option>
+                            <option value="seis">06</option>
+                            <option value="siete">07</option>
+                            <option value="ocho">08</option>
+                            <option value="nueve">09</option>
+                            <option value="diez">10</option>
+                            <option value="once">11</option>
+                            <option value="doce">12</option>
+                            <option value="trece">13</option>
+                            <option value="catorce">14</option>
+                            <option value="quince">15</option>
+                            <option value="dieciseis">16</option>
+                            <option value="diecisiete">17</option>
+                            <option value="dieciocho">18</option>
+                            <option value="diecinueve">19</option>
+                            <option value="veinte">20</option>
+                            <option value="veintiuno">21</option>
+                            <option value="veintidos">22</option>
+                            <option value="veintitres">23</option>
+                            <option value="veinticuatro">24</option>
+                            <option value="veinticinco">25</option>
+                            <option value="veintiseis">26</option>
+                            <option value="veintisiete">27</option>
+                            <option value="veintiocho">28</option>
+                            <option value="veintinueve">29</option>
+                            <option value="treinta">30</option>
+                            <option value="treintauno">31</option>
+                            <option value="treintados">32</option>
+                            <option value="treintatres">33</option>
+                            <option value="treintacuatro">34</option>
+                            <option value="treintacinco">35</option>
+                            <option value="treintaseis">36</option>
+                            <option value="treintasiete">37</option>
+                            <option value="treintaocho">38</option>
+                            <option value="treintanueve">39</option>
+                            <option value="cuarenta">40</option>
+                            <option value="cuarentauno">41</option>
+                            <option value="cuarentados">42</option>
+                            <option value="cuarentatres">43</option>
+                            <option value="cuarentacuatro">44</option>
+                            <option value="cuarentacinco">45</option>
+                            <option value="cuarentaseis">46</option>
+                            <option value="cuarentasiete">47</option>
+                            <option value="cuarentaocho">48</option>
+                            <option value="cuarentanueve">49</option>
+                            <option value="cincuenta">50</option>
+                            <option value="cincuentauno">51</option>
+                            <option value="cincuentados">52</option>
+                            <option value="cincuentatres">53</option>
+                            <option value="cincuentacuatro">54</option>
+                            <option value="cincuentacinco">55</option>
+                            <option value="cincuentaseis">56</option>
+                            <option value="cincuentasiete">57</option>
+                            <option value="cincuentaocho">58</option>
+                            <option value="cincuentanueve">59</option>
+                        </select>
+                    </div>
                 </div><hr />
 
                 <a href="#" class="link-info">Días</a>
@@ -300,174 +297,174 @@ Id AL DETALLE CALENDARIO: @ViewBag.IDCRONTAB
                 </div>
                 
                 <table id="tbl-dias-exe" class="display nowrap" width="100%">
-                <thead>
-                <tr>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptUnoExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtUnoExe">
-                            1
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDosExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtDosExe">
-                            2
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptTresExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtTresExe">
-                            3
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptCuatroExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtCuatroExe">
-                            4
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptCincoExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtCincoExe">
-                            5
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSeisExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtSeisExe">
-                            6
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSieteExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtSieteExe">
-                            7
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptOchoExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtOchoExe">
-                            8
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptnueveExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtnueveExe">
-                            9
-                        </label>
-                    </td>
-                    <td>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiezExe" name="dinamico" >
-                    </td>
-                    <td>
-                        <label class="form-check-label" for="flexCheckTxtDiezExe">
-                            10
-                        </label>
-                    </td>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptOnceExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtOnceExe">
-                                11
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDoceExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtDoceExe">
-                                12
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptTreceExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtTreceExe">
-                                13
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptCatorceExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtCatorceExe">
-                                14
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptQuinceExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtQuinceExe">
-                                15
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiesiseisExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtDiesiseisExe">
-                                16
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiesicieteExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtDiesicieteExe">
-                                17
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiesiochoExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtDiesiochoExe">
-                                18
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiecinueveExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtDiecinueveExe">
-                                19
-                            </label>
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptVeinteExe" name="dinamico" >
-                        </td>
-                        <td>
-                            <label class="form-check-label" for="flexCheckTxtVeinteExe">
-                                20
-                            </label>
-                        </td>
-                    </tr>
-                </tbody>
+                    <thead>
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptUnoExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtUnoExe">
+                                    1
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDosExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtDosExe">
+                                    2
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptTresExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtTresExe">
+                                    3
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptCuatroExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtCuatroExe">
+                                    4
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptCincoExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtCincoExe">
+                                    5
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSeisExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtSeisExe">
+                                    6
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSieteExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtSieteExe">
+                                    7
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptOchoExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtOchoExe">
+                                    8
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptnueveExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtnueveExe">
+                                    9
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiezExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtDiezExe">
+                                    10
+                                </label>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptOnceExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtOnceExe">
+                                    11
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDoceExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtDoceExe">
+                                    12
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptTreceExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtTreceExe">
+                                    13
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptCatorceExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtCatorceExe">
+                                    14
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptQuinceExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtQuinceExe">
+                                    15
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiesiseisExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtDiesiseisExe">
+                                    16
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiesicieteExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtDiesicieteExe">
+                                    17
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiesiochoExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtDiesiochoExe">
+                                    18
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDiecinueveExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtDiecinueveExe">
+                                    19
+                                </label>
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckUptVeinteExe" name="dinamico" >
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="flexCheckTxtVeinteExe">
+                                    20
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <table id="tbl-dias-exe" class="display nowrap" width="100%">
                     <thead>
@@ -726,7 +723,6 @@ Id AL DETALLE CALENDARIO: @ViewBag.IDCRONTAB
             </table>
         </div>
     </body>
-}
     
   <script> 
     function toggle(source) {
