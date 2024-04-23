@@ -4,14 +4,13 @@
  <head>
   <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
-        <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
-   <script src="~/js/jquery-1.11.3.min.js"></script>
-  <script src="~/js/pdfmake.min.js"></script>
-  <script src="~/js/vfs_fonts.js"></script>
-  <script src="~/js/datatables.min.js"></script>
-<script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
-<script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
-
+    <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script src="~/js/pdfmake.min.js"></script>
+    <script src="~/js/vfs_fonts.js"></script>
+    <script src="~/js/datatables.min.js"></script>
+    <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
+    <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
 
   <style>
     .container{
@@ -125,6 +124,9 @@
   {
 	
   <body>
+    <div>
+      <a asp-action="Index" class="btn btn-primary">Inicio</a>
+    </div>
     <h1>Calendarios</h1>
     <div class="card">
       <div class="card-header">
@@ -132,12 +134,6 @@
       </div>
       <div class="card-body">
         <div class="row g-4 align-items-center">
-          <div class="col-auto">
-            <label for="TittleCrontab" class="col-form-label">IDCRONTAB</label>
-          </div>
-          <div class="col-auto">
-            <label for="txtCrontab" class="col-form-label">01</label>
-          </div>
           <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
               Hora Inicio
@@ -815,56 +811,46 @@
 
     $(document).on("ready",function(){
 
-   
     $('#btnSave').on('click',function(){
+      var data_cron={
+        "oCrontab": {
+            /*"IDCRONTAB":,*/
+            "FECHA":"00000000",
+            "HORA_INICIO":"0000",
+            "HORA_FIN":"0000",
+            "RECURRENCIA":"0000",
+            "WDAY_M2S_EX":"1111111",
+            "DAY_EX":"0",
+            "MONTH_EX":"0",
+            "REPEAT_EVERY_MINS":"0",
+            "REPEAT_AFTER_FINISH":"0"
+        }
+      };
 
- var data_cron={
-  "oCrontab": {
-       /*"IDCRONTAB":,*/
-       "FECHA":"00000000",
-       "HORA_INICIO":"0000",
-       "HORA_FIN":"0000",
-       "RECURRENCIA":"0000",
-       "WDAY_M2S_EX":"1111111",
-       "DAY_EX":"0",
-       "MONTH_EX":"0",
-       "REPEAT_EVERY_MINS":"0",
-       "REPEAT_AFTER_FINISH":"0"
-  }
- };
+      $.ajax({
+        type: "POST",
+        url: '@Url.Action("Save", "Calendario")' ,
+        data: JSON.stringify(data_cron),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+          Swal.fire({
+          title: "Calendario registrado!",
+          text: "Click en aceptar para ver calendarios registrados!",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        }).then((result) => {
+        if (result.isConfirmed) {
+          $(location).attr("href","@Url.Action("Index","Calendario")")
+        }  
+    });
+    },
+      error: function () {
+        alert("Error while inserting data");
+      }
+  });
 
-  $.ajax({
-                type: "POST",
-                url: '@Url.Action("Save", "Calendario")' ,
-                data: JSON.stringify(data_cron),
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function () {
-                   
-                  Swal.fire({
-  title: "Calendario registrado!",
-  text: "Click en aceptar para ver calendarios registrados!",
-  icon: "success",
-  confirmButtonText: "Aceptar",
-}).then((result) => {
-  if (result.isConfirmed) {
-     $(location).attr("href","@Url.Action("Index","Calendario")")
-  }  
-});
+})
 
-
-
-              
-                    //recargartabla(table);
-                },
-                error: function () {
-                    alert("Error while inserting data");
-                }
-            });
-
-
-
-      })
-
-    })
-  </script>
+})
+</script>

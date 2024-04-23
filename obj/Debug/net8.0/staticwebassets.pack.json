@@ -1,295 +1,331 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebAdminScheduler.bundle.scp.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebAdminScheduler.bundle.scp.css",
       "PackagePath": "staticwebassets\\WebAdminScheduler.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\css\\clockpicker.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\css\\clockpicker.css",
       "PackagePath": "staticwebassets\\css\\clockpicker.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\css\\datatables.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\css\\datatables.min.css",
       "PackagePath": "staticwebassets\\css\\datatables.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\css\\styles.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\css\\styles.css",
       "PackagePath": "staticwebassets\\css\\styles.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\js\\clockpicker.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\js\\clockpicker.js",
       "PackagePath": "staticwebassets\\js\\clockpicker.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\js\\datatables.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\js\\datatables.min.js",
       "PackagePath": "staticwebassets\\js\\datatables.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\js\\jquery-1.11.3.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\js\\jquery-1.11.3.min.js",
       "PackagePath": "staticwebassets\\js\\jquery-1.11.3.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\js\\pdfmake.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\js\\pdfmake.min.js",
       "PackagePath": "staticwebassets\\js\\pdfmake.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\js\\vfs_fonts.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\js\\vfs_fonts.js",
       "PackagePath": "staticwebassets\\js\\vfs_fonts.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\SweetAlert\\dist\\sweetalert2.all.js",
+      "PackagePath": "staticwebassets\\lib\\SweetAlert\\dist\\sweetalert2.all.js"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\SweetAlert\\dist\\sweetalert2.all.min.js",
+      "PackagePath": "staticwebassets\\lib\\SweetAlert\\dist\\sweetalert2.all.min.js"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\SweetAlert\\dist\\sweetalert2.css",
+      "PackagePath": "staticwebassets\\lib\\SweetAlert\\dist\\sweetalert2.css"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\SweetAlert\\dist\\sweetalert2.js",
+      "PackagePath": "staticwebassets\\lib\\SweetAlert\\dist\\sweetalert2.js"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\SweetAlert\\dist\\sweetalert2.min.css",
+      "PackagePath": "staticwebassets\\lib\\SweetAlert\\dist\\sweetalert2.min.css"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\SweetAlert\\dist\\sweetalert2.min.js",
+      "PackagePath": "staticwebassets\\lib\\SweetAlert\\dist\\sweetalert2.min.js"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\Toast\\dist\\jquery.toast.min.css",
+      "PackagePath": "staticwebassets\\lib\\Toast\\dist\\jquery.toast.min.css"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\Toast\\dist\\jquery.toast.min.js",
+      "PackagePath": "staticwebassets\\lib\\Toast\\dist\\jquery.toast.min.js"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\datatables\\dist\\css\\datatables.min.css",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\datatables\\dist\\css\\datatables.min.css",
       "PackagePath": "staticwebassets\\lib\\datatables\\dist\\css\\datatables.min.css"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\datatables\\dist\\js\\datatables.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\datatables\\dist\\js\\datatables.min.js",
       "PackagePath": "staticwebassets\\lib\\datatables\\dist\\js\\datatables.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\datatables\\dist\\js\\pdfmake.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\datatables\\dist\\js\\pdfmake.min.js",
       "PackagePath": "staticwebassets\\lib\\datatables\\dist\\js\\pdfmake.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\datatables\\dist\\js\\vfs_fonts.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\datatables\\dist\\js\\vfs_fonts.js",
       "PackagePath": "staticwebassets\\lib\\datatables\\dist\\js\\vfs_fonts.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\datatables\\dist\\locales\\es\\es.json",
+      "PackagePath": "staticwebassets\\lib\\datatables\\dist\\locales\\es\\es.json"
+    },
+    {
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\njt33770\\Documents\\WebAdmingit\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\njt33770\\Documents\\WebAdminScheduler\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {

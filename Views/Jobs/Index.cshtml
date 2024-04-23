@@ -15,10 +15,10 @@
       <a asp-action="Create" class="btn btn-primary">Nuevo</a>
     </p>
     <div class="container">
-      <table id="dt-jobs" class="display nowrap" width="100%">
+      <table id="tblJobs" class="display nowrap" width="100%">
         <thead>
           <tr>
-            <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="dt-jobs-select-all"></th>
+            <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tblJobs-select-all"></th>
             <th>IDPROC</th>
             <th>IDCONEX</th>
             <th>NOMBRE</th>
@@ -48,7 +48,7 @@
 
 <script>
   $(document).ready( function () {
-    var table = $('#dt-jobs').DataTable( {
+    var table = $('#tblJobs').DataTable( {
       "processing": true,
       "serverSide": true,
       "filter": true,
@@ -99,7 +99,7 @@
         style:    'os',   //default but you have to specify it, no idea why
         selector: 'tr,a:not(.btn)'
       }
-      });
+    });
 
     table.on('select', function (e, dt, type, indexes) {
     console.log(e.target);

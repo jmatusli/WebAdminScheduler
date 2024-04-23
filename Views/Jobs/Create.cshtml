@@ -17,12 +17,6 @@
     <div class="card-body">
         <div class="row g-4 align-items-center">
             <div class="col-auto">
-                <label for="TittleProc" class="col-form-label">IDPROC</label>
-            </div>
-            <div class="col-auto">
-                <label for="txtIdProc" class="col-form-label">01</label>
-            </div>
-            <div class="col-auto">
                 <label for="TittleConex" class="col-form-label">IDCONEX</label>
             </div>
             <div class="col-auto">
@@ -34,16 +28,16 @@
             <div class="col-auto">
                 <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
             </div>
-        </div>
-
-        <br/>
-        <div class="row g-4 align-items-center">
             <div class="col-auto">
                 <label for="TittleDescrpcion" class="col-form-label">DESCRIPCIÓN</label>
             </div>
             <div class="col-auto">
                 <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
             </div>
+        </div>
+
+        <br/>
+        <div class="row g-4 align-items-center">
             <div class="col-auto">
                 <label for="TittlePath" class="col-form-label">PATH</label>
             </div>
@@ -82,6 +76,10 @@
                     </label>
                 </div>
             </div>
+        </div>
+
+        <br/>
+        <div class="row g-4 align-items-center">
             <div class="col-auto">
                 <span id="RepeatIntentos" class="form-text">
                     INTENTOS
@@ -118,6 +116,9 @@
                     </label>
                 </div>
             </div>
+        </div>
+        <br/>
+        <div class="row g-4 align-items-center">
             <div class="col-auto">
                 <span id="idHost" class="form-text">
                     IDHOST
@@ -145,6 +146,7 @@
         </div>
     </div>
     <div class="card-footer text-muted">
+        <h4 style="text-align: center;">Crear Crontab asociado</h4>
     </div>
 </div>
 
@@ -152,13 +154,91 @@
     <table id="dt-crontab" class="display nowrap" width="100%">
       <thead>
         <tr>
-          <th><input type="radio" name="select_all" class="dt-column-title" value="1" id="idcrontab"></th>
+          <th></th>
+          <th>DÍAS</th>
           <th>HORA INICIO</th>
           <th>HORA FIN</th>
-          <th>DÍAS</th>
         </tr>
       </thead>
       <tbody>
+        <td>
+            <input type="checkbox" name="id[IDCRONTAB]" value=""></input>
+        </td>
+        <td>
+            <select class="form-select" name="dias" id="dias">
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miercoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sabado">Sabado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+        </td>
+        <td>
+            <div class="row g-4 align-items-center">
+                <div class="col-auto">
+                    <select class="form-select" name="horaIni" id="horaIni">
+                        <option value="cero">00</option>
+                        <option value="uno">01</option>
+                        <option value="dos">02</option>
+                        <option value="tres">03</option>
+                        <option value="cuatro">04</option>
+                        <option value="cinco">05</option>
+                        <option value="seis">06</option>
+                        <option value="siete">07</option>
+                        <option value="ocho">08</option>
+                        <option value="nueve">09</option>
+                        <option value="diez">10</option>
+                        <option value="once">11</option>
+                        <option value="doce">12</option>
+                        <option value="trece">13</option>
+                        <option value="catorce">14</option>
+                        <option value="quince">15</option>
+                        <option value="dieciseis">16</option>
+                        <option value="diecisiete">17</option>
+                        <option value="dieciocho">18</option>
+                        <option value="diecinueve">19</option>
+                        <option value="veinte">20</option>
+                        <option value="veintiuno">21</option>
+                        <option value="veintidos">22</option>
+                        <option value="veintires">23</option>
+                    </select>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="row g-4 align-items-center">
+                <div class="col-auto">
+                    <select class="form-select" name="horaFin" id="horaFin">
+                        <option value="cero">00</option>
+                        <option value="uno">01</option>
+                        <option value="dos">02</option>
+                        <option value="tres">03</option>
+                        <option value="cuatro">04</option>
+                        <option value="cinco">05</option>
+                        <option value="seis">06</option>
+                        <option value="siete">07</option>
+                        <option value="ocho">08</option>
+                        <option value="nueve">09</option>
+                        <option value="diez">10</option>
+                        <option value="once">11</option>
+                        <option value="doce">12</option>
+                        <option value="trece">13</option>
+                        <option value="catorce">14</option>
+                        <option value="quince">15</option>
+                        <option value="dieciseis">16</option>
+                        <option value="diecisiete">17</option>
+                        <option value="dieciocho">18</option>
+                        <option value="diecinueve">19</option>
+                        <option value="veinte">20</option>
+                        <option value="veintiuno">21</option>
+                        <option value="veintidos">22</option>
+                        <option value="veintires">23</option>
+                    </select>
+                </div>
+            </div>
+        </td>
       </tbody>
     </table>
 </div>

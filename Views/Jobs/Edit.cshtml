@@ -1,0 +1,238 @@
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div>
+  <a asp-action="Index" class="btn btn-primary">Inicio</a>
+</div>
+<div class="card">
+  <div class="card-header">
+    <a href="#" class="btn btn-primary">Guardar</a>
+  </div>
+  <div class="card-body">
+    <div class="row g-4 align-items-center">
+      <div class="col-auto">
+        <label for="TittleProc" class="col-form-label">IDPROC</label>
+      </div>
+      <div class="col-auto">
+        <label for="txtIdProc" class="col-form-label">01</label>
+      </div>
+      <div class="col-auto">
+        <label for="TittleConex" class="col-form-label">IDCONEX</label>
+      </div>
+      <div class="col-auto">
+        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <label for="TittleNombre" class="col-form-label">NOMBRE</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+    </div>
+
+    <br/>
+    <div class="row g-4 align-items-center">
+      <div class="col-auto">
+        <label for="TittleDescrpcion" class="col-form-label">DESCRIPCIÓN</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <label for="TittlePath" class="col-form-label">PATH</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <label for="TittleParametro1" class="col-form-label">PARAMETRO1</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <label for="TittleParametroDos" class="col-form-label">PARAMETRO2</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <label for="TittleParametroTres" class="col-form-label">PARAMETRO3</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <label for="TittleParametroCuatro" class="col-form-label">PARAMETRO4</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="IdDependencia">
+            <label class="form-check-label" for="IdDependencia">
+              DEPENDENCIA
+            </label>
+        </div>
+      </div>
+      <div class="col-auto">
+        <span id="RepeatIntentos" class="form-text">
+          INTENTOS
+        </span>
+    </div>
+    <div class="col-auto">
+      <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+    </div>
+    <div class="col-auto">
+      <span id="RepeatEsperaIntento" class="form-text">
+        ESPERA INTENTO
+      </span>
+    </div>
+    <div class="col-auto">
+      <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+    </div>
+    <div class="col-auto">
+      <span id="RepeatEstado" class="form-text">
+        ESTADO
+      </span>
+    </div>
+      <div class="col-auto">
+        <select class="form-select" name="estado" id="estado">
+          <option value="act">ACTIVO</option>
+          <option value="inact">INACTIVO</option>
+          <option value="int">INTERNAL</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckFtp">
+          <label class="form-check-label" for="flexCheckFtp">
+            FTP
+          </label>
+        </div>
+      </div>
+      <div class="col-auto">
+        <span id="idHost" class="form-text">
+          IDHOST
+        </span>
+      </div>
+      <div class="col-auto">
+        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+      <div class="col-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckComprension">
+          <label class="form-check-label" for="flexCheckComprension">
+            COMPRESION
+          </label>
+        </div>
+      </div>
+      <div class="col-auto">
+        <span id="Node" class="form-text">
+          NODE
+        </span>
+      </div>
+      <div class="col-auto">
+        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <h4 style="text-align: center;">Crear Crontab</h4>
+  </div>
+</div>
+
+<div class="container">
+  <table id="dt-crontab" class="display nowrap" width="100%">
+    <thead>
+      <tr>
+        <th></th>
+        <th>DÍAS</th>
+        <th>HORA INICIO</th>
+        <th>HORA FIN</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td>
+        <input type="checkbox" name="id[IDCRONTAB]" value=""></input>
+      </td>
+      <td>
+        <select class="form-select" name="dias" id="dias">
+          <option value="lunes">Lunes</option>
+          <option value="martes">Martes</option>
+          <option value="miercoles">Miercoles</option>
+          <option value="jueves">Jueves</option>
+          <option value="viernes">Viernes</option>
+          <option value="sabado">Sabado</option>
+          <option value="domingo">Domingo</option>
+        </select>
+      </td>
+      <td>
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <select class="form-select" name="horaIni" id="horaIni">
+              <option value="cero">00</option>
+              <option value="uno">01</option>
+              <option value="dos">02</option>
+              <option value="tres">03</option>
+              <option value="cuatro">04</option>
+              <option value="cinco">05</option>
+              <option value="seis">06</option>
+              <option value="siete">07</option>
+              <option value="ocho">08</option>
+              <option value="nueve">09</option>
+              <option value="diez">10</option>
+              <option value="once">11</option>
+              <option value="doce">12</option>
+              <option value="trece">13</option>
+              <option value="catorce">14</option>
+              <option value="quince">15</option>
+              <option value="dieciseis">16</option>
+              <option value="diecisiete">17</option>
+              <option value="dieciocho">18</option>
+              <option value="diecinueve">19</option>
+              <option value="veinte">20</option>
+              <option value="veintiuno">21</option>
+              <option value="veintidos">22</option>
+              <option value="veintires">23</option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <select class="form-select" name="horaFin" id="horaFin">
+              <option value="cero">00</option>
+              <option value="uno">01</option>
+              <option value="dos">02</option>
+              <option value="tres">03</option>
+              <option value="cuatro">04</option>
+              <option value="cinco">05</option>
+              <option value="seis">06</option>
+              <option value="siete">07</option>
+              <option value="ocho">08</option>
+              <option value="nueve">09</option>
+              <option value="diez">10</option>
+              <option value="once">11</option>
+              <option value="doce">12</option>
+              <option value="trece">13</option>
+              <option value="catorce">14</option>
+              <option value="quince">15</option>
+              <option value="dieciseis">16</option>
+              <option value="diecisiete">17</option>
+              <option value="dieciocho">18</option>
+              <option value="diecinueve">19</option>
+              <option value="veinte">20</option>
+              <option value="veintiuno">21</option>
+              <option value="veintidos">22</option>
+              <option value="veintires">23</option>
+            </select>
+          </div>
+        </div>
+      </td>
+    </tbody>
+  </table>
+</div>
