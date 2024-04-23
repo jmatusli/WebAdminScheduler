@@ -147,7 +147,7 @@ namespace WebAdminScheduler.Controllers
 			_DBContext.Database.OpenConnection();
 		String _query="SELECT * FROM (SELECT cc.*,row_number() over "
 		+"(ORDER BY cc.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_CRONTAB cc ) "
-		+" WHERE line_number BETWEEN  "+(skip)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
+		+" WHERE line_number BETWEEN  "+(skip+1)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
 	
 
 			OracleCommand oraCommand = new OracleCommand(_query, 
