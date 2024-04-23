@@ -148,8 +148,7 @@ namespace WebAdminScheduler.Controllers
 		String _query="SELECT * FROM (SELECT cc.*,row_number() over "
 		+"(ORDER BY cc.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_CRONTAB cc ) "
 		+" WHERE line_number BETWEEN  "+(skip)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
-		 
-		Console.WriteLine(" esto ejecutamos "+_query);
+	
 
 			OracleCommand oraCommand = new OracleCommand(_query, 
 			(OracleConnection)_DBContext.Database.GetDbConnection());
