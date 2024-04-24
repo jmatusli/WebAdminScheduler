@@ -29,7 +29,6 @@ namespace WebAdminScheduler.Controllers
         }
         public IActionResult Create()
         {
-        
             Int32 result = WACustomHelper.GetLasIdCRON(_DBContext);
             
             ViewBag.LasIdcrontab=result;
@@ -67,7 +66,7 @@ namespace WebAdminScheduler.Controllers
         }
         public IActionResult Edit(int id)
         {
-             CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
+            CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
             select s).ToList().AsQueryable().FirstOrDefault();  
             ViewBag.IDCRONTAB = id;  
             //ViewBag.data=data;

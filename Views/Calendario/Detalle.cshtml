@@ -3,7 +3,7 @@
     ViewData["Title"] = "Detalle";
 }
 <head>
-  <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
     <script src="~/js/jquery-1.11.3.min.js"></script>
@@ -30,8 +30,8 @@
                         <label for="TittleCrontab" class="col-form-label">IDCRONTAB</label>
                     </div>
                     <div class="col-auto">
-                        <label for="txtCrontab" class="col-form-label" id="updIdCrontab">@ViewBag.IDCRONTAB</label>
-                        @* <label for="txtCrontab" class="col-form-label" id="updIdCrontab">@Model.IDCRONTAB</label> *@
+                        <label for="txtCrontab" class="col-form-label" id="txtCrontab">@ViewBag.IDCRONTAB</label>
+                        @* <label for="txtCrontab" class="col-form-label" id="txtCrontab">@Model.IDCRONTAB</label> *@
                     </div>
                     <div class="col-auto">
                         <span id="passwordHelpInline" class="form-text">
@@ -563,10 +563,6 @@
     var idcrontab="@ViewBag.IDCRONTAB";
     params.idcrontab=idcrontab;
 
-    var hora_ini="@ViewBag.HORA_INICIO";
-    params.hora_ini=hora_ini;
-    console.log(params.idcrontab,'idcrontab');
- 
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');
 

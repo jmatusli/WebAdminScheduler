@@ -65,7 +65,7 @@
           'targets': 0,
         orderable: false,
           'render': function (data, type, full, meta){
-            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+            return   '<a class="btn btn-success" asp-route-idProc="'+data.idcrontab+'" href="/Jobs/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info" asp-route-idProc="'+data.idcrontab+'" href="/Jobs/Detalle/'+data.idcrontab+'">Detalle</a>';
           }
           }],
         "columns": [
@@ -90,63 +90,63 @@
             { "data": "comprension", "name": "comprension", "autoWidth": true },
             { "data": "id_crontab", "name": "id_crontab", "autoWidth": true },
             { "data": "node", "name": "node", "autoWidth": true },
-            {
-              "render": function (data,row) { return '<a class="btn btn-success">Editar</a>&nbsp;<a class="btn btn-info">Ver Log</a>';   }
-            },
+            { "data":null },
         ],
       
       select: {
-        style:    'os',   //default but you have to specify it, no idea why
-        selector: 'tr,a:not(.btn)'
-      }
-    });
+      style: 'single',
+      selector: 'td:not(:last-child)' // no row selection on last column
+      },
+        "language": {
+        "url": "/lib/datatables/dist/locales/es/es.json"
+        }
+      });
 
-    table.on('select', function (e, dt, type, indexes) {
-    console.log(e.target);
-      if (type === 'row'   ) {
-        var nodes = table
-        .rows(indexes)
-        .nodes()
-        .each(function () { 
-          $('td:first-child', this).find('input').prop('checked', true); 
-        });
-        //.find(':checkbox', 'td:first-child').checked = true; 
-      }
-    });
+      table.on('select', function (e, dt, type, indexes) {
+     
+        if (type === 'row'   ) {
+          var nodes = table
+          .rows(indexes)
+          .nodes()
+          .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', true); 
+          });
+          //.find(':checkbox', 'td:first-child').checked = true; 
+        }
+      });
 
-    table.on('deselect', function (e, dt, type, indexes) {
-      if (type === 'row') {
-      $('#example-select-all').prop("checked",false);
-        table
-        .rows(indexes)
-        .nodes()
-        .each(function () { 
-          $('td:first-child', this).find('input').prop('checked', false); 
-        });
-      }
-    });
-    
-    // Handle click on "Select all" control
-    $('#example-select-all').on('click', function(){
-        
-      console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-      // Get all rows with search applied
-        var rows = table.rows({ 'search': 'applied' }).nodes();
-        // Check/uncheck checkboxes for all rows in the table
-      if(this.checked){
-        $('input[type="checkbox"]', rows).prop('checked', this.checked);
-        
-        var selData =   table.rows().select();
-        var selData =   table.rows(".selected").data();
-      }
-      else 
-      {
-      var selData =   table.rows().deselect();
-      }
-    });
+      table.on('deselect', function (e, dt, type, indexes) {
+        if (type === 'row') {
+        $('#example-select-all').prop("checked",false);
+          table
+          .rows(indexes)
+          .nodes()
+          .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', false); 
+          });
+        }
+      });
+      
+      // Handle click on "Select all" control
+      $('#example-select-all').on('click', function() {
+          
+         // Get all rows with search applied
+          var rows = table.rows({ 'search': 'applied' }).nodes();
+          // Check/uncheck checkboxes for all rows in the table
+        if(this.checked){
+          $('input[type="checkbox"]', rows).prop('checked', this.checked);
+          
+          var selData =   table.rows().select();
+          var selData =   table.rows(".selected").data();
+        }
+        else 
+        {
+        var selData =   table.rows().deselect();
+        }
+      });
 
-    // Handle click on checkbox to set state of "Select all" control
-    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+      // Handle click on checkbox to set state of "Select all" control
+      $('#example tbody').on('change', 'input[type="checkbox"]', function(){
         // If checkbox is not checked
         if(!this.checked){
           var el = $('#example-select-all').get(0);
@@ -157,54 +157,53 @@
             el.indeterminate = true;
           }
         }
-    });
-    
-    table.on('select', function (e, dt, type, indexes) {
-    console.log(e.target);
-      if (type === 'row'   ) {
-        var nodes = table
-        .rows(indexes)
-        .nodes()
-        .each(function () { 
-          $('td:first-child', this).find('input').prop('checked', true); 
-        });
-        //.find(':checkbox', 'td:first-child').checked = true; 
-      }
-    });
+      });
+      
+      table.on('select', function (e, dt, type, indexes) {
+      
+        if (type === 'row'   ) {
+          var nodes = table
+          .rows(indexes)
+          .nodes()
+          .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', true); 
+          });
+          //.find(':checkbox', 'td:first-child').checked = true; 
+        }
+      });
 
-    table.on('deselect', function (e, dt, type, indexes) {
-      if (type === 'row') {
-      $('#example-select-all').prop("checked",false);
-        table
-        .rows(indexes)
-        .nodes()
-        .each(function () { 
-          $('td:first-child', this).find('input').prop('checked', false); 
-        });
-      }
-    });
-    
-    // Handle click on "Select all" control
-    $('#example-select-all').on('click', function(){
-        
-      console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-      // Get all rows with search applied
-        var rows = table.rows({ 'search': 'applied' }).nodes();
-        // Check/uncheck checkboxes for all rows in the table
-      if(this.checked){
-        $('input[type="checkbox"]', rows).prop('checked', this.checked);
-        
-        var selData =   table.rows().select();
-        var selData =   table.rows(".selected").data();
-      }
-      else 
-      {
-      var selData =   table.rows().deselect();
-      }
-    });
+      table.on('deselect', function (e, dt, type, indexes) {
+        if (type === 'row') {
+        $('#example-select-all').prop("checked",false);
+          table
+          .rows(indexes)
+          .nodes()
+          .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', false); 
+          });
+        }
+      });
+      
+      // Handle click on "Select all" control
+      $('#example-select-all').on('click', function(){
+          
+        // Get all rows with search applied
+          var rows = table.rows({ 'search': 'applied' }).nodes();
+          // Check/uncheck checkboxes for all rows in the table
+        if(this.checked){
+          $('input[type="checkbox"]', rows).prop('checked', this.checked);
+          
+          var selData =   table.rows().select();
+          var selData =   table.rows(".selected").data();
+        }
+        else 
+        {
+        var selData =   table.rows().deselect();
+        }
+      });
 
-    // Handle click on checkbox to set state of "Select all" control
-    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+      // Handle click on checkbox to set state of "Select all" control
+      $('#example tbody').on('change', 'input[type="checkbox"]', function(){
         // If checkbox is not checked
         if(!this.checked){
           var el = $('#example-select-all').get(0);
@@ -217,5 +216,5 @@
       }
     });
   });
-</script>
+</script> 
 </html>

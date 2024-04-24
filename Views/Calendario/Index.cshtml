@@ -26,7 +26,6 @@
           <th>FECHA</th>
           <th>HORA INICIO</th>
           <th>HORA FIN</th>
-          <th>RECURRENCIA</th>
           <th>WDAY_M2S_EX</th>
           <th>DAY_EX</th>
           <th>MONTH_EX</th>
@@ -42,16 +41,13 @@
 </body>
 
 <script> 
-var params={};
- 
-function recargartabla(objeto,value)
-{
- 
-	params.estado=value;
- 
-	objeto.ajax.reload(null,false); //reload datatable ajax 
+  var params={};
 
-}
+  function recargartabla(objeto,value)
+  {
+    params.estado=value;
+    objeto.ajax.reload(null,false); //reload datatable ajax 
+  }
 
   $(document).ready( function () {
 
@@ -94,7 +90,6 @@ function recargartabla(objeto,value)
             { "data": "fecha", "name": "fecha", "autoWidth": true },
             { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
             { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
-            { "data": "recurrencia", "name": "recurrencia", "autoWidth": true },
             { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
             { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
             { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
@@ -139,9 +134,9 @@ function recargartabla(objeto,value)
       // Handle click on "Select all" control
       $('#example-select-all').on('click', function() {
           
-         // Get all rows with search applied
-          var rows = table.rows({ 'search': 'applied' }).nodes();
-          // Check/uncheck checkboxes for all rows in the table
+        // Get all rows with search applied
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        // Check/uncheck checkboxes for all rows in the table
         if(this.checked){
           $('input[type="checkbox"]', rows).prop('checked', this.checked);
           
@@ -150,7 +145,7 @@ function recargartabla(objeto,value)
         }
         else 
         {
-        var selData =   table.rows().deselect();
+          var selData =   table.rows().deselect();
         }
       });
 
@@ -196,7 +191,6 @@ function recargartabla(objeto,value)
       // Handle click on "Select all" control
       $('#example-select-all').on('click', function(){
           
-        
         // Get all rows with search applied
           var rows = table.rows({ 'search': 'applied' }).nodes();
           // Check/uncheck checkboxes for all rows in the table
@@ -225,8 +219,6 @@ function recargartabla(objeto,value)
         }
       }
     });
-	
-	
   });
 </script> 
 </html>
