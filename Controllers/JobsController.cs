@@ -149,5 +149,18 @@ namespace WebAdminScheduler.Controllers
                 aaData = cp_procesosList,
             });
 		}
+        public JsonResult ListarRegistro(int idproc) {
+            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == idproc)
+           // var data = (from s in _DBContext.CP_REGISTRO.Where(x => x.IDPROC == idproc)
+            select s).ToList();
+               return Json(new {
+                draw = 1, 
+                iTotalRecords = 1,
+                iDisplayLength=10,
+                iTotalDisplayRecords=data.Count(),
+                aaData = data,
+            });   
+              
+        }
    }
 }
