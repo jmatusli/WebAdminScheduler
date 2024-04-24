@@ -730,6 +730,12 @@
 }
     
   <script> 
+var params={};
+ var table={};
+ var idcrontab="@ViewBag.IDCRONTAB";
+ params.idcrontab=idcrontab;
+ 
+
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');
 
@@ -740,7 +746,7 @@
 
     $(document).on("ready",function() {
 
-        var table = $('#dt-jobs').DataTable( {
+          table = $('#dt-jobs').DataTable( {
             "processing": true,
             "serverSide": true,
             "filter": true,
@@ -749,9 +755,12 @@
             "scrollY":            $(document).height() - 300,
             "scrollCollapse":     true,
             "ajax": {
-                "url": "@Url.Action("ObtenerJobsAsoc","Calendario")",
+                "url": "@Url.Action("ListarJobsAsoc","Calendario")",
                 "type": "GET",
-                "datatype": "json"
+                "datatype": "json",
+                "data": function(d){
+                $.extend( d, params);    
+                },
         },
             "columnDefs": [{
             'targets': 0,
@@ -792,7 +801,7 @@
             "url": "/lib/datatables/dist/locales/es/es.json"
             }
         });
-
+ 
         table.on('select', function (e, dt, type, indexes) {
         console.log(e.target);
         if (type === 'row'   ) {
@@ -907,6 +916,8 @@
         }
       }
     });
-
+   // recargartabla(table,idcrontab);
     })
+      
+   
 </script>

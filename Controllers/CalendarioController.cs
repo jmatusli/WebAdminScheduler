@@ -180,11 +180,19 @@ namespace WebAdminScheduler.Controllers
             });
 
 		}
-        public JsonResult ListarJobsAsoc(int idCrontab) {
-            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idCrontab)
+        public JsonResult ListarJobsAsoc(int idcrontab) {
+            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
             select s).ToList();  
-                ViewBag.CP_PROCESOS = data;
-                return ListarJobsAsoc(idCrontab);
+               // ViewBag.CP_PROCESOS = data;
+
+               return Json(new {
+                draw = 1, 
+                iTotalRecords = 1,
+                iDisplayLength=10,
+                iTotalDisplayRecords=data.Count(),
+                aaData = data,
+            });   
+              
         }
     }
 
