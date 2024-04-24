@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
 }
 <head>
-  <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
     <script src="~/js/jquery-1.11.3.min.js"></script>
@@ -36,18 +36,14 @@
                 </div>
                 <div class="col-auto">
                     <span id="passwordHelpInline" class="form-text">
-                    Hora Inicio 
-
-                    @if (Model.HORA_INICIO != null)
-     {
-          
- 
-string horaitmp = Model.HORA_INICIO;
-@horaitmp[0] @horaitmp[1];
-<br>
-@horaitmp[2] @horaitmp[3];
-  }
-     
+                        Hora Inicio 
+                        @if (Model.HORA_INICIO != null)
+                        {
+                            string horaitmp = Model.HORA_INICIO;
+                            @horaitmp[0] @horaitmp[1];
+                            <br>
+                            @horaitmp[2] @horaitmp[3];
+                        }
                     </span>
                     
                 </div>
@@ -709,228 +705,20 @@ string horaitmp = Model.HORA_INICIO;
                 <a id="btnSave" class="btn btn-primary">Guardar</a>
             </div>
         </div>
-
-        <div class="container">
-            <table id="dt-jobs" class="display nowrap" width="100%">
-                <thead>
-                <tr>
-                    <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tblJobs-select-all"></th>
-                    <th>IDPROC</th>
-                    <th>IDCONEX</th>
-                    <th>NOMBRE</th>
-                    <th>DESCRIPCIÓN</th>
-                    <th>PATH</th>  
-                    <th>PARAMETRO1</th>
-                    <th>PARAMETRO2</th>
-                    <th>PARAMETRO3</th>
-                    <th>PARAMETRO4</th>
-                    <th>DEPENDENCIA</th>
-                    <th>INTENTOS</th>
-                    <th>ESPERA INTENTO</th>
-                    <th>ESTADO</th>
-                    <th>FTP</th>
-                    <th>IDHOST</th>
-                    <th>COMPRESIÓN</th>
-                    <th>IDCRONTAB</th>
-                    <th>NODE</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
     </body>
 }
     
   <script> 
-var params={};
- var table={};
- var idcrontab="@ViewBag.IDCRONTAB";
- params.idcrontab=idcrontab;
+    var params={};
+    var table={};
+    var idcrontab="@ViewBag.IDCRONTAB";
+    params.idcrontab=idcrontab;
  
-
     function toggle(source) {
-      checkboxes = document.getElementsByName('dinamico');
+        checkboxes = document.getElementsByName('dinamico');
 
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = source.checked;
-      }
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].checked = source.checked;
+        }
     }
-
-    $(document).on("ready",function() {
-
-          table = $('#dt-jobs').DataTable( {
-            "processing": true,
-            "serverSide": true,
-            "filter": true,
-            "scrollX":          true,
-            "sScrollX":         "50%",
-            "scrollY":            $(document).height() - 300,
-            "scrollCollapse":     true,
-            "ajax": {
-                "url": "@Url.Action("ListarJobsAsoc","Calendario")",
-                "type": "GET",
-                "datatype": "json",
-                "data": function(d){
-                $.extend( d, params);    
-                },
-        },
-            "columnDefs": [{
-            'targets': 0,
-            orderable: false,
-            'render': function (data, type, full, meta){
-                return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-            }
-            }],
-            "columns": [
-            {
-                "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
-            },
-                { "data": "idproc", "name": "idproc", "autoWidth": true },
-                { "data": "idconex", "name": "idconex", "autoWidth": true },
-                { "data": "nombre", "name": "nombre", "autoWidth": true },
-                { "data": "descripcion", "name": "descripcion", "autoWidth": true },
-                { "data": "path", "name": "path", "autoWidth": true },
-                { "data": "parametrO1", "name": "parametrO1", "autoWidth": true },
-                { "data": "parametrO2", "name": "parametrO2", "autoWidth": true },
-                { "data": "parametrO3", "name": "parametrO3", "autoWidth": true },
-                { "data": "parametrO4", "name": "parametrO4", "autoWidth": true },
-                { "data": "dependencia", "name": "dependencia", "autoWidth": true },
-                { "data": "intentos", "name": "intentos", "autoWidth": true },
-                { "data": "esperA_INTENTO", "name": "esperA_INTENTO", "autoWidth": true },
-                { "data": "estado", "name": "estado", "autoWidth": true },
-                { "data": "ftp", "name": "ftp", "autoWidth": true },
-                { "data": "idhost", "name": "idhost", "autoWidth": true },
-                { "data": "compresion", "name": "compresion", "autoWidth": true },
-                { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
-                { "data": "node", "name": "node", "autoWidth": true },
-            ],
-            
-            select: {
-            style:    'os',   //default but you have to specify it, no idea why
-            selector: 'tr,a:not(.btn)'
-            },
-            "language": {
-            "url": "/lib/datatables/dist/locales/es/es.json"
-            }
-        });
- 
-        table.on('select', function (e, dt, type, indexes) {
-        console.log(e.target);
-        if (type === 'row'   ) {
-            var nodes = table
-            .rows(indexes)
-            .nodes()
-            .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', true); 
-            });
-        }
-        });
-
-        table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
-            table
-            .rows(indexes)
-            .nodes()
-            .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', false); 
-            });
-        }
-        });
-        
-        // Handle click on "Select all" control
-        $('#example-select-all').on('click', function() {
-          
-        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-        // Get all rows with search applied
-          var rows = table.rows({ 'search': 'applied' }).nodes();
-          // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-          $('input[type="checkbox"]', rows).prop('checked', this.checked);
-          
-          var selData =   table.rows().select();
-          var selData =   table.rows(".selected").data();
-        }
-        else 
-        {
-            var selData =   table.rows().deselect();
-        }
-      });
-
-        // Handle click on checkbox to set state of "Select all" control
-        $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-            // If checkbox is not checked
-            if(!this.checked){
-            var el = $('#example-select-all').get(0);
-            // If "Select all" control is checked and has 'indeterminate' property
-            if(el && el.checked && ('indeterminate' in el)){
-                // Set visual state of "Select all" control
-                // as 'indeterminate'
-                el.indeterminate = true;
-            }
-            }
-        });
-        
-        table.on('select', function (e, dt, type, indexes) {
-            console.log(e.target);
-            if (type === 'row'   ) {
-                var nodes = table
-                .rows(indexes)
-                .nodes()
-                .each(function () { 
-                $('td:first-child', this).find('input').prop('checked', true); 
-                });
-                //.find(':checkbox', 'td:first-child').checked = true; 
-            }
-            });
-
-        table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
-            table
-            .rows(indexes)
-            .nodes()
-            .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', false); 
-            });
-        }
-        });
-        
-        // Handle click on "Select all" control
-        $('#example-select-all').on('click', function(){
-            
-        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-        // Get all rows with search applied
-            var rows = table.rows({ 'search': 'applied' }).nodes();
-            // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-            $('input[type="checkbox"]', rows).prop('checked', this.checked);
-            
-            var selData =   table.rows().select();
-            var selData =   table.rows(".selected").data();
-        }
-        else 
-        {
-        var selData =   table.rows().deselect();
-        }
-        });
-
-        // Handle click on checkbox to set state of "Select all" control
-        $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-        // If checkbox is not checked
-        if(!this.checked){
-          var el = $('#example-select-all').get(0);
-          // If "Select all" control is checked and has 'indeterminate' property
-          if(el && el.checked && ('indeterminate' in el)){
-          // Set visual state of "Select all" control
-          // as 'indeterminate'
-          el.indeterminate = true;
-        }
-      }
-    });
-   // recargartabla(table,idcrontab);
-    })
-      
-   
 </script>

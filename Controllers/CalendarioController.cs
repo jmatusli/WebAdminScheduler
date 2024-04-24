@@ -51,20 +51,22 @@ namespace WebAdminScheduler.Controllers
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);
             return Json(crontabt);
 		}
+        public IActionResult Detalle(int id)
+        {
+            CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
+            select s).ToList().AsQueryable().FirstOrDefault();
+			ViewBag.IDCRONTAB = id;  
+            return View();
+        }
         public IActionResult Edit(int id)
         {
-             CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
+            CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
             select s).ToList().AsQueryable().FirstOrDefault();  
             ViewBag.IDCRONTAB = id;  
             //ViewBag.data=data;
             return View(data);
         }
-        public IActionResult Detalle(int id)
-        {
-			ViewBag.IDCRONTAB = id;  
-            return View();
-        }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id)
@@ -181,21 +183,18 @@ namespace WebAdminScheduler.Controllers
                 iTotalDisplayRecords=totalRecord,
                 aaData = cp_contrabList,
             });
-
 		}
         public JsonResult ListarJobsAsoc(int idcrontab) {
             var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
             select s).ToList();  
-               // ViewBag.CP_PROCESOS = data;
-
-               return Json(new {
-                draw = 1, 
-                iTotalRecords = 1,
-                iDisplayLength=10,
-                iTotalDisplayRecords=data.Count(),
-                aaData = data,
-            });   
-              
+                // ViewBag.CP_PROCESOS = data;
+                return Json(new {
+                    draw = 1, 
+                    iTotalRecords = 1,
+                    iDisplayLength=10,
+                    iTotalDisplayRecords=data.Count(),
+                    aaData = data,
+                });
         }
     }
 
