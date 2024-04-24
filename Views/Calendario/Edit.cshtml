@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
 }
 <head>
-    <link rel="stylesheet" href="~/css/datatables.min.css" />
+  <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
     <script src="~/js/jquery-1.11.3.min.js"></script>
@@ -15,10 +15,10 @@
 </head>	
 
 <div>
-    <a asp-action="Index" class="btn btn-primary">Inicio</a>
+    <a asp-action="Index" class="btn btn-primary">Inicio </a>
 </div>
 
-@using (Html.BeginForm("Save", "Calendario", FormMethod.Post))
+ @using (Html.BeginForm("Save", "Calendario", FormMethod.Post))
   {
     <body>
         <h1>Calendarios</h1>
@@ -36,107 +36,100 @@
                 </div>
                 <div class="col-auto">
                     <span id="passwordHelpInline" class="form-text">
-                        Hora Inicio 
-                        @if (Model.HORA_INICIO != null)
-                        {
-                            string horaitmp = Model.HORA_INICIO;
-                            @horaitmp[0] @horaitmp[1];
-                            <br>
-                            @horaitmp[2] @horaitmp[3];
-                        }
+                    Hora Inicio 
                     </span>
                     
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="updhoraIni" id="updhoraIni">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintires">23</option>
+                    <option value="00">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
                     </select>
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="uptminutoIni" id="uptminutoIni">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintitres">23</option>
-                    <option value="veinticuatro">24</option>
-                    <option value="veinticinco">25</option>
-                    <option value="veintiseis">26</option>
-                    <option value="veintisiete">27</option>
-                    <option value="veintiocho">28</option>
-                    <option value="veintinueve">29</option>
-                    <option value="treinta">30</option>
-                    <option value="treintauno">31</option>
-                    <option value="treintados">32</option>
-                    <option value="treintatres">33</option>
-                    <option value="treintacuatro">34</option>
-                    <option value="treintacinco">35</option>
-                    <option value="treintaseis">36</option>
-                    <option value="treintasiete">37</option>
-                    <option value="treintaocho">38</option>
-                    <option value="treintanueve">39</option>
-                    <option value="cuarenta">40</option>
-                    <option value="cuarentauno">41</option>
-                    <option value="cuarentados">42</option>
-                    <option value="cuarentatres">43</option>
-                    <option value="cuarentacuatro">44</option>
-                    <option value="cuarentacinco">45</option>
-                    <option value="cuarentaseis">46</option>
-                    <option value="cuarentasiete">47</option>
-                    <option value="cuarentaocho">48</option>
-                    <option value="cuarentanueve">49</option>
-                    <option value="cincuenta">50</option>
-                    <option value="cincuentauno">51</option>
-                    <option value="cincuentados">52</option>
-                    <option value="cincuentatres">53</option>
-                    <option value="cincuentacuatro">54</option>
-                    <option value="cincuentacinco">55</option>
-                    <option value="cincuentaseis">56</option>
-                    <option value="cincuentasiete">57</option>
-                    <option value="cincuentaocho">58</option>
-                    <option value="cincuentanueve">59</option>
+                    <option value="00">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                    <option value="37">37</option>
+                    <option value="38">38</option>
+                    <option value="39">39</option>
+                    <option value="40">40</option>
+                    <option value="41">41</option>
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                    <option value="45">45</option>
+                    <option value="46">46</option>
+                    <option value="47">47</option>
+                    <option value="48">48</option>
+                    <option value="49">49</option>
+                    <option value="50">50</option>
+                    <option value="51">51</option>
+                    <option value="52">52</option>
+                    <option value="53">53</option>
+                    <option value="54">54</option>
+                    <option value="55">55</option>
+                    <option value="56">56</option>
+                    <option value="57">57</option>
+                    <option value="58">58</option>
+                    <option value="59">59</option>
                     </select>
                 </div>
                 <div class="col-auto">
@@ -146,94 +139,94 @@
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="upthoraFin" id="upthoraFin">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintires">23</option>
+                    <option value="00">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
                     </select>
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="uptminutoFin" id="uptminutoFin">
-                    <option value="cero">00</option>
-                    <option value="uno">01</option>
-                    <option value="dos">02</option>
-                    <option value="tres">03</option>
-                    <option value="cuatro">04</option>
-                    <option value="cinco">05</option>
-                    <option value="seis">06</option>
-                    <option value="siete">07</option>
-                    <option value="ocho">08</option>
-                    <option value="nueve">09</option>
-                    <option value="diez">10</option>
-                    <option value="once">11</option>
-                    <option value="doce">12</option>
-                    <option value="trece">13</option>
-                    <option value="catorce">14</option>
-                    <option value="quince">15</option>
-                    <option value="dieciseis">16</option>
-                    <option value="diecisiete">17</option>
-                    <option value="dieciocho">18</option>
-                    <option value="diecinueve">19</option>
-                    <option value="veinte">20</option>
-                    <option value="veintiuno">21</option>
-                    <option value="veintidos">22</option>
-                    <option value="veintitres">23</option>
-                    <option value="veinticuatro">24</option>
-                    <option value="veinticinco">25</option>
-                    <option value="veintiseis">26</option>
-                    <option value="veintisiete">27</option>
-                    <option value="veintiocho">28</option>
-                    <option value="veintinueve">29</option>
-                    <option value="treinta">30</option>
-                    <option value="treintauno">31</option>
-                    <option value="treintados">32</option>
-                    <option value="treintatres">33</option>
-                    <option value="treintacuatro">34</option>
-                    <option value="treintacinco">35</option>
-                    <option value="treintaseis">36</option>
-                    <option value="treintasiete">37</option>
-                    <option value="treintaocho">38</option>
-                    <option value="treintanueve">39</option>
-                    <option value="cuarenta">40</option>
-                    <option value="cuarentauno">41</option>
-                    <option value="cuarentados">42</option>
-                    <option value="cuarentatres">43</option>
-                    <option value="cuarentacuatro">44</option>
-                    <option value="cuarentacinco">45</option>
-                    <option value="cuarentaseis">46</option>
-                    <option value="cuarentasiete">47</option>
-                    <option value="cuarentaocho">48</option>
-                    <option value="cuarentanueve">49</option>
-                    <option value="cincuenta">50</option>
-                    <option value="cincuentauno">51</option>
-                    <option value="cincuentados">52</option>
-                    <option value="cincuentatres">53</option>
-                    <option value="cincuentacuatro">54</option>
-                    <option value="cincuentacinco">55</option>
-                    <option value="cincuentaseis">56</option>
-                    <option value="cincuentasiete">57</option>
-                    <option value="cincuentaocho">58</option>
-                    <option value="cincuentanueve">59</option>
+                     <option value="00">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                    <option value="37">37</option>
+                    <option value="38">38</option>
+                    <option value="39">39</option>
+                    <option value="40">40</option>
+                    <option value="41">41</option>
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                    <option value="45">45</option>
+                    <option value="46">46</option>
+                    <option value="47">47</option>
+                    <option value="48">48</option>
+                    <option value="49">49</option>
+                    <option value="50">50</option>
+                    <option value="51">51</option>
+                    <option value="52">52</option>
+                    <option value="53">53</option>
+                    <option value="54">54</option>
+                    <option value="55">55</option>
+                    <option value="56">56</option>
+                    <option value="57">57</option>
+                    <option value="58">58</option>
+                    <option value="59">59</option>
                     </select>
                 </div>
                 </div><hr />
@@ -705,20 +698,249 @@
                 <a id="btnSave" class="btn btn-primary">Guardar</a>
             </div>
         </div>
+
+        <div class="container">
+            <table id="dt-jobs" class="display nowrap" width="100%">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tblJobs-select-all"></th>
+                    <th>IDPROC</th>
+                    <th>IDCONEX</th>
+                    <th>NOMBRE</th>
+                    <th>DESCRIPCIÓN</th>
+                    <th>PATH</th>  
+                    <th>PARAMETRO1</th>
+                    <th>PARAMETRO2</th>
+                    <th>PARAMETRO3</th>
+                    <th>PARAMETRO4</th>
+                    <th>DEPENDENCIA</th>
+                    <th>INTENTOS</th>
+                    <th>ESPERA INTENTO</th>
+                    <th>ESTADO</th>
+                    <th>FTP</th>
+                    <th>IDHOST</th>
+                    <th>COMPRESIÓN</th>
+                    <th>IDCRONTAB</th>
+                    <th>NODE</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </body>
 }
     
   <script> 
-    var params={};
-    var table={};
-    var idcrontab="@ViewBag.IDCRONTAB";
-    params.idcrontab=idcrontab;
+var params={};
+ var table={};
+ var idcrontab="@ViewBag.IDCRONTAB";
+ params.idcrontab=idcrontab;
+
+ 
+ 
+var horainicio="@Model.HORA_INICIO[0]";
+var  horafin="@Model.HORA_INICIO[2]";
+var  minutoinicio="@Model.HORA_INICIO[1]";
+var  minutofin="@Model.HORA_INICIO[3]";
+
+console.log("hora inicio ",horainicio)
+ 
  
     function toggle(source) {
-        checkboxes = document.getElementsByName('dinamico');
+      checkboxes = document.getElementsByName('dinamico');
 
-        for(var i=0, n=checkboxes.length;i<n;i++) {
-            checkboxes[i].checked = source.checked;
-        }
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+      }
     }
+
+    $(document).on("ready",function() {
+
+          table = $('#dt-jobs').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            "filter": true,
+            "scrollX":          true,
+            "sScrollX":         "50%",
+            "scrollY":            $(document).height() - 300,
+            "scrollCollapse":     true,
+            "ajax": {
+                "url": "@Url.Action("ListarJobsAsoc","Calendario")",
+                "type": "GET",
+                "datatype": "json",
+                "data": function(d){
+                $.extend( d, params);    
+                },
+        },
+            "columnDefs": [{
+            'targets': 0,
+            orderable: false,
+            'render': function (data, type, full, meta){
+                return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+            }
+            }],
+            "columns": [
+            {
+                "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
+            },
+                { "data": "idproc", "name": "idproc", "autoWidth": true },
+                { "data": "idconex", "name": "idconex", "autoWidth": true },
+                { "data": "nombre", "name": "nombre", "autoWidth": true },
+                { "data": "descripcion", "name": "descripcion", "autoWidth": true },
+                { "data": "path", "name": "path", "autoWidth": true },
+                { "data": "parametrO1", "name": "parametrO1", "autoWidth": true },
+                { "data": "parametrO2", "name": "parametrO2", "autoWidth": true },
+                { "data": "parametrO3", "name": "parametrO3", "autoWidth": true },
+                { "data": "parametrO4", "name": "parametrO4", "autoWidth": true },
+                { "data": "dependencia", "name": "dependencia", "autoWidth": true },
+                { "data": "intentos", "name": "intentos", "autoWidth": true },
+                { "data": "esperA_INTENTO", "name": "esperA_INTENTO", "autoWidth": true },
+                { "data": "estado", "name": "estado", "autoWidth": true },
+                { "data": "ftp", "name": "ftp", "autoWidth": true },
+                { "data": "idhost", "name": "idhost", "autoWidth": true },
+                { "data": "compresion", "name": "compresion", "autoWidth": true },
+                { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
+                { "data": "node", "name": "node", "autoWidth": true },
+            ],
+            
+            select: {
+            style:    'os',   //default but you have to specify it, no idea why
+            selector: 'tr,a:not(.btn)'
+            },
+            "language": {
+            "url": "/lib/datatables/dist/locales/es/es.json"
+            }
+        });
+ 
+        table.on('select', function (e, dt, type, indexes) {
+        console.log(e.target);
+        if (type === 'row'   ) {
+            var nodes = table
+            .rows(indexes)
+            .nodes()
+            .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', true); 
+            });
+        }
+        });
+
+        table.on('deselect', function (e, dt, type, indexes) {
+        if (type === 'row') {
+        $('#example-select-all').prop("checked",false);
+            table
+            .rows(indexes)
+            .nodes()
+            .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', false); 
+            });
+        }
+        });
+        
+        // Handle click on "Select all" control
+        $('#example-select-all').on('click', function() {
+          
+        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+        // Get all rows with search applied
+          var rows = table.rows({ 'search': 'applied' }).nodes();
+          // Check/uncheck checkboxes for all rows in the table
+        if(this.checked){
+          $('input[type="checkbox"]', rows).prop('checked', this.checked);
+          
+          var selData =   table.rows().select();
+          var selData =   table.rows(".selected").data();
+        }
+        else 
+        {
+            var selData =   table.rows().deselect();
+        }
+      });
+
+        // Handle click on checkbox to set state of "Select all" control
+        $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+            // If checkbox is not checked
+            if(!this.checked){
+            var el = $('#example-select-all').get(0);
+            // If "Select all" control is checked and has 'indeterminate' property
+            if(el && el.checked && ('indeterminate' in el)){
+                // Set visual state of "Select all" control
+                // as 'indeterminate'
+                el.indeterminate = true;
+            }
+            }
+        });
+        
+        table.on('select', function (e, dt, type, indexes) {
+            console.log(e.target);
+            if (type === 'row'   ) {
+                var nodes = table
+                .rows(indexes)
+                .nodes()
+                .each(function () { 
+                $('td:first-child', this).find('input').prop('checked', true); 
+                });
+                //.find(':checkbox', 'td:first-child').checked = true; 
+            }
+            });
+
+        table.on('deselect', function (e, dt, type, indexes) {
+        if (type === 'row') {
+        $('#example-select-all').prop("checked",false);
+            table
+            .rows(indexes)
+            .nodes()
+            .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', false); 
+            });
+        }
+        });
+        
+        // Handle click on "Select all" control
+        $('#example-select-all').on('click', function(){
+            
+        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+        // Get all rows with search applied
+            var rows = table.rows({ 'search': 'applied' }).nodes();
+            // Check/uncheck checkboxes for all rows in the table
+        if(this.checked){
+            $('input[type="checkbox"]', rows).prop('checked', this.checked);
+            
+            var selData =   table.rows().select();
+            var selData =   table.rows(".selected").data();
+        }
+        else 
+        {
+        var selData =   table.rows().deselect();
+        }
+        });
+
+        // Handle click on checkbox to set state of "Select all" control
+        $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+        // If checkbox is not checked
+        if(!this.checked){
+          var el = $('#example-select-all').get(0);
+          // If "Select all" control is checked and has 'indeterminate' property
+          if(el && el.checked && ('indeterminate' in el)){
+          // Set visual state of "Select all" control
+          // as 'indeterminate'
+          el.indeterminate = true;
+        }
+      }
+    });
+   // recargartabla(table,idcrontab);
+
+
+ 
+
+$("#updhoraIni option[value='"+String(horainicio).padStart(2, '0')+"']").attr('selected', true);
+ $("#uptminutoIni option[value='"+String(minutoinicio).padStart(2, '0')+"']").attr('selected', true);
+     
+ 
+
+       
+$("#upthoraFin option[value='"+String(horafin).padStart(2, '0')+"']").attr('selected', true);
+ $("#uptminutoFin option[value='"+String(minutofin).padStart(2, '0')+"']").attr('selected', true);
+    })
+ 
+   
 </script>
