@@ -1,3 +1,4 @@
+@model WebAdminScheduler.Models.CP_CRONTAB;
 @{
     ViewData["Title"] = "Edit";
 }
@@ -31,12 +32,24 @@
                         <label for="TittleCrontab" class="col-form-label">IDCRONTAB</label>
                     </div>
                 <div class="col-auto">
-                    <label for="txtCrontab" class="col-form-label" id="updIdCrontab">@ViewBag.IDCRONTAB</label>
+                    <label for="txtCrontab" class="col-form-label" id="updIdCrontab">@Model.IDCRONTAB</label>
                 </div>
                 <div class="col-auto">
                     <span id="passwordHelpInline" class="form-text">
-                    Hora Inicio
+                    Hora Inicio 
+
+                    @if (Model.HORA_INICIO != null)
+     {
+          
+ 
+string horaitmp = Model.HORA_INICIO;
+@horaitmp[0] @horaitmp[1];
+<br>
+@horaitmp[2] @horaitmp[3];
+  }
+     
                     </span>
+                    
                 </div>
                 <div class="col-auto">
                     <select class="form-select" name="updhoraIni" id="updhoraIni">
@@ -679,7 +692,7 @@
                         </div>
                         <div class="col-auto">
                             <input type="number" min="1" id="UptRepeatEveryMins" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
-                            @ViewBag.REPEAT_EVERY_MINS
+                            
                         </div>
                         <div class="col-auto">
                             <div class="form-check">

@@ -51,10 +51,13 @@ namespace WebAdminScheduler.Controllers
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);
             return Json(crontabt);
 		}
-		public IActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
-			ViewBag.IDCRONTAB = id;  
-            return View();
+             CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
+            select s).ToList().AsQueryable().FirstOrDefault();  
+            ViewBag.IDCRONTAB = id;  
+            //ViewBag.data=data;
+            return View(data);
         }
         public IActionResult Detalle(int id)
         {
@@ -64,9 +67,9 @@ namespace WebAdminScheduler.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IDCRONTAB,HORA_INICIO,HORA_FIN,WDAY_M2S_EX,REPEAT_EVERY_MINS,REPEAT_AFTER_FINISH")] CP_CRONTAB CP_CRONTABS)
+        public async Task<IActionResult> Update(int id)
         {
-            if (id != CP_CRONTABS.IDCRONTAB)
+           /* if (id != CP_CRONTABS.IDCRONTAB)
             {
                 return NotFound();
             }
@@ -90,8 +93,8 @@ namespace WebAdminScheduler.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(CP_CRONTABS);
+            }*/
+            return View(/*CP_CRONTABS*/);
         }
         private bool CrontabsExists(int id)
         {
