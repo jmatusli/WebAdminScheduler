@@ -722,6 +722,12 @@
     var idcrontab="@ViewBag.IDCRONTAB";
     params.idcrontab=idcrontab;
 
+    if (idRepAftFin = 1) {
+        $("#IdUptRepeatAfterFin").prop('checked', true);
+    } else {
+        $("#IdUptRepeatAfterFin").prop('checked', false);
+    }
+
     var horainicio="@Model.HORA_INICIO[0]";
     var  horafin="@Model.HORA_INICIO[2]";
     var  minutoinicio="@Model.HORA_INICIO[1]";
