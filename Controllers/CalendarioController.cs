@@ -61,7 +61,7 @@ namespace WebAdminScheduler.Controllers
             CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
             select s).ToList().AsQueryable().FirstOrDefault();
 			ViewBag.IDCRONTAB = id;  
-            return View();
+            return View(data);
         }
         public IActionResult Edit(int id)
         {

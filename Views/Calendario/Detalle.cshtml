@@ -31,22 +31,14 @@
                     </div>
                     <div class="col-auto">
                         <label for="txtCrontab" class="col-form-label" id="txtCrontab">@Model.IDCRONTAB</label>
-                        @* <label for="txtCrontab" class="col-form-label" id="txtCrontab">@Model.IDCRONTAB</label> *@
                     </div>
                     <div class="col-auto">
                         <span id="passwordHelpInline" class="form-text">
                             Hora Inicio
-                            @* @if (Model.HORA_INICIO != null)
-                            {
-                                string horaitmp = Model.HORA_INICIO;
-                                @horaitmp[0] @horaitmp[1];
-                                <br>
-                                @horaitmp[2] @horaitmp[3];
-                            } *@
                         </span>
                     </div>
                     <div class="col-auto">
-                        <label for="txtHoraIni" class="col-form-label" id="txtHoraIni">@ViewBag.HORA_INICIO</label>
+                        <label for="txtHoraIni" class="col-form-label" id="txtHoraIni">@Model.HORA_INICIO</label>
                     </div>
                     <div class="col-auto">
                         <span id="passwordHelpInline" class="form-text">
@@ -54,7 +46,7 @@
                         </span>
                     </div>
                     <div class="col-auto">
-                        <label for="txtHoraFin" class="col-form-label" id="txtHoraFin">@ViewBag.HORA_FIN</label>
+                        <label for="txtHoraFin" class="col-form-label" id="txtHoraFin">@Model.HORA_FIN</label>
                     </div>
                 </div><hr />
 
@@ -507,8 +499,7 @@
                             </span>
                         </div>
                         <div class="col-auto">
-                            <input type="number" min="1" id="UptRepeatEveryMins" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
-                            @ViewBag.REPEAT_EVERY_MINS
+                            <label for="RepeatEveryMins" class="col-form-label" id="RepeatEveryMins">@Model.REPEAT_EVERY_MINS</label>
                         </div>
                         <div class="col-auto">
                             <div class="form-check">
