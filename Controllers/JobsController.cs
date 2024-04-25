@@ -25,35 +25,7 @@ namespace WebAdminScheduler.Controllers
         {
             return View();
         }
-        public JsonResult ListarProcess1() {
-
-            int NroPeticion = Convert.ToInt32(Request.Form["draw"].FirstOrDefault() ?? "0");
-
-            //cuantos registros va a devolver
-            int CantidadRegistros = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
-
-            //cuantos registros va a omitir
-            int OmitirRegistros = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
-
-            //el texto de busqueda
-            string ValorBuscado = Request.Form["search[value]"].FirstOrDefault() ?? "";
-
-            IQueryable<CP_PROCESOS> queryProcesos = _DBContext.CP_PROCESOS;
-            // Total de registros antes de filtrar.
-            int TotalRegistros = queryProcesos.Count();
-
-            int TotalRegistrosFiltrados = queryProcesos.Count();
-
-            var listaCrons = queryProcesos.ToList();
-
-            return Json(new {
-                draw = NroPeticion,
-                recordsTotal = TotalRegistros,
-                recordsFiltered = TotalRegistros,
-                data=listaCrons
-            });
-        }
-
+        
         [HttpPost]
         public JsonResult ListarProcesos()
         {
@@ -107,7 +79,7 @@ namespace WebAdminScheduler.Controllers
 		   List<CP_PROCESOS> cp_procesosList = new List<CP_PROCESOS>();
 		   
 			if (oraReader.HasRows)
-			{
+			{ 
 				while (oraReader.Read())
 				{
 					CP_PROCESOS cp_procesos = new CP_PROCESOS();
@@ -115,20 +87,69 @@ namespace WebAdminScheduler.Controllers
 					cp_procesos.IDCONEX = oraReader.GetInt32(1);
 					cp_procesos.NOMBRE = oraReader.GetString(2);
 					cp_procesos.DESCRIPCION= oraReader.GetString(3);
-					cp_procesos.PATH= oraReader.GetString(4);
-					cp_procesos.PARAMETRO1= oraReader.GetString(5);
-					cp_procesos.PARAMETRO2= oraReader.GetString(6);
-					cp_procesos.PARAMETRO3= oraReader.GetString(7);
-					cp_procesos.PARAMETRO4= oraReader.GetString(8);
+                    
+                    if (!oraReader.IsDBNull(4))
+                    {
+                    cp_procesos.PATH= oraReader.GetString(4);
+                      }
+					 if (!oraReader.IsDBNull(5))
+                    {
+                    cp_procesos.PARAMETRO1= oraReader.GetString(5);
+                        
+                    }
+                    if (!oraReader.IsDBNull(6))
+                    {
+                    cp_procesos.PARAMETRO2= oraReader.GetString(6);
+                        
+                    }
+
+                    if (!oraReader.IsDBNull(6))
+                    {
+                    cp_procesos.PARAMETRO3= oraReader.GetString(7);
+                        
+                    }
+					if (!oraReader.IsDBNull(6))
+                    {
+                    cp_procesos.PARAMETRO4= oraReader.GetString(8);
+                        
+                    }
+ 
+				 
 					cp_procesos.DEPENDENCIA= oraReader.GetInt32(9);
 					cp_procesos.INTENTOS= oraReader.GetInt32(10);
 					cp_procesos.ESPERA_INTENTO= oraReader.GetInt32(11);
-					cp_procesos.ESTADO= oraReader.GetString(12);
-					cp_procesos.FTP= oraReader.GetInt32(13);
-					cp_procesos.IDHOST= oraReader.GetInt32(14);
-					cp_procesos.COMPRESION= oraReader.GetInt32(15);
-					cp_procesos.IDCRONTAB= oraReader.GetInt32(16);
-					cp_procesos.NODE= oraReader.GetString(17);
+
+                    if (!oraReader.IsDBNull(12))
+                    {
+                    cp_procesos.ESTADO= oraReader.GetString(12);
+                        
+                    }
+				    if (!oraReader.IsDBNull(13))
+                    {
+                    cp_procesos.FTP= oraReader.GetInt32(13);
+                        
+                    }
+					if (!oraReader.IsDBNull(14))
+                    {
+                    cp_procesos.IDHOST= oraReader.GetInt32(14);
+                        
+                    }
+				    if (!oraReader.IsDBNull(15))
+                    {
+                    cp_procesos.COMPRESION= oraReader.GetInt32(15);
+                        
+                    }
+				    if (!oraReader.IsDBNull(16))
+                    {
+                    cp_procesos.IDCRONTAB= oraReader.GetInt32(16);
+                        
+                    }
+				    if (!oraReader.IsDBNull(17))
+                    {
+                    cp_procesos.NODE= oraReader.GetString(17);
+                        
+                    }
+				  
 					cp_procesosList.Add(cp_procesos);
 				}
 				filterRecord = cp_procesosList.Count();
@@ -153,6 +174,21 @@ namespace WebAdminScheduler.Controllers
             var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == idproc)
            // var data = (from s in _DBContext.CP_REGISTRO.Where(x => x.IDPROC == idproc)
             select s).ToList();
+               return Json(new {
+                draw = 1, 
+                iTotalRecords = 1,
+                iDisplayLength=10,
+                iTotalDisplayRecords=data.Count(),
+                aaData = data,
+            });   
+              
+        }
+		
+		 public JsonResult ListarCrontabsAsoc(int idcrontab) {
+            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
+            select s).ToList();  
+               // ViewBag.CP_PROCESOS = data;
+
                return Json(new {
                 draw = 1, 
                 iTotalRecords = 1,

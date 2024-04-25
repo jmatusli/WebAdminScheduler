@@ -167,8 +167,19 @@ namespace WebAdminScheduler.Controllers
 					cp_crontab.WDAY_M2S_EX= oraReader.GetString(5);
 					cp_crontab.DAY_EX= oraReader.GetString(6);
 					cp_crontab.MONTH_EX= oraReader.GetString(7);
-					cp_crontab.REPEAT_EVERY_MINS= oraReader.GetInt32(8);
-					cp_crontab.REPEAT_AFTER_FINISH= oraReader.GetInt32(8);
+                     if (!oraReader.IsDBNull(8))
+                    {
+                    cp_crontab.REPEAT_EVERY_MINS= oraReader.GetInt32(8);
+                        
+                    }
+
+                    if (!oraReader.IsDBNull(9))
+                    {
+                    cp_crontab.REPEAT_AFTER_FINISH= oraReader.GetInt32(9);
+                        
+                    }
+					 
+					 
 					cp_contrabList.Add(cp_crontab);
 					
 				}

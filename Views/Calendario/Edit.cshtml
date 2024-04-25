@@ -720,4 +720,19 @@
         checkboxes[i].checked = source.checked;
       }
     }
+
+
+    $(document).on("ready",function() {
+    
+
+$("#updhoraIni option[value='"+String(horainicio).padStart(2, '0')+"']").attr('selected', true);
+ $("#uptminutoIni option[value='"+String(minutoinicio).padStart(2, '0')+"']").attr('selected', true);
+     
+ 
+
+       
+$("#upthoraFin option[value='"+String(horafin).padStart(2, '0')+"']").attr('selected', true);
+ $("#uptminutoFin option[value='"+String(minutofin).padStart(2, '0')+"']").attr('selected', true);
+
+ })
 </script>
