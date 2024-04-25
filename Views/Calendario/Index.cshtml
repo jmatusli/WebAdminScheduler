@@ -66,8 +66,13 @@
         "datatype": "json",
 		    "data": function(d){
           $.extend( d, params);    
-        },
+        }
       },
+      drawCallback: function(settings){ 
+          if($(this).find('tbody tr').length <= 1){
+          $('.dt-paging-button').hide();
+        }
+    },
         "columnDefs": [{
           'targets': 0,
         orderable: false,
@@ -97,6 +102,7 @@
             { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
             { "data":null },
         ],
+     
       select: {
       style: 'single',
       selector: 'td:not(:last-child)' // no row selection on last column
