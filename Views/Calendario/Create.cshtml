@@ -334,7 +334,15 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes">
+              <input class="form-check-input" type="checkbox" onClick="toggle_week_days(this)" /> Seleccionar/Deseleccionar todos<br><br>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes" name="dias_semana">
               <label class="form-check-label" for="flexCheckLunes">
                 Lunes
               </label>
@@ -342,7 +350,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes" name="dias_semana">
               <label class="form-check-label" for="flexCheckMartes">
                 Martes
               </label>
@@ -350,7 +358,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles" name="dias_semana">
               <label class="form-check-label" for="flexCheckMiercoles">
                 Miercoles
               </label>
@@ -358,7 +366,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves" name="dias_semana">
               <label class="form-check-label" for="flexCheckJueves">
                 Jueves
               </label>
@@ -366,7 +374,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes" name="dias_semana">
               <label class="form-check-label" for="flexCheckViernes">
                 Viernes
               </label>
@@ -374,7 +382,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado" name="dias_semana">
               <label class="form-check-label" for="flexCheckSabado">
                 Sabado
               </label>
@@ -382,7 +390,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo" name="dias_semana">
               <label class="form-check-label" for="flexCheckDomingo">
                 Domingo
               </label>
@@ -674,7 +682,15 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckEnero">
+              <input class="form-check-input" type="checkbox" onClick="toggle_month(this)" /> Seleccionar/Deseleccionar todos<br><br>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckEnero" name="meses">
               <label class="form-check-label" for="flexCheckEnero">
                 Enero
               </label>
@@ -682,7 +698,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckFebrero">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckFebrero" name="meses">
               <label class="form-check-label" for="flexCheckFebrero">
                 Febrero
               </label>
@@ -690,7 +706,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckMarzo">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMarzo" name="meses">
               <label class="form-check-label" for="flexCheckMarzo">
                 Marzo
               </label>
@@ -698,7 +714,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckAbril">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckAbril" name="meses">
               <label class="form-check-label" for="flexCheckAbril">
                 Abril
               </label>
@@ -706,7 +722,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckMayo">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckMayo" name="meses">
               <label class="form-check-label" for="flexCheckMayo">
                 Mayo
               </label>
@@ -714,7 +730,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckJunio">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckJunio" name="meses">
               <label class="form-check-label" for="flexCheckJunio">
                 Junio
               </label>
@@ -722,7 +738,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckJulio">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckJulio" name="meses">
               <label class="form-check-label" for="flexCheckJulio">
                 Julio
               </label>
@@ -730,7 +746,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckAgost">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckAgost" name="meses">
               <label class="form-check-label" for="flexCheckAgost">
                 Agosto
               </label>
@@ -738,7 +754,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckSept">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckSept" name="meses">
               <label class="form-check-label" for="flexCheckSept">
                 Septiembre
               </label>
@@ -746,7 +762,7 @@
           </div>        
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckOct">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckOct" name="meses">
               <label class="form-check-label" for="flexCheckOct">
                 Octubre
               </label>
@@ -754,7 +770,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckNov">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckNov" name="meses">
               <label class="form-check-label" for="flexCheckNov">
                 Noviembre
               </label>
@@ -762,7 +778,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDic">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDic" name="meses">
               <label class="form-check-label" for="flexCheckDic">
                 Diciembre
               </label>
@@ -803,6 +819,22 @@
   <script> 
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');
+
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    } 
+
+    function toggle_week_days(source) {
+      checkboxes = document.getElementsByName('dias_semana');
+
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+
+    function toggle_month(source) {
+      checkboxes = document.getElementsByName('meses');
 
       for(var i=0, n=checkboxes.length;i<n;i++) {
         checkboxes[i].checked = source.checked;

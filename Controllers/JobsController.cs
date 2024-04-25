@@ -25,6 +25,13 @@ namespace WebAdminScheduler.Controllers
         {
             return View();
         }
+        public IActionResult DetalleCrontab(int id)
+        {
+            CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
+            select s).ToList().AsQueryable().FirstOrDefault();
+			ViewBag.IDCRONTAB = id;  
+            return View(data);
+        }
         public IActionResult Detalle(int id)
         {
             CP_PROCESOS data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == id)

@@ -232,9 +232,17 @@
 
                 <a href="#" class="link-info">Días</a>
                 <div class="row g-4 align-items-center">
+                <div class="col-auto">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" onClick="toggle_week_days(this)" /> Seleccionar/Deseleccionar todos<br><br>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptLunes">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptLunes" name="dias_semana">
                         <label class="form-check-label" for="flexCheckUptLunes">
                             Lunes
                         </label>
@@ -242,7 +250,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMartes">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMartes" name="dias_semana">
                         <label class="form-check-label" for="flexCheckUptMartes">
                             Martes
                         </label>
@@ -250,7 +258,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMiercoles">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMiercoles" name="dias_semana">
                         <label class="form-check-label" for="flexCheckUptMiercoles">
                             Miercoles
                         </label>
@@ -258,7 +266,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJueves">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJueves" name="dias_semana">
                         <label class="form-check-label" for="flexCheckUptJueves">
                             Jueves
                         </label>
@@ -266,7 +274,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptViernes">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptViernes" name="dias_semana">
                         <label class="form-check-label" for="flexCheckUptViernes">
                             Viernes
                         </label>
@@ -274,7 +282,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSabado">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSabado" name="dias_semana">
                         <label class="form-check-label" for="flexCheckUptSabado">
                             Sabado
                         </label>
@@ -282,7 +290,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDomingo">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDomingo" name="dias_semana">
                         <label class="form-check-label" for="flexCheckUptDomingo">
                             Domingo
                         </label>
@@ -572,9 +580,17 @@
 
                 <a href="#" class="link-info">Meses</a>
                 <div class="row g-4 align-items-center">
+                <div class="col-auto">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" onClick="toggle_month(this)" /> Seleccionar/Deseleccionar todos<br><br>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptEnero">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckUptEnero" name="meses">
                             <label class="form-check-label" for="flexCheckTxtEnero">
                                 Enero
                             </label>
@@ -582,7 +598,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptFebrero">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptFebrero" name="meses">
                             <label class="form-check-label" for="flexCheckTxtFebrero">
                                 Febrero
                             </label>
@@ -590,7 +606,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMarzo">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMarzo" name="meses">
                             <label class="form-check-label" for="flexCheckTxtMarzo">
                                 Marzo
                             </label>
@@ -598,7 +614,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptAbril">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptAbril" name="meses">
                             <label class="form-check-label" for="flexCheckTxtAbril">
                                 Abril
                             </label>
@@ -606,7 +622,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMayo">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMayo" name="meses">
                             <label class="form-check-label" for="flexCheckTxtMayo">
                                 Mayo
                             </label>
@@ -614,7 +630,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJunio">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJunio" name="meses">
                             <label class="form-check-label" for="flexCheckTxtJunio">
                                 Junio
                             </label>
@@ -622,7 +638,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJulio">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJulio" name="meses">
                             <label class="form-check-label" for="flexCheckTxtJulio">
                                 Julio
                             </label>
@@ -630,7 +646,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptAgost">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptAgost" name="meses">
                             <label class="form-check-label" for="flexCheckTxtAgost">
                                 Agosto
                             </label>
@@ -638,7 +654,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSept">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSept" name="meses">
                             <label class="form-check-label" for="flexCheckTxtSept">
                                 Septiembre
                             </label>
@@ -646,7 +662,7 @@
                     </div>        
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptOct">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptOct" name="meses">
                             <label class="form-check-label" for="flexCheckTxtOct">
                                 Octubre
                             </label>
@@ -654,7 +670,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptNov">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptNov" name="meses">
                             <label class="form-check-label" for="flexCheckTxtNov">
                                 Noviembre
                             </label>
@@ -662,7 +678,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDic">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDic" name="meses">
                             <label class="form-check-label" for="flexCheckTxtDic">
                                 Diciembre
                             </label>
@@ -700,7 +716,7 @@
     </body>
 }
     
-  <script> 
+<script> 
     var params={};
     var table={};
     var idcrontab="@ViewBag.IDCRONTAB";
@@ -712,27 +728,35 @@
     var  minutofin="@Model.HORA_INICIO[3]";
 
     console.log("hora inicio ",horainicio)
- 
     function toggle(source) {
-      checkboxes = document.getElementsByName('dinamico');
+        checkboxes = document.getElementsByName('dinamico');
+
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].checked = source.checked;
+        }
+        } 
+
+    function toggle_week_days(source) {
+      checkboxes = document.getElementsByName('dias_semana');
 
       for(var i=0, n=checkboxes.length;i<n;i++) {
         checkboxes[i].checked = source.checked;
       }
     }
 
+    function toggle_month(source) {
+      checkboxes = document.getElementsByName('meses');
+
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
 
     $(document).on("ready",function() {
-    
-
-$("#updhoraIni option[value='"+String(horainicio).padStart(2, '0')+"']").attr('selected', true);
- $("#uptminutoIni option[value='"+String(minutoinicio).padStart(2, '0')+"']").attr('selected', true);
-     
- 
-
-       
-$("#upthoraFin option[value='"+String(horafin).padStart(2, '0')+"']").attr('selected', true);
- $("#uptminutoFin option[value='"+String(minutofin).padStart(2, '0')+"']").attr('selected', true);
-
- })
+        $("#updhoraIni option[value='"+String(horainicio).padStart(2, '0')+"']").attr('selected', true);
+        $("#uptminutoIni option[value='"+String(minutoinicio).padStart(2, '0')+"']").attr('selected', true);
+        
+        $("#upthoraFin option[value='"+String(horafin).padStart(2, '0')+"']").attr('selected', true);
+        $("#uptminutoFin option[value='"+String(minutofin).padStart(2, '0')+"']").attr('selected', true);
+    })
 </script>

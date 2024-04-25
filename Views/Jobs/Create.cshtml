@@ -1,3 +1,4 @@
+@model WebAdminScheduler.Models.CP_CRONTAB;
 @{  
     ViewData["Title"] = "Crear";  
 }
@@ -149,7 +150,7 @@
         </div>
     </div>
     <div class="card-footer text-muted">
-        <h4 style="text-align: center;">Registrar Crontab asociado</h4>
+        <h4 style="text-align: center;">Registrar Crontab</h4>
     </div>
 </div>
 
@@ -158,90 +159,27 @@
       <thead>
         <tr>
           <th></th>
-          <th>DÍAS</th>
-          <th>HORA INICIO</th>
-          <th>HORA FIN</th>
+          <th>CRONTAB @ViewBag.IDCRONTAB</th>
+          <th>DETALLE</th>
         </tr>
       </thead>
       <tbody>
         <td>
-            <input type="radio" name="id[IDCRONTAB]" value="" checked></input>
+            <input type="radio" name="id[IDCRONTAB]" value=""></input>
         </td>
+        <td></td>
         <td>
-            <select class="form-select" name="dias" id="dias">
-                <option value="lunes">Lunes</option>
-                <option value="martes">Martes</option>
-                <option value="miercoles">Miercoles</option>
-                <option value="jueves">Jueves</option>
-                <option value="viernes">Viernes</option>
-                <option value="sabado">Sabado</option>
-                <option value="domingo">Domingo</option>
-            </select>
-        </td>
-        <td>
-            <div class="row g-4 align-items-center">
-                <div class="col-auto">
-                    <select class="form-select" name="horaIni" id="horaIni">
-                        <option value="cero">00</option>
-                        <option value="uno">01</option>
-                        <option value="dos">02</option>
-                        <option value="tres">03</option>
-                        <option value="cuatro">04</option>
-                        <option value="cinco">05</option>
-                        <option value="seis">06</option>
-                        <option value="siete">07</option>
-                        <option value="ocho">08</option>
-                        <option value="nueve">09</option>
-                        <option value="diez">10</option>
-                        <option value="once">11</option>
-                        <option value="doce">12</option>
-                        <option value="trece">13</option>
-                        <option value="catorce">14</option>
-                        <option value="quince">15</option>
-                        <option value="dieciseis">16</option>
-                        <option value="diecisiete">17</option>
-                        <option value="dieciocho">18</option>
-                        <option value="diecinueve">19</option>
-                        <option value="veinte">20</option>
-                        <option value="veintiuno">21</option>
-                        <option value="veintidos">22</option>
-                        <option value="veintires">23</option>
-                    </select>
-                </div>
-            </div>
-        </td>
-        <td>
-            <div class="row g-4 align-items-center">
-                <div class="col-auto">
-                    <select class="form-select" name="horaFin" id="horaFin">
-                        <option value="cero">00</option>
-                        <option value="uno">01</option>
-                        <option value="dos">02</option>
-                        <option value="tres">03</option>
-                        <option value="cuatro">04</option>
-                        <option value="cinco">05</option>
-                        <option value="seis">06</option>
-                        <option value="siete">07</option>
-                        <option value="ocho">08</option>
-                        <option value="nueve">09</option>
-                        <option value="diez">10</option>
-                        <option value="once">11</option>
-                        <option value="doce">12</option>
-                        <option value="trece">13</option>
-                        <option value="catorce">14</option>
-                        <option value="quince">15</option>
-                        <option value="dieciseis">16</option>
-                        <option value="diecisiete">17</option>
-                        <option value="dieciocho">18</option>
-                        <option value="diecinueve">19</option>
-                        <option value="veinte">20</option>
-                        <option value="veintiuno">21</option>
-                        <option value="veintidos">22</option>
-                        <option value="veintires">23</option>
-                    </select>
-                </div>
-            </div>
+            <button type="button" class="btn btn-warning">Ver</button>
         </td>
       </tbody>
     </table>
 </div>
+
+<script>
+    var params={};
+    var table={};
+    var idcrontab="@ViewBag.IDCRONTAB";
+    params.idcrontab=idcrontab;
+
+    console.log(params.idcrontab, 'idcrontab');
+</script>
