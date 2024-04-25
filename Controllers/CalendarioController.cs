@@ -41,7 +41,7 @@ namespace WebAdminScheduler.Controllers
 		{
            CP_CRONTAB crontabt = new CP_CRONTAB();
            
-            crontabt.IDCRONTAB=1001;
+            crontabt.IDCRONTAB=WACustomHelper.GetLasIdCRON(_DBContext);
             crontabt.FECHA="00000000";
             crontabt.HORA_INICIO="0000";
             crontabt.HORA_FIN="0000";
