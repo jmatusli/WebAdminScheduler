@@ -25,7 +25,21 @@ namespace WebAdminScheduler.Controllers
         {
             return View();
         }
-        
+        public IActionResult Detalle(int id)
+        {
+            CP_PROCESOS data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == id)
+            select s).ToList().AsQueryable().FirstOrDefault();
+			ViewBag.IDPROC = id;  
+            return View();
+        }
+        public IActionResult Edit(int id)
+        {
+            CP_PROCESOS data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == id)
+            select s).ToList().AsQueryable().FirstOrDefault();  
+            ViewBag.IDPROC = id;  
+            //ViewBag.data=data;
+            return View(data);
+        }
         [HttpPost]
         public JsonResult ListarProcesos()
         {
@@ -90,64 +104,53 @@ namespace WebAdminScheduler.Controllers
                     
                     if (!oraReader.IsDBNull(4))
                     {
-                    cp_procesos.PATH= oraReader.GetString(4);
-                      }
+                        cp_procesos.PATH= oraReader.GetString(4);
+                    }
 					 if (!oraReader.IsDBNull(5))
                     {
-                    cp_procesos.PARAMETRO1= oraReader.GetString(5);
-                        
+                        cp_procesos.PARAMETRO1= oraReader.GetString(5);
                     }
                     if (!oraReader.IsDBNull(6))
                     {
-                    cp_procesos.PARAMETRO2= oraReader.GetString(6);
-                        
+                        cp_procesos.PARAMETRO2= oraReader.GetString(6);
                     }
 
-                    if (!oraReader.IsDBNull(6))
+                    if (!oraReader.IsDBNull(7))
                     {
-                    cp_procesos.PARAMETRO3= oraReader.GetString(7);
-                        
+                        cp_procesos.PARAMETRO3= oraReader.GetString(7);
                     }
-					if (!oraReader.IsDBNull(6))
+					if (!oraReader.IsDBNull(8))
                     {
-                    cp_procesos.PARAMETRO4= oraReader.GetString(8);
-                        
+                        cp_procesos.PARAMETRO4= oraReader.GetString(8);
                     }
  
-				 
 					cp_procesos.DEPENDENCIA= oraReader.GetInt32(9);
 					cp_procesos.INTENTOS= oraReader.GetInt32(10);
 					cp_procesos.ESPERA_INTENTO= oraReader.GetInt32(11);
 
                     if (!oraReader.IsDBNull(12))
                     {
-                    cp_procesos.ESTADO= oraReader.GetString(12);
-                        
+                        cp_procesos.ESTADO= oraReader.GetString(12);
                     }
 				    if (!oraReader.IsDBNull(13))
                     {
-                    cp_procesos.FTP= oraReader.GetInt32(13);
-                        
+                        cp_procesos.FTP= oraReader.GetInt32(13);
                     }
 					if (!oraReader.IsDBNull(14))
                     {
-                    cp_procesos.IDHOST= oraReader.GetInt32(14);
-                        
+                        cp_procesos.IDHOST= oraReader.GetInt32(14);
                     }
 				    if (!oraReader.IsDBNull(15))
                     {
-                    cp_procesos.COMPRESION= oraReader.GetInt32(15);
-                        
+                        cp_procesos.COMPRESION= oraReader.GetInt32(15);
                     }
 				    if (!oraReader.IsDBNull(16))
                     {
-                    cp_procesos.IDCRONTAB= oraReader.GetInt32(16);
-                        
+                        cp_procesos.IDCRONTAB= oraReader.GetInt32(16);
                     }
 				    if (!oraReader.IsDBNull(17))
                     {
-                    cp_procesos.NODE= oraReader.GetString(17);
-                        
+                        cp_procesos.NODE= oraReader.GetString(17);
                     }
 				  
 					cp_procesosList.Add(cp_procesos);

@@ -56,7 +56,6 @@ namespace WebAdminScheduler.Controllers
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);
             return Json(crontabt);
 		}
-
         public IActionResult Detalle(int id)
         {
             CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)

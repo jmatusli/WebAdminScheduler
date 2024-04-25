@@ -8,8 +8,11 @@
     <script src="~/js/vfs_fonts.js"></script>
     <script src="~/js/datatables.min.js"></script>
 </head>
-
-<h1>@ViewData["Title"]</h1>
+    
+    <div>
+      <a asp-action="Index" class="btn btn-success">Inicio </a>
+    </div>
+<h1>@ViewData["Title"] Jobs</h1>
 <div class="card">
     <div class="card-header">
         <a href="#" class="btn btn-primary">Guardar</a>
@@ -146,7 +149,7 @@
         </div>
     </div>
     <div class="card-footer text-muted">
-        <h4 style="text-align: center;">Crear Crontab asociado</h4>
+        <h4 style="text-align: center;">Registrar Crontab asociado</h4>
     </div>
 </div>
 
@@ -162,7 +165,7 @@
       </thead>
       <tbody>
         <td>
-            <input type="checkbox" name="id[IDCRONTAB]" value=""></input>
+            <input type="radio" name="id[IDCRONTAB]" value="" checked></input>
         </td>
         <td>
             <select class="form-select" name="dias" id="dias">
