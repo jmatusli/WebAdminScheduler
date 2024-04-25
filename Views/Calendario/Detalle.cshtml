@@ -503,7 +503,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="IdUptRepeatAfterFin">
+                                <input class="form-check-input" type="checkbox" value="" id="TxtIdRepeatAfterFin">
                                 <label class="form-check-label" for="RepeatAfterFin">
                                     REPEAT_AFTER_FINISH
                                 </label>
@@ -552,7 +552,15 @@
     var params={};
     var table={};
     var idcrontab="@ViewBag.IDCRONTAB";
+    var idRepAftFin="@Model.REPEAT_AFTER_FINISH";
     params.idcrontab=idcrontab;
+
+    console.log(idRepAftFin,'idRepAftFin');
+    if (idRepAftFin = 1) {
+        $("#TxtIdRepeatAfterFin").prop('checked', true);
+    } else {
+        $("#TxtIdRepeatAfterFin").prop('checked', false);
+    }
 
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');
