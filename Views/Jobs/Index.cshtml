@@ -70,7 +70,7 @@
           }],
         "columns": [
           {
-            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">'; }
+            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all">'; }
           },
             { "data": "idproc", "name": "idproc", "autoWidth": true },
             { "data": "idconex", "name": "idconex", "autoWidth": true },
@@ -117,7 +117,7 @@
 
       table.on('deselect', function (e, dt, type, indexes) {
         if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
+        $('#tbljobs-select-all').prop("checked",false);
           table
           .rows(indexes)
           .nodes()
@@ -128,7 +128,7 @@
       });
       
       // Handle click on "Select all" control
-      $('#example-select-all').on('click', function() {
+      $('#tbljobs-select-all').on('click', function() {
           
          // Get all rows with search applied
           var rows = table.rows({ 'search': 'applied' }).nodes();
@@ -146,10 +146,10 @@
       });
 
       // Handle click on checkbox to set state of "Select all" control
-      $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+      $('#tbljobs tbody').on('change', 'input[type="checkbox"]', function(){
         // If checkbox is not checked
         if(!this.checked){
-          var el = $('#example-select-all').get(0);
+          var el = $('#tbljobs-select-all').get(0);
           // If "Select all" control is checked and has 'indeterminate' property
           if(el && el.checked && ('indeterminate' in el)){
             // Set visual state of "Select all" control
@@ -174,7 +174,7 @@
 
       table.on('deselect', function (e, dt, type, indexes) {
         if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
+        $('#tbljobs-select-all').prop("checked",false);
           table
           .rows(indexes)
           .nodes()
@@ -185,7 +185,7 @@
       });
       
       // Handle click on "Select all" control
-      $('#example-select-all').on('click', function(){
+      $('#tbljobs-select-all').on('click', function(){
           
         // Get all rows with search applied
           var rows = table.rows({ 'search': 'applied' }).nodes();
@@ -203,10 +203,10 @@
       });
 
       // Handle click on checkbox to set state of "Select all" control
-      $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+      $('#tbljobs tbody').on('change', 'input[type="checkbox"]', function(){
         // If checkbox is not checked
         if(!this.checked){
-          var el = $('#example-select-all').get(0);
+          var el = $('#tbljobs-select-all').get(0);
           // If "Select all" control is checked and has 'indeterminate' property
           if(el && el.checked && ('indeterminate' in el)){
           // Set visual state of "Select all" control
