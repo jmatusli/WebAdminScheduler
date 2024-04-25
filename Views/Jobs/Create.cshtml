@@ -154,12 +154,104 @@
     </div>
 </div>
 
+<div class="modal fade" id="miModalDetCront" tabindex="-1" role="dialog" aria-labelledby="modalDetalleCrontabLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modalDetalleCrontabLabel">Detalle del crontab</h4>
+      </div>
+      <div class="modal-body">
+        <a href="#" class="link-info">Días</a>
+        <hr />
+        <div class="row g-4 align-items-center">
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptLunes" name="dias_semana">
+                    <label class="form-check-label" for="flexCheckUptLunes">
+                        Lunes
+                    </label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMartes" name="dias_semana">
+                    <label class="form-check-label" for="flexCheckUptMartes">
+                        Martes
+                    </label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMiercoles" name="dias_semana">
+                    <label class="form-check-label" for="flexCheckUptMiercoles">
+                        Miercoles
+                    </label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJueves" name="dias_semana">
+                    <label class="form-check-label" for="flexCheckUptJueves">
+                        Jueves
+                    </label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptViernes" name="dias_semana">
+                    <label class="form-check-label" for="flexCheckUptViernes">
+                        Viernes
+                    </label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSabado" name="dias_semana">
+                    <label class="form-check-label" for="flexCheckUptSabado">
+                        Sabado
+                    </label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDomingo" name="dias_semana">
+                    <label class="form-check-label" for="flexCheckUptDomingo">
+                        Domingo
+                    </label>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row g-4 align-items-center">
+            <div class="col-auto">
+                <label for="TittleCrontab" class="col-form-label">IDCRONTAB</label>
+            </div>
+            <div class="col-auto">
+                <label for="txtCrontab" class="col-form-label" id="txtCrontab">@ViewBag.IDCRONTAB</label>
+            </div>
+            <div class="col-auto">
+                <span id="passwordHelpInline" class="form-text">
+                    Hora Inicio
+                </span>
+            </div>
+            <div class="col-auto">
+                <label for="txtHoraIni" class="col-form-label" id="txtHoraIni">@ViewBag.HORA_INICIO</label>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
     <table id="dt-crontab" class="display nowrap" width="100%">
       <thead>
         <tr>
           <th></th>
-          <th>CRONTAB @ViewBag.IDCRONTAB</th>
+          <th>CRONTAB</th>
           <th>DETALLE</th>
         </tr>
       </thead>
@@ -167,9 +259,13 @@
         <td>
             <input type="radio" name="id[IDCRONTAB]" value=""></input>
         </td>
-        <td></td>
         <td>
-            <button type="button" class="btn btn-warning">Ver</button>
+            <label for="txtCrontab" class="col-form-label" id="txtCrontab">@ViewBag.IDCRONTAB</label>
+        </td>
+        <td>
+            <div class="contenedor-modal">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#miModalDetCront">Ver</button>
+            </div>
         </td>
       </tbody>
     </table>

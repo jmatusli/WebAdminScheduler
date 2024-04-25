@@ -146,99 +146,123 @@
   </div>
 </div>
 
-<div class="container">
-    <table id="dt-crontab" class="display nowrap" width="100%">
-      <thead>
-        <tr>
-          <th></th>
-          <th>DÍAS</th>
-          <th>HORA INICIO</th>
-          <th>HORA FIN</th>
-        </tr>
-      </thead>
-      <tbody>
-        <td>
-            <input type="radio" name="id[IDCRONTAB]" value="" checked></input>
-        </td>
-        <td>
-            <select class="form-select" name="dias" id="dias">
-                <option value="lunes">Lunes</option>
-                <option value="martes">Martes</option>
-                <option value="miercoles">Miercoles</option>
-                <option value="jueves">Jueves</option>
-                <option value="viernes">Viernes</option>
-                <option value="sabado">Sabado</option>
-                <option value="domingo">Domingo</option>
-            </select>
-        </td>
-        <td>
-            <div class="row g-4 align-items-center">
-                <div class="col-auto">
-                    <select class="form-select" name="horaIni" id="horaIni">
-                        <option value="cero">00</option>
-                        <option value="uno">01</option>
-                        <option value="dos">02</option>
-                        <option value="tres">03</option>
-                        <option value="cuatro">04</option>
-                        <option value="cinco">05</option>
-                        <option value="seis">06</option>
-                        <option value="siete">07</option>
-                        <option value="ocho">08</option>
-                        <option value="nueve">09</option>
-                        <option value="diez">10</option>
-                        <option value="once">11</option>
-                        <option value="doce">12</option>
-                        <option value="trece">13</option>
-                        <option value="catorce">14</option>
-                        <option value="quince">15</option>
-                        <option value="dieciseis">16</option>
-                        <option value="diecisiete">17</option>
-                        <option value="dieciocho">18</option>
-                        <option value="diecinueve">19</option>
-                        <option value="veinte">20</option>
-                        <option value="veintiuno">21</option>
-                        <option value="veintidos">22</option>
-                        <option value="veintires">23</option>
-                    </select>
-                </div>
+<div class="modal fade" id="miModalDetCront" tabindex="-1" role="dialog" aria-labelledby="modalDetalleCrontabLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modalDetalleCrontabLabel">Detalle del crontab</h4>
+      </div>
+      <div class="modal-body">
+        <a href="#" class="link-info">Días</a>
+        <hr />
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTxtLunes" name="dias_semana">
+              <label class="form-check-label" for="flexCheckTxtLunes">
+                Lunes
+              </label>
             </div>
-        </td>
-        <td>
-            <div class="row g-4 align-items-center">
-                <div class="col-auto">
-                    <select class="form-select" name="horaFin" id="horaFin">
-                        <option value="cero">00</option>
-                        <option value="uno">01</option>
-                        <option value="dos">02</option>
-                        <option value="tres">03</option>
-                        <option value="cuatro">04</option>
-                        <option value="cinco">05</option>
-                        <option value="seis">06</option>
-                        <option value="siete">07</option>
-                        <option value="ocho">08</option>
-                        <option value="nueve">09</option>
-                        <option value="diez">10</option>
-                        <option value="once">11</option>
-                        <option value="doce">12</option>
-                        <option value="trece">13</option>
-                        <option value="catorce">14</option>
-                        <option value="quince">15</option>
-                        <option value="dieciseis">16</option>
-                        <option value="diecisiete">17</option>
-                        <option value="dieciocho">18</option>
-                        <option value="diecinueve">19</option>
-                        <option value="veinte">20</option>
-                        <option value="veintiuno">21</option>
-                        <option value="veintidos">22</option>
-                        <option value="veintires">23</option>
-                    </select>
-                </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTxtMartes" name="dias_semana">
+              <label class="form-check-label" for="flexCheckTxtMartes">
+                Martes
+              </label>
             </div>
-        </td>
-      </tbody>
-    </table>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTxtMiercoles" name="dias_semana">
+              <label class="form-check-label" for="flexCheckTxtMiercoles">
+                Miercoles
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTxtJueves" name="dias_semana">
+              <label class="form-check-label" for="flexCheckTxtJueves">
+                Jueves
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTxtViernes" name="dias_semana">
+              <label class="form-check-label" for="flexCheckTxtViernes">
+                Viernes
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTxtSabado" name="dias_semana">
+              <label class="form-check-label" for="flexCheckTxtSabado">
+                Sabado
+              </label>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckTxtDomingo" name="dias_semana">
+              <label class="form-check-label" for="flexCheckTxtDomingo">
+                Domingo
+              </label>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row g-4 align-items-center">
+          <div class="col-auto">
+            <label for="TittleCrontab" class="col-form-label">IDCRONTAB</label>
+          </div>
+          <div class="col-auto">
+            <label for="txtCrontab" class="col-form-label" id="txtCrontab">@ViewBag.IDCRONTAB</label>
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+              Hora Inicio
+            </span>
+          </div>
+          <div class="col-auto">
+            <label for="txtHoraIni" class="col-form-label" id="txtHoraIni">@ViewBag.HORA_INICIO</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-		
+
+<div class="container">
+  <table id="dt-crontab" class="display nowrap" width="100%">
+    <thead>
+      <tr>
+        <th></th>
+        <th>CRONTAB</th>
+        <th>DETALLE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td>
+        <input type="radio" name="id[IDCRONTAB]" value=""></input>
+      </td>
+      <td>
+        <label for="txtCrontab" class="col-form-label" id="txtCrontab">@ViewBag.IDCRONTAB</label>
+      </td>
+      <td>
+        <div class="contenedor-modal">
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#miModalDetCront">Ver</button>
+        </div>
+      </td>
+    </tbody>
+  </table>
+</div>
+
 <script> 
   var params={};
   var table={};
