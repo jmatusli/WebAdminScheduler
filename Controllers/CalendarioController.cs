@@ -37,7 +37,7 @@ namespace WebAdminScheduler.Controllers
         }
 		
 		[HttpPost]
-		public JsonResult Save(Cp_CrontabVM user)
+		public JsonResult Save(CrontabVM user)
 		{
            CP_CRONTAB crontabt = new CP_CRONTAB();
            

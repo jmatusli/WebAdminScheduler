@@ -18,7 +18,7 @@
       <table id="tblJobs" class="display nowrap" width="100%">
         <thead>
           <tr>
-            <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tblJobs-select-all"></th>
+            <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all"></th>
             <th>IDPROC</th>
             <th>IDCONEX</th>
             <th>NOMBRE</th>
@@ -62,6 +62,10 @@
           "datatype": "json"
         },
         "columnDefs": [{
+          'targets': 0,
+        orderable: false 
+           
+        },{
           'targets': -1,
         orderable: false,
           'render': function (data, type, full, meta){
@@ -70,7 +74,7 @@
           }],
         "columns": [
           {
-            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all">'; }
+            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all-item">'; }
           },
             { "data": "idproc", "name": "idproc", "autoWidth": true },
             { "data": "idconex", "name": "idconex", "autoWidth": true },
@@ -127,66 +131,12 @@
         }
       });
       
-      // Handle click on "Select all" control
-      $('#tbljobs-select-all').on('click', function() {
-          
-         // Get all rows with search applied
-          var rows = table.rows({ 'search': 'applied' }).nodes();
-          // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-          $('input[type="checkbox"]', rows).prop('checked', this.checked);
-          
-          var selData =   table.rows().select();
-          var selData =   table.rows(".selected").data();
-        }
-        else 
-        {
-        var selData =   table.rows().deselect();
-        }
-      });
-
-      // Handle click on checkbox to set state of "Select all" control
-      $('#tbljobs tbody').on('change', 'input[type="checkbox"]', function(){
-        // If checkbox is not checked
-        if(!this.checked){
-          var el = $('#tbljobs-select-all').get(0);
-          // If "Select all" control is checked and has 'indeterminate' property
-          if(el && el.checked && ('indeterminate' in el)){
-            // Set visual state of "Select all" control
-            // as 'indeterminate'
-            el.indeterminate = true;
-          }
-        }
-      });
-      
-      table.on('select', function (e, dt, type, indexes) {
-      
-        if (type === 'row'   ) {
-          var nodes = table
-          .rows(indexes)
-          .nodes()
-          .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', true); 
-          });
-          //.find(':checkbox', 'td:first-child').checked = true; 
-        }
-      });
-
-      table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-        $('#tbljobs-select-all').prop("checked",false);
-          table
-          .rows(indexes)
-          .nodes()
-          .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', false); 
-          });
-        }
-      });
       
       // Handle click on "Select all" control
       $('#tbljobs-select-all').on('click', function(){
-          
+       
+        if(table.settings()[0]._select.style=='multi')
+        {   
         // Get all rows with search applied
           var rows = table.rows({ 'search': 'applied' }).nodes();
           // Check/uncheck checkboxes for all rows in the table
@@ -200,10 +150,13 @@
         {
         var selData =   table.rows().deselect();
         }
+        }
+        else 
+        return false;
       });
 
       // Handle click on checkbox to set state of "Select all" control
-      $('#tbljobs tbody').on('change', 'input[type="checkbox"]', function(){
+      $('#tblJobs tbody').on('change', 'input[type="checkbox"]', function(){
         // If checkbox is not checked
         if(!this.checked){
           var el = $('#tbljobs-select-all').get(0);

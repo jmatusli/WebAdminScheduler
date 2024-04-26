@@ -24,6 +24,17 @@ public static int GetLasIdCRON(WebAdminSchedulerContext WAContext)
             
 }
 
+public static int GetLasIdPROC(WebAdminSchedulerContext WAContext)
+{
+ 
+          CP_PROCESOS data = (from s in WAContext.CP_PROCESOS.OrderByDescending(x => x.IDPROC)
+                             select s).ToList().AsQueryable().FirstOrDefault();
+            int LasIdproc=data.IDPROC+1;
+
+            return LasIdproc;
+            
+}
+
 
 
    }

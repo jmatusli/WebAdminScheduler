@@ -4,7 +4,7 @@ using WebAdminScheduler.Models.ViewModels;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
-
+using WebAdminScheduler.helpers;
 namespace WebAdminScheduler.Controllers
 {
     public class JobsController : Controller
@@ -208,5 +208,19 @@ namespace WebAdminScheduler.Controllers
             });   
               
         }
+
+
+        [HttpPost]
+		public JsonResult Save(ProcesosVM procesos)
+		{
+           CP_PROCESOS procesost = new CP_PROCESOS();
+           
+            procesost.IDPROC=WACustomHelper.GetLasIdPROC(_DBContext);
+      
+           _DBContext.CP_PROCESOS.Add(procesost);
+           _DBContext.SaveChanges();
+            Console.WriteLine("ejemplo "+procesost.IDPROC);
+            return Json(procesost);
+		}
    }
 }
