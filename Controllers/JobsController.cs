@@ -216,7 +216,24 @@ namespace WebAdminScheduler.Controllers
            CP_PROCESOS procesost = new CP_PROCESOS();
            
             procesost.IDPROC=WACustomHelper.GetLasIdPROC(_DBContext);
-      
+            procesost.COMPRESION=procesos.oProcesos.COMPRESION;
+            procesost.DEPENDENCIA=procesos.oProcesos.DEPENDENCIA;
+            procesost.DESCRIPCION=procesos.oProcesos.DESCRIPCION;
+            procesost.IDCONEX=procesos.oProcesos.IDCONEX;
+            procesost.IDCRONTAB=procesos.oProcesos.IDCRONTAB;
+            procesost.ESPERA_INTENTO=procesos.oProcesos.ESPERA_INTENTO;
+            procesost.ESTADO=procesos.oProcesos.ESTADO;
+            procesost.FTP=procesos.oProcesos.FTP;
+            procesost.IDHOST=procesos.oProcesos.IDHOST;
+            procesost.INTENTOS=procesos.oProcesos.INTENTOS;
+            procesost.NODE=procesos.oProcesos.NODE;
+            procesost.NOMBRE=procesos.oProcesos.NOMBRE;
+            procesost.PARAMETRO1=procesos.oProcesos.PARAMETRO1;
+            procesost.PARAMETRO2=procesos.oProcesos.PARAMETRO2;
+            procesost.PARAMETRO3=procesos.oProcesos.PARAMETRO3;
+            procesost.PARAMETRO4=procesos.oProcesos.PARAMETRO4;
+            procesost.PATH=procesos.oProcesos.PATH;
+
            _DBContext.CP_PROCESOS.Add(procesost);
            _DBContext.SaveChanges();
             Console.WriteLine("ejemplo "+procesost.IDPROC);
