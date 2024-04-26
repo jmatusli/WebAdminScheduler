@@ -181,19 +181,17 @@ namespace WebAdminScheduler.Controllers
             });
 		}
         public JsonResult ListarRegistro(int idproc) {
-            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == idproc)
-           // var data = (from s in _DBContext.CP_REGISTRO.Where(x => x.IDPROC == idproc)
+            var data = (from s in _DBContext.CP_REGISTRO.Where(x => x.IDPROC == idproc)
             select s).ToList();
-               return Json(new {
+
+            return Json(new {
                 draw = 1, 
                 iTotalRecords = 1,
                 iDisplayLength=10,
                 iTotalDisplayRecords=data.Count(),
                 aaData = data,
-            });   
-              
+            });
         }
-		
 		 public JsonResult ListarCrontabsAsoc(int idcrontab) {
             var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
             select s).ToList();  
@@ -208,7 +206,6 @@ namespace WebAdminScheduler.Controllers
             });   
               
         }
-
 
         [HttpPost]
 		public  async Task<JsonResult> Save([FromBody] ProcesosVM dtoprocesos)  
