@@ -74,110 +74,110 @@
           $('.dt-paging-button').hide();
         }
     },
-        "columnDefs": [{
-          'targets': 0,
-        orderable: false,
-          'render': function (data, type, full, meta){
-            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-          }
-        },{
-        'targets': -1,
-        orderable: false,
-          'render': function (data, type, full, meta){
-		      console.log("son los datos ",data);
-            return   '<a class="btn btn-success" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Detalle/'+data.idcrontab+'">Detalle</a>';
-          }
-        }],
-        "columns": [
-          {
-            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
-          },
-          { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
-            { "data": "fecha", "name": "fecha", "autoWidth": true },
-            { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
-            { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
-            { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
-            { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
-            { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
-            { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
-            { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
-            { "data":null },
-        ],
-     
-      select: {
-      style: 'single',
-      selector: 'td:not(:last-child)' // no row selection on last column
-      },
-        "language": {
-        "url": "/lib/datatables/dist/locales/es/es.json"
+      "columnDefs": [{
+        'targets': 0,
+      orderable: false,
+        'render': function (data, type, full, meta){
+          return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
         }
-      });
-
-      table.on('select', function (e, dt, type, indexes) {
-     
-        if (type === 'row'   ) {
-          var nodes = table
-          .rows(indexes)
-          .nodes()
-          .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', true); 
-          });
-          //.find(':checkbox', 'td:first-child').checked = true; 
+      },{
+      'targets': -1,
+      orderable: false,
+        'render': function (data, type, full, meta){
+        console.log("son los datos ",data);
+          return   '<a class="btn btn-success" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Detalle/'+data.idcrontab+'">Detalle</a>';
         }
-      });
-
-      table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
-          table
-          .rows(indexes)
-          .nodes()
-          .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', false); 
-          });
-        }
-      });
-      
-      // Handle click on "Select all" control
-      $('#example-select-all').on('click', function() {
-          
-        // Get all rows with search applied
-        var rows = table.rows({ 'search': 'applied' }).nodes();
-        // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-          $('input[type="checkbox"]', rows).prop('checked', this.checked);
-          
-          var selData =   table.rows().select();
-          var selData =   table.rows(".selected").data();
-        }
-        else 
+      }],
+      "columns": [
         {
-          var selData =   table.rows().deselect();
-        }
-      });
+          "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
+        },
+        { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
+          { "data": "fecha", "name": "fecha", "autoWidth": true },
+          { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
+          { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
+          { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
+          { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
+          { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
+          { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
+          { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
+          { "data":null },
+      ],
+    
+    select: {
+    style: 'single',
+    selector: 'td:not(:last-child)' // no row selection on last column
+    },
+      "language": {
+      "url": "/lib/datatables/dist/locales/es/es.json"
+      }
+    });
 
-      // Handle click on checkbox to set state of "Select all" control
-      $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-          // If checkbox is not checked
-          if(!this.checked){
-            var el = $('#example-select-all').get(0);
-            // If "Select all" control is checked and has 'indeterminate' property
-            if(el && el.checked && ('indeterminate' in el)){
-              // Set visual state of "Select all" control
-              // as 'indeterminate'
-              el.indeterminate = true;
-            }
-          }
-      });
+    table.on('select', function (e, dt, type, indexes) {
+    
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
+        });
+        //.find(':checkbox', 'td:first-child').checked = true; 
+      }
+    });
+
+    table.on('deselect', function (e, dt, type, indexes) {
+      if (type === 'row') {
+      $('#example-select-all').prop("checked",false);
+        table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', false); 
+        });
+      }
+    });
       
-      table.on('select', function (e, dt, type, indexes) {
+    // Handle click on "Select all" control
+    $('#example-select-all').on('click', function() {
+        
+      // Get all rows with search applied
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+      // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else
+      {
+        var selData =   table.rows().deselect();
+      }
+    });
+
+    // Handle click on checkbox to set state of "Select all" control
+    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+      // If checkbox is not checked
+      if(!this.checked){
+        var el = $('#example-select-all').get(0);
+        // If "Select all" control is checked and has 'indeterminate' property
+        if(el && el.checked && ('indeterminate' in el)){
+          // Set visual state of "Select all" control
+          // as 'indeterminate'
+          el.indeterminate = true;
+        }
+      }
+    });
       
-        if (type === 'row'   ) {
-          var nodes = table
-          .rows(indexes)
-          .nodes()
-          .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', true); 
+    table.on('select', function (e, dt, type, indexes) {
+    
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
           });
           //.find(':checkbox', 'td:first-child').checked = true; 
         }

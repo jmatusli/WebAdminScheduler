@@ -36,7 +36,7 @@ namespace WebAdminScheduler.Controllers
         {
             CP_PROCESOS data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == id)
             select s).ToList().AsQueryable().FirstOrDefault();
-			ViewBag.IDPROC = id;  
+			ViewBag.IDPROC = id;
             return View();
         }
         public IActionResult Edit(int id)
@@ -185,14 +185,14 @@ namespace WebAdminScheduler.Controllers
             select s).ToList();
 
             return Json(new {
-                draw = 1, 
+                draw = 1,
                 iTotalRecords = 1,
                 iDisplayLength=10,
                 iTotalDisplayRecords=data.Count(),
                 aaData = data,
             });
         }
-		 public JsonResult ListarCrontabsAsoc(int idcrontab) {
+		public JsonResult ListarCrontabsAsoc(int idcrontab) {
             var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
             select s).ToList();  
                // ViewBag.CP_PROCESOS = data;
@@ -203,8 +203,7 @@ namespace WebAdminScheduler.Controllers
                 iDisplayLength=10,
                 iTotalDisplayRecords=data.Count(),
                 aaData = data,
-            });   
-              
+            });
         }
 
         [HttpPost]
