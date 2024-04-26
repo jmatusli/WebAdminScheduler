@@ -2,15 +2,18 @@
   ViewData["Title"] = "Crear";  
 }
  <head>
-  <link rel="stylesheet" href="~/css/datatables.min.css" />
+   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/css/clockpicker.css" />
     <script src="~/js/jquery-1.11.3.min.js"></script>
     <script src="~/js/pdfmake.min.js"></script>
     <script src="~/js/vfs_fonts.js"></script>
     <script src="~/js/datatables.min.js"></script>
     <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
     <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
+    <script src="~/js/clockpicker.js"></script>
 
   <style>
     .container{
@@ -133,202 +136,27 @@
         Registro   (@ViewBag.LasIdcrontab)
       </div>
       <div class="card-body">
-        <div class="row g-4 align-items-center">
-          <div class="col-auto">
-            <span id="passwordHelpInline" class="form-text">
-              Hora Inicio
-            </span>
-          </div>
-          <div class="col-auto">
-            <select class="form-select" name="horaIni" id="horaIni">
-              <option value="cero">00</option>
-              <option value="uno">01</option>
-              <option value="dos">02</option>
-              <option value="tres">03</option>
-              <option value="cuatro">04</option>
-              <option value="cinco">05</option>
-              <option value="seis">06</option>
-              <option value="siete">07</option>
-              <option value="ocho">08</option>
-              <option value="nueve">09</option>
-              <option value="diez">10</option>
-              <option value="once">11</option>
-              <option value="doce">12</option>
-              <option value="trece">13</option>
-              <option value="catorce">14</option>
-              <option value="quince">15</option>
-              <option value="dieciseis">16</option>
-              <option value="diecisiete">17</option>
-              <option value="dieciocho">18</option>
-              <option value="diecinueve">19</option>
-              <option value="veinte">20</option>
-              <option value="veintiuno">21</option>
-              <option value="veintidos">22</option>
-              <option value="veintires">23</option>
-            </select>
-          </div>
-          <div class="col-auto">
-            <select class="form-select" name="minutoIni" id="minutoIni">
-              <option value="cero">00</option>
-              <option value="uno">01</option>
-              <option value="dos">02</option>
-              <option value="tres">03</option>
-              <option value="cuatro">04</option>
-              <option value="cinco">05</option>
-              <option value="seis">06</option>
-              <option value="siete">07</option>
-              <option value="ocho">08</option>
-              <option value="nueve">09</option>
-              <option value="diez">10</option>
-              <option value="once">11</option>
-              <option value="doce">12</option>
-              <option value="trece">13</option>
-              <option value="catorce">14</option>
-              <option value="quince">15</option>
-              <option value="dieciseis">16</option>
-              <option value="diecisiete">17</option>
-              <option value="dieciocho">18</option>
-              <option value="diecinueve">19</option>
-              <option value="veinte">20</option>
-              <option value="veintiuno">21</option>
-              <option value="veintidos">22</option>
-              <option value="veintitres">23</option>
-              <option value="veinticuatro">24</option>
-              <option value="veinticinco">25</option>
-              <option value="veintiseis">26</option>
-              <option value="veintisiete">27</option>
-              <option value="veintiocho">28</option>
-              <option value="veintinueve">29</option>
-              <option value="treinta">30</option>
-              <option value="treintauno">31</option>
-              <option value="treintados">32</option>
-              <option value="treintatres">33</option>
-              <option value="treintacuatro">34</option>
-              <option value="treintacinco">35</option>
-              <option value="treintaseis">36</option>
-              <option value="treintasiete">37</option>
-              <option value="treintaocho">38</option>
-              <option value="treintanueve">39</option>
-              <option value="cuarenta">40</option>
-              <option value="cuarentauno">41</option>
-              <option value="cuarentados">42</option>
-              <option value="cuarentatres">43</option>
-              <option value="cuarentacuatro">44</option>
-              <option value="cuarentacinco">45</option>
-              <option value="cuarentaseis">46</option>
-              <option value="cuarentasiete">47</option>
-              <option value="cuarentaocho">48</option>
-              <option value="cuarentanueve">49</option>
-              <option value="cincuenta">50</option>
-              <option value="cincuentauno">51</option>
-              <option value="cincuentados">52</option>
-              <option value="cincuentatres">53</option>
-              <option value="cincuentacuatro">54</option>
-              <option value="cincuentacinco">55</option>
-              <option value="cincuentaseis">56</option>
-              <option value="cincuentasiete">57</option>
-              <option value="cincuentaocho">58</option>
-              <option value="cincuentanueve">59</option>
-            </select>
-          </div>
-          <div class="col-auto">
-            <span id="passwordHelpInline" class="form-text">
-              Hora Fin
-            </span>
-          </div>
-          <div class="col-auto">
-            <select class="form-select" name="horaFin" id="horaFin">
-              <option value="cero">00</option>
-              <option value="uno">01</option>
-              <option value="dos">02</option>
-              <option value="tres">03</option>
-              <option value="cuatro">04</option>
-              <option value="cinco">05</option>
-              <option value="seis">06</option>
-              <option value="siete">07</option>
-              <option value="ocho">08</option>
-              <option value="nueve">09</option>
-              <option value="diez">10</option>
-              <option value="once">11</option>
-              <option value="doce">12</option>
-              <option value="trece">13</option>
-              <option value="catorce">14</option>
-              <option value="quince">15</option>
-              <option value="dieciseis">16</option>
-              <option value="diecisiete">17</option>
-              <option value="dieciocho">18</option>
-              <option value="diecinueve">19</option>
-              <option value="veinte">20</option>
-              <option value="veintiuno">21</option>
-              <option value="veintidos">22</option>
-              <option value="veintires">23</option>
-            </select>
-          </div>
-          <div class="col-auto">
-            <select class="form-select" name="minutoFin" id="minutoFin">
-              <option value="cero">00</option>
-              <option value="uno">01</option>
-              <option value="dos">02</option>
-              <option value="tres">03</option>
-              <option value="cuatro">04</option>
-              <option value="cinco">05</option>
-              <option value="seis">06</option>
-              <option value="siete">07</option>
-              <option value="ocho">08</option>
-              <option value="nueve">09</option>
-              <option value="diez">10</option>
-              <option value="once">11</option>
-              <option value="doce">12</option>
-              <option value="trece">13</option>
-              <option value="catorce">14</option>
-              <option value="quince">15</option>
-              <option value="dieciseis">16</option>
-              <option value="diecisiete">17</option>
-              <option value="dieciocho">18</option>
-              <option value="diecinueve">19</option>
-              <option value="veinte">20</option>
-              <option value="veintiuno">21</option>
-              <option value="veintidos">22</option>
-              <option value="veintitres">23</option>
-              <option value="veinticuatro">24</option>
-              <option value="veinticinco">25</option>
-              <option value="veintiseis">26</option>
-              <option value="veintisiete">27</option>
-              <option value="veintiocho">28</option>
-              <option value="veintinueve">29</option>
-              <option value="treinta">30</option>
-              <option value="treintauno">31</option>
-              <option value="treintados">32</option>
-              <option value="treintatres">33</option>
-              <option value="treintacuatro">34</option>
-              <option value="treintacinco">35</option>
-              <option value="treintaseis">36</option>
-              <option value="treintasiete">37</option>
-              <option value="treintaocho">38</option>
-              <option value="treintanueve">39</option>
-              <option value="cuarenta">40</option>
-              <option value="cuarentauno">41</option>
-              <option value="cuarentados">42</option>
-              <option value="cuarentatres">43</option>
-              <option value="cuarentacuatro">44</option>
-              <option value="cuarentacinco">45</option>
-              <option value="cuarentaseis">46</option>
-              <option value="cuarentasiete">47</option>
-              <option value="cuarentaocho">48</option>
-              <option value="cuarentanueve">49</option>
-              <option value="cincuenta">50</option>
-              <option value="cincuentauno">51</option>
-              <option value="cincuentados">52</option>
-              <option value="cincuentatres">53</option>
-              <option value="cincuentacuatro">54</option>
-              <option value="cincuentacinco">55</option>
-              <option value="cincuentaseis">56</option>
-              <option value="cincuentasiete">57</option>
-              <option value="cincuentaocho">58</option>
-              <option value="cincuentanueve">59</option>
-            </select>
-          </div>
-        </div><hr />
+	    <div class="row g-4 align-items-center">
+		 <div class="col-auto">
+       
+            <div class="col-sm-6">
+                <label>Hora Inicio</label>
+                <input type="text" class="form-control clockpicker"  name="horaIni" id="horaIni"
+                        data-placement="right" data-align="top" data-autoclose="true" readonly="">
+            </div>
+       
+    </div>
+	 <div class="col-auto">
+	
+            <div class="col-sm-6">
+                <label>Hora Fin</label>
+                <input type="text" class="form-control clockpicker"  name="horaFin" id="horaFin"
+                        data-placement="right" data-align="top" data-autoclose="true" readonly="">
+            </div>
+       
+    </div>
+    </div>
+      <hr />
 
         <a href="#" class="link-info">Días</a>
         <div class="row g-4 align-items-center">
@@ -882,5 +710,6 @@
     });
 
   })
+     $('.clockpicker').clockpicker();
 })
 </script>
