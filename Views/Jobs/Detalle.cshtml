@@ -182,6 +182,8 @@
     var table={};
     var idcrontab="@ViewBag.IDCRONTAB";
     params.idcrontab=idcrontab;
+    var idreg="@ViewBag.IDREG";
+    params.idreg=idreg;
 
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');
@@ -202,8 +204,8 @@
             "scrollY":            $(document).height() - 300,
             "scrollCollapse":     true,
             "ajax": {
-                "url": "@Url.Action("ListarRegistros","Jobs")",
-                "type": "GET",
+                "url": "@Url.Action("ListarRegistro","Jobs")",
+                "type": "POST",
                 "datatype": "json",
                 "data": function(d){
                 $.extend( d, params);    
