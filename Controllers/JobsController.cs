@@ -211,28 +211,28 @@ namespace WebAdminScheduler.Controllers
 
 
         [HttpPost]
-		public JsonResult Save(ProcesosVM procesos)
+		public  async Task<JsonResult> Save([FromBody] ProcesosVM dtoprocesos)  
 		{
            CP_PROCESOS procesost = new CP_PROCESOS();
            
             procesost.IDPROC=WACustomHelper.GetLasIdPROC(_DBContext);
-            procesost.COMPRESION=procesos.oProcesos.COMPRESION;
-            procesost.DEPENDENCIA=procesos.oProcesos.DEPENDENCIA;
-            procesost.DESCRIPCION=procesos.oProcesos.DESCRIPCION;
-            procesost.IDCONEX=procesos.oProcesos.IDCONEX;
-            procesost.IDCRONTAB=procesos.oProcesos.IDCRONTAB;
-            procesost.ESPERA_INTENTO=procesos.oProcesos.ESPERA_INTENTO;
-            procesost.ESTADO=procesos.oProcesos.ESTADO;
-            procesost.FTP=procesos.oProcesos.FTP;
-            procesost.IDHOST=procesos.oProcesos.IDHOST;
-            procesost.INTENTOS=procesos.oProcesos.INTENTOS;
-            procesost.NODE=procesos.oProcesos.NODE;
-            procesost.NOMBRE=procesos.oProcesos.NOMBRE;
-            procesost.PARAMETRO1=procesos.oProcesos.PARAMETRO1;
-            procesost.PARAMETRO2=procesos.oProcesos.PARAMETRO2;
-            procesost.PARAMETRO3=procesos.oProcesos.PARAMETRO3;
-            procesost.PARAMETRO4=procesos.oProcesos.PARAMETRO4;
-            procesost.PATH=procesos.oProcesos.PATH;
+            procesost.COMPRESION=dtoprocesos.oProcesos.COMPRESION;
+            procesost.DEPENDENCIA=dtoprocesos.oProcesos.DEPENDENCIA;
+            procesost.DESCRIPCION=dtoprocesos.oProcesos.DESCRIPCION;
+            procesost.IDCONEX=dtoprocesos.oProcesos.IDCONEX;
+            procesost.IDCRONTAB=dtoprocesos.oProcesos.IDCRONTAB;
+            procesost.ESPERA_INTENTO=dtoprocesos.oProcesos.ESPERA_INTENTO;
+            procesost.ESTADO=dtoprocesos.oProcesos.ESTADO;
+            procesost.FTP=dtoprocesos.oProcesos.FTP;
+            procesost.IDHOST=dtoprocesos.oProcesos.IDHOST;
+            procesost.INTENTOS=dtoprocesos.oProcesos.INTENTOS;
+            procesost.NODE=dtoprocesos.oProcesos.NODE;
+            procesost.NOMBRE=dtoprocesos.oProcesos.NOMBRE;
+            procesost.PARAMETRO1=dtoprocesos.oProcesos.PARAMETRO1;
+            procesost.PARAMETRO2=dtoprocesos.oProcesos.PARAMETRO2;
+            procesost.PARAMETRO3=dtoprocesos.oProcesos.PARAMETRO3;
+            procesost.PARAMETRO4=dtoprocesos.oProcesos.PARAMETRO4;
+            procesost.PATH=dtoprocesos.oProcesos.PATH;
 
            _DBContext.CP_PROCESOS.Add(procesost);
            _DBContext.SaveChanges();

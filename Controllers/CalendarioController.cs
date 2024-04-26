@@ -13,6 +13,7 @@ using WebAdminScheduler.Models;
 using WebAdminScheduler.Models.ViewModels;
 using System.Linq.Expressions;
 using WebAdminScheduler.helpers;
+using Microsoft.AspNetCore.Razor.Language;
 namespace WebAdminScheduler.Controllers
 {
     public class CalendarioController : Controller
@@ -37,20 +38,20 @@ namespace WebAdminScheduler.Controllers
         }
 		
 		[HttpPost]
-		public JsonResult Save(CrontabVM user)
+		public JsonResult Save([FromBody] CrontabVM  dtocrontab)
 		{
            CP_CRONTAB crontabt = new CP_CRONTAB();
            
             crontabt.IDCRONTAB=WACustomHelper.GetLasIdCRON(_DBContext);
-            crontabt.FECHA="00000000";
-            crontabt.HORA_INICIO="0000";
-            crontabt.HORA_FIN="0000";
-            crontabt.RECURRENCIA="0000";
-            crontabt.WDAY_M2S_EX="1111111";
-            crontabt.DAY_EX="0";
-            crontabt.MONTH_EX="0";
-            crontabt.REPEAT_EVERY_MINS=0;
-            crontabt.REPEAT_AFTER_FINISH=0;
+            crontabt.FECHA=dtocrontab.oCrontab.FECHA;
+            crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
+            crontabt.HORA_FIN=dtocrontab.oCrontab.HORA_FIN;
+            crontabt.RECURRENCIA=dtocrontab.oCrontab.RECURRENCIA;
+            crontabt.WDAY_M2S_EX=dtocrontab.oCrontab.WDAY_M2S_EX;
+            crontabt.DAY_EX=dtocrontab.oCrontab.DAY_EX;
+            crontabt.MONTH_EX=dtocrontab.oCrontab.MONTH_EX;
+            crontabt.REPEAT_EVERY_MINS=dtocrontab.oCrontab.REPEAT_EVERY_MINS;
+            crontabt.REPEAT_AFTER_FINISH=dtocrontab.oCrontab.REPEAT_AFTER_FINISH;
            _DBContext.CP_CRONTABS.Add(crontabt);
            _DBContext.SaveChanges();
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);

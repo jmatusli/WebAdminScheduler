@@ -411,11 +411,11 @@
       $("#saveJob").on("click",function(){
 
          var data_job={
-            
-          "oProcesos": {
+            "oProcesos":{
+          
             "IDPROC":"0",
             "IDCONEX":1,
-            "NOMBRE":"TEST PROC",
+            "NOMBRE":"TEST PROC "+(1 + Math.floor(Math.random() * 6)),
             "DESCRIPCION":"DESCRIPCION PROC",
             "PATH":"PATH PROC",
             "PARAMETRO1":"TEST PARAMETRO1",
@@ -431,16 +431,21 @@
              "COMPRESION":0,
              "IDCRONTAB":selectedCrontab,
              "NODE":"TEST NODE"
+             }
 	 
-          }
+          
         };
 
+             
+            
         $.ajax({
-          type: "POST",
-          url: '@Url.Action("Save", "Jobs")' ,
-          data: JSON.stringify(data_job),
-          dataType: "json",
-          contentType: "application/json; charset=utf-8",
+            method: "POST",
+            async: true,
+            dataType: "json",
+            data: JSON.stringify(data_job),
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("Save", "Jobs")' ,
+            
           success: function () {
             Swal.fire({
             title: "Job registrado!",
