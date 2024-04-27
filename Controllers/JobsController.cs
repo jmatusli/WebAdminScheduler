@@ -37,7 +37,7 @@ namespace WebAdminScheduler.Controllers
             CP_PROCESOS data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == id)
             select s).ToList().AsQueryable().FirstOrDefault();
 			ViewBag.IDPROC = id;
-            return View();
+            return View(data);
         }
         public IActionResult Edit(int id)
         {

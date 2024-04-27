@@ -710,7 +710,7 @@
                 </div>
             </div>
             <div class="card-footer text-muted">
-                <a id="btnSave" class="btn btn-primary">Guardar</a>
+                <a id="btnSave" onclick="Guardar()" class="btn btn-primary">Guardar</a>
             </div>
         </div>
     </body>
@@ -729,9 +729,9 @@
     }
 
     var horainicio="@Model.HORA_INICIO[0]";
-    var  horafin="@Model.HORA_INICIO[2]";
-    var  minutoinicio="@Model.HORA_INICIO[1]";
-    var  minutofin="@Model.HORA_INICIO[3]";
+    var horafin="@Model.HORA_INICIO[2]";
+    var minutoinicio="@Model.HORA_INICIO[1]";
+    var minutofin="@Model.HORA_INICIO[3]";
 
     console.log("hora inicio ",horainicio)
     function toggle(source) {
@@ -765,4 +765,26 @@
         $("#upthoraFin option[value='"+String(horafin).padStart(2, '0')+"']").attr('selected', true);
         $("#uptminutoFin option[value='"+String(minutofin).padStart(2, '0')+"']").attr('selected', true);
     })
+
+    function Guardar($idcrontab) {
+        if ($idcrontab != 0) {
+            jQuery.ajax({
+            url: "@Url.Action("Update","Calendario")",
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data != null) {
+                $("#updhoraIni").val(data.HORA_INICIO);
+                $("#upthoraFin").val(data.HORA_FIN);
+                $("#UptRepeatEveryMins").val(data.REPEAT_EVERY_MINS);
+                }
+            }
+            });
+        } else {
+            $("#updhoraIni").val("");
+            $("#upthoraFin").val("");
+            $("#UptRepeatEveryMins").val("");
+        }
+    }
 </script>

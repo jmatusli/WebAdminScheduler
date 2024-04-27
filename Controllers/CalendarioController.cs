@@ -75,34 +75,28 @@ namespace WebAdminScheduler.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int id, CrontabVM dtocrontab)
         {
-           /* if (id != CP_CRONTABS.IDCRONTAB)
             {
-                return NotFound();
-            }
+                CP_CRONTAB crontabt = new CP_CRONTAB();
+        
+                CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
+                select s).ToList().AsQueryable().FirstOrDefault();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _DBContext.Update(CP_CRONTABS);
-                    await _DBContext.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CrontabsExists(CP_CRONTABS.IDCRONTAB))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }*/
-            return View(/*CP_CRONTABS*/);
+                crontabt.FECHA=dtocrontab.oCrontab.FECHA;
+                crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
+                crontabt.HORA_FIN=dtocrontab.oCrontab.HORA_FIN;
+                crontabt.RECURRENCIA=dtocrontab.oCrontab.RECURRENCIA;
+                crontabt.WDAY_M2S_EX=dtocrontab.oCrontab.WDAY_M2S_EX;
+                crontabt.DAY_EX=dtocrontab.oCrontab.DAY_EX;
+                crontabt.MONTH_EX=dtocrontab.oCrontab.MONTH_EX;
+                crontabt.REPEAT_EVERY_MINS=dtocrontab.oCrontab.REPEAT_EVERY_MINS;
+                crontabt.REPEAT_AFTER_FINISH=dtocrontab.oCrontab.REPEAT_AFTER_FINISH;
+                _DBContext.CP_CRONTABS.Update(crontabt);
+                _DBContext.SaveChanges();
+                return Json(crontabt);
+            }
+            return View();
         }
         private bool CrontabsExists(int id)
         {
@@ -126,6 +120,7 @@ namespace WebAdminScheduler.Controllers
 			//Obtener el total de los datos de la tabla
 			totalRecord = data.Count();
 			// Buscar datos cuando se encuentre el valor de búsqueda
+            //quitar la concatenacion del valor, hay que usar parametros en la funcion Listar de las tablas, esto puede dar Full Injection. 
 			if (!string.IsNullOrEmpty(searchValue)) {
                 textSearch =" AND ((FECHA like '%"+searchValue.ToLower()+"%')";  
                 textSearch +=" OR (HORA_INICIO like '%"+searchValue.ToLower()+"%')";  

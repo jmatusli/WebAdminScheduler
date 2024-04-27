@@ -1,4 +1,4 @@
-@model WebAdminScheduler.Models.CP_CRONTAB;
+@model WebAdminScheduler.Models.CP_PROCESOS;
 @{
     ViewData["Title"] = "Detalle";
 }
@@ -15,9 +15,6 @@
 </head>
 
 <h1>Detalle Jobs</h1>
-<div>
-    <a asp-action="Index" class="btn btn-primary">Inicio</a>
-</div>
     <body>
         <div class="card">
             <div class="card-header">
@@ -29,75 +26,75 @@
                         <label for="TittleProc" class="col-form-label">IDPROC</label>
                     </div>
                     <div class="col-auto">
-                        <label for="txtIdProc" class="col-form-label">01</label>
+                        <label for="txtIdProc" class="col-form-label">@ViewBag.IDPROC</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittleConex" class="col-form-label">IDCONEX</label>
                     </div>
                     <div class="col-auto">
-                        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtIdConex" class="col-form-label">@ViewBag.IDCONEX</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittleNombre" class="col-form-label">NOMBRE</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtNombre" class="col-form-label">@ViewBag.NOMBRE</label>
                     </div>
                 </div>
 
                 <br/>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
-                        <label for="TittleDescrpcion" class="col-form-label">DESCRIPCIÓN</label>
+                        <label for="TittleDescripcion" class="col-form-label">DESCRIPCIÓN</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtDescripcion" class="col-form-label">@ViewBag.DESCRIPCION</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittlePath" class="col-form-label">PATH</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtPath" class="col-form-label">@ViewBag.PATH</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittleParametro1" class="col-form-label">PARAMETRO1</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtParametro1" class="col-form-label">@ViewBag.PARAMETRO1</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittleParametroDos" class="col-form-label">PARAMETRO2</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtParametro2" class="col-form-label">@ViewBag.PARAMETRO2</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittleParametroTres" class="col-form-label">PARAMETRO3</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtParametro3" class="col-form-label">@ViewBag.PARAMETRO3</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittleParametroCuatro" class="col-form-label">PARAMETRO4</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtParametro4" class="col-form-label">@ViewBag.PARAMETRO4</label>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="IdDependencia">
+                        <input class="form-check-input" type="checkbox" value="" id="TxtIdDependencia" disabled>
                             <label class="form-check-label" for="IdDependencia">
-                            DEPENDENCIA
+                                DEPENDENCIA
                             </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <span id="RepeatIntentos" class="form-text">
-                        INTENTOS
+                            INTENTOS
                         </span>
                     </div>
                     <div class="col-auto">
-                        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtIntento" class="col-form-label">@ViewBag.INTENTOS</label>
                     </div>
                     <div class="col-auto">
                         <span id="RepeatEsperaIntento" class="form-text">
@@ -105,7 +102,7 @@
                         </span>
                     </div>
                     <div class="col-auto">
-                        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtIntento" class="col-form-label">@ViewBag.ESPERA_INTENTO</label>
                     </div>
                     <div class="col-auto">
                         <span id="RepeatEstado" class="form-text">
@@ -113,15 +110,11 @@
                         </span>
                     </div>
                     <div class="col-auto">
-                        <select class="form-select" name="estado" id="estado">
-                            <option value="act">ACTIVO</option>
-                            <option value="inact">INACTIVO</option>
-                            <option value="int">INTERNAL</option>
-                        </select>
+                        <label for="txtEstado" class="col-form-label">@ViewBag.ESTADO</label>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckFtp">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckFtp" disabled>
                             <label class="form-check-label" for="flexCheckFtp">
                                 FTP
                             </label>
@@ -129,27 +122,27 @@
                     </div>
                     <div class="col-auto">
                         <span id="idHost" class="form-text">
-                        IDHOST
+                            IDHOST
                         </span>
                     </div>
                     <div class="col-auto">
-                        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtHost" class="col-form-label">@ViewBag.IDHOST</label>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckComprension">
-                        <label class="form-check-label" for="flexCheckComprension">
-                            COMPRESION
-                        </label>
+                            <input class="form-check-input" type="checkbox" value="" id="CheckComprension" disabled>
+                            <label class="form-check-label" for="CheckComprension">
+                                COMPRESION
+                            </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <span id="Node" class="form-text">
-                        NODE
+                            NODE
                         </span>
                     </div>
                     <div class="col-auto">
-                        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+                        <label for="txtHost" class="col-form-label">@ViewBag.NODE</label>
                     </div>
                 </div>
             </div>
@@ -186,6 +179,31 @@
 
     var idreg="@ViewBag.IDREG";
     params.idreg=idreg;
+
+    var idreg="@ViewBag.IDREG";
+    params.idreg=idreg;
+
+    var idDependencia = "@ViewBag.DEPENDENCIA";
+    var idflexFtp = "@ViewBag.FTP";
+    var idComprens = "@ViewBag.COMPRESION";
+
+    if (idDependencia = 1) {
+        $("#TxtIdDependencia").prop('checked', true);
+    } else {
+        $("#TxtIdDependencia").prop('checked', false);
+    }
+
+    if (idflexFtp = 1) {
+        $("#flexCheckFtp").prop('checked', true);
+    } else {
+        $("#flexCheckFtp").prop('checked', false);
+    }
+
+    if (idComprens = 1) {
+        $("#CheckComprensComprension").prop('checked', true);
+    } else {
+        $("#CheckComprension").prop('checked', false);
+    }
 
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');
