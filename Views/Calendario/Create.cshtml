@@ -689,16 +689,25 @@
     var hora_ini=$('#horaIni').val();
     hora_ini=hora_ini.replace(":", "");
 
+     var hora_fin=$('#horaFin').val();
+    hora_fin=hora_fin.replace(":", "");
 
+    var diastext=($('#flexCheckLunes').is(":checked")?1:0)+""
+      +($('#flexCheckMartes').is(":checked")?1:0)+""
+      +($('#flexCheckMiercoles').is(":checked")?1:0)+""
+       +($('#flexCheckJueves').is(":checked")?1:0)+""
+       +($('#flexCheckViernes').is(":checked")?1:0)+""
+       +($('#flexCheckSabado').is(":checked")?1:0)+""
+       +($('#flexCheckDomingo').is(":checked")?1:0)+"";
 
       var data_cron={
         "oCrontab": {
           /*"IDCRONTAB":,*/
           "FECHA":"00000000",
           "HORA_INICIO":hora_ini,
-          "HORA_FIN":"0000",
+          "HORA_FIN":hora_fin,
           "RECURRENCIA":"0000",
-          "WDAY_M2S_EX":"1111111",
+          "WDAY_M2S_EX":diastext,
           "DAY_EX":"0",
           "MONTH_EX":"0",
           "REPEAT_EVERY_MINS":"0",
