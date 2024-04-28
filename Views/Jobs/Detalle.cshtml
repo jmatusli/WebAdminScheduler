@@ -173,7 +173,7 @@
 <script> 
     var params={};
     var table={};
-
+@Model
     var idproc="@ViewBag.IDPROC";
     params.idproc=idproc;
 
@@ -187,13 +187,13 @@
     var idflexFtp = "@ViewBag.FTP";
     var idComprens = "@ViewBag.COMPRESION";
 
-    if (idDependencia = 1) {
+    if (idDependencia == 1) {
         $("#TxtIdDependencia").prop('checked', true);
     } else {
         $("#TxtIdDependencia").prop('checked', false);
     }
 
-    if (idflexFtp = 1) {
+    if (idflexFtp == 1) {
         $("#flexCheckFtp").prop('checked', true);
     } else {
         $("#flexCheckFtp").prop('checked', false);

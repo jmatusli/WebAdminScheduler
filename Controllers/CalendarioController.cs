@@ -74,15 +74,16 @@ namespace WebAdminScheduler.Controllers
         }
        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, CrontabVM dtocrontab)
+         
+        public JsonResult Update([FromBody] CrontabVM  dtocrontab)
+		
         {
-            {
+            
                 CP_CRONTAB crontabt = new CP_CRONTAB();
         
-                CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
-                select s).ToList().AsQueryable().FirstOrDefault();
-
+               /* CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == dtocrontab.oCrontab.IDCRONTAB)
+                select s).ToList().AsQueryable().FirstOrDefault();*/
+                crontabt.IDCRONTAB=dtocrontab.oCrontab.IDCRONTAB;
                 crontabt.FECHA=dtocrontab.oCrontab.FECHA;
                 crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
                 crontabt.HORA_FIN=dtocrontab.oCrontab.HORA_FIN;
@@ -94,9 +95,10 @@ namespace WebAdminScheduler.Controllers
                 crontabt.REPEAT_AFTER_FINISH=dtocrontab.oCrontab.REPEAT_AFTER_FINISH;
                 _DBContext.CP_CRONTABS.Update(crontabt);
                 _DBContext.SaveChanges();
+          
                 return Json(crontabt);
-            }
-            return View();
+          
+     
         }
         private bool CrontabsExists(int id)
         {
@@ -159,7 +161,40 @@ namespace WebAdminScheduler.Controllers
 					cp_crontab.HORA_INICIO = oraReader.GetString(2);
 					cp_crontab.RECURRENCIA= oraReader.GetString(3);
 					cp_crontab.HORA_FIN= oraReader.GetString(4);
-					cp_crontab.WDAY_M2S_EX= oraReader.GetString(5);
+                    string dias= oraReader.GetString(5);
+                    string tdias="";
+                    string textdia="";
+                       if(dias.Substring(0,1)=="1") 
+                       { tdias="l";
+                       textdia += tdias;
+                       }
+                       if(dias.Substring(1,1)=="1") 
+                       { tdias="m"; 
+                       textdia += tdias;} 
+                       if(dias.Substring(2,1)=="1") 
+                        {tdias="m";
+                        textdia += tdias;
+                        }
+                        if(dias.Substring(3,1)=="1") 
+                        {
+                        tdias="j";
+                        textdia += tdias;
+                        }
+                        if(dias.Substring(4,1)=="1") {
+                        tdias="v";
+                        textdia += tdias;
+                        }
+                        if(dias.Substring(5,1)=="1") { 
+                        tdias="s";
+                        textdia += tdias;
+                        }
+                        if(dias.Substring(6,1)=="1") { 
+                        tdias="d";
+                        textdia += tdias;
+                        }
+                        
+
+					cp_crontab.WDAY_M2S_EX= textdia;
 					cp_crontab.DAY_EX= oraReader.GetString(6);
 					cp_crontab.MONTH_EX= oraReader.GetString(7);
                      if (!oraReader.IsDBNull(8))

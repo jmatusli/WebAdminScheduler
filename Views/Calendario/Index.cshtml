@@ -89,7 +89,7 @@
       }],
       "columns": [
         {
-          "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
+          "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all-item">';   }
         },
         { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
           { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
@@ -111,33 +111,10 @@
       }
     });
 
-    table.on('select', function (e, dt, type, indexes) {
-    
-      if (type === 'row'   ) {
-        var nodes = table
-        .rows(indexes)
-        .nodes()
-        .each(function () { 
-          $('td:first-child', this).find('input').prop('checked', true); 
-        });
-        //.find(':checkbox', 'td:first-child').checked = true; 
-      }
-    });
 
-    table.on('deselect', function (e, dt, type, indexes) {
-      if (type === 'row') {
-      $('#example-select-all').prop("checked",false);
-        table
-        .rows(indexes)
-        .nodes()
-        .each(function () { 
-          $('td:first-child', this).find('input').prop('checked', false); 
-        });
-      }
-    });
-      
+
     // Handle click on "Select all" control
-    $('#example-select-all').on('click', function() {
+    $('#dt-calendario-select-all').on('click', function() {
         
       // Get all rows with search applied
       var rows = table.rows({ 'search': 'applied' }).nodes();
@@ -155,10 +132,10 @@
     });
 
     // Handle click on checkbox to set state of "Select all" control
-    $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+    $('#dt-calendario tbody').on('change', 'input[type="checkbox"]', function(){
       // If checkbox is not checked
       if(!this.checked){
-        var el = $('#example-select-all').get(0);
+        var el = $('#dt-calendario-select-all').get(0);
         // If "Select all" control is checked and has 'indeterminate' property
         if(el && el.checked && ('indeterminate' in el)){
           // Set visual state of "Select all" control
@@ -183,7 +160,7 @@
 
       table.on('deselect', function (e, dt, type, indexes) {
         if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
+        $('#dt-calendario-select-all').prop("checked",false);
           table
           .rows(indexes)
           .nodes()
@@ -192,38 +169,6 @@
           });
         }
       });
-      
-      // Handle click on "Select all" control
-      $('#example-select-all').on('click', function(){
-          
-        // Get all rows with search applied
-          var rows = table.rows({ 'search': 'applied' }).nodes();
-          // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-          $('input[type="checkbox"]', rows).prop('checked', this.checked);
-          
-          var selData =   table.rows().select();
-          var selData =   table.rows(".selected").data();
-        }
-        else 
-        {
-        var selData =   table.rows().deselect();
-        }
-      });
-
-      // Handle click on checkbox to set state of "Select all" control
-      $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-        // If checkbox is not checked
-        if(!this.checked){
-          var el = $('#example-select-all').get(0);
-          // If "Select all" control is checked and has 'indeterminate' property
-          if(el && el.checked && ('indeterminate' in el)){
-          // Set visual state of "Select all" control
-          // as 'indeterminate'
-          el.indeterminate = true;
-        }
-      }
-    });
-  });
+	   });
 </script> 
 </html>

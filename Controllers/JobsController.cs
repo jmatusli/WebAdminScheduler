@@ -207,7 +207,7 @@ namespace WebAdminScheduler.Controllers
         }
 
         [HttpPost]
-		public  async Task<JsonResult> Save([FromBody] ProcesosVM dtoprocesos)  
+	    public JsonResult Save([FromBody] ProcesosVM  dtoprocesos)
 		{
            CP_PROCESOS procesost = new CP_PROCESOS();
            
