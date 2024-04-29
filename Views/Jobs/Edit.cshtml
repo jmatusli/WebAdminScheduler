@@ -1,6 +1,11 @@
 @{
   ViewData["Title"] = "Edit";
 }
+<head>
+  <link rel="stylesheet" href="~/css/datatables.min.css" />
+  <script src="~/js/jquery-1.11.3.min.js"></script>
+  <script src="~/js/datatables.min.js"></script>
+</head>
 
 <h1>Editar Jobs</h1>
 <br />
@@ -240,14 +245,14 @@
     <thead>
       <tr>
         <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="dt-crontab-select-all-th"></th>
-        <th>IDCRONTAB</th>
-        <th>HORA INICIO</th>
-        <th>HORA FIN</th>
-        <th>DAYS</th>
-        <th>DAY EXE</th>
-        <th>MONTHS</th>
-        <th>REPEAT EVERY MINS</th>
-        <th>REPEAT AFTER FINISH</th>
+        <th style="font-size:13px;">IDCRONTAB</th>
+        <th style="font-size:13px;">HORA INICIO</th>
+        <th style="font-size:13px;">HORA FIN</th>
+        <th style="font-size:13px;">DAYS</th>
+        <th style="font-size:13px;">DAY EXE</th>
+        <th style="font-size:13px;">MONTHS</th>
+        <th style="font-size:13px;">REPEAT EVERY MINS</th>
+        <th style="font-size:13px;">REPEAT AFTER FINISH</th>
       </tr>
     </thead>
     <tbody>
@@ -262,4 +267,129 @@
 
   var idproc="@Model.IDPROC";
   params.idproc=idproc;
-</script>		
+
+  $(document).ready( function () {
+    var table = $('#dt-crontab').DataTable( {
+      "processing": true,
+      "serverSide": true,
+      "paging": true,
+	    "deferLoading": 0, // here
+      "scrollX":          true,
+      "sScrollX":         "50%",
+      "scrollY":            $(document).height() - 300,
+      "scrollCollapse":     true,
+      "ajax": {
+        "url": "@Url.Action("ListarCrontabs","Calendario")",
+        "type": "POST",
+        "datatype": "json",
+		    "data": function(d){
+          $.extend( d, params);    
+        }
+      },
+      drawCallback: function(settings){ 
+        if($(this).find('tbody tr').length <= 1){
+        $('.dt-paging-button').hide();
+      }
+    },drawCallback: function(settings){ 
+			  if($(this).find('tbody tr').length <= 1){
+			  $('.dt-paging-button').hide();
+			}
+		},
+      "columnDefs": [{
+        'targets': 0,
+      orderable: false 
+          
+      },{
+      'targets': -1,
+      orderable: false,
+        'render': function (data, type, full, meta) {
+          return   '';
+        }
+      }],
+      "columns": [
+        {
+          "render": function (data,row) { return '<input type="radio" name="select_all" class="dt-column-title" value="1" id="dt-crontab-select-item">';   }
+        },
+        { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
+          { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
+          { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
+          { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
+          { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
+          { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
+          { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
+          { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
+      ],
+    
+    select: {
+    style: 'single',
+    selector: 'td:not(:last-child)' // no row selection on last column
+    },
+      "language": {
+      "url": "/lib/datatables/dist/locales/es/es.json"
+      }
+    });
+
+    table.on('select', function (e, dt, type, indexes) {
+    
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true);
+        });
+        selectedCrontab=table.rows( { selected: true }).data()[0].idcrontab;
+        console.log("selectedCrontab ", selectedCrontab)
+      }
+    });
+
+    table.on('deselect', function (e, dt, type, indexes) {
+      if (type === 'row') {
+      $('#dt-crontab-select-all').prop("checked",false);
+        table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', false); 
+        });
+      }
+    });
+    
+    // Handle click on "Select all" control
+    $('#dt-crontab-select-all-th').on('click', function() {
+      if(table.settings()[0]._select.style=='multi')
+      { 
+      // Get all rows with search applied
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+      // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else 
+      {
+        var selData =   table.rows().deselect();
+      }
+
+      }
+      else 
+      return false;
+    });
+
+    // Handle click on checkbox to set state of "Select all" control
+    $('#dt-crontab tbody').on('change', 'input[type="checkbox"]', function(){
+      // If checkbox is not checked
+        if(!this.checked){
+        var el = $('#dt-crontab-select').get(0);
+        // If "Select all" control is checked and has 'indeterminate' property
+        if(el && el.checked && ('indeterminate' in el)){
+          // Set visual state of "Select all" control
+          // as 'indeterminate'
+          el.indeterminate = true;
+        }
+      }
+    });
+  });
+</script>

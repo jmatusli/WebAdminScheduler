@@ -120,8 +120,7 @@ namespace WebAdminScheduler.Controllers
 			//Obtener el total de los datos de la tabla
 			totalRecord = data.Count();
 			// Buscar datos cuando se encuentre el valor de búsqueda
-            //quitar la concatenacion del valor, hay que usar parametros en la funcion Listar de las tablas, esto puede dar Full Injection. 
-			if (!string.IsNullOrEmpty(searchValue)) {  
+            if (!string.IsNullOrEmpty(searchValue)) {  
 				textSearch +=" AND ((FECHA like '%' || :psearch || '%')";
 				textSearch +=" OR (HORA_INICIO like '%' || :psearch || '%')";
 				textSearch +=" OR (RECURRENCIA like '%' || :psearch || '%')";
@@ -131,12 +130,11 @@ namespace WebAdminScheduler.Controllers
 				textSearch +=" OR (MONTH_EX like '%' || :psearch || '%')";
 				textSearch +=" OR (REPEAT_EVERY_MINS like '%' || :psearch || '%')";
 				textSearch +=" OR (REPEAT_AFTER_FINISH like '%' || :psearch || '%'))";
-              
 			}
 			// get total count of records after search
 			  
 			if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)) 
-			 textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
+			textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
 			 
 			_DBContext.Database.OpenConnection();
             String _query="SELECT * FROM (SELECT cc.*,row_number() over "
