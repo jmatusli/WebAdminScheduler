@@ -127,7 +127,7 @@ namespace WebAdminScheduler.Controllers
                     {
                         cp_procesos.PARAMETRO3= oraReader.GetString(7);
                     }
-                    
+
 					if (!oraReader.IsDBNull(8))
                     {
                         cp_procesos.PARAMETRO4= oraReader.GetString(8);
@@ -194,20 +194,7 @@ namespace WebAdminScheduler.Controllers
                 aaData = data,
             });
         }
-		public JsonResult ListarCrontabsAsoc(int idcrontab) {
-            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
-            select s).ToList();  
-               // ViewBag.CP_PROCESOS = data;
-
-               return Json(new {
-                draw = 1, 
-                iTotalRecords = 1,
-                iDisplayLength=10,
-                iTotalDisplayRecords=data.Count(),
-                aaData = data,
-            });
-        }
-
+		
         [HttpPost]
 	    public JsonResult Save([FromBody] ProcesosVM  dtoprocesos)
 		{
