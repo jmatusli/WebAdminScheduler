@@ -76,29 +76,27 @@ namespace WebAdminScheduler.Controllers
         [HttpPost]
          
         public JsonResult Update([FromBody] CrontabVM  dtocrontab)
-		
         {
             
-                CP_CRONTAB crontabt = new CP_CRONTAB();
+            CP_CRONTAB crontabt = new CP_CRONTAB();
+    
+            /* CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == dtocrontab.oCrontab.IDCRONTAB)
+            select s).ToList().AsQueryable().FirstOrDefault();*/
+            crontabt.IDCRONTAB=dtocrontab.oCrontab.IDCRONTAB;
+            crontabt.FECHA=dtocrontab.oCrontab.FECHA;
+            crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
+            crontabt.HORA_FIN=dtocrontab.oCrontab.HORA_FIN;
+            crontabt.RECURRENCIA=dtocrontab.oCrontab.RECURRENCIA;
+            crontabt.WDAY_M2S_EX=dtocrontab.oCrontab.WDAY_M2S_EX;
+            crontabt.DAY_EX=dtocrontab.oCrontab.DAY_EX;
+            crontabt.MONTH_EX=dtocrontab.oCrontab.MONTH_EX;
+            crontabt.REPEAT_EVERY_MINS=dtocrontab.oCrontab.REPEAT_EVERY_MINS;
+            crontabt.REPEAT_AFTER_FINISH=dtocrontab.oCrontab.REPEAT_AFTER_FINISH;
+            _DBContext.CP_CRONTABS.Update(crontabt);
+            _DBContext.SaveChanges();
         
-               /* CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == dtocrontab.oCrontab.IDCRONTAB)
-                select s).ToList().AsQueryable().FirstOrDefault();*/
-                crontabt.IDCRONTAB=dtocrontab.oCrontab.IDCRONTAB;
-                crontabt.FECHA=dtocrontab.oCrontab.FECHA;
-                crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
-                crontabt.HORA_FIN=dtocrontab.oCrontab.HORA_FIN;
-                crontabt.RECURRENCIA=dtocrontab.oCrontab.RECURRENCIA;
-                crontabt.WDAY_M2S_EX=dtocrontab.oCrontab.WDAY_M2S_EX;
-                crontabt.DAY_EX=dtocrontab.oCrontab.DAY_EX;
-                crontabt.MONTH_EX=dtocrontab.oCrontab.MONTH_EX;
-                crontabt.REPEAT_EVERY_MINS=dtocrontab.oCrontab.REPEAT_EVERY_MINS;
-                crontabt.REPEAT_AFTER_FINISH=dtocrontab.oCrontab.REPEAT_AFTER_FINISH;
-                _DBContext.CP_CRONTABS.Update(crontabt);
-                _DBContext.SaveChanges();
+            return Json(crontabt);
           
-                return Json(crontabt);
-          
-     
         }
         private bool CrontabsExists(int id)
         {

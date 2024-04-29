@@ -3,9 +3,6 @@
 }
 
 <h1>Editar Jobs</h1>
-<div>
-  <a asp-action="Index" class="btn btn-primary">Inicio</a>
-</div>
 <br />
 <div class="card">
   <div class="card-header">
@@ -242,23 +239,18 @@
   <table id="dt-crontab" class="display nowrap" width="100%">
     <thead>
       <tr>
-        <th></th>
-        <th>CRONTAB</th>
-        <th>DETALLE</th>
+        <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="dt-crontab-select-all-th"></th>
+        <th>IDCRONTAB</th>
+        <th>HORA INICIO</th>
+        <th>HORA FIN</th>
+        <th>DAYS</th>
+        <th>DAY EXE</th>
+        <th>MONTHS</th>
+        <th>REPEAT EVERY MINS</th>
+        <th>REPEAT AFTER FINISH</th>
       </tr>
     </thead>
     <tbody>
-      <td>
-        <input type="radio" name="id[IDCRONTAB]" value=""></input>
-      </td>
-      <td>
-        <label for="txtCrontab" class="col-form-label" id="txtCrontab">@ViewBag.IDCRONTAB</label>
-      </td>
-      <td>
-        <div class="contenedor-modal">
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#miModalDetCront">Ver</button>
-        </div>
-      </td>
     </tbody>
   </table>
 </div>
@@ -267,5 +259,7 @@
   var params={};
   var table={};
   var idjob="";
-  params.idcrontab=idcrontab;
+
+  var idproc="@Model.IDPROC";
+  params.idproc=idproc;
 </script>		

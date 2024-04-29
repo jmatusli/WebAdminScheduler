@@ -65,22 +65,22 @@ namespace WebAdminScheduler.Controllers
 			totalRecord = data.Count();
 			// Buscar datos cuando se encuentre el valor de búsqueda
 			if (!string.IsNullOrEmpty(searchValue)) {
-                textSearch +=" AND (IDCONEX like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" AND ((IDCONEX like '%"+searchValue.ToLower()+"%')";  
                 textSearch +=" OR (NOMBRE like '%"+searchValue.ToLower()+"%')";  
                 textSearch +=" OR (DESCRIPCION like '%"+searchValue.ToLower()+"%')";  
                 textSearch +=" OR (PATH like '%"+searchValue.ToLower()+"%')";  
                 textSearch +=" OR (PARAMETRO1 like '%"+searchValue.ToLower()+"%')";
                 textSearch +=" OR (PARAMETRO2 like '%"+searchValue.ToLower()+"%')";  
                 textSearch +=" OR (PARAMETRO3 like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (PARAMETRO4 like '%"+searchValue.ToLower()+"%'))"; 
-                textSearch +=" OR (DEPENDENCIA like '%"+searchValue.ToLower()+"%'))"; 
-                textSearch +=" OR (INTENTOS like '%"+searchValue.ToLower()+"%'))";   
-                textSearch +=" OR (ESPERA_INTENTO like '%"+searchValue.ToLower()+"%'))"; 
-                textSearch +=" OR (ESTADO like '%"+searchValue.ToLower()+"%'))"; 
-                textSearch +=" OR (FTP like '%"+searchValue.ToLower()+"%'))";  
-                textSearch +=" OR (IDHOST like '%"+searchValue.ToLower()+"%'))"; 
-                textSearch +=" OR (COMPRENSION like '%"+searchValue.ToLower()+"%'))"; 
-                textSearch +=" OR (IDCRONTAB like '%"+searchValue.ToLower()+"%'))"; 
+                textSearch +=" OR (PARAMETRO4 like '%"+searchValue.ToLower()+"%')"; 
+                textSearch +=" OR (DEPENDENCIA like '%"+searchValue.ToLower()+"%')"; 
+                textSearch +=" OR (INTENTOS like '%"+searchValue.ToLower()+"%')";   
+                textSearch +=" OR (ESPERA_INTENTO like '%"+searchValue.ToLower()+"%')"; 
+                textSearch +=" OR (ESTADO like '%"+searchValue.ToLower()+"%')"; 
+                textSearch +=" OR (FTP like '%"+searchValue.ToLower()+"%')";  
+                textSearch +=" OR (IDHOST like '%"+searchValue.ToLower()+"%')"; 
+                textSearch +=" OR (COMPRESION like '%"+searchValue.ToLower()+"%')"; 
+                textSearch +=" OR (IDCRONTAB like '%"+searchValue.ToLower()+"%')"; 
                 textSearch +=" OR (NODE like '%"+searchValue.ToLower()+"%'))"; 
 			}
 			// get total count of records after search
@@ -126,6 +126,7 @@ namespace WebAdminScheduler.Controllers
                     {
                         cp_procesos.PARAMETRO3= oraReader.GetString(7);
                     }
+                    
 					if (!oraReader.IsDBNull(8))
                     {
                         cp_procesos.PARAMETRO4= oraReader.GetString(8);
