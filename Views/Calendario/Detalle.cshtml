@@ -14,10 +14,6 @@
     <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
 </head>	
 
-<div>
-    <a asp-action="Index" class="btn btn-primary">Inicio</a>
-</div>
-
     <body>
         <h1>Calendarios</h1>
         <div class="card">
@@ -50,60 +46,60 @@
                     </div>
                 </div><hr />
 
-                <a href="#" class="link-info">Días</a>
+                <h4>Días</h4>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptLunes">
-                            <label class="form-check-label" for="flexCheckUptLunes">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes">
+                            <label class="form-check-label" for="flexCheckLunes">
                                 Lunes
                             </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMartes">
-                            <label class="form-check-label" for="flexCheckUptMartes">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes">
+                            <label class="form-check-label" for="flexCheckMartes">
                                 Martes
                             </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMiercoles">
-                            <label class="form-check-label" for="flexCheckUptMiercoles">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles">
+                            <label class="form-check-label" for="flexCheckMiercoles">
                                 Miercoles
                             </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJueves">
-                            <label class="form-check-label" for="flexCheckUptJueves">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves">
+                            <label class="form-check-label" for="flexCheckJueves">
                                 Jueves
                             </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptViernes">
-                            <label class="form-check-label" for="flexCheckUptViernes">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes">
+                            <label class="form-check-label" for="flexCheckViernes">
                                 Viernes
                             </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSabado">
-                            <label class="form-check-label" for="flexCheckUptSabado">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado">
+                            <label class="form-check-label" for="flexCheckSabado">
                                 Sabado
                             </label>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDomingo">
-                            <label class="form-check-label" for="flexCheckUptDomingo">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo">
+                            <label class="form-check-label" for="flexCheckDomingo">
                                 Domingo
                             </label>
                         </div>
@@ -111,7 +107,7 @@
                 </div>
                 <hr />
 
-                <a href="#" class="link-info">Días Ejecución</a>
+                <h4>Días Ejecución</h4>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
@@ -390,7 +386,7 @@
                 </table>
                 <hr />
 
-                <a href="#" class="link-info">Meses</a>
+                <h4>Meses</h4>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
@@ -651,7 +647,6 @@
         }
         });
         
-          
         // Handle click on "Select all" control
         $('#tblJobs-select-all').on('click', function(){
             
@@ -668,7 +663,7 @@
         }
         else 
         {
-        var selData =   table.rows().deselect();
+            var selData =   table.rows().deselect();
         }
         }
         else 

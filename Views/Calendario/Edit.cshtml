@@ -16,10 +16,6 @@
     <script src="~/js/clockpicker.js"></script>
 </head>	
 
-<div>
-    <a asp-action="Index" class="btn btn-primary">Inicio </a>
-</div>
-
   @using (Html.BeginForm("UpdateCrontab", "Calendario", FormMethod.Post))
   {
 
@@ -37,13 +33,10 @@
             </span>
           </div>
           <div class="col-auto">
-           
             <div class="col-sm-4">
-               
                 <input type="text" class="form-control clockpicker" 
-                        data-placement="right" data-align="top" name="horaIni" id="horaIni" data-autoclose="true" readonly="">
+                    data-placement="right" data-align="top" name="horaIni" id="horaIni" data-autoclose="true" readonly="">
             </div>
-         
           </div>
 
           <div class="col-auto">
@@ -51,26 +44,23 @@
               Hora Fin
             </span>
           </div>
+
           <div class="col-auto">
-           
             <div class="col-sm-4">
-               
                 <input type="text" class="form-control clockpicker" 
-                        data-placement="right" data-align="top" name="horaFin" id="horaFin" data-autoclose="true" readonly="">
+                    data-placement="right" data-align="top" name="horaFin" id="horaFin" data-autoclose="true" readonly="">
             </div>
-         
           </div>
-        
        
                 </div><hr />
 
-                <a href="#" class="link-info">Días</a>
+                <h4>Días</h4>
                 <div class="row g-4 align-items-center">
-                <div class="col-auto">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" onClick="toggle_week_days(this)" /> Seleccionar/Deseleccionar todos<br><br>
+                    <div class="col-auto">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" onClick="toggle_week_days(this)" /> Seleccionar/Deseleccionar todos<br><br>
+                        </div>
                     </div>
-                </div>
                 </div>
 
                 <div class="row g-4 align-items-center">
@@ -133,7 +123,7 @@
                 </div>
                 <hr />
 
-                <a href="#" class="link-info">Días Ejecución</a>
+                <h4>Días Ejecución</h4>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
@@ -412,7 +402,7 @@
                 </table>
                 <hr />
 
-                <a href="#" class="link-info">Meses</a>
+                <h4>Meses</h4>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
@@ -560,59 +550,51 @@
     var diasSel="@Model.WDAY_M2S_EX";
     
     var hora_ini=vhorainitmp[0]+""+vhorainitmp[1]+":"+vhorainitmp[2]+""+vhorainitmp[3];
-    
     var hora_fin=vhorafintmp[0]+""+vhorafintmp[1]+":"+vhorafintmp[2]+""+vhorafintmp[3];
  
-
     params.idcrontab=idcrontab;
 
     if(diasSel[0]==1){
-     $("#flexCheckUptLunes").prop('checked', true);
+        $("#flexCheckUptLunes").prop('checked', true);
     } else {
-     $("#flexCheckUptLunes").prop('checked', false);
+        $("#flexCheckUptLunes").prop('checked', false);
     }
     
     if(diasSel[1]==1){
-     $("#flexCheckUptMartes").prop('checked', true);
+        $("#flexCheckUptMartes").prop('checked', true);
     } else {
-     $("#flexCheckUptMartes").prop('checked', false);
+        $("#flexCheckUptMartes").prop('checked', false);
     }
  
-     if(diasSel[2]==1){
-     $("#flexCheckUptMiercoles").prop('checked', true);
+    if(diasSel[2]==1){
+        $("#flexCheckUptMiercoles").prop('checked', true);
     } else {
-     $("#flexCheckUptMiercoles").prop('checked', false);
+        $("#flexCheckUptMiercoles").prop('checked', false);
     } 
   
-     if(diasSel[3]==1){
-     $("#flexCheckUptJueves").prop('checked', true);
+    if(diasSel[3]==1){
+        $("#flexCheckUptJueves").prop('checked', true);
     } else {
-     $("#flexCheckUptJueves").prop('checked', false);
+        $("#flexCheckUptJueves").prop('checked', false);
     } 
 
-     if(diasSel[4]==1){
-     $("#flexCheckUptViernes").prop('checked', true);
+    if(diasSel[4]==1){
+        $("#flexCheckUptViernes").prop('checked', true);
     } else {
-     $("#flexCheckUptViernes").prop('checked', false);
+        $("#flexCheckUptViernes").prop('checked', false);
     } 
 
-    
-     if(diasSel[5]==1){
-     $("#flexCheckUptSabado").prop('checked', true);
+    if(diasSel[5]==1){
+        $("#flexCheckUptSabado").prop('checked', true);
     } else {
-     $("#flexCheckUptSabado").prop('checked', false);
+        $("#flexCheckUptSabado").prop('checked', false);
     } 
 
-     
-     if(diasSel[6]==1){
-     $("#flexCheckUptDomingo").prop('checked', true);
+    if(diasSel[6]==1){
+        $("#flexCheckUptDomingo").prop('checked', true);
     } else {
-     $("#flexCheckUptDomingo").prop('checked', false);
+        $("#flexCheckUptDomingo").prop('checked', false);
     } 
-
-
-
-
 
     if (idRepAftFin == 1) {
         $("#IdUptRepeatAfterFin").prop('checked', true);
@@ -621,9 +603,10 @@
     }
 
     var horainicio="@Model.HORA_INICIO[0]";
-    var horafin="@Model.HORA_INICIO[2]";
     var minutoinicio="@Model.HORA_INICIO[1]";
-    var minutofin="@Model.HORA_INICIO[3]";
+    var horafin="@Model.HORA_FIN[2]";
+    var minutofin="@Model.HORA_FIN[3]";
+    var repeat_every_mins = "@Model.REPEAT_EVERY_MINS";
 
     console.log("hora inicio ",horainicio)
     function toggle(source) {
@@ -657,42 +640,51 @@
         $("#upthoraFin option[value='"+String(horafin).padStart(2, '0')+"']").attr('selected', true);
         $("#uptminutoFin option[value='"+String(minutofin).padStart(2, '0')+"']").attr('selected', true);
         */
-         $('.clockpicker').clockpicker();
+        $('.clockpicker').clockpicker();
         $("#horaIni").val(hora_ini);
-         $("#horaFin").val(hora_fin);
+        $("#horaFin").val(hora_fin);
+        $("#UptRepeatEveryMins").val(repeat_every_mins);
     })
 
     function Guardar() {
-
-
         hora_ini=$('#horaIni').val();
         hora_ini=hora_ini.replace(":", "");
 
         hora_fin=$('#horaFin').val();
         hora_fin=hora_fin.replace(":", "");
 
-      var diastext=($('#flexCheckUptLunes').is(":checked")?1:0)+""
-      +($('#flexCheckUptMartes').is(":checked")?1:0)+""
-      +($('#flexCheckUptMiercoles').is(":checked")?1:0)+""
-       +($('#flexCheckUptJueves').is(":checked")?1:0)+""
-       +($('#flexCheckUptViernes').is(":checked")?1:0)+""
-       +($('#flexCheckUptSabado').is(":checked")?1:0)+""
-       +($('#flexCheckUptDomingo').is(":checked")?1:0)+"";
+        repeat_every_mins=$('#UptRepeatEveryMins').val();
 
-      var data_cron={
-        "oCrontab": {
-          "IDCRONTAB": idcrontab,
-          "FECHA":"00000000",
-          "HORA_INICIO":hora_ini,
-          "HORA_FIN":hora_fin,
-          "RECURRENCIA":"0000",
-          "WDAY_M2S_EX":diastext,
-          "DAY_EX":"0",
-          "MONTH_EX":"0",
-          "REPEAT_EVERY_MINS":"0",
-          "REPEAT_AFTER_FINISH":$('#IdUptRepeatAfterFin').is(":checked")?1:0
+        var diastext=($('#flexCheckUptLunes').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptMartes').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptMiercoles').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptJueves').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptViernes').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptSabado').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptDomingo').is(":checked") ? 1 : 0) + "";
+            
+        var diasexetext=($('#flexCheckUptUnoExe').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptDosExe').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptTresExe').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptCuatroExe').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptCincoExe').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptSeisExe').is(":checked") ? 1 : 0) + ""
+            +($('#flexCheckUptSieteExe').is(":checked") ? 1 : 0) + "";
+
+        var data_cron={
+            "oCrontab": {
+            "IDCRONTAB": idcrontab,
+            "FECHA":"00000000",
+            "HORA_INICIO":hora_ini,
+            "HORA_FIN":hora_fin,
+            "RECURRENCIA":"0000",
+            "WDAY_M2S_EX":diastext,
+            "DAY_EX":"0",
+            "MONTH_EX":"0",
+            "REPEAT_EVERY_MINS":repeat_every_mins,
+            "REPEAT_AFTER_FINISH":$('#IdUptRepeatAfterFin').is(":checked") ? 1 : 0
         }
-      };
+    };
 
         if (idcrontab != 0) {
             jQuery.ajax({

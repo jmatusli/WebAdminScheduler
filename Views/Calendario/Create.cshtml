@@ -125,9 +125,6 @@
   {
 	
   <body>
-    <div>
-      <a asp-action="Index" class="btn btn-primary">Inicio </a>
-    </div>
     <h1>Calendarios</h1>
     <div class="card">
       <div class="card-header">
@@ -142,33 +139,27 @@
             </span>
           </div>
           <div class="col-auto">
-           
             <div class="col-sm-4">
-               
-                <input type="text" class="form-control clockpicker" 
-                        data-placement="right" data-align="top" name="horaIni" id="horaIni" data-autoclose="true" readonly="">
+              <input type="text" class="form-control clockpicker" 
+                data-placement="right" data-align="top" name="horaIni" id="horaIni" data-autoclose="true" readonly="">
             </div>
-         
           </div>
         
-		<div class="col-auto">
-            <span id="passwordHelpInline" class="form-text">
-              Hora Fin
-            </span>
-          </div>
-          <div class="col-auto">
-           
-            <div class="col-sm-4">
-               
-                <input type="text" class="form-control clockpicker" 
-                        data-placement="right" data-align="top" name="horaFin" id="horaFin" data-autoclose="true" readonly="">
-            </div>
-         
-          </div>
-        
-        </div><hr />
+		  <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">
+          Hora Fin
+        </span>
+      </div>
 
-        <a href="#" class="link-info">Días</a>
+      <div class="col-auto">
+        <div class="col-sm-4">
+          <input type="text" class="form-control clockpicker" 
+            data-placement="right" data-align="top" name="horaFin" id="horaFin" data-autoclose="true" readonly="">
+        </div>
+      </div>
+      </div><hr />
+
+        <h4>Días</h4>
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
@@ -237,7 +228,7 @@
         </div>
         <hr />
 
-        <a href="#" class="link-info">Días Ejecución</a>
+        <h4>Días Ejecución</h4>
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
@@ -516,7 +507,7 @@
         </table>
         <hr />
 
-        <a href="#" class="link-info">Meses</a>
+        <h4>Meses</h4>
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
@@ -633,7 +624,7 @@
               </span>
             </div>
             <div class="col-auto">
-              <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true">
+              <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="txtRepeatEveryMins" name="txtRepeatEveryMins">
             </div>
             <div class="col-auto">
               <div class="form-check">
@@ -689,16 +680,17 @@
     var hora_ini=$('#horaIni').val();
     hora_ini=hora_ini.replace(":", "");
 
-     var hora_fin=$('#horaFin').val();
+    var repeat_every_mins = $('#txtRepeatEveryMins').val();
+    var hora_fin=$('#horaFin').val();
     hora_fin=hora_fin.replace(":", "");
 
-    var diastext=($('#flexCheckLunes').is(":checked")?1:0)+""
-      +($('#flexCheckMartes').is(":checked")?1:0)+""
-      +($('#flexCheckMiercoles').is(":checked")?1:0)+""
-       +($('#flexCheckJueves').is(":checked")?1:0)+""
-       +($('#flexCheckViernes').is(":checked")?1:0)+""
-       +($('#flexCheckSabado').is(":checked")?1:0)+""
-       +($('#flexCheckDomingo').is(":checked")?1:0)+"";
+    var diastext=($('#flexCheckLunes').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckMartes').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckMiercoles').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckJueves').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckViernes').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckSabado').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckDomingo').is(":checked") ? 1 : 0) + "";
 
       var data_cron={
         "oCrontab": {
@@ -708,9 +700,9 @@
           "HORA_FIN":hora_fin,
           "RECURRENCIA":"0000",
           "WDAY_M2S_EX":diastext,
-          "DAY_EX":"0",
+          "DAY_EX":'0',
           "MONTH_EX":"0",
-          "REPEAT_EVERY_MINS":"0",
+          "REPEAT_EVERY_MINS":repeat_every_mins,
           "REPEAT_AFTER_FINISH":"0"
         }
       };
@@ -740,7 +732,6 @@
   });
 
   })
-
-     $('.clockpicker').clockpicker();
+    $('.clockpicker').clockpicker();
 })
 </script>
