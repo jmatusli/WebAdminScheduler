@@ -50,7 +50,7 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckLunes" disabled>
                             <label class="form-check-label" for="flexCheckLunes">
                                 Lunes
                             </label>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMartes" disabled>
                             <label class="form-check-label" for="flexCheckMartes">
                                 Martes
                             </label>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMiercoles" disabled>
                             <label class="form-check-label" for="flexCheckMiercoles">
                                 Miercoles
                             </label>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckJueves" disabled>
                             <label class="form-check-label" for="flexCheckJueves">
                                 Jueves
                             </label>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckViernes" disabled>
                             <label class="form-check-label" for="flexCheckViernes">
                                 Viernes
                             </label>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckSabado" disabled>
                             <label class="form-check-label" for="flexCheckSabado">
                                 Sabado
                             </label>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDomingo" disabled>
                             <label class="form-check-label" for="flexCheckDomingo">
                                 Domingo
                             </label>
@@ -547,8 +547,9 @@
     var params={};
     var table={};
     var idcrontab="@ViewBag.IDCRONTAB";
-    var idRepAftFin="@Model.REPEAT_AFTER_FINISH";
     params.idcrontab=idcrontab;
+    var idRepAftFin="@Model.REPEAT_AFTER_FINISH";
+    var diasSel="@Model.WDAY_M2S_EX";
 
     console.log(idRepAftFin,'idRepAftFin');
     if (idRepAftFin = 1) {
@@ -556,6 +557,48 @@
     } else {
         $("#TxtIdRepeatAfterFin").prop('checked', false);
     }
+
+    if(diasSel[0]==1){
+        $("#flexCheckLunes").prop('checked', true);
+    } else {
+        $("#flexCheckLunes").prop('checked', false);
+    }
+
+    if(diasSel[1]==1){
+        $("#flexCheckMartes").prop('checked', true);
+    } else {
+        $("#flexCheckMartes").prop('checked', false);
+    }
+ 
+    if(diasSel[2]==1){
+        $("#flexCheckMiercoles").prop('checked', true);
+    } else {
+        $("#flexCheckMiercoles").prop('checked', false);
+    } 
+  
+    if(diasSel[3]==1){
+        $("#flexCheckJueves").prop('checked', true);
+    } else {
+        $("#flexCheckJueves").prop('checked', false);
+    } 
+
+    if(diasSel[4]==1){
+        $("#flexCheckViernes").prop('checked', true);
+    } else {
+        $("#flexCheckViernes").prop('checked', false);
+    } 
+
+    if(diasSel[5]==1){
+        $("#flexCheckSabado").prop('checked', true);
+    } else {
+        $("#flexCheckSabado").prop('checked', false);
+    } 
+
+    if(diasSel[6]==1){
+        $("#flexCheckDomingo").prop('checked', true);
+    } else {
+        $("#flexCheckDomingo").prop('checked', false);
+    } 
 
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');

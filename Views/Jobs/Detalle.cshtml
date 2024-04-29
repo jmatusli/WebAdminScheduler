@@ -226,13 +226,9 @@
                 "type": "POST",
                 "datatype": "json",
                 "data": function(d){
-                $.extend( d, params);    
-                },
-        },drawCallback: function(settings){ 
-			  if($(this).find('tbody tr').length <= 1){
-			  $('.dt-paging-button').hide();
-			}
-		},
+                    $.extend( d, params);    
+                }
+		    },
             "columnDefs": [{
             'targets': 0,
             orderable: false,
