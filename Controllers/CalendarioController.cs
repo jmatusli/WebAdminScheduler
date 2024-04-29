@@ -121,17 +121,17 @@ namespace WebAdminScheduler.Controllers
 			totalRecord = data.Count();
 			// Buscar datos cuando se encuentre el valor de búsqueda
             //quitar la concatenacion del valor, hay que usar parametros en la funcion Listar de las tablas, esto puede dar Full Injection. 
-			if (!string.IsNullOrEmpty(searchValue)) {
-                textSearch =" AND ((FECHA like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (HORA_INICIO like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (RECURRENCIA like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (HORA_FIN like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (WDAY_M2S_EX like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (DAY_EX like '%"+searchValue.ToLower()+"%')";  
-
-                textSearch +=" OR (MONTH_EX like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (REPEAT_EVERY_MINS like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (REPEAT_AFTER_FINISH like '%"+searchValue.ToLower()+"%'))";  
+			if (!string.IsNullOrEmpty(searchValue)) {  
+				textSearch +=" AND ((FECHA like '%' || :psearch || '%')";
+				textSearch +=" OR (HORA_INICIO like '%' || :psearch || '%')";
+				textSearch +=" OR (RECURRENCIA like '%' || :psearch || '%')";
+				textSearch +=" OR (HORA_FIN like '%' || :psearch || '%')";
+				textSearch +=" OR (WDAY_M2S_EX like '%' || :psearch || '%')";
+				textSearch +=" OR (DAY_EX like '%' || :psearch || '%')";
+				textSearch +=" OR (MONTH_EX like '%' || :psearch || '%')";
+				textSearch +=" OR (REPEAT_EVERY_MINS like '%' || :psearch || '%')";
+				textSearch +=" OR (REPEAT_AFTER_FINISH like '%' || :psearch || '%'))";
+              
 			}
 			// get total count of records after search
 			  
@@ -145,7 +145,7 @@ namespace WebAdminScheduler.Controllers
 	
 			OracleCommand oraCommand = new OracleCommand(_query, 
 			(OracleConnection)_DBContext.Database.GetDbConnection());
-
+            oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
 		   OracleDataReader oraReader = oraCommand.ExecuteReader();
 		   List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
 		   

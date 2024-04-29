@@ -65,23 +65,24 @@ namespace WebAdminScheduler.Controllers
 			totalRecord = data.Count();
 			// Buscar datos cuando se encuentre el valor de búsqueda
 			if (!string.IsNullOrEmpty(searchValue)) {
-                textSearch +=" AND ((IDCONEX like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (NOMBRE like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (DESCRIPCION like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (PATH like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (PARAMETRO1 like '%"+searchValue.ToLower()+"%')";
-                textSearch +=" OR (PARAMETRO2 like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (PARAMETRO3 like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (PARAMETRO4 like '%"+searchValue.ToLower()+"%')"; 
-                textSearch +=" OR (DEPENDENCIA like '%"+searchValue.ToLower()+"%')"; 
-                textSearch +=" OR (INTENTOS like '%"+searchValue.ToLower()+"%')";   
-                textSearch +=" OR (ESPERA_INTENTO like '%"+searchValue.ToLower()+"%')"; 
-                textSearch +=" OR (ESTADO like '%"+searchValue.ToLower()+"%')"; 
-                textSearch +=" OR (FTP like '%"+searchValue.ToLower()+"%')";  
-                textSearch +=" OR (IDHOST like '%"+searchValue.ToLower()+"%')"; 
-                textSearch +=" OR (COMPRESION like '%"+searchValue.ToLower()+"%')"; 
-                textSearch +=" OR (IDCRONTAB like '%"+searchValue.ToLower()+"%')"; 
-                textSearch +=" OR (NODE like '%"+searchValue.ToLower()+"%'))"; 
+                textSearch +=" AND ((IDCONEX like '%' || :psearch || '%')";
+                textSearch +=" OR (NOMBRE like '%' || :psearch || '%')";
+                textSearch +=" OR (DESCRIPCION like '%' || :psearch || '%')";
+                textSearch +=" OR (PATH like '%' || :psearch || '%')";
+                textSearch +=" OR (PARAMETRO1 like '%' || :psearch || '%')";
+                textSearch +=" OR (PARAMETRO2 like '%' || :psearch || '%')";
+                textSearch +=" OR (PARAMETRO3 like '%' || :psearch || '%')";
+                textSearch +=" OR (PARAMETRO4 like '%' || :psearch || '%')";
+                textSearch +=" OR (DEPENDENCIA like '%' || :psearch || '%')";
+                textSearch +=" OR (INTENTOS like '%' || :psearch || '%')";
+                textSearch +=" OR (ESPERA_INTENTO like '%' || :psearch || '%')";
+                textSearch +=" OR (ESTADO like '%' || :psearch || '%')";
+                textSearch +=" OR (FTP like '%' || :psearch || '%')";
+                textSearch +=" OR (IDHOST like '%' || :psearch || '%')";
+                textSearch +=" OR (COMPRESION like '%' || :psearch || '%')";
+                textSearch +=" OR (IDCRONTAB like '%' || :psearch || '%')";
+ 
+                textSearch +=" OR (NODE like '%' || :psearch || '%'))";
 			}
 			// get total count of records after search
 			  
@@ -95,7 +96,7 @@ namespace WebAdminScheduler.Controllers
 	
 			OracleCommand oraCommand = new OracleCommand(_query, 
 			(OracleConnection)_DBContext.Database.GetDbConnection());
-
+            oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
 		   OracleDataReader oraReader = oraCommand.ExecuteReader();
 		   List<CP_PROCESOS> cp_procesosList = new List<CP_PROCESOS>();
 		   
