@@ -23,8 +23,40 @@ namespace WebAdminScheduler.Controllers
         }
         public IActionResult Create()
         {
+            Int32 result = WACustomHelper.GetLastIdPROC(_DBContext);
+            ViewBag.LastIdproc=result;
             return View();
         }
+		
+		[HttpPost]
+	    public JsonResult Save([FromBody] ProcesosVM dtoprocesos)
+		{
+           CP_PROCESOS procesost = new CP_PROCESOS();
+           
+            procesost.IDPROC=WACustomHelper.GetLastIdPROC(_DBContext);
+            procesost.COMPRESION=dtoprocesos.oProcesos.COMPRESION;
+            procesost.DEPENDENCIA=dtoprocesos.oProcesos.DEPENDENCIA;
+            procesost.DESCRIPCION=dtoprocesos.oProcesos.DESCRIPCION;
+            procesost.IDCONEX=dtoprocesos.oProcesos.IDCONEX;
+            procesost.IDCRONTAB=dtoprocesos.oProcesos.IDCRONTAB;
+            procesost.ESPERA_INTENTO=dtoprocesos.oProcesos.ESPERA_INTENTO;
+            procesost.ESTADO=dtoprocesos.oProcesos.ESTADO;
+            procesost.FTP=dtoprocesos.oProcesos.FTP;
+            procesost.IDHOST=dtoprocesos.oProcesos.IDHOST;
+            procesost.INTENTOS=dtoprocesos.oProcesos.INTENTOS;
+            procesost.NODE=dtoprocesos.oProcesos.NODE;
+            procesost.NOMBRE=dtoprocesos.oProcesos.NOMBRE;
+            procesost.PARAMETRO1=dtoprocesos.oProcesos.PARAMETRO1;
+            procesost.PARAMETRO2=dtoprocesos.oProcesos.PARAMETRO2;
+            procesost.PARAMETRO3=dtoprocesos.oProcesos.PARAMETRO3;
+            procesost.PARAMETRO4=dtoprocesos.oProcesos.PARAMETRO4;
+            procesost.PATH=dtoprocesos.oProcesos.PATH;
+
+           _DBContext.CP_PROCESOS.Add(procesost);
+           _DBContext.SaveChanges();
+            Console.WriteLine("ejemplo "+procesost.IDPROC);
+            return Json(procesost);
+		}
         public IActionResult DetalleCrontab(int id)
         {
             CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == id)
@@ -47,6 +79,35 @@ namespace WebAdminScheduler.Controllers
             //ViewBag.data=data;
             return View(data);
         }
+        
+        [HttpPost]
+        public JsonResult Update([FromBody] ProcesosVM dtoprocesos)
+        {
+            CP_PROCESOS procesost = new CP_PROCESOS();
+    
+            procesost.COMPRESION=dtoprocesos.oProcesos.COMPRESION;
+            procesost.DEPENDENCIA=dtoprocesos.oProcesos.DEPENDENCIA;
+            procesost.DESCRIPCION=dtoprocesos.oProcesos.DESCRIPCION;
+            procesost.IDCONEX=dtoprocesos.oProcesos.IDCONEX;
+            procesost.IDCRONTAB=dtoprocesos.oProcesos.IDCRONTAB;
+            procesost.ESPERA_INTENTO=dtoprocesos.oProcesos.ESPERA_INTENTO;
+            procesost.ESTADO=dtoprocesos.oProcesos.ESTADO;
+            procesost.FTP=dtoprocesos.oProcesos.FTP;
+            procesost.IDHOST=dtoprocesos.oProcesos.IDHOST;
+            procesost.INTENTOS=dtoprocesos.oProcesos.INTENTOS;
+            procesost.NODE=dtoprocesos.oProcesos.NODE;
+            procesost.NOMBRE=dtoprocesos.oProcesos.NOMBRE;
+            procesost.PARAMETRO1=dtoprocesos.oProcesos.PARAMETRO1;
+            procesost.PARAMETRO2=dtoprocesos.oProcesos.PARAMETRO2;
+            procesost.PARAMETRO3=dtoprocesos.oProcesos.PARAMETRO3;
+            procesost.PARAMETRO4=dtoprocesos.oProcesos.PARAMETRO4;
+            procesost.PATH=dtoprocesos.oProcesos.PATH;
+            _DBContext.CP_PROCESOS.Update(procesost);
+            _DBContext.SaveChanges();
+        
+            return Json(procesost);
+        }
+
         [HttpPost]
         public JsonResult ListarProcesos()
         {
@@ -97,8 +158,8 @@ namespace WebAdminScheduler.Controllers
 			OracleCommand oraCommand = new OracleCommand(_query, 
 			(OracleConnection)_DBContext.Database.GetDbConnection());
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
-		   OracleDataReader oraReader = oraCommand.ExecuteReader();
-		   List<CP_PROCESOS> cp_procesosList = new List<CP_PROCESOS>();
+		    OracleDataReader oraReader = oraCommand.ExecuteReader();
+		    List<CP_PROCESOS> cp_procesosList = new List<CP_PROCESOS>();
 		   
 			if (oraReader.HasRows)
 			{ 
@@ -194,35 +255,5 @@ namespace WebAdminScheduler.Controllers
                 aaData = data,
             });
         }
-		
-        [HttpPost]
-	    public JsonResult Save([FromBody] ProcesosVM  dtoprocesos)
-		{
-           CP_PROCESOS procesost = new CP_PROCESOS();
-           
-            procesost.IDPROC=WACustomHelper.GetLasIdPROC(_DBContext);
-            procesost.COMPRESION=dtoprocesos.oProcesos.COMPRESION;
-            procesost.DEPENDENCIA=dtoprocesos.oProcesos.DEPENDENCIA;
-            procesost.DESCRIPCION=dtoprocesos.oProcesos.DESCRIPCION;
-            procesost.IDCONEX=dtoprocesos.oProcesos.IDCONEX;
-            procesost.IDCRONTAB=dtoprocesos.oProcesos.IDCRONTAB;
-            procesost.ESPERA_INTENTO=dtoprocesos.oProcesos.ESPERA_INTENTO;
-            procesost.ESTADO=dtoprocesos.oProcesos.ESTADO;
-            procesost.FTP=dtoprocesos.oProcesos.FTP;
-            procesost.IDHOST=dtoprocesos.oProcesos.IDHOST;
-            procesost.INTENTOS=dtoprocesos.oProcesos.INTENTOS;
-            procesost.NODE=dtoprocesos.oProcesos.NODE;
-            procesost.NOMBRE=dtoprocesos.oProcesos.NOMBRE;
-            procesost.PARAMETRO1=dtoprocesos.oProcesos.PARAMETRO1;
-            procesost.PARAMETRO2=dtoprocesos.oProcesos.PARAMETRO2;
-            procesost.PARAMETRO3=dtoprocesos.oProcesos.PARAMETRO3;
-            procesost.PARAMETRO4=dtoprocesos.oProcesos.PARAMETRO4;
-            procesost.PATH=dtoprocesos.oProcesos.PATH;
-
-           _DBContext.CP_PROCESOS.Add(procesost);
-           _DBContext.SaveChanges();
-            Console.WriteLine("ejemplo "+procesost.IDPROC);
-            return Json(procesost);
-		}
    }
 }

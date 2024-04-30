@@ -31,14 +31,12 @@ namespace WebAdminScheduler.Controllers
         public IActionResult Create()
         {
             Int32 result = WACustomHelper.GetLasIdCRON(_DBContext);
-            
             ViewBag.LasIdcrontab=result;
-             
             return View();
         }
 		
 		[HttpPost]
-		public JsonResult Save([FromBody] CrontabVM  dtocrontab)
+		public JsonResult Save([FromBody] CrontabVM dtocrontab)
 		{
            CP_CRONTAB crontabt = new CP_CRONTAB();
            
@@ -52,8 +50,8 @@ namespace WebAdminScheduler.Controllers
             crontabt.MONTH_EX=dtocrontab.oCrontab.MONTH_EX;
             crontabt.REPEAT_EVERY_MINS=dtocrontab.oCrontab.REPEAT_EVERY_MINS;
             crontabt.REPEAT_AFTER_FINISH=dtocrontab.oCrontab.REPEAT_AFTER_FINISH;
-           _DBContext.CP_CRONTABS.Add(crontabt);
-           _DBContext.SaveChanges();
+            _DBContext.CP_CRONTABS.Add(crontabt);
+            _DBContext.SaveChanges();
             Console.WriteLine("ejemplo "+crontabt.IDCRONTAB);
             return Json(crontabt);
 		}
@@ -74,14 +72,10 @@ namespace WebAdminScheduler.Controllers
         }
        
         [HttpPost]
-         
-        public JsonResult Update([FromBody] CrontabVM  dtocrontab)
+        public JsonResult Update([FromBody] CrontabVM dtocrontab)
         {
-            
             CP_CRONTAB crontabt = new CP_CRONTAB();
     
-            /* CP_CRONTAB data = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == dtocrontab.oCrontab.IDCRONTAB)
-            select s).ToList().AsQueryable().FirstOrDefault();*/
             crontabt.IDCRONTAB=dtocrontab.oCrontab.IDCRONTAB;
             crontabt.FECHA=dtocrontab.oCrontab.FECHA;
             crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;

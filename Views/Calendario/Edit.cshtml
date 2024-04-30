@@ -615,7 +615,7 @@
         for(var i=0, n=checkboxes.length;i<n;i++) {
             checkboxes[i].checked = source.checked;
         }
-        } 
+    } 
 
     function toggle_week_days(source) {
       checkboxes = document.getElementsByName('dias_semana');
@@ -626,20 +626,14 @@
     }
 
     function toggle_month(source) {
-      checkboxes = document.getElementsByName('meses');
+        checkboxes = document.getElementsByName('meses');
 
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = source.checked;
-      }
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].checked = source.checked;
+        }
     }
 
     $(document).on("ready",function() {
-       /* $("#updhoraIni option[value='"+String(horainicio).padStart(2, '0')+"']").attr('selected', true);
-        $("#uptminutoIni option[value='"+String(minutoinicio).padStart(2, '0')+"']").attr('selected', true);
-        
-        $("#upthoraFin option[value='"+String(horafin).padStart(2, '0')+"']").attr('selected', true);
-        $("#uptminutoFin option[value='"+String(minutofin).padStart(2, '0')+"']").attr('selected', true);
-        */
         $('.clockpicker').clockpicker();
         $("#horaIni").val(hora_ini);
         $("#horaFin").val(hora_fin);
@@ -686,32 +680,32 @@
         }
     };
 
-        if (idcrontab != 0) {
-            jQuery.ajax({
-            method: "POST",
-            async: true,
-            dataType: "json",
-            data: JSON.stringify(data_cron),
-            contentType: "application/json; charset=utf-8",
-            url: "@Url.Action("Update","Calendario")",
- 
-            success: function (data) {
-                            Swal.fire({
-                    title: "Calendario Actualizado!",
-                    text: "Click en aceptar para ver calendarios!",
-                    icon: "success",
-                    confirmButtonText: "Aceptar",
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    $(location).attr("href","@Url.Action("Index","Calendario")")
-                }  
-                });
-            }
-            });
-        } else {
-            $("#horaIni").val("");
-            $("#horaFin").val("");
-            $("#UptRepeatEveryMins").val("");
-        }
-    }
+    if (idcrontab != 0) {
+        jQuery.ajax({
+        method: "POST",
+        async: true,
+        dataType: "json",
+        data: JSON.stringify(data_cron),
+        contentType: "application/json; charset=utf-8",
+        url: "@Url.Action("Update","Calendario")",
+
+        success: function (data) {
+            Swal.fire({
+            title: "Calendario Actualizado!",
+            text: "Click en aceptar para ver calendarios!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $(location).attr("href","@Url.Action("Index","Calendario")")
+        }  
+    });
+}
+});
+} else {
+    $("#horaIni").val("");
+    $("#horaFin").val("");
+    $("#UptRepeatEveryMins").val("");
+}
+}
 </script>

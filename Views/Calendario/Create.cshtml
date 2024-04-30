@@ -669,65 +669,64 @@
       }
     }
 
-    $(document).on("ready",function(){
+    $(document).on("ready",function() {
+      $('#btnSave').on('click',function() {
+          
+        var hora_ini=$('#horaIni').val();
+        hora_ini=hora_ini.replace(":", "");
 
-    $('#btnSave').on('click',function() {
-       
-    var hora_ini=$('#horaIni').val();
-    hora_ini=hora_ini.replace(":", "");
+        var repeat_every_mins = $('#txtRepeatEveryMins').val();
+        var hora_fin=$('#horaFin').val();
+        hora_fin=hora_fin.replace(":", "");
 
-    var repeat_every_mins = $('#txtRepeatEveryMins').val();
-    var hora_fin=$('#horaFin').val();
-    hora_fin=hora_fin.replace(":", "");
+        var diastext=($('#flexCheckLunes').is(":checked") ? 1 : 0) + ""
+          +($('#flexCheckMartes').is(":checked") ? 1 : 0) + ""
+          +($('#flexCheckMiercoles').is(":checked") ? 1 : 0) + ""
+          +($('#flexCheckJueves').is(":checked") ? 1 : 0) + ""
+          +($('#flexCheckViernes').is(":checked") ? 1 : 0) + ""
+          +($('#flexCheckSabado').is(":checked") ? 1 : 0) + ""
+          +($('#flexCheckDomingo').is(":checked") ? 1 : 0) + "";
 
-    var diastext=($('#flexCheckLunes').is(":checked") ? 1 : 0) + ""
-      +($('#flexCheckMartes').is(":checked") ? 1 : 0) + ""
-      +($('#flexCheckMiercoles').is(":checked") ? 1 : 0) + ""
-      +($('#flexCheckJueves').is(":checked") ? 1 : 0) + ""
-      +($('#flexCheckViernes').is(":checked") ? 1 : 0) + ""
-      +($('#flexCheckSabado').is(":checked") ? 1 : 0) + ""
-      +($('#flexCheckDomingo').is(":checked") ? 1 : 0) + "";
+          var data_cron={
+            "oCrontab": {
+              /*"IDCRONTAB":,*/
+              "FECHA":"00000000",
+              "HORA_INICIO":hora_ini,
+              "HORA_FIN":hora_fin,
+              "RECURRENCIA":"0000",
+              "WDAY_M2S_EX":diastext,
+              "DAY_EX":'0',
+              "MONTH_EX":"0",
+              "REPEAT_EVERY_MINS":repeat_every_mins,
+              "REPEAT_AFTER_FINISH":"0"
+            }
+          };
 
-      var data_cron={
-        "oCrontab": {
-          /*"IDCRONTAB":,*/
-          "FECHA":"00000000",
-          "HORA_INICIO":hora_ini,
-          "HORA_FIN":hora_fin,
-          "RECURRENCIA":"0000",
-          "WDAY_M2S_EX":diastext,
-          "DAY_EX":'0',
-          "MONTH_EX":"0",
-          "REPEAT_EVERY_MINS":repeat_every_mins,
-          "REPEAT_AFTER_FINISH":"0"
+          $.ajax({
+            method: "POST",
+            async: true,
+            dataType: "json",
+            data: JSON.stringify(data_cron),
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("Save", "Calendario")' ,
+            success: function () {
+            Swal.fire({
+            title: "Calendario registrado!",
+            text: "Click en aceptar para ver calendarios registrados!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          }).then((result) => {
+          if (result.isConfirmed) {
+            $(location).attr("href","@Url.Action("Index","Calendario")")
+          }  
+        });
+        },
+        error: function () {
+          alert("Error while inserting data");
         }
-      };
+      });
 
-      $.ajax({
-        method: "POST",
-        async: true,
-        dataType: "json",
-        data: JSON.stringify(data_cron),
-        contentType: "application/json; charset=utf-8",
-        url: '@Url.Action("Save", "Calendario")' ,
-        success: function () {
-        Swal.fire({
-        title: "Calendario registrado!",
-        text: "Click en aceptar para ver calendarios registrados!",
-        icon: "success",
-        confirmButtonText: "Aceptar",
-      }).then((result) => {
-      if (result.isConfirmed) {
-        $(location).attr("href","@Url.Action("Index","Calendario")")
-      }  
-    });
-    },
-      error: function () {
-        alert("Error while inserting data");
-      }
-  });
-
-  })
-    $('.clockpicker').clockpicker();
-})
+    })
+      $('.clockpicker').clockpicker();
+    })
 </script>

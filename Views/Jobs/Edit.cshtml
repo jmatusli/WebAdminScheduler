@@ -11,7 +11,7 @@
 <br />
 <div class="card">
   <div class="card-header">
-    <a href="#" class="btn btn-primary">Guardar</a>
+    <a id="btnSaveJobs" onclick="GuardarJobs()" class="btn btn-primary">Guardar</a>
   </div>
   <div class="card-body">
     <div class="row g-4 align-items-center">
@@ -268,7 +268,59 @@
   var idproc="@Model.IDPROC";
   params.idproc=idproc;
 
+  var id_conex = "@Model.IDCONEX";
+  var nombre = "@Model.NOMBRE";
+  var descripcion = "@Model.DESCRIPCION";
+  var path = "@Model.PATH";
+  var param1 = "@Model.PARAMETRO1";
+  var param2 = "@Model.PARAMETRO2";
+  var param3 = "@Model.PARAMETRO3";
+  var param4 = "@Model.PARAMETRO4";
+  var dependencia = "@Model.DEPENDENCIA";
+  var intentos = "@Model.INTENTOS";
+  var espera_intento = "@Model.ESPERA_INTENTO";
+  var estado = "@Model.ESTADO";
+  var ftp = "@Model.FTP";
+  var id_host = "@Model.IDHOST";
+  var compresion = "@Model.COMPRESION";
+  var node = "@Model.NODE";
+
   $(document).ready( function () {
+    $("#txtIdUptConex").val(id_conex);
+    $("#txtUptNombre").val(nombre);
+    $("#txtUptDescripcion").val(descripcion);
+    $("#txtUptPath").val(path);
+    $("#txtUptParam1").val(param1);
+    $("#txtUptParam2").val(param2);
+    $("#txtUptParam3").val(param3);
+    $("#txtUptParam4").val(param4);
+
+    if(dependencia == 1) {
+      $("#flexCheckUptDependencia").prop('checked', true);
+    } else {
+      $("#flexCheckUptDependencia").prop('checked', false);
+    }
+
+    $("#txtUptIntento").val(intentos);
+    $("#txtUptEsperaIntento").val(espera_intento);
+    $("#txtUptEstado").val(estado);
+
+    if(ftp == 1) {
+      $("#flexCheckUptFtp").prop('checked', true);
+    } else {
+      $("#flexCheckUptFtp").prop('checked', false);
+    }
+
+    $("#txtUptIdHost").val(id_host);
+
+    if(compresion == 1) {
+      $("#flexCheckUptCompresion").prop('checked', true);
+    } else {
+      $("#flexCheckUptCompresion").prop('checked', false);
+    }
+
+    $("#txtUptNode").val(node);
+
     var table = $('#dt-crontab').DataTable( {
       "processing": true,
       "serverSide": true,
@@ -319,11 +371,10 @@
           { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
           { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
       ],
-    
-    select: {
-    style: 'single',
-    selector: 'td:not(:last-child)' // no row selection on last column
-    },
+      select: {
+      style: 'single',
+      selector: 'td:not(:last-child)' // no row selection on last column
+      },
       "language": {
       "url": "/lib/datatables/dist/locales/es/es.json"
       }
@@ -392,4 +443,69 @@
       }
     });
   });
+
+  function GuardarJobs() {
+    hora_ini = $('#horaIni').val();
+    hora_fin = $('#horaFin').val();
+    repeat_every_mins = $('#UptRepeatEveryMins').val();
+
+    var diastext=($('#flexCheckUptLunes').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckUptMartes').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckUptMiercoles').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckUptJueves').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckUptViernes').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckUptSabado').is(":checked") ? 1 : 0) + ""
+      +($('#flexCheckUptDomingo').is(":checked") ? 1 : 0) + "";
+        
+    var data_cron={
+      "oProcess" : {
+      "IDPROC" : idproc,
+      "IDCONEX": "00000000",
+      "NOMBRE" : hora_ini,
+      "DESCRIPCION" : hora_fin,
+      "PATH" : "0000",
+      "PARAMETRO1" : diastext,
+      "PARAMETRO2" : "0",
+      "PARAMETRO3" : "0",
+      "PARAMETRO4" : repeat_every_mins,
+      "DEPENDENCIA" : repeat_every_mins,
+      "INTENTOS" : repeat_every_mins,
+      "ESPERA_INTENTO" : repeat_every_mins,
+      "ESTADO" : repeat_every_mins,
+      "FTP" : repeat_every_mins,
+      "IDHOST" : repeat_every_mins,
+      "COMPRESION" : repeat_every_mins,
+      "IDCRONTAB" : repeat_every_mins,
+      "NODE" : repeat_every_mins,
+      "REPEAT_AFTER_FINISH" : $('#IdUptRepeatAfterFin').is(":checked") ? 1 : 0
+    }
+  };
+
+  if (idproc != 0) {
+    jQuery.ajax({
+    method: "POST",
+    async: true,
+    dataType: "json",
+    data: JSON.stringify(data_cron),
+    contentType: "application/json; charset=utf-8",
+    url: "@Url.Action("Update","Jobs")",
+
+    success: function (data) {
+      Swal.fire({
+        title: "Jobs Actualizado!",
+        text: "Click en aceptar para ver los procesos!",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      }).then((result) => {
+      if (result.isConfirmed) {
+        $(location).attr("href","@Url.Action("Index","Jobs")")
+      }  
+    });
+  }
+});
+} else {
+  $("#horaIni").val("");
+  $("#horaFin").val("");
+  $("#UptRepeatEveryMins").val("");
+}
 </script>
