@@ -85,6 +85,14 @@ namespace WebAdminScheduler.Controllers
         { 
             CP_PROCESOS procesost = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == dtoprocesos.oProcesos.IDPROC)
                                 select s).ToList().AsQueryable().FirstOrDefault();
+
+            CP_PROCESOS procesosval = (from s in _DBContext.CP_PROCESOS.Where(x => x.NOMBRE == dtoprocesos.oProcesos.NOMBRE)
+                                select s).ToList().AsQueryable().FirstOrDefault();
+
+           if(procesosval.IDPROC>0)
+           {}
+           else 
+           {
             procesost.COMPRESION = dtoprocesos.oProcesos.COMPRESION;
             procesost.DEPENDENCIA = dtoprocesos.oProcesos.DEPENDENCIA;
             procesost.DESCRIPCION = dtoprocesos.oProcesos.DESCRIPCION;
@@ -106,7 +114,7 @@ namespace WebAdminScheduler.Controllers
        
             _DBContext.CP_PROCESOS.Update(procesost);
             _DBContext.SaveChanges();
-
+          }
 
             return Json(procesost);
         }
