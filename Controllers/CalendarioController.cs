@@ -74,9 +74,9 @@ namespace WebAdminScheduler.Controllers
         [HttpPost]
         public JsonResult Update([FromBody] CrontabVM dtocrontab)
         {
-            CP_CRONTAB crontabt = new CP_CRONTAB();
-    
-            crontabt.IDCRONTAB=dtocrontab.oCrontab.IDCRONTAB;
+          
+            CP_CRONTAB crontabt = (from s in _DBContext.CP_CRONTABS.Where(x => x.IDCRONTAB == dtocrontab.oCrontab.IDCRONTAB)
+                                select s).ToList().AsQueryable().FirstOrDefault();
             crontabt.FECHA=dtocrontab.oCrontab.FECHA;
             crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
             crontabt.HORA_FIN=dtocrontab.oCrontab.HORA_FIN;
