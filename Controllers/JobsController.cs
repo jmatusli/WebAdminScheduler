@@ -86,10 +86,10 @@ namespace WebAdminScheduler.Controllers
             CP_PROCESOS procesost = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == dtoprocesos.oProcesos.IDPROC)
                                 select s).ToList().AsQueryable().FirstOrDefault();
 
-            CP_PROCESOS procesosval = (from s in _DBContext.CP_PROCESOS.Where(x => x.NOMBRE == dtoprocesos.oProcesos.NOMBRE)
+            CP_PROCESOS procesosval = (from s in _DBContext.CP_PROCESOS.Where(x => x.NOMBRE == dtoprocesos.oProcesos.NOMBRE && x.IDPROC !=dtoprocesos.oProcesos.IDPROC)
                                 select s).ToList().AsQueryable().FirstOrDefault();
-
-           if(procesosval.IDPROC>0)
+        
+           if(procesosval!=null && procesosval.IDPROC>0)
            {
            return Json(new { error=true,msg = "Ya existe un proceso con el nombre "+dtoprocesos.oProcesos.NOMBRE });
 
