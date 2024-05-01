@@ -90,7 +90,10 @@ namespace WebAdminScheduler.Controllers
                                 select s).ToList().AsQueryable().FirstOrDefault();
 
            if(procesosval.IDPROC>0)
-           {}
+           {
+           return Json(new { error=true,msg = "Ya existe un proceso con el nombre "+dtoprocesos.oProcesos.NOMBRE });
+
+           }
            else 
            {
             procesost.COMPRESION = dtoprocesos.oProcesos.COMPRESION;

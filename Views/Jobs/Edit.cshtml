@@ -408,6 +408,13 @@ console.log("esto va ",data_job)
     url: "@Url.Action("Update","Jobs")",
 
     success: function (data) {
+      
+      if(data.error)
+      {
+      Swal.fire ('Duplicidad...', data.msg, 'error')
+
+      }
+      else
       Swal.fire({
         title: "Jobs Actualizado!",
         text: "Click en aceptar para ver los procesos!",
