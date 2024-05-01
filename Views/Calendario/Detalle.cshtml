@@ -34,7 +34,7 @@
                         </span>
                     </div>
                     <div class="col-auto">
-                        <label for="txtHoraIni" class="col-form-label" id="txtHoraIni">@Model.HORA_INICIO</label>
+                        <label for="txtHoraIni" class="col-form-label" id="txtHoraIni"></label>
                     </div>
                     <div class="col-auto">
                         <span id="passwordHelpInline" class="form-text">
@@ -42,7 +42,7 @@
                         </span>
                     </div>
                     <div class="col-auto">
-                        <label for="txtHoraFin" class="col-form-label" id="txtHoraFin">@Model.HORA_FIN</label>
+                        <label for="txtHoraFin" class="col-form-label" id="txtHoraFin"></label>
                     </div>
                 </div><hr />
 
@@ -545,7 +545,15 @@
     var diasSel="@Model.WDAY_M2S_EX";
     var diasSelExe="@Model.DAY_EX";
     var montExe="@Model.MONTH_EX";
+    var vhorainitmp="@Model.HORA_INICIO";
+    var vhorafintmp="@Model.HORA_FIN";
 
+    var hora_ini=vhorainitmp[0]+""+vhorainitmp[1]+":"+vhorainitmp[2]+""+vhorainitmp[3];
+    var hora_fin=vhorafintmp[0]+""+vhorafintmp[1]+":"+vhorafintmp[2]+""+vhorafintmp[3];
+
+    $("#txtHoraIni").val(hora_ini);
+    $("#txtHoraFin").val(hora_fin);
+    
     console.log(idRepAftFin,'idRepAftFin');
     if (idRepAftFin = 1) {
         $("#TxtIdRepeatAfterFin").prop('checked', true);
@@ -864,7 +872,6 @@
     }
 
     $(document).on("ready",function() {
-
         table = $('#dt-jobs').DataTable( {
             "processing": true,
             "serverSide": true,
