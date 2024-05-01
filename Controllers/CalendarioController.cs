@@ -220,7 +220,12 @@ namespace WebAdminScheduler.Controllers
 			}
 			else
 			{
-				return Json(null);
+				return Json(new {
+            draw = draw, 
+                iTotalRecords = 0,
+                iDisplayLength = 0,
+                iTotalDisplayRecords = 0,
+            aaData=new {}});
 			}
 
 			oraReader.Close();
