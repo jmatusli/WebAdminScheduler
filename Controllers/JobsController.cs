@@ -102,8 +102,10 @@ namespace WebAdminScheduler.Controllers
             procesost.PARAMETRO3=dtoprocesos.oProcesos.PARAMETRO3;
             procesost.PARAMETRO4=dtoprocesos.oProcesos.PARAMETRO4;
             procesost.PATH=dtoprocesos.oProcesos.PATH;
+          
             _DBContext.CP_PROCESOS.Update(procesost);
             _DBContext.SaveChanges();
+        
         
             return Json(procesost);
         }

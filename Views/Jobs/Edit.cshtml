@@ -3,8 +3,14 @@
 }
 <head>
   <link rel="stylesheet" href="~/css/datatables.min.css" />
+  <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
+  <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
   <script src="~/js/jquery-1.11.3.min.js"></script>
+  <script src="~/js/pdfmake.min.js"></script>
+  <script src="~/js/vfs_fonts.js"></script>
   <script src="~/js/datatables.min.js"></script>
+  <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
+  <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
 </head>
 
 <h1>Editar Jobs</h1>
@@ -65,7 +71,7 @@
         <label for="TittleParametroTres" class="col-form-label">PARAMETRO3</label>
       </div>
       <div class="col-auto">
-        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="txtParametro3" name="txtParametro3">
+        <input type="text" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="txtUptParametro3" name="txtParametro3">
       </div>
       <div class="col-auto">
         <label for="TittleParametroCuatro" class="col-form-label">PARAMETRO4</label>
@@ -192,6 +198,7 @@
   var id_host = "@Model.IDHOST";
   var compresion = "@Model.COMPRESION";
   var node = "@Model.NODE";
+  var idcrontab="@Model.IDCRONTAB";
 
   $(document).ready( function () {
     $("#IdUptConex").val(id_conex);
@@ -250,11 +257,12 @@
         if($(this).find('tbody tr').length <= 1){
         $('.dt-paging-button').hide();
       }
-    },drawCallback: function(settings){ 
-			  if($(this).find('tbody tr').length <= 1){
-			  $('.dt-paging-button').hide();
-			}
-		},
+    },rowCallback: function (row, data) {
+                            if (data.idcrontab == idcrontab) {
+                                table.row(row).select()
+                            }
+                             
+                        },
       "columnDefs": [{
         'targets': 0,
       orderable: false
@@ -310,6 +318,7 @@
           $('td:first-child', this).find('input').prop('checked', false); 
         });
       }
+       selectedCrontab=0;
     });
     
     // Handle click on "Select all" control
@@ -346,6 +355,9 @@
         }
       }
     });
+
+ 
+
   });
 
   function GuardarJobs() {
@@ -363,8 +375,8 @@
     id_host = $('#txtUptIdHost').val();
     node = $('#txtUptNode').val();
 
-    var data_cron={
-      "oProcess" : {
+    var data_job={
+      "oProcesos" : {
       "IDPROC" : idproc,
       "IDCONEX": id_conex,
       "NOMBRE" : nombre,
@@ -376,22 +388,22 @@
       "PARAMETRO4" : param4,
       "DEPENDENCIA" : $('#checkUptDependencia').is(":checked") ? 1 : 0,
       "INTENTOS" : intentos,
-      "ESPERA_INTENTO" : espera_intento,
+      "ESPERA_INTENTO" : parseInt(espera_intento,10),
       "ESTADO" : estado,
       "FTP" : $('#flexCheckUptFtp').is(":checked") ? 1 : 0,
-      "IDHOST" : id_host,
+      "IDHOST" : parseInt(id_host,10),
       "COMPRESION" : $('#flexCheckUptCompresion').is(":checked") ? 1 : 0,
-      "IDCRONTAB" : select_all,
+      "IDCRONTAB" : selectedCrontab,
       "NODE" : node
     }
   };
-
+console.log("esto va ",data_job)
   if (idproc != 0) {
     jQuery.ajax({
     method: "POST",
     async: true,
     dataType: "json",
-    data: JSON.stringify(data_cron),
+    data: JSON.stringify(data_job),
     contentType: "application/json; charset=utf-8",
     url: "@Url.Action("Update","Jobs")",
 
