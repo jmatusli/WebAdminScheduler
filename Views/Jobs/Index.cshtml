@@ -11,19 +11,35 @@
 
   <body>
     <h1>Jobs</h1>
-    <p>
-      <a asp-action="Create" class="btn btn-primary">Nuevo</a>
-    </p>
+    <div class="row g-4 align-items-center">
+      <div class="col-auto">
+        <p>
+          <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+        </p>
+      </div>
+      <div class="col-auto">
+        <span id="RepeatEstado" class="form-text">
+          ESTADO
+        </span>
+      </div>
+      <div class="col-auto">
+        <select class="form-select" name="txtEstado" id="txtEstado">
+          <option value="Activo">ACTIVO</option>
+          <option value="Inactivo">INACTIVO</option>
+          <option value="Internal">INTERNAL</option>
+        </select>
+      </div>
+    </div>
     <div class="container">
       <table id="tblJobs" class="display nowrap" width="100%">
         <thead>
-          <tr>
+          <tr style="font-size:13px;">
             <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all"></th>
-            <th style="font-size:13px;">IDPROC</th>
-            <th style="font-size:13px;">IDCONEX</th>
-            <th style="font-size:13px;">NOMBRE</th>
-            <th style="font-size:13px;">DESCRIPCIÓN</th>
-            <th style="font-size:13px;">ACCIONES</th>
+            <th>IDPROC</th>
+            <th>IDCONEX</th>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ACCIONES</th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +64,7 @@
       "filter": true,
       "scrollX":          true,
         "sScrollX":         "50%",
-        "scrollY":            $(document).height() - 300,
+        "scrollY":            '230px',
         "scrollCollapse":     true,
         "ajax": {
           "url": "@Url.Action("ListarProcesos","Jobs")",
@@ -60,100 +76,95 @@
 			  $('.dt-paging-button').hide();
 			}
 		},
-        "columnDefs": [{
-          'targets': 0,
-        orderable: false 
-           
-        },{
-          'targets': -1,
-        orderable: false,
-          'render': function (data, type, full, meta){
-            return   '<a class="btn btn-success" asp-route-idProc="'+data.idproc+'" href="/Jobs/Edit/'+data.idproc+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info" asp-route-idProc="'+data.idproc+'" href="/Jobs/Detalle/'+data.idproc+'">Detalle</a>';
-          }
-          }],
-        "columns": [
-          {
-            "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all-item">'; }
-          },
-            { "data": "idproc", "name": "idproc", "autoWidth": true },
-            { "data": "idconex", "name": "idconex", "autoWidth": true },
-            { "data": "nombre", "name": "nombre", "autoWidth": true },
-            { "data": "descripcion", "name": "descripcion", "autoWidth": true },
-            { "data": "dependencia", "name": "dependencia", "autoWidth": true },
-            { "data":null },
-        ],
-      
-      select: {
-      style: 'single',
-      selector: 'td:not(:last-child)' // no row selection on last column
+    "columnDefs": [{
+      'targets': 0,
+      orderable: false
+    },{
+      'targets': -1,
+      orderable: false,
+      'render': function (data, type, full, meta){
+        return   '<a class="btn btn-success btn-sm" asp-route-idProc="'+data.idproc+'" href="/Jobs/Edit/'+data.idproc+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info btn-sm" asp-route-idProc="'+data.idproc+'" href="/Jobs/Detalle/'+data.idproc+'">Detalle</a>';
+      }
+    }],
+    "columns": [
+      {
+        "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all-item">'; }
       },
-        "language": {
-        "url": "/lib/datatables/dist/locales/es/es.json"
-        }
-      });
-
-      table.on('select', function (e, dt, type, indexes) {
-     
-        if (type === 'row'   ) {
-          var nodes = table
-          .rows(indexes)
-          .nodes()
-          .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', true); 
-          });
-          //.find(':checkbox', 'td:first-child').checked = true; 
-        }
-      });
-
-      table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-        $('#tbljobs-select-all').prop("checked",false);
-          table
-          .rows(indexes)
-          .nodes()
-          .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', false); 
-          });
-        }
-      });
-      
-      
-      // Handle click on "Select all" control
-      $('#tbljobs-select-all').on('click', function(){
-       
-        if(table.settings()[0]._select.style=='multi')
-        {   
-        // Get all rows with search applied
-          var rows = table.rows({ 'search': 'applied' }).nodes();
-          // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-          $('input[type="checkbox"]', rows).prop('checked', this.checked);
-          
-          var selData =   table.rows().select();
-          var selData =   table.rows(".selected").data();
-        }
-        else 
-        {
-        var selData =   table.rows().deselect();
-        }
-        }
-        else 
-        return false;
-      });
-
-      // Handle click on checkbox to set state of "Select all" control
-      $('#tblJobs tbody').on('change', 'input[type="checkbox"]', function(){
-        // If checkbox is not checked
-        if(!this.checked){
-          var el = $('#tbljobs-select-all').get(0);
-          // If "Select all" control is checked and has 'indeterminate' property
-          if(el && el.checked && ('indeterminate' in el)){
-          // Set visual state of "Select all" control
-          // as 'indeterminate'
-          el.indeterminate = true;
-        }
+        { "data": "idproc", "name": "idproc", "autoWidth": true },
+        { "data": "idconex", "name": "idconex", "autoWidth": true },
+        { "data": "nombre", "name": "nombre", "autoWidth": true },
+        { "data": "descripcion", "name": "descripcion", "autoWidth": true },
+        { "data":null },
+    ],
+    select: {
+    style: 'single',
+    selector: 'td:not(:last-child)' // no row selection on last column
+    },
+      "language": {
+      "url": "/lib/datatables/dist/locales/es/es.json"
       }
     });
+
+    table.on('select', function (e, dt, type, indexes) {
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
+        });
+        //.find(':checkbox', 'td:first-child').checked = true; 
+      }
+    });
+
+    table.on('deselect', function (e, dt, type, indexes) {
+      if (type === 'row') {
+      $('#tbljobs-select-all').prop("checked",false);
+        table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', false); 
+        });
+      }
+    });
+      
+    // Handle click on "Select all" control
+    $('#tbljobs-select-all').on('click', function(){
+      
+      if(table.settings()[0]._select.style=='multi')
+      {   
+      // Get all rows with search applied
+        var rows = table.rows({ 'search': 'applied' }).nodes();
+        // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else 
+      {
+        var selData =   table.rows().deselect();
+      }
+    }
+    else 
+    return false;
   });
+
+    // Handle click on checkbox to set state of "Select all" control
+    $('#tblJobs tbody').on('change', 'input[type="checkbox"]', function(){
+      // If checkbox is not checked
+      if(!this.checked){
+        var el = $('#tbljobs-select-all').get(0);
+        // If "Select all" control is checked and has 'indeterminate' property
+        if(el && el.checked && ('indeterminate' in el)){
+        // Set visual state of "Select all" control
+        // as 'indeterminate'
+        el.indeterminate = true;
+      }
+    }
+  });
+});
 </script> 
 </html>

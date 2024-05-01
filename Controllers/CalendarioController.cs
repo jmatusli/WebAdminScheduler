@@ -149,62 +149,74 @@ namespace WebAdminScheduler.Controllers
 					cp_crontab.IDCRONTAB = oraReader.GetInt32(0);
 					cp_crontab.FECHA = oraReader.GetString(1);
 					cp_crontab.HORA_INICIO = oraReader.GetString(2);
-					cp_crontab.RECURRENCIA= oraReader.GetString(3);
-					cp_crontab.HORA_FIN= oraReader.GetString(4);
-                    string dias= oraReader.GetString(5);
-                    string tdias="";
-                    string textdia="";
-                       if(dias.Substring(0,1)=="1") 
-                       { tdias="l";
-                       textdia += tdias;
-                       }
-                       if(dias.Substring(1,1)=="1") 
-                       { tdias="m"; 
-                       textdia += tdias;} 
-                       if(dias.Substring(2,1)=="1") 
-                        {tdias="m";
+					cp_crontab.RECURRENCIA = oraReader.GetString(3);
+					cp_crontab.HORA_FIN = oraReader.GetString(4);
+                    string dias = oraReader.GetString(5);
+                    string tdias = "";
+                    string textdia = "";
+                    if(dias.Substring(0,1) == "1") 
+                    { 
+                        tdias = "Lun, ";
                         textdia += tdias;
-                        }
-                        if(dias.Substring(3,1)=="1") 
-                        {
-                        tdias="j";
-                        textdia += tdias;
-                        }
-                        if(dias.Substring(4,1)=="1") {
-                        tdias="v";
-                        textdia += tdias;
-                        }
-                        if(dias.Substring(5,1)=="1") { 
-                        tdias="s";
-                        textdia += tdias;
-                        }
-                        if(dias.Substring(6,1)=="1") { 
-                        tdias="d";
-                        textdia += tdias;
-                        }
-                        
+                    }
 
-					cp_crontab.WDAY_M2S_EX= textdia;
-					cp_crontab.DAY_EX= oraReader.GetString(6);
-					cp_crontab.MONTH_EX= oraReader.GetString(7);
-                     if (!oraReader.IsDBNull(8))
+                    if(dias.Substring(1,1) == "1") 
+                    { 
+                        tdias = "Mar, "; 
+                        textdia += tdias;
+                    }
+
+                    if(dias.Substring(2,1) == "1") 
                     {
-                    cp_crontab.REPEAT_EVERY_MINS= oraReader.GetInt32(8);
+                        tdias = "Mie, ";
+                        textdia += tdias;
+                    }
+
+                    if(dias.Substring(3,1) == "1") 
+                    {
+                        tdias = "Jue, ";
+                        textdia += tdias;
+                    }
+
+                    if(dias.Substring(4,1) == "1") {
+                        tdias = "Vie, ";
+                        textdia += tdias;
+                    }
+
+                    if(dias.Substring(5,1) == "1") { 
+                        tdias = "Sab, ";
+                        textdia += tdias;
+                    }
+
+                    if(dias.Substring(6,1) == "1") { 
+                        tdias = "Dom.";
+                        textdia += tdias;
+                    }
                         
+					cp_crontab.WDAY_M2S_EX = textdia;
+					cp_crontab.DAY_EX = oraReader.GetString(6);
+					cp_crontab.MONTH_EX = oraReader.GetString(7);
+                    if (!oraReader.IsDBNull(8))
+                    {
+                        cp_crontab.REPEAT_EVERY_MINS = oraReader.GetInt32(8);   
                     }
 
                     if (!oraReader.IsDBNull(9))
                     {
-                    cp_crontab.REPEAT_AFTER_FINISH= oraReader.GetInt32(9);
-                        
+                        cp_crontab.REPEAT_AFTER_FINISH = oraReader.GetInt32(9);
+                        /*string repeat_aft = oraReader.GetInt32(9);
+                        string frepeat_aft = "";
+                        if(repeat_aft == "1") 
+                        { 
+                            frepeat_aft = "Y";
+                        } else {
+                            frepeat_aft = "N";
+                        } */
                     }
 					 
-					 
 					cp_contrabList.Add(cp_crontab);
-					
 				}
 				filterRecord = cp_contrabList.Count();
-		   
 			}
 			else
 			{
@@ -216,17 +228,15 @@ namespace WebAdminScheduler.Controllers
 		    return Json(new {
                 draw = draw, 
                 iTotalRecords = totalRecord,
-                iDisplayLength=10,
-                iTotalDisplayRecords=totalRecord,
+                iDisplayLength = 10,
+                iTotalDisplayRecords = totalRecord,
                 aaData = cp_contrabList,
             });
-
 		}
         public JsonResult ListarJobsAsoc(int idcrontab) {
             var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
             select s).ToList();  
                // ViewBag.CP_PROCESOS = data;
-
                return Json(new {
                 draw = 1, 
                 iTotalRecords = 1,

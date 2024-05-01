@@ -21,17 +21,17 @@
   <div class="container">
     <table id="dt-calendario" class="display nowrap" width="100%">
       <thead>
-        <tr>
+        <tr style="font-size:13px;">
           <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="dt-calendario-select-all"></th>
-          <th>IDCRONTAB</th>
+          <th>ID</th>
           <th>HORA INICIO</th>
           <th>HORA FIN</th>
-          <th>WDAY_M2S_EX</th>
-          <th>DAY_EX</th>
-          <th>MONTH_EX</th>
-          <th>REPEAT_EVERY_MINS</th>
-          <th>REPEAT_AFTER_FINISH</th>
-          <th>ACCION</th>
+          <th>DAYS</th>
+          <th>DAY EXE</th>
+          <th>MONTHS</th>
+          <th>REPEAT EVERY MINS</th>
+          <th>REPEAT AFTER FINISH</th>
+          <th>ACCIONES</th>
         </tr>
       </thead>
       <tbody>
@@ -50,7 +50,6 @@
   }
 
   $(document).ready( function () {
-
     var table = $('#dt-calendario').DataTable( {
       "processing": true,
       "serverSide": true,
@@ -58,7 +57,7 @@
 	    "deferLoading": 0, // here
       "scrollX":          true,
       "sScrollX":         "50%",
-      "scrollY":            $(document).height() - 300,
+      "scrollY":            '230px',
       "scrollCollapse":     true,
       "ajax": {
         "url": "@Url.Action("ListarCrontabs","Calendario")",
@@ -69,9 +68,9 @@
         }
       },
       drawCallback: function(settings){ 
-          if($(this).find('tbody tr').length <= 1){
-          $('.dt-paging-button').hide();
-        }
+        if($(this).find('tbody tr').length <= 1){
+        $('.dt-paging-button').hide();
+      }
     },
       "columnDefs": [{
         'targets': 0,
@@ -84,7 +83,7 @@
       orderable: false,
         'render': function (data, type, full, meta){
         console.log("son los datos ",data);
-          return   '<a class="btn btn-success" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Detalle/'+data.idcrontab+'">Detalle</a>';
+          return   '<a class="btn btn-success btn-sm" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info btn-sm" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Detalle/'+data.idcrontab+'">Detalle</a>';
         }
       }],
       "columns": [
@@ -111,11 +110,8 @@
       }
     });
 
-
-
     // Handle click on "Select all" control
     $('#dt-calendario-select-all').on('click', function() {
-        
       // Get all rows with search applied
       var rows = table.rows({ 'search': 'applied' }).nodes();
       // Check/uncheck checkboxes for all rows in the table
@@ -146,7 +142,6 @@
     });
       
     table.on('select', function (e, dt, type, indexes) {
-    
       if (type === 'row'   ) {
         var nodes = table
         .rows(indexes)
@@ -169,6 +164,6 @@
           });
         }
       });
-	   });
+    });
 </script> 
 </html>

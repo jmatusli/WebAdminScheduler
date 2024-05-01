@@ -213,6 +213,8 @@
     $("#txtUptEsperaIntento").val(espera_intento);
     $("#txtUptEstado").val(estado);
 
+    $("#txtUptNode").val(node);
+
     if(ftp == 1) {
       $("#flexCheckUptFtp").prop('checked', true);
     } else {
@@ -226,8 +228,6 @@
     } else {
       $("#flexCheckUptCompresion").prop('checked', false);
     }
-
-    $("#txtUptNode").val(node);
 
     var table = $('#dt-crontab').DataTable( {
       "processing": true,
@@ -288,7 +288,6 @@
     });
 
     table.on('select', function (e, dt, type, indexes) {
-    
       if (type === 'row'   ) {
         var nodes = table
         .rows(indexes)
