@@ -136,10 +136,11 @@ namespace WebAdminScheduler.Controllers
             var searchValue = Request.Form["search[value]"].FirstOrDefault();
             int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
             int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
-            
+             string estado_param = Request.Form["estado"].FirstOrDefault() ?? "Activo";
 
             var dataproc=(from ep in _DBContext.Set<CP_PROCESOS>()
                  join e in _DBContext.Set<CP_CONEXION>() on ep.IDCONEX equals e.IDCONEX
+                 where ep.ESTADO == estado_param
                  select new {
                       IDCONEX=e.IDCONEX,
                       usuario=e.USUARIO
@@ -179,7 +180,7 @@ namespace WebAdminScheduler.Controllers
             String _query = "SELECT * FROM (SELECT cc.*,con.usuario,row_number() over "
             + "(ORDER BY cc.IDPROC ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cc "
             + " JOIN APP_SCL_ALTAMIRA.CP_CONEXION con on cc.idconex=con.idconex  ) "
-            + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) + " " + textSearch + " " + textOrder;
+            + " WHERE estado='"+estado_param+"' and line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) + " " + textSearch + " " + textOrder;
 
             OracleCommand oraCommand = new OracleCommand(_query,
             (OracleConnection)_DBContext.Database.GetDbConnection());

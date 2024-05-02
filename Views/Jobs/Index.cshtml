@@ -23,7 +23,7 @@
         </span>
       </div>
       <div class="col-auto">
-        <select class="form-select" name="txtEstado" id="txtEstado">
+        <select class="form-select" name="slcEstado" id="slcEstado">
           <option value="Activo">ACTIVO</option>
           <option value="Inactivo">INACTIVO</option>
           <option value="Internal">INTERNAL</option>
@@ -69,7 +69,10 @@
         "ajax": {
           "url": "@Url.Action("ListarProcesos","Jobs")",
           "type": "POST",
-          "datatype": "json"
+          "datatype": "json",
+          "data": function(d){
+          $.extend( d, params);    
+        }
         }
 		, 
     "columnDefs": [{
@@ -161,6 +164,12 @@
       }
     }
   });
+
+  $("#slcEstado").on("change",function(){
+
+recargartabla(table,$(this).val())
+
+  })
 });
 </script> 
 </html>
