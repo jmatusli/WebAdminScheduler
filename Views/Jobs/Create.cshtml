@@ -146,7 +146,7 @@
         </span>
       </div>
       <div class="col-auto">
-        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="txtNode" name="txtNode">
+        <input type="text" maxlength="10" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtNode" name="txtNode">
       </div>
     </div>
   </div>
@@ -178,24 +178,7 @@
 <script>
 
   var params={}, selectedCrontab = 0;
-  var id_conex = $('#txtIdConex').val();
-  var nombre = $('#txtNombre').val();
-  var descripcion = $('#txtDescripcion').val();
-  var path = $('#txtPath').val();
-  var parametro1 = $('#txtParametro1').val();
-  var parametro2 = $('#txtParametro2').val();
-  var parametro3 = $('#txtParametro3').val();
-  var parametro4 = $('#txtParametro4').val();
-  var dependencia = $('#txtDependencia').val();
-  var intentos = $('#txtIntentos').val();
-  var espera_intento = $('#txtEsperaIntento').val();
-  var estado = $('#txtEstado').val();
-  var ftp = $('#flexCheckFtp').val();
-  var id_host = $('#txtIdHost').val();
-  var compresion = $('#flexCheckComprension').val();
-  var id_crontab = $('#txtIdCrontab').val();
-  var node = $('#txtNode').val();
-
+   
   function recargartabla(objeto,value)
   {
     params.estado=value;
@@ -324,6 +307,26 @@
     });
 
     $("#saveJob").on("click",function(){
+    var id_conex = $('#txtIdConex').val();
+    var nombre = $('#txtNombre').val();
+    var descripcion = $('#txtDescripcion').val();
+    var path = $('#txtPath').val();
+    var parametro1 = $('#txtParametro1').val();
+    var parametro2 = $('#txtParametro2').val();
+    var parametro3 = $('#txtParametro3').val();
+    var parametro4 = $('#txtParametro4').val();
+    var dependencia = $('#txtDependencia').is(":checked")?1:0;
+    var intentos = $('#txtIntentos').val();
+    var espera_intento = $('#txtEsperaIntento').val();
+    var estado = $('#txtEstado').val();
+    var ftp = $('#flexCheckFtp').is(":checked")?1:0;
+    var id_host = $('#txtIdHost').val();
+    var compresion = $('#flexCheckComprension').is(":checked")?1:0;  
+
+    var node = $('#txtNode').val();
+
+
+
       var data_job={
         "oProcesos" : {
           "IDCONEX" : id_conex,
@@ -345,7 +348,7 @@
           "NODE" : node
         }
       };
- 
+   console.log("datajob ",data_job);
     $.ajax({
       method: "POST",
       async: true,
