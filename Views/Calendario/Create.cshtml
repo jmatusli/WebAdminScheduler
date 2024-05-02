@@ -719,6 +719,7 @@ function getDays(arrayDay,dia){
         Swal.fire ('Rango de horas...', "Hora fin debe ser mayor a hora inicio", 'error')
         return;
         }
+        flagHoras=false;
         var repeat_after_finish= ($('#IdRepeatAfterFin').is(":checked") ? 1 : 0);  
           var data_cron={
             "oCrontab": {
@@ -842,8 +843,9 @@ $(".diasexe").prop("disabled",false);
       autoclose: true,
       'default': 'now',
       afterDone: function () {
-        $('#horaFin').get(0).value > $('#horaIni').get(0).value;
-        flag = true;
+        if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
+        flagHoras = true;
+         
       }
     });
  $('#horaFin').clockpicker({
@@ -852,8 +854,10 @@ $(".diasexe").prop("disabled",false);
       autoclose: true,
       'default': 'now',
       afterDone: function () {
-        $('#horaFin').get(0).value > $('#horaIni').get(0).value;
-        flag = true;
+        if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
+        flagHoras = true;
+
+   
       }
     });
 
