@@ -133,7 +133,7 @@
       </div>
       <div class="col-auto">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckUptComprension" name="flexCheckUptComprension">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckUptCompresion" name="flexCheckUptCompresion">
           <label class="form-check-label" for="lblflexCheckComprension">
             COMPRESION
           </label>
@@ -223,9 +223,9 @@
     $("#txtUptNode").val(node);
 
     if(ftp == 1) {
-      $("#flexCheckUptFtp").prop('checked', true);
+      $("#flexUptCheckFtp").prop('checked', true);
     } else {
-      $("#flexCheckUptFtp").prop('checked', false);
+      $("#flexUptCheckFtp").prop('checked', false);
     }
 
     $("#txtUptIdHost").val(id_host);
@@ -390,7 +390,7 @@
       "INTENTOS" : intentos,
       "ESPERA_INTENTO" : parseInt(espera_intento,10),
       "ESTADO" : estado,
-      "FTP" : $('#flexCheckUptFtp').is(":checked") ? 1 : 0,
+      "FTP" : $('#flexUptCheckFtp').is(":checked") ? 1 : 0,
       "IDHOST" : parseInt(id_host,10),
       "COMPRESION" : $('#flexCheckUptCompresion').is(":checked") ? 1 : 0,
       "IDCRONTAB" : selectedCrontab,
