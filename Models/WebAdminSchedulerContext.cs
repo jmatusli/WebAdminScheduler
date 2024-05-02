@@ -18,6 +18,8 @@ namespace WebAdminScheduler.Models
         public  virtual DbSet<CP_CRONTAB> CP_CRONTABS { get; set; } = null!;
         public  virtual DbSet<CP_PROCESOS> CP_PROCESOS { get; set; } = null!;
         public  virtual DbSet<CP_REGISTRO> CP_REGISTRO { get; set; } = null!;
+
+        public  virtual DbSet<CP_CONEXION> CP_CONEXION { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         }
@@ -159,6 +161,37 @@ namespace WebAdminScheduler.Models
 
                     entity.Property(e => e.FLAG_ALARMA)
                     .IsUnicode(false);
+            });
+
+
+
+            modelBuilder.Entity<CP_CONEXION>(entity =>
+            { 
+                entity.HasKey(e => e.IDCONEX)
+                 .HasName("PK__CONEXION__CRSFDF");
+
+                entity.ToTable("CP_CONEXION");
+
+                entity.Property(e => e.USUARIO)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PASSWORD)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SERVICIO)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                     entity.Property(e => e.DLINK)
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                    entity.Property(e => e.TIPO)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+ 
             });
 
             OnModelCreatingPartial(modelBuilder);

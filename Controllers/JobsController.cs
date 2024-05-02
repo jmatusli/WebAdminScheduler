@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
 using WebAdminScheduler.helpers;
+using System.Linq.Dynamic.Core;
 namespace WebAdminScheduler.Controllers
 {
     public class JobsController : Controller
@@ -135,9 +136,17 @@ namespace WebAdminScheduler.Controllers
             var searchValue = Request.Form["search[value]"].FirstOrDefault();
             int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
             int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
-            IQueryable<CP_PROCESOS> data = _DBContext.Set<CP_PROCESOS>().AsQueryable();
+            
+
+            var dataproc=(from ep in _DBContext.Set<CP_PROCESOS>()
+                 join e in _DBContext.Set<CP_CONEXION>() on ep.IDCONEX equals e.IDCONEX
+                 select new {
+                      IDCONEX=e.IDCONEX,
+                      usuario=e.USUARIO
+                 }).AsQueryable();
+             //IQueryable<CP_PROCESOS> data = (IQueryable<CP_PROCESOS>)dataproc;
             //Obtener el total de los datos de la tabla
-            totalRecord = data.Count();
+            totalRecord = dataproc.Count();
             // Buscar datos cuando se encuentre el valor de búsqueda
             if (!string.IsNullOrEmpty(searchValue))
             {
@@ -157,6 +166,7 @@ namespace WebAdminScheduler.Controllers
                 textSearch += " OR (IDHOST like '%' || :psearch || '%')";
                 textSearch += " OR (COMPRESION like '%' || :psearch || '%')";
                 textSearch += " OR (IDCRONTAB like '%' || :psearch || '%')";
+                textSearch += " OR (usuario like '%' || :psearch || '%')";
 
                 textSearch += " OR (NODE like '%' || :psearch || '%'))";
             }
@@ -166,81 +176,103 @@ namespace WebAdminScheduler.Controllers
                 textOrder = " ORDER BY " + sortColumn + " " + sortColumnDirection;
 
             _DBContext.Database.OpenConnection();
-            String _query = "SELECT * FROM (SELECT cc.*,row_number() over "
-            + "(ORDER BY cc.IDPROC ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cc ) "
+            String _query = "SELECT * FROM (SELECT cc.*,con.usuario,row_number() over "
+            + "(ORDER BY cc.IDPROC ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cc "
+            + " JOIN APP_SCL_ALTAMIRA.CP_CONEXION con on cc.idconex=con.idconex  ) "
             + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) + " " + textSearch + " " + textOrder;
 
             OracleCommand oraCommand = new OracleCommand(_query,
             (OracleConnection)_DBContext.Database.GetDbConnection());
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
             OracleDataReader oraReader = oraCommand.ExecuteReader();
-            List<CP_PROCESOS> cp_procesosList = new List<CP_PROCESOS>();
-
+           // List<CP_PROCESOS> cp_procesosList = new List<CP_PROCESOS>();
+           List<object> procesosList = new List<object>();
+           var path="";
+           var parametro1="";
+           var parametro2="";
+           
+           var parametro3="";
+           
+           var parametro4="";   
+           var estado=""; 
+           var ftp=0;
+           var idhost=0;
+           var compresion=0;
+           var idcrontab=0;
+           var node="";
             if (oraReader.HasRows)
             {
                 while (oraReader.Read())
                 {
+                    var cpprocesos =new object();
+                   // cpprocesos.nombre=oraReader.GetString(2);
                     CP_PROCESOS cp_procesos = new CP_PROCESOS();
-                    cp_procesos.IDPROC = oraReader.GetInt32(0);
-                    cp_procesos.IDCONEX = oraReader.GetInt32(1);
-                    cp_procesos.NOMBRE = oraReader.GetString(2);
-                    cp_procesos.DESCRIPCION = oraReader.GetString(3);
+                  /*  cp_procesos.IDPROC */ var idproc= oraReader.GetInt32(0);
+                   /* cp_procesos.IDCONEX*/  var usuario= oraReader.GetString(18);
+                    /*cp_procesos.NOMBRE*/ var nombre= oraReader.GetString(2);
+                    /*cp_procesos.DESCRIPCION */var descripcion= oraReader.GetString(3);
 
                     if (!oraReader.IsDBNull(4))
                     {
-                        cp_procesos.PATH = oraReader.GetString(4);
+                        /*cp_procesos.PATH*/  path= oraReader.GetString(4);
                     }
                     if (!oraReader.IsDBNull(5))
                     {
-                        cp_procesos.PARAMETRO1 = oraReader.GetString(5);
+                       /* cp_procesos.PARAMETRO1*/ parametro1= oraReader.GetString(5);
                     }
                     if (!oraReader.IsDBNull(6))
                     {
-                        cp_procesos.PARAMETRO2 = oraReader.GetString(6);
+                        /*cp_procesos.PARAMETRO2*/  parametro2=oraReader.GetString(6);
                     }
 
                     if (!oraReader.IsDBNull(7))
                     {
-                        cp_procesos.PARAMETRO3 = oraReader.GetString(7);
+                        /*cp_procesos.PARAMETRO3 */ parametro3=oraReader.GetString(7);
                     }
 
                     if (!oraReader.IsDBNull(8))
                     {
-                        cp_procesos.PARAMETRO4 = oraReader.GetString(8);
+                       /* cp_procesos.PARAMETRO4 */parametro4= oraReader.GetString(8);
                     }
 
-                    cp_procesos.DEPENDENCIA = oraReader.GetInt32(9);
-                    cp_procesos.INTENTOS = oraReader.GetInt32(10);
-                    cp_procesos.ESPERA_INTENTO = oraReader.GetInt32(11);
+                    /*cp_procesos.DEPENDENCIA */var dependencia=oraReader.GetInt32(9);
+                    /*cp_procesos.INTENTOS*/ var intentos= oraReader.GetInt32(10);
+                   /* cp_procesos.ESPERA_INTENTO*/ var espera_intento= oraReader.GetInt32(11);
 
                     if (!oraReader.IsDBNull(12))
                     {
-                        cp_procesos.ESTADO = oraReader.GetString(12);
+                       /* cp_procesos.ESTADO*/ estado= oraReader.GetString(12);
+                        
                     }
                     if (!oraReader.IsDBNull(13))
                     {
-                        cp_procesos.FTP = oraReader.GetInt32(13);
+                       /* cp_procesos.FTP*/ ftp=oraReader.GetInt32(13);
                     }
                     if (!oraReader.IsDBNull(14))
                     {
-                        cp_procesos.IDHOST = oraReader.GetInt32(14);
+                        /*cp_procesos.IDHOST*/ idhost= oraReader.GetInt32(14);
                     }
                     if (!oraReader.IsDBNull(15))
                     {
-                        cp_procesos.COMPRESION = oraReader.GetInt32(15);
+                       /* cp_procesos.COMPRESION */compresion=oraReader.GetInt32(15);
                     }
                     if (!oraReader.IsDBNull(16))
                     {
-                        cp_procesos.IDCRONTAB = oraReader.GetInt32(16);
+                        /*cp_procesos.IDCRONTAB */idcrontab=oraReader.GetInt32(16);
                     }
                     if (!oraReader.IsDBNull(17))
                     {
-                        cp_procesos.NODE = oraReader.GetString(17);
+                       /* cp_procesos.NODE */node=oraReader.GetString(17);
                     }
-
-                    cp_procesosList.Add(cp_procesos);
+              var c = new { IDPROC = idproc, USUARIO = usuario,NOMBRE=nombre,DESCRIPCION =descripcion,
+              PATH=path,PARAMETRO1=parametro1,PARAMETRO2=parametro2,PARAMETRO3=parametro3,PARAMETRO4=parametro4,
+              DEPENDENCIA=dependencia,INTENTOS=intentos,ESPERA_INTENTO=espera_intento,ESTADO=estado,FTP=ftp,
+              IDHOST=idhost,COMPRESION=compresion,IDCRONTAB=idcrontab,NODE=node
+              };
+             procesosList.Add(c);
+                    
                 }
-                filterRecord = cp_procesosList.Count();
+                filterRecord = procesosList.Count();
 
             }
             else
@@ -261,7 +293,7 @@ namespace WebAdminScheduler.Controllers
                 iTotalRecords = totalRecord,
                 iDisplayLength = 10,
                 iTotalDisplayRecords = totalRecord,
-                aaData = cp_procesosList,
+                aaData = procesosList,
             });
         }
         public JsonResult ListarRegistro(int idproc)
