@@ -39,9 +39,11 @@ namespace WebAdminScheduler.Controllers
 		public JsonResult Save([FromBody] CrontabVM dtocrontab)
 		{
            CP_CRONTAB crontabt = new CP_CRONTAB();
-           
+           DateTime fechaActual = DateTime.Today;
+        
+
             crontabt.IDCRONTAB=WACustomHelper.GetLasIdCRON(_DBContext);
-            crontabt.FECHA=dtocrontab.oCrontab.FECHA;
+            crontabt.FECHA=dtocrontab.oCrontab.FECHA; //fechaActual.ToString("ddMMyyyy");
             crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
             crontabt.HORA_FIN=dtocrontab.oCrontab.HORA_FIN;
             crontabt.RECURRENCIA=dtocrontab.oCrontab.RECURRENCIA;

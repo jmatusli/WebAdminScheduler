@@ -623,7 +623,7 @@
               </span>
             </div>
             <div class="col-auto">
-              <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="txtRepeatEveryMins" name="txtRepeatEveryMins" placeholder="0">
+              <input type="number" min="1" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtRepeatEveryMins" name="txtRepeatEveryMins" placeholder="0">
             </div>
             <div class="col-auto">
               <div class="form-check">
@@ -644,6 +644,9 @@
   }
   
   <script> 
+   var mesesArray=[];
+   var diasexeArray=[];
+  var flagHoras = false;
 
    function daysMonth(anio,mes){
 var arrayDays=[];
@@ -711,6 +714,12 @@ function getDays(arrayDay,dia){
           +($('#flexCheckSabado').is(":checked") ? 1 : 0) + ""
           +($('#flexCheckDomingo').is(":checked") ? 1 : 0) + "";
 
+        if(!flagHoras)
+        {
+        Swal.fire ('Rango de horas...', "Hora fin debe ser mayor a hora inicio", 'error')
+        return;
+        }
+        var repeat_after_finish= ($('#IdRepeatAfterFin').is(":checked") ? 1 : 0);  
           var data_cron={
             "oCrontab": {
               /*"IDCRONTAB":,*/
@@ -719,10 +728,10 @@ function getDays(arrayDay,dia){
               "HORA_FIN":hora_fin,
               "RECURRENCIA":"0000",
               "WDAY_M2S_EX":diastext,
-              "DAY_EX":'0',
-              "MONTH_EX":"0",
+              "DAY_EX": diasexeArray.length>0?diasexeArray.join(","):"0",
+              "MONTH_EX":mesesArray.length>0?mesesArray.join(","):"0",
               "REPEAT_EVERY_MINS":repeat_every_mins,
-              "REPEAT_AFTER_FINISH":"0"
+              "REPEAT_AFTER_FINISH":repeat_after_finish
             }
           };
 
@@ -756,7 +765,8 @@ function getDays(arrayDay,dia){
     
   $(".flexCheckMes").on("change",function(){
 
-   
+   if($(this).is(":checked"))
+   { 
     var miarrayx=daysMonth(2024,$(this).val());
 var dias=getDays(miarrayx,"");
  if($('.flexCheckMes:checked').length==1)
@@ -768,7 +778,18 @@ $.each(dias, function( index, item ) {
         });
 
  //  console.log("mes seleccionado ",$(this).is(":checked")," valor ",$(this).val())
+       mesesArray.indexOf($(this).val()) === -1 ? mesesArray.push($(this).val()) :'';
+   
+       
+  } 
+  else 
+  {
+const index = mesesArray.indexOf($(this).val());
 
+    const x = mesesArray.splice(index, 1);
+
+  }
+   console.log("meses seleccionados ",mesesArray.join(","));
   })
   
   $(".flexCheckDias").on("change",function(){
@@ -789,10 +810,56 @@ $.each(dias, function( index, item ) {
 else 
 $(".diasexe").prop("disabled",false);
 
+
+        
+
+  })
+
+  $(".diasexe").on("change",function(){
+ 
+    if($(this).is(":checked"))
+    {
+
+      diasexeArray.indexOf($(this).val()) === -1 ? diasexeArray.push($(this).val()) :'';
+  
+    }
+    else 
+    {
+    const index = diasexeArray.indexOf($(this).val());
+
+    const x = diasexeArray.splice(index, 1);
+
+    }
+    
+         console.log("dias ejecucion  seleccionados ",diasexeArray.join(","));
   })
 
 
+  
+      $('#horaIni').clockpicker({
+      placement: 'bottom',
+      align: 'right',
+      autoclose: true,
+      'default': 'now',
+      afterDone: function () {
+        $('#horaFin').get(0).value > $('#horaIni').get(0).value;
+        flag = true;
+      }
+    });
+ $('#horaFin').clockpicker({
+      placement: 'bottom',
+      align: 'right',
+      autoclose: true,
+      'default': 'now',
+      afterDone: function () {
+        $('#horaFin').get(0).value > $('#horaIni').get(0).value;
+        flag = true;
+      }
+    });
 
-      $('.clockpicker').clockpicker();
+
+
+
+
     })
 </script>
