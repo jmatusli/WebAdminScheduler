@@ -551,10 +551,10 @@
     var hora_ini=vhorainitmp[0]+""+vhorainitmp[1]+":"+vhorainitmp[2]+""+vhorainitmp[3];
     var hora_fin=vhorafintmp[0]+""+vhorafintmp[1]+":"+vhorafintmp[2]+""+vhorafintmp[3];
 
-    $("#txtHoraIni").val(hora_ini);
-    $("#txtHoraFin").val(hora_fin);
-    
-    console.log(idRepAftFin,'idRepAftFin');
+    $("#txtHoraIni").html(hora_ini);
+    $("#txtHoraFin").html(hora_fin);
+     
+    console.log('idRepAftFin',idRepAftFin);
     if (idRepAftFin = 1) {
         $("#TxtIdRepeatAfterFin").prop('checked', true);
     } else {
