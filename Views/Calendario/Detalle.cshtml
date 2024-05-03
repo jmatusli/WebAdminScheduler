@@ -604,6 +604,13 @@
     } 
 
     //Validación de los días de ejecución
+    if(diasSelExe == 0) {
+        console.log('dias select');
+        $("#flexCheckUnoExe").prop('checked', true);
+    }
+
+    console.log(diasSelExe, 'test');
+
     if(diasSelExe[0] == 1){
         $("#flexCheckUnoExe").prop('checked', true);
     } else {

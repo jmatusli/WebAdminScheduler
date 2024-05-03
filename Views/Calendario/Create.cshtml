@@ -729,8 +729,8 @@ function getDays(arrayDay,dia){
               "HORA_FIN":hora_fin,
               "RECURRENCIA":"0000",
               "WDAY_M2S_EX":diastext,
-              "DAY_EX": diasexeArray.length>0?diasexeArray.join(","):"0",
-              "MONTH_EX":mesesArray.length>0?mesesArray.join(","):"0",
+              "DAY_EX": diasexeArray.length > 0 ? diasexeArray.join(","):"0",
+              "MONTH_EX":mesesArray.length > 0 ? mesesArray.join(","):"0",
               "REPEAT_EVERY_MINS":repeat_every_mins,
               "REPEAT_AFTER_FINISH":repeat_after_finish
             }
@@ -762,82 +762,71 @@ function getDays(arrayDay,dia){
 
     })
 
-
-    
   $(".flexCheckMes").on("change",function(){
 
-   if($(this).is(":checked"))
-   { 
-    var miarrayx=daysMonth(2024,$(this).val());
-var dias=getDays(miarrayx,"");
- if($('.flexCheckMes:checked').length==1)
-$(".diasexe").prop("disabled",true);
-$.each(dias, function( index, item ) {
-          //console.log(item);
-         
-         $(":checkbox[value="+item.dia+"]").prop("disabled",false);
-        });
-
- //  console.log("mes seleccionado ",$(this).is(":checked")," valor ",$(this).val())
-       mesesArray.indexOf($(this).val()) === -1 ? mesesArray.push($(this).val()) :'';
-   
-       
-  } 
-  else 
-  {
-const index = mesesArray.indexOf($(this).val());
-
-    const x = mesesArray.splice(index, 1);
-
-  }
-   console.log("meses seleccionados ",mesesArray.join(","));
-  })
+    if($(this).is(":checked"))
+    { 
+      var miarrayx=daysMonth(2024,$(this).val());
+      var dias=getDays(miarrayx,"");
+      if($('.flexCheckMes:checked').length==1)
+      $(".diasexe").prop("disabled",true);
+      $.each(dias, function( index, item ) 
+      {
+        //console.log(item);
+        $(":checkbox[value="+item.dia+"]").prop("disabled",false);
+      });
+      //  console.log("mes seleccionado ",$(this).is(":checked")," valor ",$(this).val())
+      mesesArray.indexOf($(this).val()) === -1 ? mesesArray.push($(this).val()) :''; 
+    } 
+    else 
+    {
+      const index = mesesArray.indexOf($(this).val());
+      const x = mesesArray.splice(index, 1);
+    }
+    console.log("meses seleccionados ",mesesArray.join(","));
+    })
   
-  $(".flexCheckDias").on("change",function(){
-/*if($(this).is(":checked"))
-console.log("dia seleccionado ",$(this).is(":checked")," valor ",$(this).val())
+    $(".flexCheckDias").on("change",function(){
+    /*if($(this).is(":checked"))
+    console.log("dia seleccionado ",$(this).is(":checked")," valor ",$(this).val())
+    */
+    var miarrayx=daysMonth(2024,$('.flexCheckMes:checked').val());
+    var dias=getDays(miarrayx,$(this).val());
+    if($('.flexCheckDias:checked').length==1) {
+      $(".diasexe").prop("disabled",true);
+      $.each(dias, function( index, item ) {
+        //console.log(item);
+        $(":checkbox[value="+item.dia+"]").prop("disabled",false);
+      });
+    }
+    else 
+      $(".diasexe").prop("disabled",false);
+    })
 
-*/
-var miarrayx=daysMonth(2024,$('.flexCheckMes:checked').val());
-var dias=getDays(miarrayx,$(this).val());
- if($('.flexCheckDias:checked').length==1){
-$(".diasexe").prop("disabled",true);
-$.each(dias, function( index, item ) {
-          //console.log(item);
-         
-         $(":checkbox[value="+item.dia+"]").prop("disabled",false);
-        });
-}
-else 
-$(".diasexe").prop("disabled",false);
-
-
-        
-
-  })
-
-  $(".diasexe").on("change",function(){
- 
+  $(".diasexe").on("change",function() {
     if($(this).is(":checked"))
     {
-
-      diasexeArray.indexOf($(this).val()) === -1 ? diasexeArray.push($(this).val()) :'';
-  
+      diasexeArray.indexOf($(this).val()) === -1 ? diasexeArray.push($(this).val()) : '';
     }
     else 
     {
-    const index = diasexeArray.indexOf($(this).val());
-
-    const x = diasexeArray.splice(index, 1);
-
+      const index = diasexeArray.indexOf($(this).val());
+      const x = diasexeArray.splice(index, 1);
     }
-    
-         console.log("dias ejecucion  seleccionados ",diasexeArray.join(","));
+    console.log("dias ejecucion  seleccionados ",diasexeArray.join(","));
   })
 
-
-  
-      $('#horaIni').clockpicker({
+    $('#horaIni').clockpicker({
+      placement: 'bottom',
+      align: 'right',
+      autoclose: true,
+      'default': 'now',
+      afterDone: function () {
+        if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
+        flagHoras = true;  
+      }
+    });
+    $('#horaFin').clockpicker({
       placement: 'bottom',
       align: 'right',
       autoclose: true,
@@ -845,25 +834,7 @@ $(".diasexe").prop("disabled",false);
       afterDone: function () {
         if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
         flagHoras = true;
-         
       }
     });
- $('#horaFin').clockpicker({
-      placement: 'bottom',
-      align: 'right',
-      autoclose: true,
-      'default': 'now',
-      afterDone: function () {
-        if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
-        flagHoras = true;
-
-   
-      }
-    });
-
-
-
-
-
-    })
+  })
 </script>
