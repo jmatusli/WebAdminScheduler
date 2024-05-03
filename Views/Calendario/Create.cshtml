@@ -162,7 +162,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" value="0" type="checkbox"  onClick="toggle_month(this)" /> Seleccionar/Deseleccionar todos<br><br>
+              <input class="form-check-input flexCheckMes" id="flexCheckAllmonths" value="0" type="checkbox" /> Seleccionar/Deseleccionar todos<br><br>
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="1"  id="flexCheckEnero" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="1"  id="flexCheckEnero">
               <label class="form-check-label" for="flexCheckEnero">
                 Enero
               </label>
@@ -178,7 +178,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="2" id="flexCheckFebrero" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="2" id="flexCheckFebrero">
               <label class="form-check-label" for="flexCheckFebrero">
                 Febrero
               </label>
@@ -186,7 +186,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="3" id="flexCheckMarzo" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="3" id="flexCheckMarzo">
               <label class="form-check-label" for="flexCheckMarzo">
                 Marzo
               </label>
@@ -194,7 +194,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="4" id="flexCheckAbril" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="4" id="flexCheckAbril">
               <label class="form-check-label" for="flexCheckAbril">
                 Abril
               </label>
@@ -202,7 +202,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="5" id="flexCheckMayo" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="5" id="flexCheckMayo">
               <label class="form-check-label" for="flexCheckMayo">
                 Mayo
               </label>
@@ -210,7 +210,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="6" id="flexCheckJunio" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="6" id="flexCheckJunio">
               <label class="form-check-label" for="flexCheckJunio">
                 Junio
               </label>
@@ -218,7 +218,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="7" id="flexCheckJulio" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="7" id="flexCheckJulio">
               <label class="form-check-label" for="flexCheckJulio">
                 Julio
               </label>
@@ -226,7 +226,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="8" id="flexCheckAgost" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="8" id="flexCheckAgost">
               <label class="form-check-label" for="flexCheckAgost">
                 Agosto
               </label>
@@ -234,7 +234,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="9" id="flexCheckSept" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="9" id="flexCheckSept">
               <label class="form-check-label" for="flexCheckSept">
                 Septiembre
               </label>
@@ -242,7 +242,7 @@
           </div>        
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="10" id="flexCheckOct" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="10" id="flexCheckOct">
               <label class="form-check-label" for="flexCheckOct">
                 Octubre
               </label>
@@ -250,7 +250,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="11" id="flexCheckNov" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="11" id="flexCheckNov">
               <label class="form-check-label" for="flexCheckNov">
                 Noviembre
               </label>
@@ -258,7 +258,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" type="checkbox" value="12" id="flexCheckDic" name="meses">
+              <input class="form-check-input flexCheckMes" type="checkbox" value="12" id="flexCheckDic">
               <label class="form-check-label" for="flexCheckDic">
                 Diciembre
               </label>
@@ -271,7 +271,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" onClick="toggle_week_days(this)" /> Seleccionar/Deseleccionar todos<br><br>
+              <input class="form-check-input flexCheckDias" id="flexCheckAlldays" type="checkbox" /> Seleccionar/Deseleccionar todos<br><br>
             </div>
           </div>
         </div>
@@ -279,7 +279,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" value="Lunes" id="flexCheckLunes" name="dias_semana">
+              <input class="form-check-input flexCheckDias" type="checkbox" value="Lunes" id="flexCheckLunes">
               <label class="form-check-label" for="flexCheckLunes">
                 Lunes
               </label>
@@ -287,7 +287,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" value="Martes" id="flexCheckMartes" name="dias_semana">
+              <input class="form-check-input flexCheckDias" type="checkbox" value="Martes" id="flexCheckMartes">
               <label class="form-check-label" for="flexCheckMartes">
                 Martes
               </label>
@@ -295,7 +295,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" value="Miercoles" id="flexCheckMiercoles" name="dias_semana">
+              <input class="form-check-input flexCheckDias" type="checkbox" value="Miercoles" id="flexCheckMiercoles">
               <label class="form-check-label" for="flexCheckMiercoles">
                 Miercoles
               </label>
@@ -303,7 +303,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" value="Jueves" id="flexCheckJueves" name="dias_semana">
+              <input class="form-check-input flexCheckDias" type="checkbox" value="Jueves" id="flexCheckJueves">
               <label class="form-check-label" for="flexCheckJueves">
                 Jueves
               </label>
@@ -311,7 +311,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" value="Viernes" id="flexCheckViernes" name="dias_semana">
+              <input class="form-check-input flexCheckDias" type="checkbox" value="Viernes" id="flexCheckViernes">
               <label class="form-check-label" for="flexCheckViernes">
                 Viernes
               </label>
@@ -319,7 +319,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" value="Sábado" id="flexCheckSabado" name="dias_semana">
+              <input class="form-check-input flexCheckDias" type="checkbox" value="Sábado" id="flexCheckSabado">
               <label class="form-check-label" for="flexCheckSabado">
                 Sabado
               </label>
@@ -327,7 +327,7 @@
           </div>
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" type="checkbox" value="Domingo" id="flexCheckDomingo" name="dias_semana">
+              <input class="form-check-input flexCheckDias" type="checkbox" value="Domingo" id="flexCheckDomingo">
               <label class="form-check-label" for="flexCheckDomingo">
                 Domingo
               </label>
@@ -340,7 +340,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" onClick="toggle(this)" /> Seleccionar/Deseleccionar todos<br><br>
+              <input class="form-check-input" type="checkbox" id="flexCheckAlldaysex"  /> Seleccionar/Deseleccionar todos<br><br>
             </div>
           </div>
         </div>
@@ -349,7 +349,7 @@
           <thead>
           <tr>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="1" id="flexCheckUnoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="1" id="flexCheckUnoExe" >
             </td>
             <td>
               <label class="form-check-label" for="flexCheckUnoExe">
@@ -357,7 +357,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="2" id="flexCheckDosExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="2" id="flexCheckDosExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckDosExe">
@@ -365,7 +365,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="3" id="flexCheckTresExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="3" id="flexCheckTresExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckTresExe">
@@ -373,7 +373,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="4" id="flexCheckCuatroExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="4" id="flexCheckCuatroExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckCuatroExe">
@@ -381,7 +381,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="5" id="flexCheckCincoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="5" id="flexCheckCincoExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckCincoExe">
@@ -389,7 +389,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="6" id="flexCheckSeisExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="6" id="flexCheckSeisExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckSeisExe">
@@ -397,7 +397,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="7" id="flexCheckSieteExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="7" id="flexCheckSieteExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckSieteExe">
@@ -405,7 +405,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="8" id="flexCheckOchoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="8" id="flexCheckOchoExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckOchoExe">
@@ -413,7 +413,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="9" id="flexChecknueveExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="9" id="flexChecknueveExe">
             </td>
             <td>
               <label class="form-check-label" for="flexChecknueveExe">
@@ -421,7 +421,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="10" id="flexCheckDiezExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="10" id="flexCheckDiezExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckDiezExe">
@@ -433,7 +433,7 @@
           <tbody>
           <tr>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="11" id="flexCheckOnceExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="11" id="flexCheckOnceExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckOnceExe">
@@ -441,7 +441,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="12" id="flexCheckDoceExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="12" id="flexCheckDoceExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckDoceExe">
@@ -449,7 +449,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="13" id="flexCheckTreceExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="13" id="flexCheckTreceExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckTreceExe">
@@ -457,7 +457,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="14" id="flexCheckCatorceExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="14" id="flexCheckCatorceExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckCatorceExe">
@@ -465,7 +465,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="15" id="flexCheckQuinceExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="15" id="flexCheckQuinceExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckQuinceExe">
@@ -473,7 +473,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="16" id="flexCheckDiesiseisExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="16" id="flexCheckDiesiseisExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckDiesiseisExe">
@@ -481,7 +481,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="17" id="flexCheckDiesicieteExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="17" id="flexCheckDiesicieteExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckDiesicieteExe">
@@ -489,7 +489,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="18" id="flexCheckDiesiochoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="18" id="flexCheckDiesiochoExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckDiesiochoExe">
@@ -497,7 +497,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="19" id="flexCheckDiecinueveExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="19" id="flexCheckDiecinueveExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckDiecinueveExe">
@@ -505,7 +505,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="20" id="flexCheckVeinteExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="20" id="flexCheckVeinteExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeinteExe">
@@ -519,7 +519,7 @@
           <thead>
           <tr>
             <th>
-              <input class="form-check-input diasexe" type="checkbox" value="21" id="flexCheckVeintiunoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="21" id="flexCheckVeintiunoExe">
             </th>
             <td>
               <label class="form-check-label" for="flexCheckVeintiunoExe">
@@ -527,7 +527,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="22" id="flexCheckVeintidosExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="22" id="flexCheckVeintidosExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeintidosExe">
@@ -535,7 +535,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="23" id="flexCheckVeintitresExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="23" id="flexCheckVeintitresExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeintitresExe">
@@ -543,7 +543,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="24" id="flexCheckVeinticuatroExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="24" id="flexCheckVeinticuatroExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeinticuatroExe">
@@ -551,7 +551,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="25" id="flexCheckVeinticincoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="25" id="flexCheckVeinticincoExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeinticincoExe">
@@ -559,7 +559,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="26" id="flexCheckVeintiseisExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="26" id="flexCheckVeintiseisExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeintiseisExe">
@@ -567,7 +567,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="27" id="flexCheckVeintisieteExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="27" id="flexCheckVeintisieteExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeintisieteExe">
@@ -575,7 +575,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="28" id="flexCheckVeintiochoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="28" id="flexCheckVeintiochoExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeintiochoExe">
@@ -583,7 +583,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="29" id="flexCheckVeintinueveExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="29" id="flexCheckVeintinueveExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckVeintinueveExe">
@@ -591,7 +591,7 @@
               </label>
             </td>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="30" id="flexCheckTreintaExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="30" id="flexCheckTreintaExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckTreintaExe">
@@ -603,7 +603,7 @@
           <tbody>
           <tr>
             <td>
-              <input class="form-check-input diasexe" type="checkbox" value="31" id="flexCheckTreintaunoExe" name="dinamico" >
+              <input class="form-check-input diasexe" type="checkbox" value="31" id="flexCheckTreintaunoExe">
             </td>
             <td>
               <label class="form-check-label" for="flexCheckTreintaunoExe">
@@ -647,7 +647,8 @@
    var mesesArray=[];
    var diasexeArray=[];
   var flagHoras = false;
-
+    var diasex="0";
+    var monthex="0";
    function daysMonth(anio,mes){
 var arrayDays=[];
 var diasMes = new Date(anio, mes, 0).getDate();
@@ -670,31 +671,6 @@ function getDays(arrayDay,dia){
 
     
 }
-
-
-    function toggle(source) {
-      checkboxes = document.getElementsByName('dinamico');
-
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = source.checked;
-      }
-    } 
-
-    function toggle_week_days(source) {
-      checkboxes = document.getElementsByName('dias_semana');
-
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = source.checked;
-      }
-    }
-
-    function toggle_month(source) {
-      checkboxes = document.getElementsByName('meses');
-
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = source.checked;
-      }
-    }
 
     $(document).on("ready",function() {
       $('#btnSave').on('click',function() {
@@ -720,6 +696,19 @@ function getDays(arrayDay,dia){
         return;
         }
         flagHoras=false;
+
+        if($("#flexCheckAlldaysex").is(":checked") )
+        diasex="0";  
+        else 
+        diasex=diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
+
+       if($("#flexCheckAllmonths").is(":checked"))
+        monthex="0"; 
+       else 
+       monthex=mesesArray.length > 0 ? mesesArray.join(","):"0"; 
+      
+
+
         var repeat_after_finish= ($('#IdRepeatAfterFin').is(":checked") ? 1 : 0);  
           var data_cron={
             "oCrontab": {
@@ -729,8 +718,8 @@ function getDays(arrayDay,dia){
               "HORA_FIN":hora_fin,
               "RECURRENCIA":"0000",
               "WDAY_M2S_EX":diastext,
-              "DAY_EX": diasexeArray.length > 0 ? diasexeArray.join(","):"0",
-              "MONTH_EX":mesesArray.length > 0 ? mesesArray.join(","):"0",
+              "DAY_EX": diasex,
+              "MONTH_EX":monthex,
               "REPEAT_EVERY_MINS":repeat_every_mins,
               "REPEAT_AFTER_FINISH":repeat_after_finish
             }
@@ -835,6 +824,32 @@ function getDays(arrayDay,dia){
         if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
         flagHoras = true;
       }
+    });
+
+    $("#flexCheckAllmonths").on("change",function(){
+
+          if($(this).is(":checked"))
+          $(".flexCheckMes").prop("checked",true);
+          else
+          $(".flexCheckMes").prop("checked",false);
+    });
+    
+    $("#flexCheckAlldays").on("change",function(){
+       if($(this).is(":checked"))
+          $(".flexCheckDias").prop("checked",true);
+          else
+          $(".flexCheckDias").prop("checked",false);
+
+    });
+    
+    $("#flexCheckAlldaysex").on("change",function(){
+
+
+          if($(this).is(":checked"))
+          $(".diasexe").prop("checked",true);
+          else
+          $(".diasexe").prop("checked",false);
+
     });
   })
 </script>

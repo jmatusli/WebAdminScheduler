@@ -174,7 +174,7 @@
             <div class="row g-4 align-items-center">
                 <div class="col-auto">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptLunes" name="dias_semana">
+                    <input class="form-check-input flexCheckDias" type="checkbox" value="" id="flexCheckUptLunes" name="dias_semana">
                     <label class="form-check-label" for="flexCheckUptLunes">
                         Lunes
                     </label>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMartes" name="dias_semana">
+                    <input class="form-check-input flexCheckDias" type="checkbox" value="" id="flexCheckUptMartes" name="dias_semana">
                     <label class="form-check-label" for="flexCheckUptMartes">
                         Martes
                     </label>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptMiercoles" name="dias_semana">
+                    <input class="form-check-input flexCheckDias" type="checkbox" value="" id="flexCheckUptMiercoles" name="dias_semana">
                     <label class="form-check-label" for="flexCheckUptMiercoles">
                         Miercoles
                     </label>
@@ -198,7 +198,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptJueves" name="dias_semana">
+                    <input class="form-check-input flexCheckDias" type="checkbox" value="" id="flexCheckUptJueves" name="dias_semana">
                     <label class="form-check-label" for="flexCheckUptJueves">
                         Jueves
                     </label>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptViernes" name="dias_semana">
+                    <input class="form-check-input flexCheckDias" type="checkbox" value="" id="flexCheckUptViernes" name="dias_semana">
                     <label class="form-check-label" for="flexCheckUptViernes">
                         Viernes
                     </label>
@@ -214,7 +214,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptSabado" name="dias_semana">
+                    <input class="form-check-input flexCheckDias" type="checkbox" value="" id="flexCheckUptSabado" name="dias_semana">
                     <label class="form-check-label" for="flexCheckUptSabado">
                         Sabado
                     </label>
@@ -222,7 +222,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckUptDomingo" name="dias_semana">
+                    <input class="form-check-input flexCheckDias" type="checkbox" value="" id="flexCheckUptDomingo" name="dias_semana">
                     <label class="form-check-label" for="flexCheckUptDomingo">
                         Domingo
                     </label>
@@ -548,7 +548,11 @@
     var vhorafintmp="@Model.HORA_FIN";
     var idRepAftFin="@Model.REPEAT_AFTER_FINISH";
     var diasSel="@Model.WDAY_M2S_EX";
-    
+
+    var vdiasexe="@Model.DAY_EX";  //aqui puede venir un valor en 0 o una cadena separada por ,
+    var vmonthexe="@Model.MONTH_EX";//aqui puede venir un valor en 0 o una cadena separada por ,
+
+
     var hora_ini=vhorainitmp[0]+""+vhorainitmp[1]+":"+vhorainitmp[2]+""+vhorainitmp[3];
     var hora_fin=vhorafintmp[0]+""+vhorafintmp[1]+":"+vhorafintmp[2]+""+vhorafintmp[3];
  
@@ -583,53 +587,61 @@ function getDays(arrayDay,dia){
 }
 
 
-
-
-
     params.idcrontab=idcrontab;
-
+    var conteodia=0;
     if(diasSel[0]==1){
         $("#flexCheckUptLunes").prop('checked', true);
+        conteodia +=1;
     } else {
         $("#flexCheckUptLunes").prop('checked', false);
     }
     
     if(diasSel[1]==1){
         $("#flexCheckUptMartes").prop('checked', true);
+         conteodia +=1;
     } else {
         $("#flexCheckUptMartes").prop('checked', false);
     }
  
     if(diasSel[2]==1){
         $("#flexCheckUptMiercoles").prop('checked', true);
+        conteodia +=1;
     } else {
         $("#flexCheckUptMiercoles").prop('checked', false);
     } 
   
     if(diasSel[3]==1){
         $("#flexCheckUptJueves").prop('checked', true);
+        conteodia +=1;
     } else {
         $("#flexCheckUptJueves").prop('checked', false);
     } 
 
     if(diasSel[4]==1){
         $("#flexCheckUptViernes").prop('checked', true);
+        conteodia +=1;
     } else {
         $("#flexCheckUptViernes").prop('checked', false);
     } 
 
     if(diasSel[5]==1){
         $("#flexCheckUptSabado").prop('checked', true);
+        conteodia +=1;
     } else {
         $("#flexCheckUptSabado").prop('checked', false);
     } 
 
     if(diasSel[6]==1){
         $("#flexCheckUptDomingo").prop('checked', true);
+        conteodia +=1;
     } else {
         $("#flexCheckUptDomingo").prop('checked', false);
     } 
-
+   
+    if(conteodia==7)
+     $("#flexCheckUptAlldays").prop('checked', true);
+     else 
+     $("#flexCheckUptAlldays").prop('checked', false);
     if (idRepAftFin == 1) {
         $("#IdUptRepeatAfterFin").prop('checked', true);
     } else {
@@ -639,6 +651,50 @@ function getDays(arrayDay,dia){
     var repeat_every_mins = "@Model.REPEAT_EVERY_MINS";
  
    
+
+
+    $(document).on("ready",function() {
+        $('.clockpicker').clockpicker();
+        $("#horaIni").val(hora_ini);
+        $("#horaFin").val(hora_fin);
+        $("#UptRepeatEveryMins").val(repeat_every_mins);
+
+       if(vmonthexe=="0")
+       {
+         $(".flexCheckMes").prop("checked",true);
+         
+          $("#flexCheckUptAllmonths").prop("checked",true);
+       }
+       else 
+       {
+        let Arraymexe = vmonthexe.split(","); //obtenemos meses de ejecucion separados por ,
+         $(Arraymexe).each(function(index, item){
+        console.log("mes ejecucion ",index," ",item);
+
+        $(".flexCheckMes:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+       
+         });
+       
+       }
+
+
+       if(vdiasexe=="0")
+       {
+          $(".diasexe").prop("checked",true);
+
+          $("#flexCheckUptAlldaysex").prop("checked",true);
+
+          
+       }
+       else 
+       {
+         let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
+           $(Arraydexe).each(function(index, item){
+         $(".diasexe:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+        
+         });
+       }
+    
       $(".flexCheckMes").on("change",function(){
 
     if($(this).is(":checked"))
@@ -695,12 +751,30 @@ function getDays(arrayDay,dia){
 
 
 
+        
+    $("#flexCheckUptAllmonths").on("change",function(){
+    if($(this).is(":checked"))
+          $(".flexCheckMes").prop("checked",true);
+          else
+          $(".flexCheckMes").prop("checked",false);
 
-    $(document).on("ready",function() {
-        $('.clockpicker').clockpicker();
-        $("#horaIni").val(hora_ini);
-        $("#horaFin").val(hora_fin);
-        $("#UptRepeatEveryMins").val(repeat_every_mins);
+    });
+    
+    $("#flexCheckUptAlldays").on("change",function(){
+     if($(this).is(":checked"))
+          $(".flexCheckDias").prop("checked",true);
+          else
+          $(".flexCheckDias").prop("checked",false);
+
+    });
+    
+    $("#flexCheckUptAlldaysex").on("change",function(){
+    if($(this).is(":checked"))
+         $(".diasexe").prop("checked",true);
+          else
+          $(".diasexe").prop("checked",false);
+
+    });
     })
 
     function Guardar() {
@@ -721,15 +795,19 @@ function getDays(arrayDay,dia){
             +($('#flexCheckUptDomingo').is(":checked") ? 1 : 0) + "";
 
            
-        if(!$("#flexCheckUptAlldaysex").is(":checked"))
-        diasex="0";   
-        else 
-        diasex=diasexeArray.join(",");
+       
 
-       if(!$("#flexCheckUptAllmonths").is(":checked"))
-        monthex="0";  
-        else
-        monthex=mesesArray.join(","); 
+        if($("#flexCheckUptAlldaysex").is(":checked") )
+        diasex="0";  
+        else 
+        diasex=diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
+
+       if($("#flexCheckUptAllmonths").is(":checked"))
+        monthex="0"; 
+       else 
+       monthex=mesesArray.length > 0 ? mesesArray.join(","):"0"; 
+      
+       
 
 
 
