@@ -561,7 +561,7 @@
     var mesesArray=[];
     var diasexeArray=[];
  
-    function daysMonth(anio,mes){
+    function daysMonth(anio,mes) {
         var arrayDays=[];
         var diasMes = new Date(anio, mes, 0).getDate();
         var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -671,9 +671,9 @@
             $("#flexCheckUptAlldaysex").prop("checked",true);
         }
         else 
-            {
-                let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
-                $(Arraydexe).each(function(index, item){
+        {
+            let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
+            $(Arraydexe).each(function(index, item) {
                 $(".diasexe:checkbox[value="+item+"]").prop("checked","true").trigger("change");
             });
         }
@@ -774,12 +774,12 @@
         if($("#flexCheckUptAlldaysex").is(":checked") )
             diasex="0";  
         else 
-            diasex=diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
+            diasex = diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
 
        if($("#flexCheckUptAllmonths").is(":checked"))
         monthex="0"; 
        else 
-       monthex=mesesArray.length > 0 ? mesesArray.join(","):"0"; 
+       monthex = mesesArray.length > 0 ? mesesArray.join(","):"0"; 
       
         var data_cron={
             "oCrontab": {
