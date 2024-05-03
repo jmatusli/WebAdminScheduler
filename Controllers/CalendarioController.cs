@@ -141,18 +141,28 @@ namespace WebAdminScheduler.Controllers
 			(OracleConnection)_DBContext.Database.GetDbConnection());
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
 		   OracleDataReader oraReader = oraCommand.ExecuteReader();
-		   List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
-		   
+		   //List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
+		   List<object> cp_contrabList = new List<object>();
+           var idcrontab=0;
+           var fecha="";
+           var horaInicio="";
+            var horaFin="";
+            var recurrencia="";
+            var wday_m2s_ex="";
+            var dayex="";
+            var monthex="";
+            var repeatevery_mins=0;
+            var repeatafter_finish="";
 			if (oraReader.HasRows)
 			{
 				while (oraReader.Read())
 				{
 					CP_CRONTAB cp_crontab = new CP_CRONTAB();
-					cp_crontab.IDCRONTAB = oraReader.GetInt32(0);
-					cp_crontab.FECHA = oraReader.GetString(1);
-					cp_crontab.HORA_INICIO = oraReader.GetString(2);
-					cp_crontab.RECURRENCIA = oraReader.GetString(3);
-					cp_crontab.HORA_FIN = oraReader.GetString(4);
+					/*cp_crontab.IDCRONTAB*/ idcrontab= oraReader.GetInt32(0);
+					/*cp_crontab.FECHA */fecha= oraReader.GetString(1);
+					/*cp_crontab.HORA_INICIO*/ horaInicio= oraReader.GetString(2);
+					/*cp_crontab.RECURRENCIA */recurrencia= oraReader.GetString(3);
+					/*cp_crontab.HORA_FIN */horaFin= oraReader.GetString(4);
                     string dias = oraReader.GetString(5);
                     string tdias = "";
                     string textdia = "";
@@ -195,28 +205,34 @@ namespace WebAdminScheduler.Controllers
                         textdia += tdias;
                     }
                         
-					cp_crontab.WDAY_M2S_EX = textdia;
-					cp_crontab.DAY_EX = oraReader.GetString(6);
-					cp_crontab.MONTH_EX = oraReader.GetString(7);
+					/*cp_crontab.WDAY_M2S_EX */wday_m2s_ex= textdia;
+					/*cp_crontab.DAY_EX*/ dayex= oraReader.GetString(6);
+					/*cp_crontab.MONTH_EX */monthex= oraReader.GetString(7);
                     if (!oraReader.IsDBNull(8))
                     {
-                        cp_crontab.REPEAT_EVERY_MINS = oraReader.GetInt32(8);   
+                       /* cp_crontab.REPEAT_EVERY_MINS */repeatevery_mins= oraReader.GetInt32(8);   
                     }
 
                     if (!oraReader.IsDBNull(9))
                     {
-                        cp_crontab.REPEAT_AFTER_FINISH = oraReader.GetInt32(9);
-                        /*string repeat_aft = oraReader.GetInt32(9);
+                       // cp_crontab.REPEAT_AFTER_FINISH = oraReader.GetInt32(9);
+                        var repeat_aft = oraReader.GetInt32(9);
                         string frepeat_aft = "";
-                        if(repeat_aft == "1") 
+                        if(repeat_aft == 1) 
                         { 
                             frepeat_aft = "Y";
                         } else {
                             frepeat_aft = "N";
-                        } */
+                        } 
+
+                        repeatafter_finish=frepeat_aft;
                     }
+			var c = new { IDCRONTAB = idcrontab,FECHA=fecha,HORA_INICIO=horaInicio,RECURRENCIA=recurrencia,
+                HORA_FIN=horaFin,WDAY_M2S_EX=wday_m2s_ex,DAY_EX=dayex,MONTH_EX=monthex,REPEAT_EVERY_MINS=repeatevery_mins,
+                REPEAT_AFTER_FINISH=repeatafter_finish
+              };
+                cp_contrabList.Add(c);
 					 
-					cp_contrabList.Add(cp_crontab);
 				}
 				filterRecord = cp_contrabList.Count();
 			}
