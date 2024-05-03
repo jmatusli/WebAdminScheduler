@@ -179,8 +179,9 @@ namespace WebAdminScheduler.Controllers
             _DBContext.Database.OpenConnection();
             String _query = "SELECT * FROM (SELECT cc.*,con.usuario,row_number() over "
             + "(ORDER BY cc.IDPROC ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cc "
-            + " JOIN APP_SCL_ALTAMIRA.CP_CONEXION con on cc.idconex=con.idconex  ) "
-            + " WHERE estado='"+estado_param+"' and line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) + " " + textSearch + " " + textOrder;
+            + " JOIN APP_SCL_ALTAMIRA.CP_CONEXION con on cc.idconex=con.idconex "
+            +"  WHERE estado='"+estado_param+"' ) "
+            + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) + " " + textSearch + " " + textOrder;
 
             OracleCommand oraCommand = new OracleCommand(_query,
             (OracleConnection)_DBContext.Database.GetDbConnection());
