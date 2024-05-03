@@ -549,7 +549,7 @@
     var idRepAftFin="@Model.REPEAT_AFTER_FINISH";
     var diasSel="@Model.WDAY_M2S_EX";
 
-    var vdiasexe="@Model.DAY_EX";  //aqui puede venir un valor en 0 o una cadena separada por ,
+    var vdiasexe = "@Model.DAY_EX";  //aqui puede venir un valor en 0 o una cadena separada por ,
     var vmonthexe="@Model.MONTH_EX";//aqui puede venir un valor en 0 o una cadena separada por ,
 
     var hora_ini=vhorainitmp[0]+""+vhorainitmp[1]+":"+vhorainitmp[2]+""+vhorainitmp[3];
@@ -574,110 +574,109 @@
         return arrayDays;
     }
 
-function getDays(arrayDay,dia) {
-    var data=$.map(arrayDay, function(obj) {
-        if(obj.nombredia == dia || dia=="")
-            return obj; 
-        });
-        return data;  
-    }
+    function getDays(arrayDay,dia) {
+        var data=$.map(arrayDay, function(obj) {
+            if(obj.nombredia == dia || dia=="")
+                return obj; 
+            });
+            return data;  
+        }
 
-    params.idcrontab = idcrontab;
-    var conteodia=0;
-    if(diasSel[0]==1){
-        $("#flexCheckUptLunes").prop('checked', true);
-        conteodia +=1;
-    } else {
-        $("#flexCheckUptLunes").prop('checked', false);
-    }
+        params.idcrontab = idcrontab;
+        var conteodia=0;
+        if(diasSel[0]==1){
+            $("#flexCheckUptLunes").prop('checked', true);
+            conteodia +=1;
+        } else {
+            $("#flexCheckUptLunes").prop('checked', false);
+        }
+        
+        if(diasSel[1]==1){
+            $("#flexCheckUptMartes").prop('checked', true);
+            conteodia +=1;
+        } else {
+            $("#flexCheckUptMartes").prop('checked', false);
+        }
     
-    if(diasSel[1]==1){
-        $("#flexCheckUptMartes").prop('checked', true);
-        conteodia +=1;
-    } else {
-        $("#flexCheckUptMartes").prop('checked', false);
-    }
- 
-    if(diasSel[2]==1){
-        $("#flexCheckUptMiercoles").prop('checked', true);
-        conteodia +=1;
-    } else {
-        $("#flexCheckUptMiercoles").prop('checked', false);
-    } 
+        if(diasSel[2]==1){
+            $("#flexCheckUptMiercoles").prop('checked', true);
+            conteodia +=1;
+        } else {
+            $("#flexCheckUptMiercoles").prop('checked', false);
+        } 
   
-    if(diasSel[3]==1){
-        $("#flexCheckUptJueves").prop('checked', true);
-        conteodia +=1;
-    } else {
-        $("#flexCheckUptJueves").prop('checked', false);
-    } 
+        if(diasSel[3]==1){
+            $("#flexCheckUptJueves").prop('checked', true);
+            conteodia +=1;
+        } else {
+            $("#flexCheckUptJueves").prop('checked', false);
+        } 
 
-    if(diasSel[4]==1){
-        $("#flexCheckUptViernes").prop('checked', true);
-        conteodia +=1;
-    } else {
-        $("#flexCheckUptViernes").prop('checked', false);
-    } 
+        if(diasSel[4]==1){
+            $("#flexCheckUptViernes").prop('checked', true);
+            conteodia +=1;
+        } else {
+            $("#flexCheckUptViernes").prop('checked', false);
+        } 
 
-    if(diasSel[5]==1){
-        $("#flexCheckUptSabado").prop('checked', true);
-        conteodia +=1;
-    } else {
-        $("#flexCheckUptSabado").prop('checked', false);
-    } 
+        if(diasSel[5]==1){
+            $("#flexCheckUptSabado").prop('checked', true);
+            conteodia +=1;
+        } else {
+            $("#flexCheckUptSabado").prop('checked', false);
+        } 
 
-    if(diasSel[6]==1){
-        $("#flexCheckUptDomingo").prop('checked', true);
-        conteodia +=1;
-    } else {
-        $("#flexCheckUptDomingo").prop('checked', false);
-    } 
-   
-    if(conteodia==7)
-     $("#flexCheckUptAlldays").prop('checked', true);
-     else 
-     $("#flexCheckUptAlldays").prop('checked', false);
-    if (idRepAftFin == 1) {
-        $("#IdUptRepeatAfterFin").prop('checked', true);
-    } else {
-        $("#IdUptRepeatAfterFin").prop('checked', false);
-    }
- 
-    var repeat_every_mins = "@Model.REPEAT_EVERY_MINS";
- 
-    $(document).on("ready",function() {
-        $('.clockpicker').clockpicker();
-        $("#horaIni").val(hora_ini);
-        $("#horaFin").val(hora_fin);
-        $("#UptRepeatEveryMins").val(repeat_every_mins);
+        if(diasSel[6]==1){
+            $("#flexCheckUptDomingo").prop('checked', true);
+            conteodia +=1;
+        } else {
+            $("#flexCheckUptDomingo").prop('checked', false);
+        } 
+    
+        if(conteodia==7)
+        $("#flexCheckUptAlldays").prop('checked', true);
+        else 
+        $("#flexCheckUptAlldays").prop('checked', false);
+        if (idRepAftFin == 1) {
+            $("#IdUptRepeatAfterFin").prop('checked', true);
+        } else {
+            $("#IdUptRepeatAfterFin").prop('checked', false);
+        }
+    
+        var repeat_every_mins = "@Model.REPEAT_EVERY_MINS";
+    
+        $(document).on("ready",function() {
+            $('.clockpicker').clockpicker();
+            $("#horaIni").val(hora_ini);
+            $("#horaFin").val(hora_fin);
+            $("#UptRepeatEveryMins").val(repeat_every_mins);
 
-       if(vmonthexe=="0")
-       {
+        if(vmonthexe=="0")
+        {
             $(".flexCheckMes").prop("checked",true);
             $("#flexCheckUptAllmonths").prop("checked",true);
-       }
-       else 
-       {
-        let Arraymexe = vmonthexe.split(","); //obtenemos meses de ejecucion separados por ,
-            $(Arraymexe).each(function(index, item){
-            console.log("mes ejecucion ",index," ",item);
-            $(".flexCheckMes:checkbox[value="+item+"]").prop("checked","true").trigger("change");
-        });
-       
-       }
+        }
+        else 
+        {
+            let Arraymexe = vmonthexe.split(","); //obtenemos meses de ejecucion separados por ,
+                $(Arraymexe).each(function(index, item){
+                console.log("mes ejecucion ",index," ",item);
+                $(".flexCheckMes:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+            });
+        }
 
-       if(vdiasexe=="0")
-       {
+        if(vdiasexe == "0")
+        {
             $(".diasexe").prop("checked",true);
             $("#flexCheckUptAlldaysex").prop("checked",true);
-       }
-       else 
-        {
-            let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
-            $(Arraydexe).each(function(index, item){
-            $(".diasexe:checkbox[value="+item+"]").prop("checked","true").trigger("change");
-        });
-    }
+        }
+        else 
+            {
+                let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
+                $(Arraydexe).each(function(index, item){
+                $(".diasexe:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+            });
+        }
     
     $(".flexCheckMes").on("change",function(){
 
@@ -703,9 +702,9 @@ function getDays(arrayDay,dia) {
             console.log("meses seleccionados ",mesesArray.join(","));
     })
   
-    $(".flexCheckDias").on("change",function(){
+    $(".flexCheckDias").on("change",function() {
         /*if($(this).is(":checked"))
-        console.log("dia seleccionado ",$(this).is(":checked")," valor ",$(this).val())
+            console.log("dia seleccionado ",$(this).is(":checked")," valor ",$(this).val())
         */
         var miarrayx=daysMonth(2024,$('.flexCheckMes:checked').val());
         var dias=getDays(miarrayx,$(this).val());
@@ -741,11 +740,10 @@ function getDays(arrayDay,dia) {
     });
     
     $("#flexCheckUptAlldays").on("change",function(){
-     if($(this).is(":checked"))
-          $(".flexCheckDias").prop("checked",true);
-          else
-          $(".flexCheckDias").prop("checked",false);
-
+        if($(this).is(":checked"))
+            $(".flexCheckDias").prop("checked",true);
+        else
+            $(".flexCheckDias").prop("checked",false);
     });
     
     $("#flexCheckUptAlldaysex").on("change",function() {
@@ -773,23 +771,16 @@ function getDays(arrayDay,dia) {
             +($('#flexCheckUptSabado').is(":checked") ? 1 : 0) + ""
             +($('#flexCheckUptDomingo').is(":checked") ? 1 : 0) + "";
 
-           
-       
-
         if($("#flexCheckUptAlldaysex").is(":checked") )
-        diasex="0";  
+            diasex="0";  
         else 
-        diasex=diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
+            diasex=diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
 
        if($("#flexCheckUptAllmonths").is(":checked"))
         monthex="0"; 
        else 
        monthex=mesesArray.length > 0 ? mesesArray.join(","):"0"; 
       
-       
-
-
-
         var data_cron={
             "oCrontab": {
             "IDCRONTAB": idcrontab,

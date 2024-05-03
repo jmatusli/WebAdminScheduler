@@ -50,7 +50,15 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckEnero" disabled>
+                        <input class="form-check-input" id="checkUptAllmonths" type="checkbox" disabled/> Seleccionar/Deseleccionar todos<br><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 align-items-center">
+                    <div class="col-auto">
+                        <div class="form-check">
+                        <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckEnero" disabled>
                             <label class="form-check-label" for="flexCheckTxtEnero">
                                 Enero
                             </label>
@@ -58,7 +66,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckFebrero" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckFebrero" disabled>
                             <label class="form-check-label" for="flexCheckTxtFebrero">
                                 Febrero
                             </label>
@@ -66,7 +74,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMarzo" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckMarzo" disabled>
                             <label class="form-check-label" for="flexCheckTxtMarzo">
                                 Marzo
                             </label>
@@ -74,7 +82,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAbril" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckAbril" disabled>
                             <label class="form-check-label" for="flexCheckTxtAbril">
                                 Abril
                             </label>
@@ -82,7 +90,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMayo" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckMayo" disabled>
                             <label class="form-check-label" for="flexCheckTxtMayo">
                                 Mayo
                             </label>
@@ -90,7 +98,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckJunio" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckJunio" disabled>
                             <label class="form-check-label" for="flexCheckTxtJunio">
                                 Junio
                             </label>
@@ -98,7 +106,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckJulio" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckJulio" disabled>
                             <label class="form-check-label" for="flexCheckTxtJulio">
                                 Julio
                             </label>
@@ -106,7 +114,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAgost" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckAgost" disabled>
                             <label class="form-check-label" for="flexCheckTxtAgost">
                                 Agosto
                             </label>
@@ -114,7 +122,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckSept" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckSept" disabled>
                             <label class="form-check-label" for="flexCheckTxtSept">
                                 Septiembre
                             </label>
@@ -122,7 +130,7 @@
                     </div>        
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckOct" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckOct" disabled>
                             <label class="form-check-label" for="flexCheckTxtOct">
                                 Octubre
                             </label>
@@ -130,7 +138,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckNov" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckNov" disabled>
                             <label class="form-check-label" for="flexCheckTxtNov">
                                 Noviembre
                             </label>
@@ -138,7 +146,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDic" disabled>
+                            <input class="form-check-input checkMesDt" type="checkbox" value="" id="flexCheckDic" disabled>
                             <label class="form-check-label" for="flexCheckTxtDic">
                                 Diciembre
                             </label>
@@ -544,7 +552,7 @@
     var idRepAftFin="@Model.REPEAT_AFTER_FINISH";
     var diasSel="@Model.WDAY_M2S_EX";
     var diasSelExe="@Model.DAY_EX";
-    var montExe="@Model.MONTH_EX";
+    var monthexe="@Model.MONTH_EX";
     var vhorainitmp="@Model.HORA_INICIO";
     var vhorafintmp="@Model.HORA_FIN";
 
@@ -798,76 +806,18 @@
     }
 
     //Validación de los meses
-    if(montExe[0] == 1){
-        $("#flexCheckEnero").prop('checked', true);
-    } else {
-        $("#flexCheckEnero").prop('checked', false);
+    if(monthexe=="0")
+    {
+        $(".checkMesDt").prop("checked",true);
+        $("#checkUptAllmonths").prop("checked",true);
     }
-
-    if(montExe[1] == 2){
-        $("#flexCheckFebrero").prop('checked', true);
-    } else {
-        $("#flexCheckFebrero").prop('checked', false);
-    }
-
-    if(montExe[2] == 3){
-        $("#flexCheckMarzo").prop('checked', true);
-    } else {
-        $("#flexCheckMarzo").prop('checked', false);
-    }
-
-    if(montExe[3] == 4){
-        $("#flexCheckAbril").prop('checked', true);
-    } else {
-        $("#flexCheckAbril").prop('checked', false);
-    }
-
-    if(montExe[4] == 5){
-        $("#flexCheckMayo").prop('checked', true);
-    } else {
-        $("#flexCheckMayo").prop('checked', false);
-    }
-
-    if(montExe[5] == 6){
-        $("#flexCheckJunio").prop('checked', true);
-    } else {
-        $("#flexCheckJunio").prop('checked', false);
-    }
-
-    if(montExe[6] == 7){
-        $("#flexCheckJulio").prop('checked', true);
-    } else {
-        $("#flexCheckJulio").prop('checked', false);
-    }
-
-    if(montExe[7] == 8){
-        $("#flexCheckAgost").prop('checked', true);
-    } else {
-        $("#flexCheckAgost").prop('checked', false);
-    }
-
-    if(montExe[8] == 9){
-        $("#flexCheckSept").prop('checked', true);
-    } else {
-        $("#flexCheckSept").prop('checked', false);
-    }
-
-    if(montExe[9] == 10){
-        $("#flexCheckOct").prop('checked', true);
-    } else {
-        $("#flexCheckOct").prop('checked', false);
-    }
-
-    if(montExe[10] == 11){
-        $("#flexCheckNov").prop('checked', true);
-    } else {
-        $("#flexCheckNov").prop('checked', false);
-    }
-
-    if(montExe[11] == 12){
-        $("#flexCheckDic").prop('checked', true);
-    } else {
-        $("#flexCheckDic").prop('checked', false);
+    else 
+    {
+        let Arraymexe = monthexe.split(","); //obtenemos meses de ejecucion separados por ,
+            $(Arraymexe).each(function(index, item){
+            console.log("mes ejecucion ",index," ",item);
+            $(".checkMesDt:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+        });
     }
 
     function toggle(source) {
