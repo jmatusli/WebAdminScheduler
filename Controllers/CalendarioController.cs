@@ -160,9 +160,12 @@ namespace WebAdminScheduler.Controllers
 					CP_CRONTAB cp_crontab = new CP_CRONTAB();
 					/*cp_crontab.IDCRONTAB*/ idcrontab= oraReader.GetInt32(0);
 					/*cp_crontab.FECHA */fecha= oraReader.GetString(1);
-					/*cp_crontab.HORA_INICIO*/ horaInicio= oraReader.GetString(2);
+					/*cp_crontab.HORA_INICIO*/   string horain= oraReader.GetString(2);
+                    horaInicio =horain[0]+""+""+horain[1]+":"+horain[2]+""+horain[3];
+
 					/*cp_crontab.RECURRENCIA */recurrencia= oraReader.GetString(3);
-					/*cp_crontab.HORA_FIN */horaFin= oraReader.GetString(4);
+					/*cp_crontab.HORA_FIN */string horafin= oraReader.GetString(4);
+                    horaFin=horafin[0]+""+""+horafin[1]+":"+horafin[2]+""+horafin[3];
                     string dias = oraReader.GetString(5);
                     string tdias = "";
                     string textdia = "";
