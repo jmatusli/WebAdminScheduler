@@ -97,28 +97,28 @@ namespace WebAdminScheduler.Controllers
            }
            else 
            {
-            procesost.COMPRESION = dtoprocesos.oProcesos.COMPRESION;
-            procesost.DEPENDENCIA = dtoprocesos.oProcesos.DEPENDENCIA;
-            procesost.DESCRIPCION = dtoprocesos.oProcesos.DESCRIPCION;
-            procesost.IDCONEX = dtoprocesos.oProcesos.IDCONEX;
-         
-            procesost.ESPERA_INTENTO = dtoprocesos.oProcesos.ESPERA_INTENTO;
-            procesost.ESTADO = dtoprocesos.oProcesos.ESTADO;
-            procesost.FTP = dtoprocesos.oProcesos.FTP;
-            procesost.IDHOST = dtoprocesos.oProcesos.IDHOST;
-            procesost.INTENTOS = dtoprocesos.oProcesos.INTENTOS;
-            procesost.NODE = dtoprocesos.oProcesos.NODE;
-            procesost.NOMBRE = dtoprocesos.oProcesos.NOMBRE;
-            procesost.IDCRONTAB = dtoprocesos.oProcesos.IDCRONTAB;
-            procesost.PARAMETRO1 = dtoprocesos.oProcesos.PARAMETRO1;
-            procesost.PARAMETRO2 = dtoprocesos.oProcesos.PARAMETRO2;
-            procesost.PARAMETRO3 = dtoprocesos.oProcesos.PARAMETRO3;
-            procesost.PARAMETRO4 = dtoprocesos.oProcesos.PARAMETRO4;
-            procesost.PATH = dtoprocesos.oProcesos.PATH;
-       
-            _DBContext.CP_PROCESOS.Update(procesost);
-            _DBContext.SaveChanges();
-          }
+                procesost.COMPRESION = dtoprocesos.oProcesos.COMPRESION;
+                procesost.DEPENDENCIA = dtoprocesos.oProcesos.DEPENDENCIA;
+                procesost.DESCRIPCION = dtoprocesos.oProcesos.DESCRIPCION;
+                procesost.IDCONEX = dtoprocesos.oProcesos.IDCONEX;
+            
+                procesost.ESPERA_INTENTO = dtoprocesos.oProcesos.ESPERA_INTENTO;
+                procesost.ESTADO = dtoprocesos.oProcesos.ESTADO;
+                procesost.FTP = dtoprocesos.oProcesos.FTP;
+                procesost.IDHOST = dtoprocesos.oProcesos.IDHOST;
+                procesost.INTENTOS = dtoprocesos.oProcesos.INTENTOS;
+                procesost.NODE = dtoprocesos.oProcesos.NODE;
+                procesost.NOMBRE = dtoprocesos.oProcesos.NOMBRE;
+                procesost.IDCRONTAB = dtoprocesos.oProcesos.IDCRONTAB;
+                procesost.PARAMETRO1 = dtoprocesos.oProcesos.PARAMETRO1;
+                procesost.PARAMETRO2 = dtoprocesos.oProcesos.PARAMETRO2;
+                procesost.PARAMETRO3 = dtoprocesos.oProcesos.PARAMETRO3;
+                procesost.PARAMETRO4 = dtoprocesos.oProcesos.PARAMETRO4;
+                procesost.PATH = dtoprocesos.oProcesos.PATH;
+        
+                _DBContext.CP_PROCESOS.Update(procesost);
+                _DBContext.SaveChanges();
+            }
 
             return Json(procesost);
         }
@@ -271,20 +271,20 @@ namespace WebAdminScheduler.Controllers
               DEPENDENCIA=dependencia,INTENTOS=intentos,ESPERA_INTENTO=espera_intento,ESTADO=estado,FTP=ftp,
               IDHOST=idhost,COMPRESION=compresion,IDCRONTAB=idcrontab,NODE=node
               };
-             procesosList.Add(c);
-                    
-                }
+                procesosList.Add(c);  
+            }
                 filterRecord = procesosList.Count();
 
             }
             else
             {
                 return Json(new {
-            draw = draw, 
-                iTotalRecords = 0,
-                iDisplayLength = 0,
-                iTotalDisplayRecords = 0,
-            aaData=new {}});
+                    draw = draw, 
+                    iTotalRecords = 0,
+                    iDisplayLength = 0,
+                    iTotalDisplayRecords = 0,
+                    aaData=new {}
+                });
             }
 
             oraReader.Close();

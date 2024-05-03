@@ -161,7 +161,7 @@ namespace WebAdminScheduler.Controllers
 					/*cp_crontab.IDCRONTAB*/ idcrontab= oraReader.GetInt32(0);
 					/*cp_crontab.FECHA */fecha= oraReader.GetString(1);
 					/*cp_crontab.HORA_INICIO*/   string horain= oraReader.GetString(2);
-                    horaInicio =horain[0]+""+""+horain[1]+":"+horain[2]+""+horain[3];
+                    horaInicio = horain[0] + "" + "" + horain[1] + ":" + horain[2] + "" + horain[3];
 
 					/*cp_crontab.RECURRENCIA */recurrencia= oraReader.GetString(3);
 					/*cp_crontab.HORA_FIN */string horafin= oraReader.GetString(4);
@@ -208,9 +208,84 @@ namespace WebAdminScheduler.Controllers
                         textdia += tdias;
                     }
                         
-					/*cp_crontab.WDAY_M2S_EX */wday_m2s_ex= textdia;
+					/*cp_crontab.WDAY_M2S_EX */wday_m2s_ex = textdia;
 					/*cp_crontab.DAY_EX*/ dayex= oraReader.GetString(6);
-					/*cp_crontab.MONTH_EX */monthex= oraReader.GetString(7);
+					string monts_exe = oraReader.GetString(7);
+                    string tmonts_exe = "";
+                    string textmonts_exe = "";
+                    if(monts_exe.Substring(0,1) == "1") 
+                    {
+                        tmonts_exe = "Ene, ";
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "2") 
+                    { 
+                        tmonts_exe = "Feb, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "3") 
+                    { 
+                        tmonts_exe = "Marz, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "4") 
+                    { 
+                        tmonts_exe = "Abr, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "5") 
+                    { 
+                        tmonts_exe = "May, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "6") 
+                    { 
+                        tmonts_exe = "Jun, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "7") 
+                    { 
+                        tmonts_exe = "Jul, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "8") 
+                    { 
+                        tmonts_exe = "Agos, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "9") 
+                    { 
+                        tmonts_exe = "Sept, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "10") 
+                    { 
+                        tmonts_exe = "Oct, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "11") 
+                    { 
+                        tmonts_exe = "Nov, "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    if(monts_exe.Substring(0,1) == "12") 
+                    { 
+                        tmonts_exe = "Dic. "; 
+                        textmonts_exe += tmonts_exe;
+                    }
+
+                    /*cp_crontab.MONTH_EX */monthex= textmonts_exe;
                     if (!oraReader.IsDBNull(8))
                     {
                        /* cp_crontab.REPEAT_EVERY_MINS */repeatevery_mins= oraReader.GetInt32(8);   
@@ -218,7 +293,6 @@ namespace WebAdminScheduler.Controllers
 
                     if (!oraReader.IsDBNull(9))
                     {
-                       // cp_crontab.REPEAT_AFTER_FINISH = oraReader.GetInt32(9);
                         var repeat_aft = oraReader.GetInt32(9);
                         string frepeat_aft = "";
                         if(repeat_aft == 1) 
@@ -230,12 +304,11 @@ namespace WebAdminScheduler.Controllers
 
                         repeatafter_finish=frepeat_aft;
                     }
-			var c = new { IDCRONTAB = idcrontab,FECHA=fecha,HORA_INICIO=horaInicio,RECURRENCIA=recurrencia,
-                HORA_FIN=horaFin,WDAY_M2S_EX=wday_m2s_ex,DAY_EX=dayex,MONTH_EX=monthex,REPEAT_EVERY_MINS=repeatevery_mins,
-                REPEAT_AFTER_FINISH=repeatafter_finish
-              };
-                cp_contrabList.Add(c);
-					 
+                    var c = new { IDCRONTAB = idcrontab,FECHA=fecha,HORA_INICIO=horaInicio,RECURRENCIA=recurrencia,
+                        HORA_FIN=horaFin,WDAY_M2S_EX=wday_m2s_ex,DAY_EX=dayex,MONTH_EX=monthex,REPEAT_EVERY_MINS=repeatevery_mins,
+                        REPEAT_AFTER_FINISH=repeatafter_finish
+                    };
+                    cp_contrabList.Add(c);
 				}
 				filterRecord = cp_contrabList.Count();
 			}

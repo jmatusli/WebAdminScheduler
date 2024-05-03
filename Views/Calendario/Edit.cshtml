@@ -552,7 +552,6 @@
     var vdiasexe="@Model.DAY_EX";  //aqui puede venir un valor en 0 o una cadena separada por ,
     var vmonthexe="@Model.MONTH_EX";//aqui puede venir un valor en 0 o una cadena separada por ,
 
-
     var hora_ini=vhorainitmp[0]+""+vhorainitmp[1]+":"+vhorainitmp[2]+""+vhorainitmp[3];
     var hora_fin=vhorafintmp[0]+""+vhorafintmp[1]+":"+vhorafintmp[2]+""+vhorafintmp[3];
  
@@ -562,32 +561,28 @@
     var mesesArray=[];
     var diasexeArray=[];
  
+    function daysMonth(anio,mes){
+        var arrayDays=[];
+        var diasMes = new Date(anio, mes, 0).getDate();
+        var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
-   function daysMonth(anio,mes){
-var arrayDays=[];
-var diasMes = new Date(anio, mes, 0).getDate();
-var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        for (var dia = 1; dia <= diasMes; dia++) {
+        // Hay que restarle 1 para obtener el mes correcto
+        var indice = new Date(anio, mes - 1, dia).getDay();
+            arrayDays.push({"dia":`${dia}`,"mes":`${mes}`,"anio":`${anio}`,"nombredia":`${diasSemana[indice]}`});
+        }
+        return arrayDays;
+    }
 
-for (var dia = 1; dia <= diasMes; dia++) {
-  // Ojo, hay que restarle 1 para obtener el mes correcto
-  var indice = new Date(anio, mes - 1, dia).getDay();
-    arrayDays.push({"dia":`${dia}`,"mes":`${mes}`,"anio":`${anio}`,"nombredia":`${diasSemana[indice]}`});
-}
-return arrayDays;
-}
+function getDays(arrayDay,dia) {
+    var data=$.map(arrayDay, function(obj) {
+        if(obj.nombredia == dia || dia=="")
+            return obj; 
+        });
+        return data;  
+    }
 
-function getDays(arrayDay,dia){
- var data=$.map(arrayDay, function(obj) {
-    if(obj.nombredia == dia || dia=="")
-         return obj; 
-});
-    return data;
-
-    
-}
-
-
-    params.idcrontab=idcrontab;
+    params.idcrontab = idcrontab;
     var conteodia=0;
     if(diasSel[0]==1){
         $("#flexCheckUptLunes").prop('checked', true);
@@ -598,7 +593,7 @@ function getDays(arrayDay,dia){
     
     if(diasSel[1]==1){
         $("#flexCheckUptMartes").prop('checked', true);
-         conteodia +=1;
+        conteodia +=1;
     } else {
         $("#flexCheckUptMartes").prop('checked', false);
     }
@@ -650,9 +645,6 @@ function getDays(arrayDay,dia){
  
     var repeat_every_mins = "@Model.REPEAT_EVERY_MINS";
  
-   
-
-
     $(document).on("ready",function() {
         $('.clockpicker').clockpicker();
         $("#horaIni").val(hora_ini);
@@ -661,103 +653,91 @@ function getDays(arrayDay,dia){
 
        if(vmonthexe=="0")
        {
-         $(".flexCheckMes").prop("checked",true);
-         
-          $("#flexCheckUptAllmonths").prop("checked",true);
+            $(".flexCheckMes").prop("checked",true);
+            $("#flexCheckUptAllmonths").prop("checked",true);
        }
        else 
        {
         let Arraymexe = vmonthexe.split(","); //obtenemos meses de ejecucion separados por ,
-         $(Arraymexe).each(function(index, item){
-        console.log("mes ejecucion ",index," ",item);
-
-        $(".flexCheckMes:checkbox[value="+item+"]").prop("checked","true").trigger("change");
-       
-         });
+            $(Arraymexe).each(function(index, item){
+            console.log("mes ejecucion ",index," ",item);
+            $(".flexCheckMes:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+        });
        
        }
-
 
        if(vdiasexe=="0")
        {
-          $(".diasexe").prop("checked",true);
-
-          $("#flexCheckUptAlldaysex").prop("checked",true);
-
-          
+            $(".diasexe").prop("checked",true);
+            $("#flexCheckUptAlldaysex").prop("checked",true);
        }
        else 
-       {
-         let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
-           $(Arraydexe).each(function(index, item){
-         $(".diasexe:checkbox[value="+item+"]").prop("checked","true").trigger("change");
-        
-         });
-       }
-    
-      $(".flexCheckMes").on("change",function(){
-
-    if($(this).is(":checked"))
-    { 
-      var miarrayx=daysMonth(2024,$(this).val());
-      var dias=getDays(miarrayx,"");
-      if($('.flexCheckMes:checked').length==1)
-      $(".diasexe").prop("disabled",true);
-      $.each(dias, function( index, item ) 
-      {
-        //console.log(item);
-        $(":checkbox[value="+item.dia+"]").prop("disabled",false);
-      });
-      //  console.log("mes seleccionado ",$(this).is(":checked")," valor ",$(this).val())
-      mesesArray.indexOf($(this).val()) === -1 ? mesesArray.push($(this).val()) :''; 
-    } 
-    else 
-    {
-      const index = mesesArray.indexOf($(this).val());
-      const x = mesesArray.splice(index, 1);
+        {
+            let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
+            $(Arraydexe).each(function(index, item){
+            $(".diasexe:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+        });
     }
-    console.log("meses seleccionados ",mesesArray.join(","));
+    
+    $(".flexCheckMes").on("change",function(){
+
+        if($(this).is(":checked"))
+        { 
+            var miarrayx=daysMonth(2024,$(this).val());
+            var dias=getDays(miarrayx,"");
+            if($('.flexCheckMes:checked').length==1)
+                $(".diasexe").prop("disabled",true);
+                $.each(dias, function( index, item ) 
+            {
+                //console.log(item);
+                $(":checkbox[value="+item.dia+"]").prop("disabled",false);
+            });
+            //  console.log("mes seleccionado ",$(this).is(":checked")," valor ",$(this).val())
+            mesesArray.indexOf($(this).val()) === -1 ? mesesArray.push($(this).val()) :''; 
+        } 
+        else 
+        {
+            const index = mesesArray.indexOf($(this).val());
+            const x = mesesArray.splice(index, 1);
+        }
+            console.log("meses seleccionados ",mesesArray.join(","));
     })
   
     $(".flexCheckDias").on("change",function(){
-    /*if($(this).is(":checked"))
-    console.log("dia seleccionado ",$(this).is(":checked")," valor ",$(this).val())
-    */
-    var miarrayx=daysMonth(2024,$('.flexCheckMes:checked').val());
-    var dias=getDays(miarrayx,$(this).val());
-    if($('.flexCheckDias:checked').length==1) {
-      $(".diasexe").prop("disabled",true);
-      $.each(dias, function( index, item ) {
-        //console.log(item);
-        $(":checkbox[value="+item.dia+"]").prop("disabled",false);
-      });
-    }
-    else 
-      $(".diasexe").prop("disabled",false);
+        /*if($(this).is(":checked"))
+        console.log("dia seleccionado ",$(this).is(":checked")," valor ",$(this).val())
+        */
+        var miarrayx=daysMonth(2024,$('.flexCheckMes:checked').val());
+        var dias=getDays(miarrayx,$(this).val());
+        if($('.flexCheckDias:checked').length==1) {
+        $(".diasexe").prop("disabled",true);
+        $.each(dias, function( index, item ) {
+            //console.log(item);
+            $(":checkbox[value="+item.dia+"]").prop("disabled",false);
+        });
+        }
+        else 
+            $(".diasexe").prop("disabled",false);
+        })
+
+        $(".diasexe").on("change",function() {
+        if($(this).is(":checked"))
+        {
+            diasexeArray.indexOf($(this).val()) === -1 ? diasexeArray.push($(this).val()) : '';
+        }
+        else 
+        {
+            const index = diasexeArray.indexOf($(this).val());
+            const x = diasexeArray.splice(index, 1);
+        }
+        console.log("dias ejecucion  seleccionados ",diasexeArray.join(","));
     })
 
-  $(".diasexe").on("change",function() {
+    $("#flexCheckUptAllmonths").on("change",function() {
     if($(this).is(":checked"))
-    {
-      diasexeArray.indexOf($(this).val()) === -1 ? diasexeArray.push($(this).val()) : '';
-    }
-    else 
-    {
-      const index = diasexeArray.indexOf($(this).val());
-      const x = diasexeArray.splice(index, 1);
-    }
-    console.log("dias ejecucion  seleccionados ",diasexeArray.join(","));
-  })
-
-
-
-        
-    $("#flexCheckUptAllmonths").on("change",function(){
-    if($(this).is(":checked"))
-          $(".flexCheckMes").prop("checked",true);
-          else
-          $(".flexCheckMes").prop("checked",false);
-
+        $(".flexCheckMes").prop("checked",true);
+    else
+        $(".flexCheckMes").prop("checked",false);
     });
     
     $("#flexCheckUptAlldays").on("change",function(){
@@ -768,14 +748,13 @@ function getDays(arrayDay,dia){
 
     });
     
-    $("#flexCheckUptAlldaysex").on("change",function(){
-    if($(this).is(":checked"))
-         $(".diasexe").prop("checked",true);
-          else
-          $(".diasexe").prop("checked",false);
-
+    $("#flexCheckUptAlldaysex").on("change",function() {
+        if($(this).is(":checked"))
+            $(".diasexe").prop("checked",true);
+        else
+            $(".diasexe").prop("checked",false);
     });
-    })
+})
 
     function Guardar() {
         hora_ini=$('#horaIni').val();
