@@ -133,27 +133,27 @@
           <div class="row g-4 align-items-center">
 
             <div class="col-auto">
-              <span id="passwordHelpInline" class="form-text">
+              <label class="form-check-label" for="lblHoraInicio">
                 Hora Inicio
-              </span>
+              </label>
             </div>
             <div class="col-auto">
               <div class="col-sm-4">
                 <input type="text" class="form-control clockpicker" 
-                  data-placement="right" data-align="top" name="horaIni" id="horaIni" data-autoclose="true" readonly="">
+                  data-placement="right" data-align="top" name="horaIni" id="horaIni" data-autoclose="true">
               </div>
             </div>
           
         <div class="col-auto">
-          <span id="passwordHelpInline" class="form-text">
+          <label class="form-check-label" for="lblHoraFin">
             Hora Fin
-          </span>
+          </label>
         </div>
 
         <div class="col-auto">
           <div class="col-sm-4">
             <input type="text" class="form-control clockpicker" 
-              data-placement="right" data-align="top" name="horaFin" id="horaFin" data-autoclose="true" readonly="">
+              data-placement="right" data-align="top" name="horaFin" id="horaFin" data-autoclose="true">
           </div>
         </div>
         </div><hr />
@@ -162,7 +162,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckMes" id="flexCheckAllmonths" value="0" type="checkbox" /> Seleccionar/Deseleccionar todos<br><br>
+              <input class="form-check-input" id="flexCheckAllmonths" value="0" type="checkbox" /> Seleccionar/Deseleccionar todos<br><br>
             </div>
           </div>
         </div>
@@ -271,7 +271,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-auto">
             <div class="form-check">
-              <input class="form-check-input flexCheckDias" id="flexCheckAlldays" type="checkbox" /> Seleccionar/Deseleccionar todos<br><br>
+              <input class="form-check-input" id="flexCheckAlldays" type="checkbox" /> Seleccionar/Deseleccionar todos<br><br>
             </div>
           </div>
         </div>
@@ -697,18 +697,16 @@ function getDays(arrayDay,dia){
         }
         flagHoras=false;
 
-        if($("#flexCheckAlldaysex").is(":checked") )
+      if($("#flexCheckAlldaysex").is(":checked") )
         diasex="0";  
-        else 
+      else 
         diasex=diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
 
-       if($("#flexCheckAllmonths").is(":checked"))
+      if($("#flexCheckAllmonths").is(":checked"))
         monthex="0"; 
-       else 
-       monthex=mesesArray.length > 0 ? mesesArray.join(","):"0"; 
+      else 
+        monthex=mesesArray.length > 0 ? mesesArray.join(","):"0"; 
       
-
-
         var repeat_after_finish= ($('#IdRepeatAfterFin').is(":checked") ? 1 : 0);  
           var data_cron={
             "oCrontab": {
@@ -826,30 +824,37 @@ function getDays(arrayDay,dia){
       }
     });
 
-    $("#flexCheckAllmonths").on("change",function(){
-
-          if($(this).is(":checked"))
-          $(".flexCheckMes").prop("checked",true);
-          else
-          $(".flexCheckMes").prop("checked",false);
+    $("#flexCheckAllmonths").on("change",function() {
+      if($(this).is(":checked")) {
+        $(".flexCheckMes").prop("checked",true);
+        $(".flexCheckMes").prop("disabled", true ); //Disable
+      }
+      else {
+        $(".flexCheckMes").prop("checked",false);
+        $(".flexCheckMes").prop( "disabled", false ); //Enable
+      }
     });
     
-    $("#flexCheckAlldays").on("change",function(){
-       if($(this).is(":checked"))
-          $(".flexCheckDias").prop("checked",true);
-          else
-          $(".flexCheckDias").prop("checked",false);
-
+    $("#flexCheckAlldays").on("change",function() {
+      if($(this).is(":checked")) {
+        $(".flexCheckDias").prop("checked",true);
+        $(".flexCheckDias").prop("disabled", true ); //Disable
+      }
+      else {
+        $(".flexCheckDias").prop("checked",false);
+        $(".flexCheckDias").prop( "disabled", false ); //Enable
+      }
     });
     
-    $("#flexCheckAlldaysex").on("change",function(){
-
-
-          if($(this).is(":checked"))
-          $(".diasexe").prop("checked",true);
-          else
-          $(".diasexe").prop("checked",false);
-
+    $("#flexCheckAlldaysex").on("change",function() {
+      if($(this).is(":checked")) {
+        $(".diasexe").prop("checked",true);
+        $(".diasexe").prop("disabled", true ); //Disable
+      }
+      else {
+        $(".diasexe").prop("checked",false);
+        $(".diasexe").prop( "disabled", false ); //Enable
+      }
     });
   })
 </script>
