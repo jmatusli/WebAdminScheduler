@@ -136,15 +136,15 @@ namespace WebAdminScheduler.Controllers
             var searchValue = Request.Form["search[value]"].FirstOrDefault();
             int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
             int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
-             string estado_param = Request.Form["estado"].FirstOrDefault() ?? "Activo";
+            string estado_param = Request.Form["estado"].FirstOrDefault() ?? "Activo";
 
             var dataproc=(from ep in _DBContext.Set<CP_PROCESOS>()
-                 join e in _DBContext.Set<CP_CONEXION>() on ep.IDCONEX equals e.IDCONEX
-                 where ep.ESTADO == estado_param
-                 select new {
-                      IDCONEX=e.IDCONEX,
-                      usuario=e.USUARIO
-                 }).AsQueryable();
+                join e in _DBContext.Set<CP_CONEXION>() on ep.IDCONEX equals e.IDCONEX
+                where ep.ESTADO == estado_param
+                select new {
+                    IDCONEX=e.IDCONEX,
+                    usuario=e.USUARIO
+                }).AsQueryable();
              //IQueryable<CP_PROCESOS> data = (IQueryable<CP_PROCESOS>)dataproc;
             //Obtener el total de los datos de la tabla
             totalRecord = dataproc.Count();
@@ -187,14 +187,12 @@ namespace WebAdminScheduler.Controllers
             (OracleConnection)_DBContext.Database.GetDbConnection());
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
             OracleDataReader oraReader = oraCommand.ExecuteReader();
-           // List<CP_PROCESOS> cp_procesosList = new List<CP_PROCESOS>();
+            
            List<object> procesosList = new List<object>();
            var path="";
            var parametro1="";
            var parametro2="";
-           
            var parametro3="";
-           
            var parametro4="";   
            var estado=""; 
            var ftp=0;
@@ -244,7 +242,6 @@ namespace WebAdminScheduler.Controllers
                     if (!oraReader.IsDBNull(12))
                     {
                        /* cp_procesos.ESTADO*/ estado= oraReader.GetString(12);
-                        
                     }
                     if (!oraReader.IsDBNull(13))
                     {
@@ -274,7 +271,6 @@ namespace WebAdminScheduler.Controllers
                 procesosList.Add(c);  
             }
                 filterRecord = procesosList.Count();
-
             }
             else
             {
