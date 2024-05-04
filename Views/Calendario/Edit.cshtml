@@ -661,7 +661,10 @@
             let Arraymexe = vmonthexe.split(","); //obtenemos meses de ejecucion separados por ,
                 $(Arraymexe).each(function(index, item){
                 console.log("mes ejecucion ",index," ",item);
-                $(".flexCheckMes:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+                $(".flexCheckMes:checkbox[value="+item+"]").prop("checked","true");
+                $(".flexCheckMes:checkbox:checked").each(function() {
+            mesesArray.indexOf($(this).val()) === -1 ? mesesArray.push($(this).val()) :''; 
+        });
             });
         }
 
@@ -674,7 +677,10 @@
         {
             let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
             $(Arraydexe).each(function(index, item) {
-                $(".diasexe:checkbox[value="+item+"]").prop("checked","true").trigger("change");
+                $(".diasexe:checkbox[value="+item+"]").prop("checked","true");
+                $(".diasexe:checkbox:checked").each(function() {
+             diasexeArray.indexOf($(this).val()) === -1 ? diasexeArray.push($(this).val()) : '';
+        });
             });
         }
     

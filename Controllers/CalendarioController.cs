@@ -210,92 +210,99 @@ namespace WebAdminScheduler.Controllers
                         
 					/*cp_crontab.WDAY_M2S_EX */wday_m2s_ex = textdia;
 					/*cp_crontab.DAY_EX*/ dayex= oraReader.GetString(6);
+                    if(dayex=="0")
+                    dayex="All";
 					string monts_exe = oraReader.GetString(7);
                     string tmonts_exe = "";
                     string textmonts_exe = "";
                     string[] month_tmp = monts_exe.Split(',');
                    foreach (var month in month_tmp)
                     {
-                        
+                 if(month=="0")
+                 textmonts_exe="All,";
+                 else
+                 {
+                         
                    if(month == "1") 
                     {
-                        tmonts_exe = "Ene, ";
+                        tmonts_exe = "Ene,";
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "2") 
                     { 
-                        tmonts_exe = "Feb, "; 
+                        tmonts_exe = "Feb,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "3") 
                     { 
-                        tmonts_exe = "Marz, "; 
+                        tmonts_exe = "Marz,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "4") 
                     { 
-                        tmonts_exe = "Abr, "; 
+                        tmonts_exe = "Abr,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "5") 
                     { 
-                        tmonts_exe = "May, "; 
+                        tmonts_exe = "May,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "6") 
                     { 
-                        tmonts_exe = "Jun, "; 
+                        tmonts_exe = "Jun,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "7") 
                     { 
-                        tmonts_exe = "Jul, "; 
+                        tmonts_exe = "Jul,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "8") 
                     { 
-                        tmonts_exe = "Agos, "; 
+                        tmonts_exe = "Agos,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "9") 
                     { 
-                        tmonts_exe = "Sept, "; 
+                        tmonts_exe = "Sept,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "10") 
                     { 
-                        tmonts_exe = "Oct, "; 
+                        tmonts_exe = "Oct,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month== "11") 
                     { 
-                        tmonts_exe = "Nov, "; 
+                        tmonts_exe = "Nov,"; 
                         textmonts_exe += tmonts_exe;
                     }
 
                     if(month == "12") 
                     { 
-                        tmonts_exe = "Dic, "; 
+                        tmonts_exe = "Dic,"; 
                         textmonts_exe += tmonts_exe;
                     }
+                     
 
-
-
+                 }
+ 
                     }
  
                  
 
-                    /*cp_crontab.MONTH_EX */monthex= textmonts_exe.TrimEnd(' ').TrimEnd(',');
+                    /*cp_crontab.MONTH_EX */monthex= textmonts_exe.TrimEnd(',');
                    
                     if (!oraReader.IsDBNull(8))
                     {

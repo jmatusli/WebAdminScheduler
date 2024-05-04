@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
 using WebAdminScheduler.helpers;
 using System.Linq.Dynamic.Core;
+using System.Data;
 namespace WebAdminScheduler.Controllers
 {
     public class JobsController : Controller
@@ -294,19 +295,123 @@ namespace WebAdminScheduler.Controllers
                 aaData = procesosList,
             });
         }
-        public JsonResult ListarRegistro(int idproc)
+        public JsonResult ListarRegistro()
         {
-            var data = (from s in _DBContext.CP_REGISTRO.Where(x => x.IDPROC == idproc)
-                        select s).ToList();
 
+
+        int totalRecord = 0;
+            int filterRecord = 0;
+            string textOrder = "";
+            string textSearch = "";
+            var draw = Request.Form["draw"].FirstOrDefault();
+            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
+            int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
+            int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
+            int pidproc = Convert.ToInt32(Request.Form["idproc"].FirstOrDefault() ?? "0");
+
+            var datareg=(from ep in _DBContext.Set<CP_REGISTRO>()
+                where ep.IDPROC == pidproc && 
+                    ep.ESTADO.Contains(searchValue) 
+                select new {
+                    IDREG=ep.IDREG 
+                }).AsQueryable();
+            
+            totalRecord = datareg.Count();
+            // Buscar datos cuando se encuentre el valor de búsqueda
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                textSearch += " AND ((IDREG like '%' || :psearch || '%')";
+                textSearch += " OR (FEC_INICIO like '%' || :psearch || '%')";
+                textSearch += " OR (FEC_EJECUCION like '%' || :psearch || '%')";
+                textSearch += " OR (FEC_FINALIZO like '%' || :psearch || '%')";
+                textSearch += " OR (ESTADO like '%' || :psearch || '%'))";
+            }
+            // get total count of records after search
+
+            if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection))
+                textOrder = " ORDER BY " + sortColumn + " " + sortColumnDirection;
+
+            _DBContext.Database.OpenConnection();
+            String _query = "SELECT * FROM (SELECT IDREG,IDPROC,FEC_INICIO,FEC_EJECUCION,FEC_FINALIZO,ESTADO,"
+            +"row_number() over(ORDER BY cr.IDREG  ASC) line_number FROM APP_SCL_ALTAMIRA.CP_REGISTRO cr "
+            +" WHERE IDPROC = '"+pidproc+"' " + textSearch + " " + textOrder+") "
+            + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) ;
+
+            OracleCommand oraCommand = new OracleCommand(_query,
+            (OracleConnection)_DBContext.Database.GetDbConnection());
+            oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
+            //oraCommand.Parameters.Add(new OracleParameter("idproc", pidproc));
+            OracleDataReader oraReader = oraCommand.ExecuteReader();
+            
+           List<object> registroList = new List<object>();
+           var idreg=0;
+            var idproc=0;
+            DateTime? fecha_inicio = null;
+           DateTime?  fecha_finalizo = null;
+           DateTime? fecha_ejecucion = null;
+           var estado=""; 
+       
+            if (oraReader.HasRows)
+            {
+                while (oraReader.Read())
+                {
+                    var cpregistros =new object();
+
+                 idreg= oraReader.GetInt32(0);
+                 //idproc= oraReader.GetInt32(1);
+               
+                if (!oraReader.IsDBNull(2))
+                    {
+                  fecha_inicio=oraReader.GetDateTime(2);
+                    }
+                  if (!oraReader.IsDBNull(3))
+                    {
+                  fecha_ejecucion=oraReader.GetDateTime(3);
+                    }  
+                   if (!oraReader.IsDBNull(4))
+                    {
+                  fecha_finalizo=oraReader.GetDateTime(4);
+                    }     
+                 if (!oraReader.IsDBNull(5))
+                    {
+                  estado=oraReader.GetString(5);
+                    }
+                
+              
+                    
+              var c = new { IDREG=idreg,IDPROC=idproc,FEC_INICIO=fecha_inicio,FEC_EJECUCION=fecha_ejecucion,
+              FEC_FINALIZO=fecha_finalizo,ESTADO=estado
+              };
+                registroList.Add(c);  
+            }
+                filterRecord = registroList.Count();
+            }
+            else
+            {
+                return Json(new {
+                    draw = draw, 
+                    iTotalRecords = 0,
+                    iDisplayLength = 0,
+                    iTotalDisplayRecords = 0,
+                    aaData=new {}
+                });
+            }
+
+            oraReader.Close();
+            _DBContext.Database.CloseConnection();
             return Json(new
             {
-                draw = 1,
-                iTotalRecords = 1,
+                draw = draw,
+                iTotalRecords = totalRecord,
                 iDisplayLength = 10,
-                iTotalDisplayRecords = data.Count(),
-                aaData = data,
+                iTotalDisplayRecords = totalRecord,
+                aaData = registroList,
             });
+
+
+            
         }
     }
 }

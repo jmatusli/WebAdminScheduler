@@ -166,7 +166,7 @@
             <table id="dt-registro" class="display nowrap" width="100%">
                 <thead>
                     <tr style="font-size:13px;">
-                        <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tblJobs-select-all"></th>
+                       <!-- <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tblJobs-select-all"></th>-->
                         <th>IDREG</th>
                         <th>FECHA INICIO</th>
                         <th>FECHA EJECUCIÓN</th>
@@ -190,6 +190,15 @@
     var idDependencia = "@Model.DEPENDENCIA";
     var idflexFtp = "@Model.FTP";
     var idComprens = "@Model.COMPRESION";
+    
+    
+  function recargartabla(objeto,value)
+  {
+    params.idproc=value;
+ 
+    objeto.ajax.reload(null,false); //reload datatable ajax 
+  }
+
 
     if (idDependencia == 1) {
         $("#TxtIdDependencia").prop('checked', true);
@@ -216,7 +225,7 @@
             checkboxes[i].checked = source.checked;
         }
     }
-
+   
     $(document).on("ready",function() {
 
         table = $('#dt-registro').DataTable( {
@@ -234,18 +243,18 @@
                 "data": function(d){
                     $.extend( d, params);    
                 }
-		    },
+		    },/*
             "columnDefs": [{
             'targets': 0,
             orderable: false,
             'render': function (data, type, full, meta){
                 return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
             }
-            }],
+            }],*/
             "columns": [
-            {
+            /*{
                 "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
-            },
+            },*/
                 { "data": "idreg", "name": "idreg", "autoWidth": true },
                 { "data": "feC_INICIO", "name": "feC_INICIO", "autoWidth": true },
                 { "data": "feC_EJECUCION", "name": "feC_EJECUCION", "autoWidth": true },
@@ -253,10 +262,10 @@
                 { "data": "estado", "name": "estado", "autoWidth": true },
             ],
             
-            select: {
+            /*select: {
             style:    'os',   //default but you have to specify it, no idea why
             selector: 'tr,a:not(.btn)'
-            },
+            },*/
             "language": {
             "url": "/lib/datatables/dist/locales/es/es.json"
             }
@@ -376,7 +385,7 @@
         }
       }
     });
-   // recargartabla(table,idcrontab);
+   recargartabla(objeto,idproc)
     })
       
 </script>
