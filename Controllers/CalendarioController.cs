@@ -213,79 +213,90 @@ namespace WebAdminScheduler.Controllers
 					string monts_exe = oraReader.GetString(7);
                     string tmonts_exe = "";
                     string textmonts_exe = "";
-                    if(monts_exe.Substring(0,1) == "1") 
+                    string[] month_tmp = monts_exe.Split(',');
+                   foreach (var month in month_tmp)
+                    {
+                        
+                   if(month == "1") 
                     {
                         tmonts_exe = "Ene, ";
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "2") 
+                    if(month == "2") 
                     { 
                         tmonts_exe = "Feb, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "3") 
+                    if(month == "3") 
                     { 
                         tmonts_exe = "Marz, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "4") 
+                    if(month == "4") 
                     { 
                         tmonts_exe = "Abr, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "5") 
+                    if(month == "5") 
                     { 
                         tmonts_exe = "May, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "6") 
+                    if(month == "6") 
                     { 
                         tmonts_exe = "Jun, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "7") 
+                    if(month == "7") 
                     { 
                         tmonts_exe = "Jul, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "8") 
+                    if(month == "8") 
                     { 
                         tmonts_exe = "Agos, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "9") 
+                    if(month == "9") 
                     { 
                         tmonts_exe = "Sept, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "10") 
+                    if(month == "10") 
                     { 
                         tmonts_exe = "Oct, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "11") 
+                    if(month== "11") 
                     { 
                         tmonts_exe = "Nov, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    if(monts_exe.Substring(0,1) == "12") 
+                    if(month == "12") 
                     { 
-                        tmonts_exe = "Dic. "; 
+                        tmonts_exe = "Dic, "; 
                         textmonts_exe += tmonts_exe;
                     }
 
-                    /*cp_crontab.MONTH_EX */monthex= textmonts_exe;
+
+
+                    }
+ 
+                 
+
+                    /*cp_crontab.MONTH_EX */monthex= textmonts_exe.TrimEnd(' ').TrimEnd(',');
+                   
                     if (!oraReader.IsDBNull(8))
                     {
                        /* cp_crontab.REPEAT_EVERY_MINS */repeatevery_mins= oraReader.GetInt32(8);   
