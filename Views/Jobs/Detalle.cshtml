@@ -176,6 +176,8 @@
                 </thead>
                 <tbody>
                 </tbody>
+                  <tfooter>
+                </tfooter>
             </table>
         </div>
     </body>
@@ -231,7 +233,7 @@
         table = $('#dt-registro').DataTable( {
             "processing": true,
             "serverSide": true,
-            "filter": true,
+            "filter": false,
             "scrollX":          true,
             "sScrollX":         "50%",
             "scrollY":            $(document).height() - 300,
@@ -268,7 +270,22 @@
             },*/
             "language": {
             "url": "/lib/datatables/dist/locales/es/es.json"
-            }
+            },
+            initComplete: function (settings, json) {
+         console.log("terminooooo");
+        $('#dt-registro_wrapper .dt-end').first().append('<div class="dt-length"><label for="dt-length-0">Filtrar el : '
+        +'<select   aria-controls="dt-registro" id="slcFilterby" class="dt-input slcFilterby">'
+        +'<option value="0">Dia de hoy</option>'
+        +'<option value="1">Semana'
+        +'<option value="2">15 dias atras</option>'
+        +'</select></label></div>');
+
+$(".slcFilterby").on("change",function(){
+  params.filterby=$(this).val();
+  recargartabla(table,idproc)
+});
+
+    }
         });
  
         table.on('select', function (e, dt, type, indexes) {
@@ -385,7 +402,13 @@
         }
       }
     });
-   recargartabla(objeto,idproc)
+   recargartabla(table,idproc);
+
+  
+
+
+
+
     })
       
 </script>

@@ -310,16 +310,36 @@ namespace WebAdminScheduler.Controllers
             int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
             int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
             int pidproc = Convert.ToInt32(Request.Form["idproc"].FirstOrDefault() ?? "0");
+            int filterby = Convert.ToInt32(Request.Form["filterby"].FirstOrDefault() ?? "0");
+            string textfilterby="";
+            int NumeroDias = 0;
 
+            if(filterby==0){
+            textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE) AND TO_DATE(SYSDATE)+1";
+            }
+            else if(filterby==1)
+            {
+              NumeroDias=-7;  
+                textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE)-7 AND TO_DATE(SYSDATE)+1";
+            }
+            else
+            {
+                NumeroDias=-15;
+            textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE)-15 AND TO_DATE(SYSDATE)+1";
+            }
+
+     
+            Console.WriteLine("esto se va a evaluar "+DateTime.Today.AddDays(NumeroDias));
             var datareg=(from ep in _DBContext.Set<CP_REGISTRO>()
-                where ep.IDPROC == pidproc && 
-                    ep.ESTADO.Contains(searchValue) 
+                where ep.IDPROC == pidproc && ep.FEC_EJECUCION >= DateTime.Today.AddDays(NumeroDias) && ep.FEC_EJECUCION <= DateTime.Today
+                && ep.ESTADO.Contains(searchValue) 
                 select new {
                     IDREG=ep.IDREG 
                 }).AsQueryable();
             
             totalRecord = datareg.Count();
             // Buscar datos cuando se encuentre el valor de búsqueda
+            
             if (!string.IsNullOrEmpty(searchValue))
             {
                 textSearch += " AND ((IDREG like '%' || :psearch || '%')";
@@ -336,9 +356,10 @@ namespace WebAdminScheduler.Controllers
             _DBContext.Database.OpenConnection();
             String _query = "SELECT * FROM (SELECT IDREG,IDPROC,FEC_INICIO,FEC_EJECUCION,FEC_FINALIZO,ESTADO,"
             +"row_number() over(ORDER BY cr.IDREG  ASC) line_number FROM APP_SCL_ALTAMIRA.CP_REGISTRO cr "
-            +" WHERE IDPROC = '"+pidproc+"' " + textSearch + " " + textOrder+") "
+            +" WHERE IDPROC = '"+pidproc+"' "+textfilterby+" " + textSearch + " " + textOrder+") "
             + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) ;
-
+ 
+         Console.WriteLine(" EN EJECUCION "+_query);
             OracleCommand oraCommand = new OracleCommand(_query,
             (OracleConnection)_DBContext.Database.GetDbConnection());
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
