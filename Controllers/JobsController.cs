@@ -312,7 +312,7 @@ namespace WebAdminScheduler.Controllers
             int pidproc = Convert.ToInt32(Request.Form["idproc"].FirstOrDefault() ?? "0");
             int filterby = Convert.ToInt32(Request.Form["filterby"].FirstOrDefault() ?? "0");
             string textfilterby="";
-            int NumeroDias = 0;
+            int NumeroDias = -1;
 
             if(filterby==0){
             textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE) AND TO_DATE(SYSDATE)+1";
