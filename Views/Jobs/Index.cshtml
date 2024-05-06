@@ -62,19 +62,20 @@
     var table = $('#tblJobs').DataTable( {
       "processing": true,
       "serverSide": true,
-      "filter": true,
+      "paging": true,
+	    "deferLoading": 0, // here
       "scrollX":          true,
-        "sScrollX":         "50%",
-        "scrollY":            '230px',
-        "scrollCollapse":     true,
-        "ajax": {
-          "url": "@Url.Action("ListarProcesos","Jobs")",
-          "type": "POST",
-          "datatype": "json",
-          "data": function(d){
-          $.extend( d, params);    
+      "sScrollX":         "50%",
+      "scrollY":            $(document).height() - 300,
+      "scrollCollapse":     true,
+      "ajax": {
+        "url": "@Url.Action("ListarProcesos","Jobs")",
+        "type": "POST",
+        "datatype": "json",
+        "data": function(d){
+          $.extend( d, params);
         }
-        }
+      }
 		, 
     "columnDefs": [{
       'targets': 0,
@@ -82,20 +83,20 @@
     },{
       'targets': -1,
       orderable: false,
-      'render': function (data, type, full, meta){
+      'render': function (data, type, full, meta) {
         return   '<a class="btn btn-success btn-sm" asp-route-idProc="'+data.idproc+'" href="/Jobs/Edit/'+data.idproc+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info btn-sm" asp-route-idProc="'+data.idproc+'" href="/Jobs/Detalle/'+data.idproc+'">Detalle</a>';
       }
     }],
     "columns": [
-      {
-        "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all-item">'; }
-      },
-        { "data": "idproc", "name": "idproc", "autoWidth": true },
-        { "data": "usuario", "name": "usuario", "autoWidth": true },
-        { "data": "nombre", "name": "nombre", "autoWidth": true },
-        { "data": "descripcion", "name": "descripcion", "autoWidth": true },
-        { "data":null },
-    ],
+    {
+      "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tbljobs-select-all-item">'; }
+    },
+      { "data": "idproc", "name": "idproc", "autoWidth": true },
+      { "data": "usuario", "name": "usuario", "autoWidth": true },
+      { "data": "nombre", "name": "nombre", "autoWidth": true },
+      { "data": "descripcion", "name": "descripcion", "autoWidth": true },
+      { "data":null },
+  ],
     select: {
     style: 'single',
     selector: 'td:not(:last-child)' // no row selection on last column
