@@ -146,7 +146,7 @@ namespace WebAdminScheduler.Controllers
                     IDCONEX=e.IDCONEX,
                     usuario=e.USUARIO
                 }).AsQueryable();
-             //IQueryable<CP_PROCESOS> data = (IQueryable<CP_PROCESOS>)dataproc;
+            //IQueryable<CP_PROCESOS> data = (IQueryable<CP_PROCESOS>)dataproc;
             //Obtener el total de los datos de la tabla
             totalRecord = dataproc.Count();
             // Buscar datos cuando se encuentre el valor de búsqueda
@@ -206,10 +206,10 @@ namespace WebAdminScheduler.Controllers
                 while (oraReader.Read())
                 {
                     var cpprocesos =new object();
-                   // cpprocesos.nombre=oraReader.GetString(2);
+                    // cpprocesos.nombre=oraReader.GetString(2);
                     CP_PROCESOS cp_procesos = new CP_PROCESOS();
-                  /*  cp_procesos.IDPROC */ var idproc= oraReader.GetInt32(0);
-                   /* cp_procesos.IDCONEX*/  var usuario= oraReader.GetString(18);
+                    /*  cp_procesos.IDPROC */ var idproc= oraReader.GetInt32(0);
+                    /* cp_procesos.IDCONEX*/  var usuario= oraReader.GetString(18);
                     /*cp_procesos.NOMBRE*/ var nombre= oraReader.GetString(2);
                     /*cp_procesos.DESCRIPCION */var descripcion= oraReader.GetString(3);
 
@@ -225,12 +225,10 @@ namespace WebAdminScheduler.Controllers
                     {
                         /*cp_procesos.PARAMETRO2*/  parametro2=oraReader.GetString(6);
                     }
-
                     if (!oraReader.IsDBNull(7))
                     {
                         /*cp_procesos.PARAMETRO3 */ parametro3=oraReader.GetString(7);
                     }
-
                     if (!oraReader.IsDBNull(8))
                     {
                        /* cp_procesos.PARAMETRO4 */parametro4= oraReader.GetString(8);
@@ -264,13 +262,13 @@ namespace WebAdminScheduler.Controllers
                     {
                        /* cp_procesos.NODE */node=oraReader.GetString(17);
                     }
-              var c = new { IDPROC = idproc, USUARIO = usuario,NOMBRE=nombre,DESCRIPCION =descripcion,
-              PATH=path,PARAMETRO1=parametro1,PARAMETRO2=parametro2,PARAMETRO3=parametro3,PARAMETRO4=parametro4,
-              DEPENDENCIA=dependencia,INTENTOS=intentos,ESPERA_INTENTO=espera_intento,ESTADO=estado,FTP=ftp,
-              IDHOST=idhost,COMPRESION=compresion,IDCRONTAB=idcrontab,NODE=node
-              };
-                procesosList.Add(c);  
-            }
+                    var c = new { IDPROC = idproc, USUARIO = usuario,NOMBRE=nombre,DESCRIPCION =descripcion,
+                        PATH=path,PARAMETRO1=parametro1,PARAMETRO2=parametro2,PARAMETRO3=parametro3,PARAMETRO4=parametro4,
+                        DEPENDENCIA=dependencia,INTENTOS=intentos,ESPERA_INTENTO=espera_intento,ESTADO=estado,FTP=ftp,
+                        IDHOST=idhost,COMPRESION=compresion,IDCRONTAB=idcrontab,NODE=node
+                    };
+                    procesosList.Add(c);  
+                }
                 filterRecord = procesosList.Count();
             }
             else
@@ -297,9 +295,7 @@ namespace WebAdminScheduler.Controllers
         }
         public JsonResult ListarRegistro()
         {
-
-
-        int totalRecord = 0;
+            int totalRecord = 0;
             int filterRecord = 0;
             string textOrder = "";
             string textSearch = "";
@@ -314,21 +310,20 @@ namespace WebAdminScheduler.Controllers
             string textfilterby="";
             int NumeroDias = -1;
 
-            if(filterby==0){
-            textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE) AND TO_DATE(SYSDATE)+1";
+            if(filterby == 0){
+                textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE) AND TO_DATE(SYSDATE)+1";
             }
             else if(filterby==1)
             {
-              NumeroDias=-7;  
+                NumeroDias=-7;  
                 textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE)-7 AND TO_DATE(SYSDATE)+1";
             }
             else
             {
                 NumeroDias=-15;
-            textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE)-15 AND TO_DATE(SYSDATE)+1";
+                textfilterby =" AND cr.FEC_EJECUCION BETWEEN TO_DATE(SYSDATE)-15 AND TO_DATE(SYSDATE)+1";
             }
 
-     
             Console.WriteLine("esto se va a evaluar "+DateTime.Today.AddDays(NumeroDias));
             var datareg=(from ep in _DBContext.Set<CP_REGISTRO>()
                 where ep.IDPROC == pidproc && ep.FEC_EJECUCION >= DateTime.Today.AddDays(NumeroDias) && ep.FEC_EJECUCION <= DateTime.Today
@@ -359,52 +354,48 @@ namespace WebAdminScheduler.Controllers
             +" WHERE IDPROC = '"+pidproc+"' "+textfilterby+" " + textSearch + " " + textOrder+") "
             + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) ;
  
-         Console.WriteLine(" EN EJECUCION "+_query);
+            Console.WriteLine(" EN EJECUCION "+_query);
             OracleCommand oraCommand = new OracleCommand(_query,
             (OracleConnection)_DBContext.Database.GetDbConnection());
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
             //oraCommand.Parameters.Add(new OracleParameter("idproc", pidproc));
             OracleDataReader oraReader = oraCommand.ExecuteReader();
             
-           List<object> registroList = new List<object>();
-           var idreg=0;
+            List<object> registroList = new List<object>();
+            var idreg=0;
             var idproc=0;
             DateTime? fecha_inicio = null;
-           DateTime?  fecha_finalizo = null;
-           DateTime? fecha_ejecucion = null;
-           var estado=""; 
-       
+            DateTime?  fecha_finalizo = null;
+            DateTime? fecha_ejecucion = null;
+            var estado=""; 
+        
             if (oraReader.HasRows)
             {
                 while (oraReader.Read())
                 {
                     var cpregistros =new object();
-
-                 idreg= oraReader.GetInt32(0);
-                 //idproc= oraReader.GetInt32(1);
-               
+                    idreg= oraReader.GetInt32(0);
+                    //idproc= oraReader.GetInt32(1);
                 if (!oraReader.IsDBNull(2))
-                    {
-                  fecha_inicio=oraReader.GetDateTime(2);
-                    }
-                  if (!oraReader.IsDBNull(3))
-                    {
-                  fecha_ejecucion=oraReader.GetDateTime(3);
-                    }  
-                   if (!oraReader.IsDBNull(4))
-                    {
-                  fecha_finalizo=oraReader.GetDateTime(4);
-                    }     
-                 if (!oraReader.IsDBNull(5))
-                    {
-                  estado=oraReader.GetString(5);
-                    }
+                {
+                    fecha_inicio=oraReader.GetDateTime(2);
+                }
+                if (!oraReader.IsDBNull(3))
+                {
+                    fecha_ejecucion=oraReader.GetDateTime(3);
+                }  
+                if (!oraReader.IsDBNull(4))
+                {
+                    fecha_finalizo=oraReader.GetDateTime(4);
+                }     
+                if (!oraReader.IsDBNull(5))
+                {
+                    estado=oraReader.GetString(5);
+                }
                 
-              
-                    
-              var c = new { IDREG=idreg,IDPROC=idproc,FEC_INICIO=fecha_inicio,FEC_EJECUCION=fecha_ejecucion,
-              FEC_FINALIZO=fecha_finalizo,ESTADO=estado
-              };
+                var c = new { IDREG=idreg,IDPROC=idproc,FEC_INICIO=fecha_inicio,FEC_EJECUCION=fecha_ejecucion,
+                    FEC_FINALIZO=fecha_finalizo,ESTADO=estado
+                };
                 registroList.Add(c);  
             }
                 filterRecord = registroList.Count();
@@ -430,9 +421,6 @@ namespace WebAdminScheduler.Controllers
                 iTotalDisplayRecords = totalRecord,
                 aaData = registroList,
             });
-
-
-            
         }
     }
 }

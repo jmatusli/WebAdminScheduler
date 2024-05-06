@@ -194,12 +194,12 @@
     var idComprens = "@Model.COMPRESION";
     
     
-  function recargartabla(objeto,value)
-  {
+    function recargartabla(objeto,value)
+    {
     params.idproc=value;
- 
+
     objeto.ajax.reload(null,false); //reload datatable ajax 
-  }
+    }
 
 
     if (idDependencia == 1) {
@@ -229,7 +229,6 @@
     }
    
     $(document).on("ready",function() {
-
         table = $('#dt-registro').DataTable( {
             "processing": true,
             "serverSide": true,
@@ -242,74 +241,58 @@
                 "url": "@Url.Action("ListarRegistro","Jobs")",
                 "type": "POST",
                 "datatype": "json",
-                "data": function(d){
+                "data": function(d) {
                     $.extend( d, params);    
                 }
-		    },/*
-            "columnDefs": [{
-            'targets': 0,
-            orderable: false,
-            'render': function (data, type, full, meta){
-                return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-            }
-            }],*/
+		    },
             "columns": [
-            /*{
-                "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all">';   }
-            },*/
                 { "data": "idreg", "name": "idreg", "autoWidth": true },
                 { "data": "feC_INICIO", "name": "feC_INICIO", "autoWidth": true },
                 { "data": "feC_EJECUCION", "name": "feC_EJECUCION", "autoWidth": true },
                 { "data": "feC_FINALIZO", "name": "feC_FINALIZO", "autoWidth": true },
                 { "data": "estado", "name": "estado", "autoWidth": true },
             ],
-            
-            /*select: {
-            style:    'os',   //default but you have to specify it, no idea why
-            selector: 'tr,a:not(.btn)'
-            },*/
             "language": {
             "url": "/lib/datatables/dist/locales/es/es.json"
             },
             initComplete: function (settings, json) {
-         console.log("terminooooo");
-        $('#dt-registro_wrapper .dt-end').first().append('<div class="dt-length"><label for="dt-length-0">Filtrar '
-        +'<select   aria-controls="dt-registro" id="slcFilterby" class="dt-input slcFilterby">'
-        +'<option value="0">Dia de hoy</option>'
-        +'<option value="1">Semana'
-        +'<option value="2">15 dias atras</option>'
-        +'</select></label></div>');
+                console.log("terminooooo");
+                $('#dt-registro_wrapper .dt-end').first().append('<div class="dt-length"><label for="dt-length-0">Filtrar '
+                +'<select   aria-controls="dt-registro" id="slcFilterby" class="dt-input slcFilterby">'
+                +'<option value="0">Dia de hoy</option>'
+                +'<option value="1">Semana'
+                +'<option value="2">15 dias atras</option>'
+                +'</select></label></div>');
 
-$(".slcFilterby").on("change",function(){
-  params.filterby=$(this).val();
-  recargartabla(table,idproc)
-});
-
-    }
+                $(".slcFilterby").on("change",function() {
+                    params.filterby=$(this).val();
+                    recargartabla(table,idproc)
+                });
+            }
         });
  
         table.on('select', function (e, dt, type, indexes) {
-        console.log(e.target);
-        if (type === 'row'   ) {
-            var nodes = table
-            .rows(indexes)
-            .nodes()
-            .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', true); 
-            });
-        }
+            console.log(e.target);
+            if (type === 'row'   ) {
+                var nodes = table
+                .rows(indexes)
+                .nodes()
+                .each(function () { 
+                    $('td:first-child', this).find('input').prop('checked', true); 
+                });
+            }
         });
 
         table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
-            table
-            .rows(indexes)
-            .nodes()
-            .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', false); 
-            });
-        }
+            if (type === 'row') {
+                $('#example-select-all').prop("checked",false);
+                    table
+                    .rows(indexes)
+                    .nodes()
+                    .each(function () { 
+                        $('td:first-child', this).find('input').prop('checked', false); 
+                });
+            }
         });
         
         // Handle click on "Select all" control
@@ -321,7 +304,6 @@ $(".slcFilterby").on("change",function(){
           // Check/uncheck checkboxes for all rows in the table
         if(this.checked){
           $('input[type="checkbox"]', rows).prop('checked', this.checked);
-          
           var selData =   table.rows().select();
           var selData =   table.rows(".selected").data();
         }
@@ -329,86 +311,79 @@ $(".slcFilterby").on("change",function(){
         {
             var selData =   table.rows().deselect();
         }
-      });
+    });
 
-        // Handle click on checkbox to set state of "Select all" control
-        $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-            // If checkbox is not checked
-            if(!this.checked){
+    // Handle click on checkbox to set state of "Select all" control
+    $('#example tbody').on('change', 'input[type="checkbox"]', function() {
+        // If checkbox is not checked
+        if(!this.checked) {
             var el = $('#example-select-all').get(0);
             // If "Select all" control is checked and has 'indeterminate' property
-            if(el && el.checked && ('indeterminate' in el)){
+            if(el && el.checked && ('indeterminate' in el)) {
                 // Set visual state of "Select all" control
                 // as 'indeterminate'
                 el.indeterminate = true;
             }
-            }
-        });
+        }
+    });
         
-        table.on('select', function (e, dt, type, indexes) {
-            console.log(e.target);
-            if (type === 'row'   ) {
-                var nodes = table
-                .rows(indexes)
-                .nodes()
-                .each(function () { 
-                $('td:first-child', this).find('input').prop('checked', true); 
-                });
-                //.find(':checkbox', 'td:first-child').checked = true; 
-            }
-            });
-
-        table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-        $('#example-select-all').prop("checked",false);
-            table
+    table.on('select', function (e, dt, type, indexes) {
+        console.log(e.target);
+        if (type === 'row'   ) {
+            var nodes = table
             .rows(indexes)
             .nodes()
             .each(function () { 
-            $('td:first-child', this).find('input').prop('checked', false); 
+                $('td:first-child', this).find('input').prop('checked', true); 
             });
+            //.find(':checkbox', 'td:first-child').checked = true; 
         }
+    });
+
+    table.on('deselect', function (e, dt, type, indexes) {
+        if (type === 'row') {
+            $('#example-select-all').prop("checked",false);
+                table
+                .rows(indexes)
+                .nodes()
+                .each(function () { 
+                    $('td:first-child', this).find('input').prop('checked', false); 
+                });
+            }
         });
         
         // Handle click on "Select all" control
-        $('#example-select-all').on('click', function(){
-            
-        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-        // Get all rows with search applied
-            var rows = table.rows({ 'search': 'applied' }).nodes();
-            // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-            $('input[type="checkbox"]', rows).prop('checked', this.checked);
-            
-            var selData =   table.rows().select();
-            var selData =   table.rows(".selected").data();
-        }
-        else 
-        {
-        var selData =   table.rows().deselect();
-        }
+        $('#example-select-all').on('click', function() {
+            console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
+            // Get all rows with search applied
+                var rows = table.rows({ 'search': 'applied' }).nodes();
+                // Check/uncheck checkboxes for all rows in the table
+            if(this.checked) {
+                $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                
+                var selData =   table.rows().select();
+                var selData =   table.rows(".selected").data();
+            }
+            else 
+            {
+                var selData =   table.rows().deselect();
+            }
         });
 
         // Handle click on checkbox to set state of "Select all" control
-        $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-        // If checkbox is not checked
-        if(!this.checked){
-          var el = $('#example-select-all').get(0);
-          // If "Select all" control is checked and has 'indeterminate' property
-          if(el && el.checked && ('indeterminate' in el)){
-          // Set visual state of "Select all" control
-          // as 'indeterminate'
-          el.indeterminate = true;
+        $('#example tbody').on('change', 'input[type="checkbox"]', function() {
+            // If checkbox is not checked
+            if(!this.checked) {
+                var el = $('#example-select-all').get(0);
+                // If "Select all" control is checked and has 'indeterminate' property
+                if(el && el.checked && ('indeterminate' in el)){
+                // Set visual state of "Select all" control
+                // as 'indeterminate'
+                el.indeterminate = true;
+            }
         }
-      }
     });
-   recargartabla(table,idproc);
-
-  
-
-
-
-
-    })
+    recargartabla(table,idproc);
+})
       
 </script>

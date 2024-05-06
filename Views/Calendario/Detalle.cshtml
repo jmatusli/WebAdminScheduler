@@ -50,7 +50,7 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <div class="form-check">
-                        <input class="form-check-input" id="checkUptAllmonths" type="checkbox" disabled/> Seleccionar/Deseleccionar todos<br><br>
+                        <input class="form-check-input" id="checkAllmonthsdt" type="checkbox" disabled/> Seleccionar/Deseleccionar todos<br><br>
                         </div>
                     </div>
                 </div>
@@ -622,7 +622,7 @@
     if(monthexe=="0")
     {
         $(".checkMesDt").prop("checked",true);
-        $("#checkUptAllmonths").prop("checked",true);
+        $("#checkAllmonthsdt").prop("checked",true);
     }
     else 
     {
@@ -632,6 +632,15 @@
             $(".checkMesDt:checkbox[value="+item+"]").prop("checked","true").trigger("change");
         });
     }
+
+    $("#checkAllmonthsdt").on("change",function() {
+        if($(this).is(":checked")) {
+            $(".checkMesDt").prop("checked",true);
+        }
+        else {
+            $(".checkMesDt").prop("checked",false);
+        }
+    });
 
     function toggle(source) {
       checkboxes = document.getElementsByName('dinamico');
