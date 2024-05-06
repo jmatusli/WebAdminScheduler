@@ -640,7 +640,7 @@
         } else {
             $("#flexCheckDomingo").prop('checked', false);
         } 
-         $(".flexCheckDias").attr("disabled",true);
+        $(".flexCheckDias").attr("disabled",true);
         if(conteodia==7)
         $("#flexCheckAlldays").prop('checked', true);
         else 
@@ -694,7 +694,7 @@
             });
         }
      
-	  table = $('#dt-jobs').DataTable( {
+	    table = $('#dt-jobs').DataTable( {
             "processing": true,
             "serverSide": true,
             "filter": true,
@@ -706,20 +706,20 @@
                 "url": "@Url.Action("ListarJobsAsoc","Calendario")",
                 "type": "POST",
                 "datatype": "json",
-                "data": function(d){
-                $.extend( d, params);    
+                "data": function(d) {
+                    $.extend( d, params);    
                 },
-        },drawCallback: function(settings){ 
-			  if($(this).find('tbody tr').length <= 1){
-			  $('.dt-paging-button').hide();
-			}
-		},
+                },drawCallback: function(settings) { 
+                    if($(this).find('tbody tr').length <= 1) {
+                        $('.dt-paging-button').hide();
+                    }
+                },
             "columnDefs": [{
-            'targets': 0,
-            orderable: false,
-            'render': function (data, type, full, meta){
-                return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-            }
+                'targets': 0,
+                orderable: false,
+                'render': function (data, type, full, meta) {
+                    return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+                }
             }],
             "columns": [
             {
@@ -740,7 +740,6 @@
             "url": "/lib/datatables/dist/locales/es/es.json"
             }
         });
- 
  
     $(".flexCheckMes").on("change",function(){
 

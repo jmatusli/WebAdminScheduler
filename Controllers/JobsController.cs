@@ -93,8 +93,7 @@ namespace WebAdminScheduler.Controllers
         
            if(procesosval!=null && procesosval.IDPROC>0)
            {
-           return Json(new { error=true,msg = "Ya existe un proceso con el nombre "+dtoprocesos.oProcesos.NOMBRE });
-
+            return Json(new { error=true,msg = "Ya existe un proceso con el nombre "+dtoprocesos.oProcesos.NOMBRE });
            }
            else 
            {
@@ -102,7 +101,6 @@ namespace WebAdminScheduler.Controllers
                 procesost.DEPENDENCIA = dtoprocesos.oProcesos.DEPENDENCIA;
                 procesost.DESCRIPCION = dtoprocesos.oProcesos.DESCRIPCION;
                 procesost.IDCONEX = dtoprocesos.oProcesos.IDCONEX;
-            
                 procesost.ESPERA_INTENTO = dtoprocesos.oProcesos.ESPERA_INTENTO;
                 procesost.ESTADO = dtoprocesos.oProcesos.ESTADO;
                 procesost.FTP = dtoprocesos.oProcesos.FTP;
@@ -139,7 +137,7 @@ namespace WebAdminScheduler.Controllers
             int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
             string estado_param = Request.Form["estado"].FirstOrDefault() ?? "Activo";
 
-            var dataproc=(from ep in _DBContext.Set<CP_PROCESOS>()
+            var dataproc = (from ep in _DBContext.Set<CP_PROCESOS>()
                 join e in _DBContext.Set<CP_CONEXION>() on ep.IDCONEX equals e.IDCONEX
                 where ep.ESTADO == estado_param
                 select new {
@@ -169,7 +167,6 @@ namespace WebAdminScheduler.Controllers
                 textSearch += " OR (COMPRESION like '%' || :psearch || '%')";
                 textSearch += " OR (IDCRONTAB like '%' || :psearch || '%')";
                 textSearch += " OR (usuario like '%' || :psearch || '%')";
-
                 textSearch += " OR (NODE like '%' || :psearch || '%'))";
             }
             // get total count of records after search
@@ -179,7 +176,7 @@ namespace WebAdminScheduler.Controllers
 
             _DBContext.Database.OpenConnection();
             String _query = "SELECT * FROM (SELECT cc.*,con.usuario,row_number() over "
-            + "(ORDER BY cc.IDPROC ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cc "
+            + "(ORDER BY cc.IDPROC DESC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cc "
             + " JOIN APP_SCL_ALTAMIRA.CP_CONEXION con on cc.idconex=con.idconex "
             +"  WHERE estado='"+estado_param+"' ) "
             + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) + " " + textSearch + " " + textOrder;
@@ -189,18 +186,19 @@ namespace WebAdminScheduler.Controllers
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
             OracleDataReader oraReader = oraCommand.ExecuteReader();
             
-           List<object> procesosList = new List<object>();
-           var path="";
-           var parametro1="";
-           var parametro2="";
-           var parametro3="";
-           var parametro4="";   
-           var estado=""; 
-           var ftp=0;
-           var idhost=0;
-           var compresion=0;
-           var idcrontab=0;
-           var node="";
+            List<object> procesosList = new List<object>();
+            var path="";
+            var parametro1="";
+            var parametro2="";
+            var parametro3="";
+            var parametro4="";   
+            var estado=""; 
+            var ftp=0;
+            var idhost=0;
+            var compresion=0;
+            var idcrontab=0;
+            var node="";
+        
             if (oraReader.HasRows)
             {
                 while (oraReader.Read())
@@ -236,7 +234,7 @@ namespace WebAdminScheduler.Controllers
 
                     /*cp_procesos.DEPENDENCIA */var dependencia=oraReader.GetInt32(9);
                     /*cp_procesos.INTENTOS*/ var intentos= oraReader.GetInt32(10);
-                   /* cp_procesos.ESPERA_INTENTO*/ var espera_intento= oraReader.GetInt32(11);
+                    /* cp_procesos.ESPERA_INTENTO*/ var espera_intento= oraReader.GetInt32(11);
 
                     if (!oraReader.IsDBNull(12))
                     {

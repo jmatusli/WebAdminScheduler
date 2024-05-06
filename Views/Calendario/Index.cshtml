@@ -53,11 +53,10 @@
     var table = $('#dt-calendario').DataTable( {
       "processing": true,
       "serverSide": true,
-      "paging": true,
-	    "deferLoading": 0, // here
+      "filter": true,
       "scrollX":          true,
       "sScrollX":         "50%",
-      "scrollY":            '230px',
+      "scrollY":            $(document).height() - 300,
       "scrollCollapse":     true,
       "ajax": {
         "url": "@Url.Action("ListarCrontabs","Calendario")",
@@ -69,7 +68,7 @@
       },
       "columnDefs": [{
         'targets': 0,
-      orderable: false,
+        orderable: false,
         'render': function (data, type, full, meta){
           return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
         }
@@ -85,7 +84,7 @@
         {
           "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all-item">';   }
         },
-        { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
+          { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
           { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
           { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
           { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
@@ -123,7 +122,7 @@
     });
 
     // Handle click on checkbox to set state of "Select all" control
-    $('#dt-calendario tbody').on('change', 'input[type="checkbox"]', function(){
+    $('#dt-calendario tbody').on('change', 'input[type="checkbox"]', function() {
       // If checkbox is not checked
       if(!this.checked){
         var el = $('#dt-calendario-select-all').get(0);

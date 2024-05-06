@@ -26,7 +26,6 @@
         <select class="form-select" name="slcEstado" id="slcEstado">
           <option value="Activo">ACTIVO</option>
           <option value="Inactivo">INACTIVO</option>
-          <option value="Internal">INTERNAL</option>
         </select>
       </div>
     </div>
@@ -167,10 +166,8 @@
     }
   });
 
-  $("#slcEstado").on("change",function(){
-
-recargartabla(table,$(this).val())
-
+  $("#slcEstado").on("change",function() {
+    recargartabla(table,$(this).val())
   })
 });
 </script> 
