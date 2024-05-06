@@ -350,17 +350,100 @@ namespace WebAdminScheduler.Controllers
                 aaData = cp_contrabList,
             });
 		}
-        public JsonResult ListarJobsAsoc(int idcrontab) {
-            var data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDCRONTAB == idcrontab)
-            select s).ToList();  
-               // ViewBag.CP_PROCESOS = data;
-               return Json(new {
-                draw = 1, 
-                iTotalRecords = 1,
-                iDisplayLength=10,
-                iTotalDisplayRecords=data.Count(),
-                aaData = data,
-            });   
+          [HttpPost]
+           public JsonResult ListarJobsAsoc() {
+           int totalRecord = 0;
+			int filterRecord = 0;
+			string textOrder="";
+			string textSearch="";
+			var draw = Request.Form["draw"].FirstOrDefault();
+			var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+			var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+			var searchValue = Request.Form["search[value]"].FirstOrDefault();
+			int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
+			int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
+            int idcrontab = Convert.ToInt32(Request.Form["idcrontab"].FirstOrDefault() ?? "0");
+			IQueryable<CP_PROCESOS>  data = _DBContext.Set < CP_PROCESOS > ().AsQueryable();
+			//Obtener el total de los datos de la tabla
+			totalRecord = data.Count();
+			// Buscar datos cuando se encuentre el valor de búsqueda
+            if (!string.IsNullOrEmpty(searchValue)) {  
+	 
+				textSearch +=" AND ((nombre like '%' || :psearch || '%')";
+                textSearch +=" OR (path like '%' || :psearch || '%')";
+                
+				textSearch +=" OR (descripcion like '%' || :psearch || '%'))";
+			}
+			// get total count of records after search
+			  
+			if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)) 
+			textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
+			 
+			_DBContext.Database.OpenConnection();
+            String _query="SELECT * FROM (SELECT cp.idproc,cp.idconex,cp.path,cp.nombre,cp.descripcion,row_number() over "
+            +"(ORDER BY cp.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp WHERE IDCRONTAB="+idcrontab+" ) "
+            +" WHERE line_number BETWEEN  "+(skip+1)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
+	 
+			OracleCommand oraCommand = new OracleCommand(_query, 
+			(OracleConnection)_DBContext.Database.GetDbConnection());
+            
+ 	
+            oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue)); 
+		   OracleDataReader oraReader = oraCommand.ExecuteReader();
+ 
+		   List<object> cp_processList = new List<object>();
+            
+           int idproc=0;
+           int idconex=0;
+            var nombre="";
+            var descripcion="";
+            var path="";
+        
+			if (oraReader.HasRows)
+			{
+				while (oraReader.Read())
+				{
+					
+                      
+					 idproc= oraReader.GetInt32(0);
+					 idconex= oraReader.GetInt32(1);
+                      if (!oraReader.IsDBNull(2))
+                    {
+                     path= oraReader.GetString(2);
+                    } 
+                     if (!oraReader.IsDBNull(3))
+                    {
+                      nombre= oraReader.GetString(3);
+                    }
+                     if (!oraReader.IsDBNull(4))
+                    {
+                    descripcion= oraReader.GetString(4);
+                    }
+                    var c = new { IDPROC = idproc,IDCONEX=idconex,NOMBRE=nombre,DESCRIPCION=descripcion,PATH=path
+                    };
+                    cp_processList.Add(c);
+				}
+				filterRecord = cp_processList.Count();
+			}
+			else
+			{
+				return Json(new {
+            draw = draw, 
+                iTotalRecords = 0,
+                iDisplayLength = 0,
+                iTotalDisplayRecords = 0,
+            aaData=new {}});
+			}
+
+			oraReader.Close();
+			_DBContext.Database.CloseConnection();
+		    return Json(new {
+                draw = draw, 
+                iTotalRecords = totalRecord,
+                iDisplayLength = 10,
+                iTotalDisplayRecords = totalRecord,
+                aaData = cp_processList,
+            });  
               
         }
     }
