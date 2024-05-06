@@ -7,6 +7,7 @@ using Oracle.ManagedDataAccess.Client;
 using WebAdminScheduler.helpers;
 using System.Linq.Dynamic.Core;
 using System.Data;
+using System.Linq;
 namespace WebAdminScheduler.Controllers
 {
     public class JobsController : Controller
@@ -136,14 +137,30 @@ namespace WebAdminScheduler.Controllers
             int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
             int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
             string estado_param = Request.Form["estado"].FirstOrDefault() ?? "Activo";
+         string estado_paramtmp =""; 
 
-            var dataproc = (from ep in _DBContext.Set<CP_PROCESOS>()
+           List<string> estados = new List<string> {};
+            if(estado_param=="Activo")
+            {
+estados.Add("Activo");
+estados.Add("Internal");
+ estado_paramtmp=" WHERE estado IN ('Activo','Internal')";
+            }
+            else if(estado_param=="Inactivo")
+            {
+            estados.Add("Inactivo");
+             estado_paramtmp=" WHERE estado='Inactivo'";
+            }
+
+             var dataproct= _DBContext.CP_PROCESOS.Where(x=>estados.Contains(x.ESTADO));
+             
+             var dataproc = (from ep in dataproct
                 join e in _DBContext.Set<CP_CONEXION>() on ep.IDCONEX equals e.IDCONEX
-                where ep.ESTADO == estado_param
-                select new {
+                 select new {
                     IDCONEX=e.IDCONEX,
                     usuario=e.USUARIO
                 }).AsQueryable();
+ 
             //IQueryable<CP_PROCESOS> data = (IQueryable<CP_PROCESOS>)dataproc;
             //Obtener el total de los datos de la tabla
             totalRecord = dataproc.Count();
@@ -178,7 +195,7 @@ namespace WebAdminScheduler.Controllers
             String _query = "SELECT * FROM (SELECT cc.*,con.usuario,row_number() over "
             + "(ORDER BY cc.IDPROC DESC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cc "
             + " JOIN APP_SCL_ALTAMIRA.CP_CONEXION con on cc.idconex=con.idconex "
-            +"  WHERE estado='"+estado_param+"' ) "
+            + estado_paramtmp+")"
             + " WHERE line_number BETWEEN  " + (skip + 1) + " AND " + (skip + pageSize) + " " + textSearch + " " + textOrder;
 
             OracleCommand oraCommand = new OracleCommand(_query,
