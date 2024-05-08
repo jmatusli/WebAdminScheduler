@@ -351,30 +351,30 @@
       return false;
     } else {
 
-    console.log("datajob ",data_job);
-    $.ajax({
-      method: "POST",
-      async: true,
-      dataType: "json",
-      data: JSON.stringify(data_job),
-      contentType: "application/json; charset=utf-8",
-      url: '@Url.Action("Save", "Jobs")' ,
-      success: function () {
-        Swal.fire({
-        title: "Job registrado!",
-        text: "Click en aceptar para ver jobs registrados!",
-        icon: "success",
-        confirmButtonText: "Aceptar",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $(location).attr("href","@Url.Action("Index","Jobs")")
-        }  
-      });
-    },
-    error: function () {
-      alert("Error while inserting data");
-    }
-  });
+      console.log("datajob ",data_job);
+      $.ajax({
+        method: "POST",
+        async: true,
+        dataType: "json",
+        data: JSON.stringify(data_job),
+        contentType: "application/json; charset=utf-8",
+        url: '@Url.Action("Save", "Jobs")' ,
+        success: function () {
+          Swal.fire({
+          title: "Job registrado!",
+          text: "Click en aceptar para ver jobs registrados!",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $(location).attr("href","@Url.Action("Index","Jobs")")
+          }  
+        });
+      },
+      error: function () {
+        alert("Error while inserting data");
+      }
+    });
   }// Fin else
 })      
 });
