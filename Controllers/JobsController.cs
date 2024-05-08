@@ -89,15 +89,15 @@ namespace WebAdminScheduler.Controllers
             CP_PROCESOS procesost = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == dtoprocesos.oProcesos.IDPROC)
                                 select s).ToList().AsQueryable().FirstOrDefault();
 
-            CP_PROCESOS procesosval = (from s in _DBContext.CP_PROCESOS.Where(x => x.NOMBRE == dtoprocesos.oProcesos.NOMBRE && x.IDPROC !=dtoprocesos.oProcesos.IDPROC)
+            CP_PROCESOS procesosval = (from s in _DBContext.CP_PROCESOS.Where(x => x.NOMBRE == dtoprocesos.oProcesos.NOMBRE && x.IDPROC != dtoprocesos.oProcesos.IDPROC)
                                 select s).ToList().AsQueryable().FirstOrDefault();
         
-           if(procesosval!=null && procesosval.IDPROC>0)
-           {
-            return Json(new { error=true,msg = "Ya existe un proceso con el nombre "+dtoprocesos.oProcesos.NOMBRE });
-           }
-           else 
-           {
+            if(procesosval!=null && procesosval.IDPROC>0)
+            {
+                return Json(new { error=true, msg = "Ya existe un proceso con el nombre "+dtoprocesos.oProcesos.NOMBRE });
+            }
+            else 
+            {
                 procesost.COMPRESION = dtoprocesos.oProcesos.COMPRESION;
                 procesost.DEPENDENCIA = dtoprocesos.oProcesos.DEPENDENCIA;
                 procesost.DESCRIPCION = dtoprocesos.oProcesos.DESCRIPCION;
@@ -137,24 +137,24 @@ namespace WebAdminScheduler.Controllers
             int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
             int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
             string estado_param = Request.Form["estado"].FirstOrDefault() ?? "Activo";
-         string estado_paramtmp =""; 
+            string estado_paramtmp =""; 
 
            List<string> estados = new List<string> {};
             if(estado_param=="Activo")
             {
-estados.Add("Activo");
-estados.Add("Internal");
- estado_paramtmp=" WHERE estado IN ('Activo','Internal')";
+                estados.Add("Activo");
+                estados.Add("Internal");
+                estado_paramtmp=" WHERE estado IN ('Activo','Internal')";
             }
             else if(estado_param=="Inactivo")
             {
-            estados.Add("Inactivo");
-             estado_paramtmp=" WHERE estado='Inactivo'";
+                estados.Add("Inactivo");
+                estado_paramtmp=" WHERE estado='Inactivo'";
             }
 
-             var dataproct= _DBContext.CP_PROCESOS.Where(x=>estados.Contains(x.ESTADO));
+            var dataproct= _DBContext.CP_PROCESOS.Where(x=>estados.Contains(x.ESTADO));
              
-             var dataproc = (from ep in dataproct
+            var dataproc = (from ep in dataproct
                 join e in _DBContext.Set<CP_CONEXION>() on ep.IDCONEX equals e.IDCONEX
                  select new {
                     IDCONEX=e.IDCONEX,

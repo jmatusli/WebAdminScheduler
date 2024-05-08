@@ -276,9 +276,8 @@
       // Get all rows with search applied
       var rows = table.rows({ 'search': 'applied' }).nodes();
       // Check/uncheck checkboxes for all rows in the table
-      if(this.checked){
+      if(this.checked) {
         $('input[type="checkbox"]', rows).prop('checked', this.checked);
-        
         var selData =   table.rows().select();
         var selData =   table.rows(".selected").data();
       }
@@ -293,12 +292,12 @@
     });
 
     // Handle click on checkbox to set state of "Select all" control
-    $('#dt-crontab tbody').on('change', 'input[type="checkbox"]', function(){
+    $('#dt-crontab tbody').on('change', 'input[type="checkbox"]', function() {
       // If checkbox is not checked
-        if(!this.checked){
+      if(!this.checked) {
         var el = $('#dt-crontab-select').get(0);
         // If "Select all" control is checked and has 'indeterminate' property
-        if(el && el.checked && ('indeterminate' in el)){
+        if(el && el.checked && ('indeterminate' in el)) {
           // Set visual state of "Select all" control
           // as 'indeterminate'
           el.indeterminate = true;
@@ -306,28 +305,26 @@
       }
     });
 
-    $("#saveJob").on("click",function(){
-    var id_conex = $('#txtIdConex').val();
-    var nombre = $('#txtNombre').val();
-    var descripcion = $('#txtDescripcion').val();
-    var path = $('#txtPath').val();
-    var parametro1 = $('#txtParametro1').val();
-    var parametro2 = $('#txtParametro2').val();
-    var parametro3 = $('#txtParametro3').val();
-    var parametro4 = $('#txtParametro4').val();
-    var dependencia = $('#txtDependencia').is(":checked")?1:0;
-    var intentos = $('#txtIntentos').val();
-    var espera_intento = $('#txtEsperaIntento').val();
-    var estado = $('#txtEstado').val();
-    var ftp = $('#flexCheckFtp').is(":checked")?1:0;
-    var id_host = $('#txtIdHost').val();
-    var compresion = $('#flexCheckComprension').is(":checked")?1:0;  
+    $("#saveJob").on("click",function() {
+      var id_conex = $('#txtIdConex').val();
+      var nombre = $('#txtNombre').val();
+      var descripcion = $('#txtDescripcion').val();
+      var path = $('#txtPath').val();
+      var parametro1 = $('#txtParametro1').val();
+      var parametro2 = $('#txtParametro2').val();
+      var parametro3 = $('#txtParametro3').val();
+      var parametro4 = $('#txtParametro4').val();
+      var dependencia = $('#txtDependencia').is(":checked")?1:0;
+      var intentos = $('#txtIntentos').val();
+      var espera_intento = $('#txtEsperaIntento').val();
+      var estado = $('#txtEstado').val();
+      var ftp = $('#flexCheckFtp').is(":checked")?1:0;
+      var id_host = $('#txtIdHost').val();
+      var compresion = $('#flexCheckComprension').is(":checked")?1:0;  
+      
+      var node = $('#txtNode').val();
 
-    var node = $('#txtNode').val();
-
-
-
-      var data_job={
+      var data_job = {
         "oProcesos" : {
           "IDCONEX" : id_conex,
           "NOMBRE" : nombre,
@@ -348,7 +345,13 @@
           "NODE" : node
         }
       };
-   console.log("datajob ",data_job);
+    
+    if ((id_conex == "") || (id_host == "")) {  //COMPRUEBA CAMPOS VACIOS
+      alert("Los campos no pueden quedar vacios");
+      return false;
+    } else {
+
+    console.log("datajob ",data_job);
     $.ajax({
       method: "POST",
       async: true,
@@ -366,12 +369,13 @@
         if (result.isConfirmed) {
           $(location).attr("href","@Url.Action("Index","Jobs")")
         }  
-    });
-  },
+      });
+    },
     error: function () {
       alert("Error while inserting data");
     }
-});
+  });
+  }// Fin else
 })      
 });
 </script> 
