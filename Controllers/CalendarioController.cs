@@ -204,11 +204,11 @@ namespace WebAdminScheduler.Controllers
                     }
 
                     if(dias.Substring(6,1) == "1") { 
-                        tdias = "Dom.";
+                        tdias = "Dom, ";
                         textdia += tdias;
                     }
-                        
-					/*cp_crontab.WDAY_M2S_EX */wday_m2s_ex = textdia;
+                    
+                    /*cp_crontab.WDAY_M2S_EX */wday_m2s_ex = textdia.TrimEnd(',');
 					/*cp_crontab.DAY_EX*/ dayex= oraReader.GetString(6);
                     if(dayex=="0")
                     dayex="All";
