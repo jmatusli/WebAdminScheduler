@@ -714,23 +714,24 @@
   }
   
   <script> 
-   var mesesArray=[];
-   var diasexeArray=[];
-  var flagHoras = false;
+    var mesesArray=[];
+    var diasexeArray=[];
+    var flagHoras = false;
     var diasex="0";
     var monthex="0";
-   function daysMonth(anio,mes){
-var arrayDays=[];
-var diasMes = new Date(anio, mes, 0).getDate();
-var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
-for (var dia = 1; dia <= diasMes; dia++) {
-  // Ojo, hay que restarle 1 para obtener el mes correcto
-  var indice = new Date(anio, mes - 1, dia).getDay();
-    arrayDays.push({"dia":`${dia}`,"mes":`${mes}`,"anio":`${anio}`,"nombredia":`${diasSemana[indice]}`});
-}
-return arrayDays;
-}
+    function daysMonth(anio,mes) {
+      var arrayDays=[];
+      var diasMes = new Date(anio, mes, 0).getDate();
+      var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+      for (var dia = 1; dia <= diasMes; dia++) {
+        // Ojo, hay que restarle 1 para obtener el mes correcto
+        var indice = new Date(anio, mes - 1, dia).getDay();
+          arrayDays.push({"dia":`${dia}`,"mes":`${mes}`,"anio":`${anio}`,"nombredia":`${diasSemana[indice]}`});
+      }
+      return arrayDays;
+    }
 
   function getDays(arrayDay,dia){
     var data=$.map(arrayDay, function(obj) {

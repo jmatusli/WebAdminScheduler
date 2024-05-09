@@ -217,7 +217,7 @@
 <script>
 
   var params={}, selectedCrontab = 0;
-   
+
   function recargartabla(objeto,value)
   {
     params.estado=value;
@@ -386,7 +386,7 @@
       };
     
     if ((id_conex == "") || (id_host == "")) {  //COMPRUEBA CAMPOS VACIOS
-      alert("Los campos no pueden quedar vacios");
+      Swal.fire ('Los campos no pueden quedar vacios', 'error')
       return false;
     } else {
       console.log("datajob ",data_job);

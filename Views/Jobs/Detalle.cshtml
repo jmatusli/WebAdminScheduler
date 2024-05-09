@@ -24,70 +24,52 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittleProc" class="col-form-label"><strong>IDPROC:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtIdProc" class="col-form-label">@Model.IDPROC</label>
                     </div>
                     <div class="col-auto">
                         <label for="TittleConex" class="col-form-label"><strong>IDCONEX:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtIdConex" class="col-form-label">@Model.IDCONEX</label>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittleNombre" class="col-form-label"><strong>NOMBRE:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtNombre" class="col-form-label">@Model.NOMBRE</label>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittleDescripcion" class="col-form-label"><strong>DESCRIPCIÓN:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtDescripcion" class="col-form-label">@Model.DESCRIPCION</label>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittlePath" class="col-form-label"><strong>PATH:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtPath" class="col-form-label">@Model.PATH</label>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittleParametro1" class="col-form-label"><strong>PARAMETRO1:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtParametro1" class="col-form-label">@Model.PARAMETRO1</label>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittleParametroDos" class="col-form-label"><strong>PARAMETRO2:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtParametro2" class="col-form-label">@Model.PARAMETRO2</label>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittleParametroTres" class="col-form-label"><strong>PARAMETRO3:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtParametro3" class="col-form-label">@Model.PARAMETRO3</label>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
                         <label for="TittleParametroCuatro" class="col-form-label"><strong>PARAMETRO4:</strong></label>
-                    </div>
-                    <div class="col-auto">
                         <label for="txtParametro4" class="col-form-label">@Model.PARAMETRO4</label>
                     </div>
                 </div>
@@ -95,65 +77,45 @@
                     <div class="col-auto">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="TxtIdDependencia" disabled>
-                            <label for="TittleDependencia" class="col-form-label"><strong>DEPENDENCIA:</strong></label>
+                            <label for="TittleDependencia" class="col-form-label"><strong>DEPENDENCIA</strong></label>
                         </div>
-                    </div>
-                    <div class="col-auto">
-                        <span id="RepeatIntentos" class="form-text">
-                            <strong>INTENTOS:</strong>
-                        </span>
-                    </div>
-                    <div class="col-auto">
-                        <label for="txtIntento" class="col-form-label">@Model.INTENTOS</label>
-                    </div>
-                    <div class="col-auto">
-                        <span id="RepeatEsperaIntento" class="form-text">
-                            <strong>ESPERA INTENTO:</strong>
-                        </span>
-                    </div>
-                    <div class="col-auto">
-                        <label for="txtIntento" class="col-form-label">@Model.ESPERA_INTENTO</label>
-                    </div>
-                    <div class="col-auto">
-                        <span id="RepeatEstado" class="form-text">
-                            <strong>ESTADO:</strong>
-                        </span>
-                    </div>
-                    <div class="col-auto">
-                        <label for="txtEstado" class="col-form-label">@Model.ESTADO</label>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckFtp" disabled>
-                            <label class="form-check-label" for="flexCheckFtp">
-                                <strong>FTP</strong>
-                            </label>
+                            <label for="RepeatIntentos" class="col-form-label"><strong>INTENTOS:</strong></label>
+                            <label for="txtIntento" class="col-form-label">@Model.INTENTOS</label>
                         </div>
                     </div>
                     <div class="col-auto">
-                        <span id="idHost" class="form-text">
-                            <strong>IDHOST</strong>
-                        </span>
+                        <label for="RepeatEsperaIntento" class="col-form-label"><strong>ESPERA INTENTO:</strong></label>
+                        <label for="txtIntento" class="col-form-label">@Model.ESPERA_INTENTO</label>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <label for="lblEstado" class="col-form-label"><strong>ESTADO:</strong></label>
+                        <label for="txtEstado" class="col-form-label">@Model.ESTADO</label>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckFtp" disabled>
+                            <label for="lblFtp" class="col-form-label"><strong>FTP</strong></label>
+                        </div>
                     </div>
                     <div class="col-auto">
+                        <label for="lblHost" class="col-form-label"><strong>IDHOST:</strong></label>
                         <label for="txtHost" class="col-form-label">@Model.IDHOST</label>
                     </div>
                     <div class="col-auto">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="CheckComprension" disabled>
-                            <label class="form-check-label" for="CheckComprension">
-                                <strong>COMPRESIÓN</strong>
-                            </label>
+                            <label for="lblComprension" class="col-form-label"><strong>COMPRESIÓN</strong></label>
                         </div>
                     </div>
                 </div>
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
-                        <span id="Node" class="form-text">
-                            <strong>NODE:</strong>
-                        </span>
-                    </div>
-                    <div class="col-auto">
+                        <label for="lblNode" class="col-form-label"><strong>NODE:</strong></label>
                         <label for="txtHost" class="col-form-label">@Model.NODE</label>
                     </div>
                 </div>
