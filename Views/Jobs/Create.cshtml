@@ -225,7 +225,6 @@
   }
 
   $(document).ready( function () {
-
     var table = $('#dt-crontab').DataTable( {
       "processing": true,
       "serverSide": true,
@@ -250,8 +249,7 @@
     },
       "columnDefs": [{
         'targets': 0,
-      orderable: false 
-          
+        orderable: false
       },{
       'targets': -1,
       orderable: false,
@@ -385,10 +383,35 @@
         }
       };
     
-    if ((id_conex == "") || (id_host == "")) {  //COMPRUEBA CAMPOS VACIOS
-      Swal.fire ('Los campos no pueden quedar vacios', 'error')
+    if ((id_conex == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo id_conex', 'error')
       return false;
-    } else {
+    } 
+    if ((nombre == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo nombre', 'error')
+      return false;
+    } 
+    if ((descripcion == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo descripción', 'error')
+      return false;
+    } 
+    if ((path == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo path', 'error')
+      return false;
+    } 
+    if ((intentos == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo intento', 'error')
+      return false;
+    }  
+    if ((id_host == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo id_host', 'error')
+      return false;
+    }
+    if ((node == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo node', 'error')
+      return false;
+    }
+    else {
       console.log("datajob ",data_job);
       $.ajax({
         method: "POST",
