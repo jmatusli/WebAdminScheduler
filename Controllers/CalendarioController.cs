@@ -41,7 +41,6 @@ namespace WebAdminScheduler.Controllers
            CP_CRONTAB crontabt = new CP_CRONTAB();
            DateTime fechaActual = DateTime.Today;
         
-
             crontabt.IDCRONTAB=WACustomHelper.GetLasIdCRON(_DBContext);
             crontabt.FECHA=dtocrontab.oCrontab.FECHA; //fechaActual.ToString("ddMMyyyy");
             crontabt.HORA_INICIO=dtocrontab.oCrontab.HORA_INICIO;
@@ -92,14 +91,13 @@ namespace WebAdminScheduler.Controllers
             _DBContext.SaveChanges();
         
             return Json(crontabt);
-          
         }
         private bool CrontabsExists(int id)
         {
           return (_DBContext.CP_CRONTABS?.Any(e => e.IDCRONTAB == id)).GetValueOrDefault();
         }
 
-	   [HttpPost]
+	    [HttpPost]
         public JsonResult ListarCrontabs()
         {
 			int totalRecord = 0;
@@ -140,12 +138,12 @@ namespace WebAdminScheduler.Controllers
 			OracleCommand oraCommand = new OracleCommand(_query, 
 			(OracleConnection)_DBContext.Database.GetDbConnection());
             oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue));
-		   OracleDataReader oraReader = oraCommand.ExecuteReader();
-		   //List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
-		   List<object> cp_contrabList = new List<object>();
-           var idcrontab=0;
-           var fecha="";
-           var horaInicio="";
+            OracleDataReader oraReader = oraCommand.ExecuteReader();
+            //List<CP_CRONTAB> cp_contrabList = new List<CP_CRONTAB>();
+            List<object> cp_contrabList = new List<object>();
+            var idcrontab=0;
+            var fecha="";
+            var horaInicio="";
             var horaFin="";
             var recurrencia="";
             var wday_m2s_ex="";
@@ -218,83 +216,83 @@ namespace WebAdminScheduler.Controllers
                     string[] month_tmp = monts_exe.Split(',');
                    foreach (var month in month_tmp)
                     {
-                if(month=="0")
-                textmonts_exe="All,";
-                else
-                {     
-                    if(month == "1") 
-                    {
-                        tmonts_exe = "Ene,";
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month=="0")
+                        textmonts_exe="All,";
+                        else
+                        {     
+                            if(month == "1") 
+                        {
+                            tmonts_exe = "Ene,";
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "2") 
-                    { 
-                        tmonts_exe = "Feb,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "2") 
+                        { 
+                            tmonts_exe = "Feb,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "3") 
-                    { 
-                        tmonts_exe = "Marz,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "3") 
+                        { 
+                            tmonts_exe = "Marz,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "4") 
-                    { 
-                        tmonts_exe = "Abr,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "4") 
+                        { 
+                            tmonts_exe = "Abr,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "5") 
-                    { 
-                        tmonts_exe = "May,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "5") 
+                        { 
+                            tmonts_exe = "May,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "6") 
-                    { 
-                        tmonts_exe = "Jun,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "6") 
+                        { 
+                            tmonts_exe = "Jun,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "7") 
-                    { 
-                        tmonts_exe = "Jul,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "7") 
+                        { 
+                            tmonts_exe = "Jul,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "8") 
-                    { 
-                        tmonts_exe = "Agos,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "8") 
+                        { 
+                            tmonts_exe = "Agos,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "9") 
-                    { 
-                        tmonts_exe = "Sept,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "9") 
+                        { 
+                            tmonts_exe = "Sept,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "10") 
-                    { 
-                        tmonts_exe = "Oct,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month == "10") 
+                        { 
+                            tmonts_exe = "Oct,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month== "11") 
-                    { 
-                        tmonts_exe = "Nov,"; 
-                        textmonts_exe += tmonts_exe;
-                    }
+                        if(month== "11") 
+                        { 
+                            tmonts_exe = "Nov,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
 
-                    if(month == "12") 
-                    { 
-                        tmonts_exe = "Dic,"; 
-                        textmonts_exe += tmonts_exe;
+                        if(month == "12") 
+                        { 
+                            tmonts_exe = "Dic,"; 
+                            textmonts_exe += tmonts_exe;
+                        }
                     }
                 }
-            }
  
                 /*cp_crontab.MONTH_EX */monthex= textmonts_exe.TrimEnd(',');
                 

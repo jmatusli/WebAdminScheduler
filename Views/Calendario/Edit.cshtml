@@ -651,10 +651,14 @@
             $("#flexCheckUptDomingo").prop('checked', false);
         } 
     
-        if(conteodia==7)
-        $("#flexCheckUptAlldays").prop('checked', true);
-        else 
-        $("#flexCheckUptAlldays").prop('checked', false);
+        if(conteodia==7) {
+            $("#flexCheckUptAlldays").prop('checked', true);
+            $(".flexCheckDias").prop("disabled", true ); //Disable
+        }
+        else {
+            $("#flexCheckUptAlldays").prop('checked', false);
+            $(".flexCheckDias").prop("disabled", false ); //Disable
+        }
         if (idRepAftFin == 1) {
             $("#IdUptRepeatAfterFin").prop('checked', true);
         } else {
@@ -673,9 +677,12 @@
         {
             $(".flexCheckMes").prop("checked",true);
             $("#flexCheckUptAllmonths").prop("checked",true);
+            $(".flexCheckMes").prop("disabled", true ); //Disable
+            console.log("third");
         }
         else 
         {
+            $(".flexCheckMes").prop("disabled", false ); //Disable
             let Arraymexe = vmonthexe.split(","); //obtenemos meses de ejecucion separados por ,
             $(Arraymexe).each(function(index, item) {
                 console.log("mes ejecucion ",index," ",item);
@@ -690,9 +697,11 @@
         {
             $(".diasexe").prop("checked",true);
             $("#flexCheckUptAlldaysex").prop("checked",true);
+            $(".diasexe").prop("disabled", true ); //Disable
         }
         else 
         {
+            $(".diasexe").prop("disabled", false ); //Disable
             let Arraydexe = vdiasexe.split(","); //obtenemos dias de ejecucion separados por ,
             $(Arraydexe).each(function(index, item) {
                 $(".diasexe:checkbox[value="+item+"]").prop("checked","true");
@@ -758,24 +767,19 @@
 
     $("#flexCheckUptAllmonths").on("change",function() {
         if($(this).is(":checked")) {
-            console.log('entramos');
             $(".flexCheckMes").prop("checked",true);
-            $(".flexCheckMes").prop("disabled", true); //Disable
         }
         else {
             $(".flexCheckMes").prop("checked",false);
-            $(".flexCheckMes").prop( "disabled", false ); //Enable
         }
     });
     
     $("#flexCheckUptAlldays").on("change",function(){
         if($(this).is(":checked")) {
             $(".flexCheckDias").prop("checked",true);
-            $(".flexCheckDias").prop("disabled", true ); //Disable
         }
         else {
             $(".flexCheckDias").prop("checked",false);
-            $(".flexCheckDias").prop( "disabled", false ); //Enable
         }
     });
     
@@ -808,15 +812,18 @@
             +($('#flexCheckUptSabado').is(":checked") ? 1 : 0) + ""
             +($('#flexCheckUptDomingo').is(":checked") ? 1 : 0) + "";
 
-        if($("#flexCheckUptAlldaysex").is(":checked") )
-            diasex="0";  
+        if($("#flexCheckUptAlldaysex").is(":checked") ) {
+            diasex="0";
+        }
         else 
             diasex = diasexeArray.length > 0 ? diasexeArray.join(","):"0"; 
 
-       if($("#flexCheckUptAllmonths").is(":checked"))
-        monthex="0"; 
-       else 
-       monthex = mesesArray.length > 0 ? mesesArray.join(","):"0"; 
+        if($("#flexCheckUptAllmonths").is(":checked")) {
+            monthex="0"; 
+        }
+        else {
+            monthex = mesesArray.length > 0 ? mesesArray.join(","):"0"; 
+        }
       
         var data_cron={
             "oCrontab": {
