@@ -139,7 +139,7 @@ namespace WebAdminScheduler.Controllers
             string estado_param = Request.Form["estado"].FirstOrDefault() ?? "Activo";
             string estado_paramtmp =""; 
 
-           List<string> estados = new List<string> {};
+            List<string> estados = new List<string> {};
             if(estado_param=="Activo")
             {
                 estados.Add("Activo");

@@ -171,40 +171,40 @@ namespace WebAdminScheduler.Controllers
                     string textdia = "";
                     if(dias.Substring(0,1) == "1") 
                     { 
-                        tdias = "Lun, ";
+                        tdias = "Lun,";
                         textdia += tdias;
                     }
 
                     if(dias.Substring(1,1) == "1") 
                     { 
-                        tdias = "Mar, "; 
+                        tdias = "Mar,"; 
                         textdia += tdias;
                     }
 
                     if(dias.Substring(2,1) == "1") 
                     {
-                        tdias = "Mie, ";
+                        tdias = "Mie,";
                         textdia += tdias;
                     }
 
                     if(dias.Substring(3,1) == "1") 
                     {
-                        tdias = "Jue, ";
+                        tdias = "Jue,";
                         textdia += tdias;
                     }
 
                     if(dias.Substring(4,1) == "1") {
-                        tdias = "Vie, ";
+                        tdias = "Vie,";
                         textdia += tdias;
                     }
 
                     if(dias.Substring(5,1) == "1") { 
-                        tdias = "Sab, ";
+                        tdias = "Sab,";
                         textdia += tdias;
                     }
 
                     if(dias.Substring(6,1) == "1") { 
-                        tdias = "Dom, ";
+                        tdias = "Dom,";
                         textdia += tdias;
                     }
                     
@@ -218,12 +218,11 @@ namespace WebAdminScheduler.Controllers
                     string[] month_tmp = monts_exe.Split(',');
                    foreach (var month in month_tmp)
                     {
-                 if(month=="0")
-                 textmonts_exe="All,";
-                 else
-                 {
-                         
-                   if(month == "1") 
+                if(month=="0")
+                textmonts_exe="All,";
+                else
+                {     
+                    if(month == "1") 
                     {
                         tmonts_exe = "Ene,";
                         textmonts_exe += tmonts_exe;
@@ -294,153 +293,147 @@ namespace WebAdminScheduler.Controllers
                         tmonts_exe = "Dic,"; 
                         textmonts_exe += tmonts_exe;
                     }
-                 }
                 }
+            }
  
-                    /*cp_crontab.MONTH_EX */monthex= textmonts_exe.TrimEnd(',');
-                   
-                    if (!oraReader.IsDBNull(8))
-                    {
-                       /* cp_crontab.REPEAT_EVERY_MINS */repeatevery_mins= oraReader.GetInt32(8);   
-                    }
-
-                    if (!oraReader.IsDBNull(9))
-                    {
-                        var repeat_aft = oraReader.GetInt32(9);
-                        string frepeat_aft = "";
-                        if(repeat_aft == 1) 
-                        { 
-                            frepeat_aft = "Y";
-                        } else {
-                            frepeat_aft = "N";
-                        } 
-
-                        repeatafter_finish=frepeat_aft;
-                    }
-                    var c = new { IDCRONTAB = idcrontab,FECHA=fecha,HORA_INICIO=horaInicio,RECURRENCIA=recurrencia,
-                        HORA_FIN=horaFin,WDAY_M2S_EX=wday_m2s_ex,DAY_EX=dayex,MONTH_EX=monthex,REPEAT_EVERY_MINS=repeatevery_mins,
-                        REPEAT_AFTER_FINISH=repeatafter_finish
-                    };
-                    cp_contrabList.Add(c);
-				}
-				filterRecord = cp_contrabList.Count();
-			}
-			else
-			{
-				return Json(new {
-            draw = draw, 
-                iTotalRecords = 0,
-                iDisplayLength = 0,
-                iTotalDisplayRecords = 0,
-            aaData=new {}});
-			}
-
-			oraReader.Close();
-			_DBContext.Database.CloseConnection();
-		    return Json(new {
-                draw = draw, 
-                iTotalRecords = totalRecord,
-                iDisplayLength = 10,
-                iTotalDisplayRecords = totalRecord,
-                aaData = cp_contrabList,
-            });
-		}
-          [HttpPost]
-           public JsonResult ListarJobsAsoc() {
-           int totalRecord = 0;
-			int filterRecord = 0;
-			string textOrder="";
-			string textSearch="";
-			var draw = Request.Form["draw"].FirstOrDefault();
-			var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-			var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-			var searchValue = Request.Form["search[value]"].FirstOrDefault();
-			int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
-			int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
-            int idcrontab = Convert.ToInt32(Request.Form["idcrontab"].FirstOrDefault() ?? "0");
-			IQueryable<CP_PROCESOS>  data = _DBContext.Set < CP_PROCESOS > ().AsQueryable();
-			//Obtener el total de los datos de la tabla
-			totalRecord = data.Count();
-			// Buscar datos cuando se encuentre el valor de búsqueda
-            if (!string.IsNullOrEmpty(searchValue)) {  
-	 
-				textSearch +=" AND ((nombre like '%' || :psearch || '%')";
-                textSearch +=" OR (path like '%' || :psearch || '%')";
+                /*cp_crontab.MONTH_EX */monthex= textmonts_exe.TrimEnd(',');
                 
-				textSearch +=" OR (descripcion like '%' || :psearch || '%'))";
-			}
-			// get total count of records after search
-			  
-			if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)) 
-			textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
-			 
-			_DBContext.Database.OpenConnection();
-            String _query="SELECT * FROM (SELECT cp.idproc,cp.idconex,cp.path,cp.nombre,cp.descripcion,row_number() over "
-            +"(ORDER BY cp.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp WHERE IDCRONTAB="+idcrontab+" ) "
-            +" WHERE line_number BETWEEN  "+(skip+1)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
-	 
-			OracleCommand oraCommand = new OracleCommand(_query, 
-			(OracleConnection)_DBContext.Database.GetDbConnection());
-            
- 	
-            oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue)); 
-		   OracleDataReader oraReader = oraCommand.ExecuteReader();
- 
-		   List<object> cp_processList = new List<object>();
-            
-           int idproc=0;
-           int idconex=0;
-            var nombre="";
-            var descripcion="";
-            var path="";
-        
-			if (oraReader.HasRows)
-			{
-				while (oraReader.Read())
-				{
-					
-                      
-					 idproc= oraReader.GetInt32(0);
-					 idconex= oraReader.GetInt32(1);
-                      if (!oraReader.IsDBNull(2))
-                    {
-                     path= oraReader.GetString(2);
+                if (!oraReader.IsDBNull(8))
+                {
+                    /* cp_crontab.REPEAT_EVERY_MINS */repeatevery_mins= oraReader.GetInt32(8);   
+                }
+
+                if (!oraReader.IsDBNull(9))
+                {
+                    var repeat_aft = oraReader.GetInt32(9);
+                    string frepeat_aft = "";
+                    if(repeat_aft == 1) 
+                    { 
+                        frepeat_aft = "Y";
+                    } else {
+                        frepeat_aft = "N";
                     } 
-                     if (!oraReader.IsDBNull(3))
-                    {
-                      nombre= oraReader.GetString(3);
-                    }
-                     if (!oraReader.IsDBNull(4))
-                    {
-                    descripcion= oraReader.GetString(4);
-                    }
-                    var c = new { IDPROC = idproc,IDCONEX=idconex,NOMBRE=nombre,DESCRIPCION=descripcion,PATH=path
-                    };
-                    cp_processList.Add(c);
-				}
-				filterRecord = cp_processList.Count();
-			}
-			else
-			{
-				return Json(new {
-            draw = draw, 
-                iTotalRecords = 0,
-                iDisplayLength = 0,
-                iTotalDisplayRecords = 0,
-            aaData=new {}});
-			}
 
-			oraReader.Close();
-			_DBContext.Database.CloseConnection();
-		    return Json(new {
-                draw = draw, 
-                iTotalRecords = totalRecord,
-                iDisplayLength = 10,
-                iTotalDisplayRecords = totalRecord,
-                aaData = cp_processList,
-            });  
-              
+                    repeatafter_finish=frepeat_aft;
+                }
+                var c = new { IDCRONTAB = idcrontab,FECHA=fecha,HORA_INICIO=horaInicio,RECURRENCIA=recurrencia,
+                    HORA_FIN=horaFin,WDAY_M2S_EX=wday_m2s_ex,DAY_EX=dayex,MONTH_EX=monthex,REPEAT_EVERY_MINS=repeatevery_mins,
+                    REPEAT_AFTER_FINISH=repeatafter_finish
+                };
+                cp_contrabList.Add(c);
+            }
+            filterRecord = cp_contrabList.Count();
         }
-    }
+        else
+        {
+            return Json(new {
+            draw = draw, 
+            iTotalRecords = 0,
+            iDisplayLength = 0,
+            iTotalDisplayRecords = 0,
+            aaData=new {}});
+        }
 
+        oraReader.Close();
+        _DBContext.Database.CloseConnection();
+        return Json(new {
+            draw = draw, 
+            iTotalRecords = totalRecord,
+            iDisplayLength = 10,
+            iTotalDisplayRecords = totalRecord,
+            aaData = cp_contrabList,
+        });
+    }
+        
+    [HttpPost]
+    public JsonResult ListarJobsAsoc() {
+        int totalRecord = 0;
+        int filterRecord = 0;
+        string textOrder="";
+        string textSearch="";
+        var draw = Request.Form["draw"].FirstOrDefault();
+        var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+        var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+        var searchValue = Request.Form["search[value]"].FirstOrDefault();
+        int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "0");
+        int skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
+        int idcrontab = Convert.ToInt32(Request.Form["idcrontab"].FirstOrDefault() ?? "0");
+        IQueryable<CP_PROCESOS>  data = _DBContext.Set < CP_PROCESOS > ().AsQueryable();
+        //Obtener el total de los datos de la tabla
+        totalRecord = data.Count();
+        // Buscar datos cuando se encuentre el valor de búsqueda
+        if (!string.IsNullOrEmpty(searchValue)) {  
+            textSearch +=" AND ((nombre like '%' || :psearch || '%')";
+            textSearch +=" OR (path like '%' || :psearch || '%')";
+            textSearch +=" OR (descripcion like '%' || :psearch || '%'))";
+        }
+        // get total count of records after search
+            
+        if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)) 
+        textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
+        
+        _DBContext.Database.OpenConnection();
+        String _query="SELECT * FROM (SELECT cp.idproc,cp.idconex,cp.path,cp.nombre,cp.descripcion,row_number() over "
+        +"(ORDER BY cp.idcrontab ASC) line_number FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp WHERE IDCRONTAB="+idcrontab+" ) "
+        +" WHERE line_number BETWEEN  "+(skip+1)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
+
+        OracleCommand oraCommand = new OracleCommand(_query, 
+        (OracleConnection)_DBContext.Database.GetDbConnection());
+            
+        oraCommand.Parameters.Add(new OracleParameter("psearch", searchValue)); 
+        OracleDataReader oraReader = oraCommand.ExecuteReader();
+
+        List<object> cp_processList = new List<object>();
+        
+        int idproc=0;
+        int idconex=0;
+        var nombre="";
+        var descripcion="";
+        var path="";
+
+        if (oraReader.HasRows)
+        {
+            while (oraReader.Read())
+            {
+                idproc= oraReader.GetInt32(0);
+                idconex= oraReader.GetInt32(1);
+                if (!oraReader.IsDBNull(2))
+                {
+                    path= oraReader.GetString(2);
+                } 
+                if (!oraReader.IsDBNull(3))
+                {
+                nombre= oraReader.GetString(3);
+                }
+                if (!oraReader.IsDBNull(4))
+                {
+                    descripcion= oraReader.GetString(4);
+                }
+                    var c = new { IDPROC = idproc,IDCONEX=idconex,NOMBRE=nombre,DESCRIPCION=descripcion,PATH=path
+                };
+                cp_processList.Add(c);
+            }
+            filterRecord = cp_processList.Count();
+        }
+        else
+        {
+            return Json(new {
+            draw = draw, 
+            iTotalRecords = 0,
+            iDisplayLength = 0,
+            iTotalDisplayRecords = 0,
+            aaData=new {}});
+        }
+
+        oraReader.Close();
+        _DBContext.Database.CloseConnection();
+        return Json(new {
+            draw = draw, 
+            iTotalRecords = totalRecord,
+            iDisplayLength = 10,
+            iTotalDisplayRecords = totalRecord,
+            aaData = cp_processList,
+        });  
+    }
+}
 }

@@ -535,7 +535,7 @@
             <td>
               <div class="col-auto">
                 <div class="form-check">
-                  <input class="form-check-input diasexe" type="checkbox" value="18" id="flexCheckDiesiochoExe">
+                  <input class="form-check-input diasexe" type="checkbox" value="18" id="flexCheckDiecinueveExe">
                   <label class="form-check-label" for="flexCheckDiecinueveExe">
                     19
                   </label>
@@ -747,7 +747,7 @@
         var hora_ini=$('#horaIni').val();
         hora_ini=hora_ini.replace(":", "");
 
-        var repeat_every_mins = $('#txtRepeatEveryMins').val();
+        var repeat_every_mins = $('#txtRepeatEveryMins').val() ? $('#txtRepeatEveryMins').val() : 0;
         var hora_fin=$('#horaFin').val();
         hora_fin=hora_fin.replace(":", "");
 
@@ -766,6 +766,186 @@
         }
         flagHoras=false;
 
+        //Validacion días seleccionados
+        var validDayW = false;
+
+        if($('#flexCheckLunes').is(":checked")) {
+          validDayW = true;
+        }
+        else if($('#flexCheckMartes').is(":checked")) {
+          validDayW = true;
+        }
+        else if($('#flexCheckMiercoles').is(":checked")) {
+          validDayW = true;
+        }
+        else if($('#flexCheckJueves').is(":checked")) {
+          validDayW = true;
+        }
+        else if($('#flexCheckViernes').is(":checked")) {
+          validDayW = true;
+        }
+        else if($('#flexCheckSabado').is(":checked")) {
+          validDayW = true;
+        }
+        else if($('#flexCheckDomingo').is(":checked")) {
+          validDayW = true;
+        }
+
+        if(validDayW) {
+          console.log('se selecciono almenos un día');
+        } else {
+          Swal.fire ('seleccione almenos un día', 'error')
+          return;
+        }
+
+        var validMonth = false;
+
+        //Validacion meses
+        if($('#flexCheckEnero').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckFebrero').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckMarzo').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckAbril').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckMayo').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckJunio').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckJulio').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckAgost').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckSept').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckOct').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckNov').is(":checked")) {
+          validMonth = true;
+        }
+        else if($('#flexCheckDic').is(":checked")) {
+          validMonth = true;
+        }
+
+        if(validMonth) {
+          console.log('se selecciono almenos un mes');
+        } else {
+          Swal.fire ('seleccione almenos un mes', 'error')
+          return;
+        }
+
+        //Validacion dias ejecucion
+        var  validDayExe = false;
+         
+        if($('#flexCheckUnoExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckDosExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckTresExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckCuatroExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckCincoExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckSeisExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckSieteExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckOchoExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexChecknueveExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckDiezExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckOnceExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckDoceExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckTreceExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckCatorceExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckQuinceExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckDiesiseisExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckDiesicieteExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckDiesiochoExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckDiecinueveExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeinteExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeintiunoExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeintidosExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeintitresExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeinticuatroExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeinticincoExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeintiseisExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeintiochoExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckVeintinueveExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckTreintaExe').is(":checked")) {
+          validDayExe = true;
+        }
+        else if($('#flexCheckTreintaunoExe').is(":checked")) {
+          validDayExe = true;
+        }
+
+        if(validDayExe) {
+         console.log('se seleccionó almenos un día de ejecución');
+        } else {
+          Swal.fire ('seleccione almenos un día de ejecución', 'error')
+          return;
+        }
+
       if($("#flexCheckAlldaysex").is(":checked") )
         diasex="0";  
       else 
@@ -777,45 +957,44 @@
         monthex=mesesArray.length > 0 ? mesesArray.join(","):"0"; 
       
         var repeat_after_finish= ($('#IdRepeatAfterFin').is(":checked") ? 1 : 0);  
-          var data_cron={
-            "oCrontab": {
-              /*"IDCRONTAB":,*/
-              "FECHA":"00000000",
-              "HORA_INICIO":hora_ini,
-              "HORA_FIN":hora_fin,
-              "RECURRENCIA":"0000",
-              "WDAY_M2S_EX":diastext,
-              "DAY_EX": diasex,
-              "MONTH_EX":monthex,
-              "REPEAT_EVERY_MINS":repeat_every_mins,
-              "REPEAT_AFTER_FINISH":repeat_after_finish
-            }
-          };
+        var data_cron={
+          "oCrontab": {
+            /*"IDCRONTAB":,*/
+            "FECHA":"00000000",
+            "HORA_INICIO":hora_ini,
+            "HORA_FIN":hora_fin,
+            "RECURRENCIA":"0000",
+            "WDAY_M2S_EX":diastext,
+            "DAY_EX": diasex,
+            "MONTH_EX":monthex,
+            "REPEAT_EVERY_MINS" : repeat_every_mins,
+            "REPEAT_AFTER_FINISH":repeat_after_finish
+          }
+        };
 
-          $.ajax({
-            method: "POST",
-            async: true,
-            dataType: "json",
-            data: JSON.stringify(data_cron),
-            contentType: "application/json; charset=utf-8",
-            url: '@Url.Action("Save", "Calendario")' ,
-            success: function () {
-            Swal.fire({
-            title: "Calendario registrado!",
-            text: "Click en aceptar para ver calendarios registrados!",
-            icon: "success",
-            confirmButtonText: "Aceptar",
-          }).then((result) => {
-          if (result.isConfirmed) {
-            $(location).attr("href","@Url.Action("Index","Calendario")")
-          }  
-        });
-        },
-        error: function () {
-          alert("Error while inserting data");
-        }
+        $.ajax({
+          method: "POST",
+          async: true,
+          dataType: "json",
+          data: JSON.stringify(data_cron),
+          contentType: "application/json; charset=utf-8",
+          url: '@Url.Action("Save", "Calendario")' ,
+          success: function () {
+          Swal.fire({
+          title: "Calendario registrado!",
+          text: "Click en aceptar para ver calendarios registrados!",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        }).then((result) => {
+        if (result.isConfirmed) {
+          $(location).attr("href","@Url.Action("Index","Calendario")")
+        }  
       });
-
+      },
+      error: function () {
+        alert("Error while inserting data");
+      }
+    });
     })
 
   $(".flexCheckMes").on("change",function(){
@@ -849,7 +1028,8 @@
       var miarrayx=daysMonth(2024,$('.flexCheckMes:checked').val());
       var dias=getDays(miarrayx,$(this).val());
       if($('.flexCheckDias:checked').length==1) {
-        $(".diasexe").prop("disabled",true);
+        //$(".diasexe").prop("disabled",true);
+        console.log("dias seleccionados");
         $.each(dias, function( index, item ) {
           //console.log(item);
           $(":checkbox[value="+item.dia+"]").prop("disabled",false);
