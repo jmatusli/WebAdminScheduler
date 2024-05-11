@@ -1,6 +1,6 @@
 @model WebAdminScheduler.Models.CP_PROCESOS;
 @{
-    ViewData["Title"] = "Detalle";
+    ViewData["Title"] = "Dependencia";
 }
 <head>
     <link rel="stylesheet" href="~/css/datatables.min.css" />
@@ -14,7 +14,7 @@
     <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
 </head>
 
-<h1>Detalle Jobs</h1>
+<h1>Dependencia</h1>
     <body>
         <div class="card">
             <div class="card-header">
@@ -26,121 +26,8 @@
                         <label for="TittleProc" class="col-form-label"><strong>IDPROC:</strong></label>
                         <label for="txtIdProc" class="col-form-label">@Model.IDPROC</label>
                     </div>
-                    <div class="col-auto">
-                        <label for="TittleConex" class="col-form-label"><strong>IDCONEX:</strong></label>
-                        <label for="txtIdConex" class="col-form-label">@Model.IDCONEX</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="TittleNombre" class="col-form-label"><strong>NOMBRE:</strong></label>
-                        <label for="txtNombre" class="col-form-label">@Model.NOMBRE</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="TittleDescripcion" class="col-form-label"><strong>DESCRIPCIÓN:</strong></label>
-                        <label for="txtDescripcion" class="col-form-label">@Model.DESCRIPCION</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="TittlePath" class="col-form-label"><strong>PATH:</strong></label>
-                        <label for="txtPath" class="col-form-label">@Model.PATH</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="TittleParametro1" class="col-form-label"><strong>PARAMETRO1:</strong></label>
-                        <label for="txtParametro1" class="col-form-label">@Model.PARAMETRO1</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="TittleParametroDos" class="col-form-label"><strong>PARAMETRO2:</strong></label>
-                        <label for="txtParametro2" class="col-form-label">@Model.PARAMETRO2</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="TittleParametroTres" class="col-form-label"><strong>PARAMETRO3:</strong></label>
-                        <label for="txtParametro3" class="col-form-label">@Model.PARAMETRO3</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="TittleParametroCuatro" class="col-form-label"><strong>PARAMETRO4:</strong></label>
-                        <label for="txtParametro4" class="col-form-label">@Model.PARAMETRO4</label>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="TxtIdDependencia" disabled>
-                            <label for="TittleDependencia" class="col-form-label"><strong>DEPENDENCIA</strong></label>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="form-check">
-                            <label for="RepeatIntentos" class="col-form-label"><strong>INTENTOS:</strong></label>
-                            <label for="txtIntento" class="col-form-label">@Model.INTENTOS</label>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <label for="RepeatEsperaIntento" class="col-form-label"><strong>ESPERA INTENTO:</strong></label>
-                        <label for="txtIntento" class="col-form-label">@Model.ESPERA_INTENTO</label>
-                    </div>
-                    
-                    <div class="col-auto">
-                        <label for="lblEstado" class="col-form-label"><strong>ESTADO:</strong></label>
-                        <label for="txtEstado" class="col-form-label">@Model.ESTADO</label>
-                    </div>
-                    
-                    <div class="col-auto">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckFtp" disabled>
-                            <label for="lblFtp" class="col-form-label"><strong>FTP</strong></label>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <label for="lblHost" class="col-form-label"><strong>IDHOST:</strong></label>
-                        <label for="txtHost" class="col-form-label">@Model.IDHOST</label>
-                    </div>
-                    <div class="col-auto">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="CheckComprension" disabled>
-                            <label for="lblComprension" class="col-form-label"><strong>COMPRESIÓN</strong></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-auto">
-                        <label for="lblNode" class="col-form-label"><strong>NODE:</strong></label>
-                        <label for="txtHost" class="col-form-label">@Model.NODE</label>
-                    </div>
                 </div>
             </div>
-            <div class="card-footer text-muted">
-                <h4 style="text-align: center;">Detalle de Registro</h4>
-            </div>
-        </div>
-        <div class="container">
-            <table id="dt-registro" class="display nowrap" width="100%">
-                <thead>
-                    <tr style="font-size:13px;">
-                       <!-- <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="tblJobs-select-all"></th>-->
-                        <th>IDREG</th>
-                        <th>FECHA INICIO</th>
-                        <th>FECHA EJECUCIÓN</th>
-                        <th>FECHA FINALIZÓ</th>  
-                        <th>ESTADO</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                  <tfooter>
-                </tfooter>
-            </table>
         </div>
     </body>
     
@@ -157,8 +44,9 @@
     
     function recargartabla(objeto,value)
     {
-        params.idproc=value;
-        objeto.ajax.reload(null,false); //reload datatable ajax 
+    params.idproc=value;
+
+    objeto.ajax.reload(null,false); //reload datatable ajax 
     }
 
     if (idDependencia == 1) {

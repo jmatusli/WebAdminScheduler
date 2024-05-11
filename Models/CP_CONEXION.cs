@@ -11,6 +11,5 @@ namespace WebAdminScheduler.Models
         public string? SERVICIO { get; set; }
         public string? DLINK { get; set; }
         public string? TIPO { get; set; }
-        
     }
 }

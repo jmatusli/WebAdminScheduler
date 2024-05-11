@@ -18,8 +18,8 @@ namespace WebAdminScheduler.Models
         public  virtual DbSet<CP_CRONTAB> CP_CRONTABS { get; set; } = null!;
         public  virtual DbSet<CP_PROCESOS> CP_PROCESOS { get; set; } = null!;
         public  virtual DbSet<CP_REGISTRO> CP_REGISTRO { get; set; } = null!;
-
         public  virtual DbSet<CP_CONEXION> CP_CONEXION { get; set; } = null!;
+        public  virtual DbSet<CP_DEPENDENCIAS> CP_DEPENDENCIAS { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         }
@@ -61,7 +61,6 @@ namespace WebAdminScheduler.Models
 
                     entity.Property(e => e.REPEAT_AFTER_FINISH)
                     .IsUnicode(false);
-                 
             });
 
             modelBuilder.Entity<CP_PROCESOS>(entity =>
@@ -135,6 +134,37 @@ namespace WebAdminScheduler.Models
             modelBuilder.Entity<CP_REGISTRO>(entity =>
             {
                 entity.HasKey(e => e.IDREG)
+                 .HasName("PK__Reg__CRSFDF");
+
+                entity.ToTable("CP_REGISTRO");
+
+                entity.Property(e => e.IDPROC)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FEC_INICIO)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FEC_EJECUCION)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                     entity.Property(e => e.FEC_FINALIZO)
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                    entity.Property(e => e.ESTADO)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                    entity.Property(e => e.FLAG_ALARMA)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CP_REGISTRO>(entity =>
+            {
+                entity.HasKey(e => e.IDREG)
                  .HasName("PK__Crontab__CRSFDF");
 
                 entity.ToTable("CP_REGISTRO");
@@ -163,7 +193,21 @@ namespace WebAdminScheduler.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<CP_DEPENDENCIAS>(entity =>
+            { 
+                entity.HasKey(e => e.IDDEP)
+                 .HasName("PK_DEPENDENCIAS__CRSFDF");
 
+                entity.ToTable("CP_DEPENDENCIAS");
+
+                entity.Property(e => e.IDPROC)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IDPROC_DEP)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<CP_CONEXION>(entity =>
             { 
@@ -191,7 +235,6 @@ namespace WebAdminScheduler.Models
                     entity.Property(e => e.TIPO)
                     .HasMaxLength(500)
                     .IsUnicode(false);
- 
             });
 
             OnModelCreatingPartial(modelBuilder);

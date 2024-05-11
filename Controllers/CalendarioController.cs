@@ -34,6 +34,11 @@ namespace WebAdminScheduler.Controllers
             ViewBag.LasIdcrontab=result;
             return View();
         }
+        public IActionResult ListDependencias()
+        {
+            //ViewBag.cp_dependencias = DataCalls.GetListDependenciass();
+            return View();
+        }
 		
 		[HttpPost]
 		public JsonResult Save([FromBody] CrontabVM dtocrontab)
