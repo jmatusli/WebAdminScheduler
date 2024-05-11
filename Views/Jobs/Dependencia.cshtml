@@ -6,16 +6,35 @@
     <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/lib/Vis/dist/vis-network.min.css" rel="stylesheet" type="text/css"/>
+
     <script src="~/js/jquery-1.11.3.min.js"></script>
     <script src="~/js/pdfmake.min.js"></script>
     <script src="~/js/vfs_fonts.js"></script>
     <script src="~/js/datatables.min.js"></script>
     <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
     <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
+         <script src="~/lib/Vis/dist/vis.js"></script>
+    <style type="text/css">
+        body {
+            font: 10pt sans;
+        }
+
+        #mynetwork {
+            width: 800px;
+            height: 800px;
+            border: 1px solid lightgray;
+
+             align:center;
+        }
+    </style>
+ 
+
+   
 </head>
 
 <h1>Dependencia</h1>
-    <body>
+    <body onload="draw();">
         <div class="card">
             <div class="card-header">
                 Detalle
@@ -29,8 +48,135 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+           <div id="mynetwork"></div>
+        </div>
     </body>
-    
+     <script type="text/javascript">
+        var nodes = null;
+        var edges = null;
+        var network = null;
+        var directionInput = document.getElementById("direction");
+
+        function destroy() {
+            if (network !== null) {
+                network.destroy();
+                network = null;
+            }
+        }
+
+        function draw() {
+            destroy();
+            nodes = [];
+            edges = [];
+            var connectionCount = [];
+
+            // randomly create some nodes and edges
+            for (var i = 0; i < 15; i++) {
+                nodes.push({id: i, label: String(i)});
+            }
+            edges.push({from: 0, to: 1});
+            edges.push({from: 0, to: 6});
+            edges.push({from: 0, to: 13});
+            edges.push({from: 0, to: 11});
+            edges.push({from: 1, to: 2});
+            edges.push({from: 2, to: 3});
+            edges.push({from: 2, to: 4});
+            edges.push({from: 3, to: 5});
+            edges.push({from: 1, to: 10});
+            edges.push({from: 1, to: 7});
+            edges.push({from: 2, to: 8});
+            edges.push({from: 2, to: 9});
+            edges.push({from: 3, to: 14});
+            edges.push({from: 1, to: 12,arrows:{middle:{scaleFactor:1.6},to:true}});
+            nodes[0]["level"] = 0;
+            nodes[0]["shape"] = 'circle';
+ 
+            nodes[1]["level"] = 1;
+             nodes[1]["shape"] = 'circle';
+            nodes[2]["level"] = 3;
+             nodes[2]["shape"] = 'circle';
+            nodes[3]["level"] = 4;
+             nodes[3]["shape"] = 'circle';
+            nodes[4]["level"] = 4;
+             nodes[4]["shape"] = 'circle';
+            nodes[5]["level"] = 5;
+             nodes[5]["shape"] = 'circle';
+            nodes[6]["level"] = 1;
+             nodes[6]["shape"] = 'circle';
+            nodes[7]["level"] = 2;
+             nodes[7]["shape"] = 'circle';
+            nodes[8]["level"] = 4;
+             nodes[8]["shape"] = 'circle';
+            nodes[9]["level"] = 4;
+             nodes[9]["shape"] = 'circle';
+            nodes[10]["level"] = 2;
+             nodes[10]["shape"] = 'circle';
+            nodes[11]["level"] = 1;
+             nodes[11]["shape"] = 'circle';
+            nodes[12]["level"] = 2;
+             nodes[12]["shape"] = 'circle';
+            nodes[13]["level"] = 1;
+             nodes[13]["shape"] = 'circle';
+            nodes[14]["level"] = 5;
+ nodes[14]["shape"] = 'circle';
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+ 
+     
+                var options = {
+                    nodes: {
+            shape: 'dot',
+            size: 30,
+            font: {
+                size: 32,
+                color: '#000000'
+            },
+            borderWidth: 2
+        }, 
+                edges: {
+                    smooth: {
+                        type: 'cubicBezier',
+                        forceDirection: 'vertical',//(directionInput.value == "UD" || directionInput.value == "DU") ? 'vertical' : 'horizontal',
+                        roundness: 0.4
+                    }
+                },
+                layout: {
+                    hierarchical: {
+                        direction: 'UD'//directionInput.value
+                    }
+                },
+                physics:false,
+               interaction: {
+                dragNodes: false,// do not allow dragging nodes
+                zoomView: false, // do not allow zooming
+                dragView: true  // do not allow dragging
+             }
+                
+                
+            };
+            network = new vis.Network(container, data, options);
+
+            // add event listeners
+            network.on('select', function (params) {
+                /*document.getElementById('selection').innerHTML = */
+                console.log('Selection: ' + params.nodes);
+            });
+
+            network.on('dragStart', function(){
+             return false;
+            });
+
+
+}
+        
+
+    </script>
 <script> 
     var params={};
     var table={};
