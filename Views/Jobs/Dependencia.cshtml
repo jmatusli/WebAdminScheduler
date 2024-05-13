@@ -2,10 +2,13 @@
 @{
     ViewData["Title"] = "Dependencia";
 }
+
 <head>
     <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/3.3.4/css/bootstrap.min.css" /> 
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-multiselect.css" /> 
     <link rel="stylesheet" href="~/lib/Vis/dist/vis-network.min.css" rel="stylesheet" type="text/css"/>
 
     <script src="~/js/jquery-1.11.3.min.js"></script>
@@ -14,7 +17,10 @@
     <script src="~/js/datatables.min.js"></script>
     <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
     <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
-         <script src="~/lib/Vis/dist/vis.js"></script>
+    <script src="~/lib/Vis/dist/vis.js"></script>
+    <script src="~/lib/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap-multiselect.js"></script>
+    
     <style type="text/css">
         body {
             font: 10pt sans;
@@ -28,9 +34,6 @@
              align:center;
         }
     </style>
- 
-
-   
 </head>
 
 <h1>Dependencia</h1>
@@ -47,12 +50,30 @@
                     </div>
                 </div>
             </div>
+            <div class="">
+                <strong>Seleccionar dependencia:</strong>
+                <select id="multiple-checkboxes" multiple="multiple">
+                    <option value="php">PHP</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="sql">SQL</option>
+                    <option value="jquery">Jquery</option>
+                    <option value=".net">.Net</option>
+                </select>
+            </div>
         </div>
+
         <div class="container">
            <div id="mynetwork"></div>
         </div>
     </body>
      <script type="text/javascript">
+
+     $(document).ready(function() {
+        $('#multiple-checkboxes').multiselect({
+          includeSelectAllOption: true,
+        });
+    });
         var nodes = null;
         var edges = null;
         var network = null;
@@ -93,9 +114,6 @@
             nodes[4]["level"] = 1;
              nodes[4]["shape"] = 'circle';
             
-           
- 
-
             // create a network
             var container = document.getElementById('mynetwork');
             var data = {
@@ -103,17 +121,16 @@
                 edges: edges
             };
  
-     
-                var options = {
-                    nodes: {
-            shape: 'dot',
-            size: 30,
-            font: {
+            var options = {
+                nodes: {
+                shape: 'dot',
+                size: 30,
+                font: {
                 size: 32,
                 color: '#000000'
             },
             borderWidth: 2
-        }, 
+            }, 
                 edges: {
                     smooth: {
                         type: 'cubicBezier',
@@ -127,13 +144,11 @@
                     }
                 },
                 physics:false,
-               interaction: {
-                dragNodes: false,// do not allow dragging nodes
-                zoomView: false, // do not allow zooming
-                dragView: true  // do not allow dragging
-             }
-                
-                
+                interaction: {
+                    dragNodes: false,// do not allow dragging nodes
+                    zoomView: false, // do not allow zooming
+                    dragView: true  // do not allow dragging
+                }
             };
             network = new vis.Network(container, data, options);
 
@@ -144,14 +159,11 @@
             });
 
             network.on('dragStart', function(){
-             return false;
+                return false;
             });
+    }
+</script>
 
-
-}
-        
-
-    </script>
 <script> 
     var params={};
     var table={};
@@ -165,9 +177,8 @@
     
     function recargartabla(objeto,value)
     {
-    params.idproc=value;
-
-    objeto.ajax.reload(null,false); //reload datatable ajax 
+        params.idproc=value;
+        objeto.ajax.reload(null,false); //reload datatable ajax 
     }
 
     if (idDependencia == 1) {
@@ -189,169 +200,10 @@
     }
 
     function toggle(source) {
-      checkboxes = document.getElementsByName('dinamico');
+        checkboxes = document.getElementsByName('dinamico');
 
         for(var i=0, n=checkboxes.length;i<n;i++) {
             checkboxes[i].checked = source.checked;
         }
     }
-   
-    $(document).on("ready",function() {
-        table = $('#dt-registro').DataTable( {
-            "processing": true,
-            "serverSide": true,
-            "filter": false,
-            "scrollX":          true,
-            "sScrollX":         "50%",
-            "scrollY":            $(document).height() - 300,
-            "scrollCollapse":     true,
-            "ajax": {
-                "url": "@Url.Action("ListarRegistro","Jobs")",
-                "type": "POST",
-                "datatype": "json",
-                "data": function(d) {
-                    $.extend( d, params);    
-                }
-		    },
-            "columns": [
-                { "data": "idreg", "name": "idreg", "autoWidth": true },
-                { "data": "feC_INICIO", "name": "feC_INICIO", "autoWidth": true },
-                { "data": "feC_EJECUCION", "name": "feC_EJECUCION", "autoWidth": true },
-                { "data": "feC_FINALIZO", "name": "feC_FINALIZO", "autoWidth": true },
-                { "data": "estado", "name": "estado", "autoWidth": true },
-            ],
-            "language": {
-            "url": "/lib/datatables/dist/locales/es/es.json"
-            },
-            initComplete: function (settings, json) {
-                console.log("terminooooo");
-                $('#dt-registro_wrapper .dt-end').first().append('<div class="dt-length"><label for="dt-length-0">Filtrar '
-                +'<select   aria-controls="dt-registro" id="slcFilterby" class="dt-input slcFilterby">'
-                +'<option value="0">Dia de hoy</option>'
-                +'<option value="1">Semana'
-                +'<option value="2">15 dias atras</option>'
-                +'</select></label></div>');
-
-                $(".slcFilterby").on("change",function() {
-                    params.filterby=$(this).val();
-                    recargartabla(table,idproc)
-                });
-            }
-        });
- 
-        table.on('select', function (e, dt, type, indexes) {
-            console.log(e.target);
-            if (type === 'row'   ) {
-                var nodes = table
-                .rows(indexes)
-                .nodes()
-                .each(function () { 
-                    $('td:first-child', this).find('input').prop('checked', true); 
-                });
-            }
-        });
-
-        table.on('deselect', function (e, dt, type, indexes) {
-            if (type === 'row') {
-                $('#example-select-all').prop("checked",false);
-                    table
-                    .rows(indexes)
-                    .nodes()
-                    .each(function () { 
-                        $('td:first-child', this).find('input').prop('checked', false); 
-                });
-            }
-        });
-        
-        // Handle click on "Select all" control
-        $('#example-select-all').on('click', function() {
-          
-        console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-        // Get all rows with search applied
-          var rows = table.rows({ 'search': 'applied' }).nodes();
-          // Check/uncheck checkboxes for all rows in the table
-        if(this.checked){
-          $('input[type="checkbox"]', rows).prop('checked', this.checked);
-          var selData =   table.rows().select();
-          var selData =   table.rows(".selected").data();
-        }
-        else 
-        {
-            var selData =   table.rows().deselect();
-        }
-    });
-
-    // Handle click on checkbox to set state of "Select all" control
-    $('#example tbody').on('change', 'input[type="checkbox"]', function() {
-        // If checkbox is not checked
-        if(!this.checked) {
-            var el = $('#example-select-all').get(0);
-            // If "Select all" control is checked and has 'indeterminate' property
-            if(el && el.checked && ('indeterminate' in el)) {
-                // Set visual state of "Select all" control
-                // as 'indeterminate'
-                el.indeterminate = true;
-            }
-        }
-    });
-        
-    table.on('select', function (e, dt, type, indexes) {
-        console.log(e.target);
-        if (type === 'row'   ) {
-            var nodes = table
-            .rows(indexes)
-            .nodes()
-            .each(function () { 
-                $('td:first-child', this).find('input').prop('checked', true); 
-            });
-            //.find(':checkbox', 'td:first-child').checked = true; 
-        }
-    });
-
-    table.on('deselect', function (e, dt, type, indexes) {
-        if (type === 'row') {
-            $('#example-select-all').prop("checked",false);
-                table
-                .rows(indexes)
-                .nodes()
-                .each(function () { 
-                    $('td:first-child', this).find('input').prop('checked', false); 
-                });
-            }
-        });
-        
-        // Handle click on "Select all" control
-        $('#example-select-all').on('click', function() {
-            console.log("esta selecconado: ",$(this).is(":checked")," otra forma ",this.checked )
-            // Get all rows with search applied
-                var rows = table.rows({ 'search': 'applied' }).nodes();
-                // Check/uncheck checkboxes for all rows in the table
-            if(this.checked) {
-                $('input[type="checkbox"]', rows).prop('checked', this.checked);
-                
-                var selData =   table.rows().select();
-                var selData =   table.rows(".selected").data();
-            }
-            else 
-            {
-                var selData =   table.rows().deselect();
-            }
-        });
-
-        // Handle click on checkbox to set state of "Select all" control
-        $('#example tbody').on('change', 'input[type="checkbox"]', function() {
-            // If checkbox is not checked
-            if(!this.checked) {
-                var el = $('#example-select-all').get(0);
-                // If "Select all" control is checked and has 'indeterminate' property
-                if(el && el.checked && ('indeterminate' in el)){
-                // Set visual state of "Select all" control
-                // as 'indeterminate'
-                el.indeterminate = true;
-            }
-        }
-    });
-    recargartabla(table,idproc);
-})
-      
 </script>

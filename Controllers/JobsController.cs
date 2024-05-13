@@ -153,10 +153,10 @@ namespace WebAdminScheduler.Controllers
                 estados.Add("Internal");
                 estado_paramtmp=" WHERE estado IN ('Activo','Internal')";
             }
-            else if(estado_param=="Inactivo")
+            else if(estado_param == "Inactivo")
             {
                 estados.Add("Inactivo");
-                estado_paramtmp=" WHERE estado='Inactivo'";
+                estado_paramtmp=" WHERE estado = 'Inactivo'";
             }
 
             var dataproct= _DBContext.CP_PROCESOS.Where(x=>estados.Contains(x.ESTADO));
@@ -315,6 +315,23 @@ namespace WebAdminScheduler.Controllers
                 aaData = procesosList,
             });
         }
+        /*public JsonResult ListarDependencias(int id_proc) 
+        {
+            _DBContext.Database.OpenConnection();
+            String _query = "SELECT cp.IDPROC, cp.NOMBRE, cp.DEPENDENCIA"
+            +"FROM CP_DEPENDENCIAS cd"
+            +"LEFT JOIN CP_PROCESOS cp on cd.IDPROC = cp.IDPROC) "
+            + " WHERE idproc_dep = '"+id_proc+"'";
+ 
+            Console.WriteLine(" EN EJECUCION "+_query);
+            OracleCommand oraCommand = new OracleCommand(_query,
+            (OracleConnection)_DBContext.Database.GetDbConnection());
+            //oraCommand.Parameters.Add(new OracleParameter("id_proc", pidproc));
+            OracleDataReader oraReader = oraCommand.ExecuteReader();
+            
+            List<object> registroList = new List<object>();
+            var id_proc = 0;
+        }*/
         public JsonResult ListarRegistro()
         {
             int totalRecord = 0;
@@ -348,7 +365,8 @@ namespace WebAdminScheduler.Controllers
 
             Console.WriteLine("esto se va a evaluar "+DateTime.Today.AddDays(NumeroDias));
             var datareg=(from ep in _DBContext.Set<CP_REGISTRO>()
-                where ep.IDPROC == pidproc && ep.FEC_EJECUCION >= DateTime.Today.AddDays(NumeroDias) && ep.FEC_EJECUCION <= DateTime.Today
+                where ep.IDPROC == pidproc && ep.FEC_EJECUCION >= DateTime.Today.AddDays(NumeroDias) 
+                && ep.FEC_EJECUCION <= DateTime.Today
                 && ep.ESTADO.Contains(searchValue) 
                 select new {
                     IDREG=ep.IDREG 
