@@ -758,13 +758,14 @@
           +($('#flexCheckViernes').is(":checked") ? 1 : 0) + ""
           +($('#flexCheckSabado').is(":checked") ? 1 : 0) + ""
           +($('#flexCheckDomingo').is(":checked") ? 1 : 0) + "";
-
+        
         if(!flagHoras)
         {
-          Swal.fire ('Rango de horas...', "Hora fin debe ser mayor a hora inicio", 'error')
+          Swal.fire ('Rango de horas...', "Hora fin debe ser mayor a hora inicio", 'error');
+           
           return;
         }
-        flagHoras=false;
+       
 
         //Validacion días seleccionados
         var validDayW = false;
@@ -1060,6 +1061,8 @@
       afterDone: function () {
         if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
         flagHoras = true;  
+        else 
+           flagHoras = false;  
       }
     });
 
@@ -1071,6 +1074,8 @@
       afterDone: function () {
         if($('#horaFin').get(0).value > $('#horaIni').get(0).value)
         flagHoras = true;
+          else 
+           flagHoras = false;  
       }
     });
 
