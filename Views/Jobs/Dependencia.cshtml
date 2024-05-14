@@ -30,8 +30,7 @@
             width: 800px;
             height: 800px;
             border: 1px solid lightgray;
-
-             align:center;
+            align:center;
         }
     </style>
 </head>
@@ -53,27 +52,34 @@
             <div class="">
                 <strong>Seleccionar dependencia:</strong>
                 <select id="multiple-checkboxes" multiple="multiple">
-                    <option value="php">PHP</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="java">Java</option>
-                    <option value="sql">SQL</option>
-                    <option value="jquery">Jquery</option>
-                    <option value=".net">.Net</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                 </select>
             </div>
         </div>
+        <br />
 
         <div class="container">
            <div id="mynetwork"></div>
         </div>
     </body>
-     <script type="text/javascript">
+    
+    <script type="text/javascript">
+        var params={};
 
-     $(document).ready(function() {
-        $('#multiple-checkboxes').multiselect({
-          includeSelectAllOption: true,
+        var idproc="@Model.IDPROC";
+        params.idproc=idproc;
+
+        $(document).ready(function() {
+            $('#multiple-checkboxes').multiselect({
+            includeSelectAllOption: true,
+            });
         });
-    });
+
         var nodes = null;
         var edges = null;
         var network = null;
@@ -106,13 +112,13 @@
             nodes[0]["shape"] = 'circle';
  
             nodes[1]["level"] = 1;
-             nodes[1]["shape"] = 'circle';
+            nodes[1]["shape"] = 'circle';
             nodes[2]["level"] = 1;
-             nodes[2]["shape"] = 'circle';
+            nodes[2]["shape"] = 'circle';
             nodes[3]["level"] = 1;
-             nodes[3]["shape"] = 'circle';
+            nodes[3]["shape"] = 'circle';
             nodes[4]["level"] = 1;
-             nodes[4]["shape"] = 'circle';
+            nodes[4]["shape"] = 'circle';
             
             // create a network
             var container = document.getElementById('mynetwork');
@@ -161,49 +167,5 @@
             network.on('dragStart', function(){
                 return false;
             });
-    }
-</script>
-
-<script> 
-    var params={};
-    var table={};
-
-    var idproc="@Model.IDPROC";
-    params.idproc=idproc;
-
-    var idDependencia = "@Model.DEPENDENCIA";
-    var idflexFtp = "@Model.FTP";
-    var idComprens = "@Model.COMPRESION";
-    
-    function recargartabla(objeto,value)
-    {
-        params.idproc=value;
-        objeto.ajax.reload(null,false); //reload datatable ajax 
-    }
-
-    if (idDependencia == 1) {
-        $("#TxtIdDependencia").prop('checked', true);
-    } else {
-        $("#TxtIdDependencia").prop('checked', false);
-    }
-
-    if (idflexFtp == 1) {
-        $("#flexCheckFtp").prop('checked', true);
-    } else {
-        $("#flexCheckFtp").prop('checked', false);
-    }
-
-    if (idComprens = 1) {
-        $("#CheckComprensComprension").prop('checked', true);
-    } else {
-        $("#CheckComprension").prop('checked', false);
-    }
-
-    function toggle(source) {
-        checkboxes = document.getElementsByName('dinamico');
-
-        for(var i=0, n=checkboxes.length;i<n;i++) {
-            checkboxes[i].checked = source.checked;
-        }
     }
 </script>
