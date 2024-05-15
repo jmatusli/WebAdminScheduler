@@ -32,6 +32,36 @@
             border: 1px solid lightgray;
             align:center;
         }
+
+        		/* CSS3 */
+
+/* The whole thing */
+.custom-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/* Each of the items in the list */
+.custom-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+}
+
+.custom-menu li:hover {
+    background-color: #DEF;
+}
     </style>
 </head>
 
@@ -64,6 +94,12 @@
         <br />
 
         <div class="container">
+            <ul class='custom-menu'>
+  <li data-action="first" id="firstli">Agregar Dependencia</li>
+  <li data-action="second">Borrar Dependencia</li>
+  <li data-action="third">Cancelar</li>
+ 
+</ul>
            <div id="mynetwork"></div>
         </div>
     </body>
@@ -83,9 +119,7 @@
         var nodes = null;
         var edges = null;
         var network = null;
-        var directionInput = document.getElementById("direction");
-
-        function destroy() {
+function destroy() {
             if (network !== null) {
                 network.destroy();
                 network = null;
@@ -94,78 +128,106 @@
 
         function draw() {
             destroy();
-            nodes = [];
-            edges = [];
-            var connectionCount = [];
 
-            // randomly create some nodes and edges
-            for (var i = 0; i < 5; i++) {
-                nodes.push({id: i, label: String(i)});
-            }
-            edges.push({from: 0, to: 1});
-            edges.push({from: 0, to: 2});
-            edges.push({from: 0, to: 3});
-            edges.push({from: 0, to: 4});
-            edges.push({from: 0, to: 5,arrows:{middle:{scaleFactor:1.6},to:true}});
+   nodes = new vis.DataSet([
+        {id: 1, label: 'Node 1',level:0},
+        {id: 2, label: 'Node 2',level:1},
+        {id: 3, label: 'Node 3',level:1},
+        {id: 4, label: 'Node 4',level:1},
+        {id: 5, label: 'Node 5',level:1}
+    ]);
+
+    // create an array with edges
+     edges = new vis.DataSet([
+        {from: 1, to: 2},
+        {from: 1, to: 3},
+        {from: 1, to: 4},
+        {from: 1, to: 5}
+    ]);        
+			
+			
+			
+    var nodeId=0;
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+
+	var options = {
+		edges: {
+			smooth: {
+				type: 'cubicBezier',
+				forceDirection:  'vertical',
+				roundness: 0.4
+			}
+		},
+		layout: {
+			hierarchical: {
+				direction: 'UD'
+			}
+		},
+		physics:false
+	};
+
+     network = new vis.Network(container, data, options);
+
+    network.on("click", function (params) {
+       
+		 $(".custom-menu").hide(100);
+        
+    });
+    network.on("doubleClick", function (params) {
+        $(".custom-menu").hide(100);
+    });
+   
+	
+		network.on("oncontext", function (params) {
+		 nodeId=this.getNodeAt(params.pointer.DOM);
+		 if(nodeId!=undefined){
+				params.event.preventDefault();
+				$(".custom-menu").finish().toggle(100);
+				$(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
+				$(".custom-menu").css({
+				top: params.event.pageY + "px",
+				left: params.event.pageX + "px"
+				});
+		}
+	});
+
+
     
-            nodes[0]["level"] = 0;
-            nodes[0]["shape"] = 'circle';
+    network.on("hoverNode", function (params) {
+	 $(".custom-menu").hide(100);
+      
+    });
+	
+	 $(".custom-menu li").click(function(){
+    
+   if(nodeId!=undefined){
  
-            nodes[1]["level"] = 1;
-            nodes[1]["shape"] = 'circle';
-            nodes[2]["level"] = 1;
-            nodes[2]["shape"] = 'circle';
-            nodes[3]["level"] = 1;
-            nodes[3]["shape"] = 'circle';
-            nodes[4]["level"] = 1;
-            nodes[4]["shape"] = 'circle';
-            
-            // create a network
-            var container = document.getElementById('mynetwork');
-            var data = {
-                nodes: nodes,
-                edges: edges
-            };
- 
-            var options = {
-                nodes: {
-                shape: 'dot',
-                size: 30,
-                font: {
-                size: 32,
-                color: '#000000'
-            },
-            borderWidth: 2
-            }, 
-                edges: {
-                    smooth: {
-                        type: 'cubicBezier',
-                        forceDirection: 'horizontal',//(directionInput.value == "UD" || directionInput.value == "DU") ? 'vertical' : 'horizontal',
-                        roundness: 0.4
-                    }
-                },
-                layout: {
-                    hierarchical: {
-                        direction: 'UD'//directionInput.value
-                    }
-                },
-                physics:false,
-                interaction: {
-                    dragNodes: false,// do not allow dragging nodes
-                    zoomView: false, // do not allow zooming
-                    dragView: true  // do not allow dragging
-                }
-            };
-            network = new vis.Network(container, data, options);
+	let nextlevel=nodes._data[nodeId].level+1;
+	let nextnode=nodes.length+1;
+    switch($(this).attr("data-action")) {
+      
+        case "first": 
+		nodes.add({ id: nextnode, label: 'Node '+nextnode,level:nextlevel});
+		edges.add({ from: nodeId, to: nextnode });
+		console.log("seleccionaste first"); 
+		break;
+        case "second":
+        nodes.remove(nodeId);
+        edges.remove(nodeId);
 
-            // add event listeners
-            network.on('select', function (params) {
-                /*document.getElementById('selection').innerHTML = */
-                console.log('Selection: ' + params.nodes);
-            });
-
-            network.on('dragStart', function(){
-                return false;
-            });
+		console.log("seleccionaste second"); 
+		
+		break;
+        case "third": console.log("seleccionaste third"); break;
     }
+  }
+    $(".custom-menu").hide(100);
+  });
+  
+  }
 </script>
