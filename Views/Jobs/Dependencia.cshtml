@@ -81,13 +81,9 @@
             </div>
             <div class="">
                 <strong>Seleccionar dependencia:</strong>
-                <select id="multiple-checkboxes" multiple="multiple">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
+                <select id="multiple-checkboxes">
+                    <option value="0">Seleccione proceso</option>
+                    
                 </select>
             </div>
         </div>
@@ -111,9 +107,41 @@
         params.idproc=idproc;
 
         $(document).ready(function() {
-            $('#multiple-checkboxes').multiselect({
+           
+
+            
+        var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":idproc}};
+ 
+      
+        $.ajax({
+          method: "POST",
+          async: true,
+          dataType: "json",
+          data: JSON.stringify(data_dependencias),
+          contentType: "application/json; charset=utf-8",
+          url: '@Url.Action("ListarDependencias", "Jobs")' ,
+          success: function (response) { 
+        $(response).each(function(index,item){
+        $('#multiple-checkboxes')
+      .append($('<option>')
+      .text(item.nombre)
+      .attr('value', item.idproc));
+
+       $('#multiple-checkboxes').multiselect({
             includeSelectAllOption: true,
             });
+});
+           
+      },
+      error: function () {
+        alert("Error while get data");
+      }
+    }); 
+
+
+
+
+
         });
 
         var nodes = null;

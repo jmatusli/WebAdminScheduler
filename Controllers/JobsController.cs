@@ -8,6 +8,7 @@ using WebAdminScheduler.helpers;
 using System.Linq.Dynamic.Core;
 using System.Data;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 namespace WebAdminScheduler.Controllers
 {
     public class JobsController : Controller
@@ -315,23 +316,34 @@ namespace WebAdminScheduler.Controllers
                 aaData = procesosList,
             });
         }
-        /*public JsonResult ListarDependencias(int id_proc) 
+        [HttpPost]
+        public JsonResult ListarDependencias([FromBody] DependenciasVM dtodependencias) 
         {
+            var id_proc = dtodependencias.oDependencias.IDPROC;
             _DBContext.Database.OpenConnection();
-            String _query = "SELECT cp.IDPROC, cp.NOMBRE, cp.DEPENDENCIA"
-            +"FROM CP_DEPENDENCIAS cd"
-            +"LEFT JOIN CP_PROCESOS cp on cd.IDPROC = cp.IDPROC) "
-            + " WHERE idproc_dep = '"+id_proc+"'";
+            String _query = "SELECT cpp.IDPROC,cpp.NOMBRE"
+            +" FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp "
+            +" JOIN APP_SCL_ALTAMIRA.CP_DEPENDENCIAS cd on cd.IDPROC = cp.IDPROC "
+            +" JOIN APP_SCL_ALTAMIRA.CP_PROCESOS cpp on cpp.IDPROC = cd.IDPROC_DEP "
+            + " WHERE cp.idproc = :id_proc";
  
             Console.WriteLine(" EN EJECUCION "+_query);
             OracleCommand oraCommand = new OracleCommand(_query,
             (OracleConnection)_DBContext.Database.GetDbConnection());
-            //oraCommand.Parameters.Add(new OracleParameter("id_proc", pidproc));
+            oraCommand.Parameters.Add(new OracleParameter("id_proc", id_proc));
             OracleDataReader oraReader = oraCommand.ExecuteReader();
             
-            List<object> registroList = new List<object>();
-            var id_proc = 0;
-        }*/
+            List<object> dependenciaList = new List<object>();
+             if (oraReader.HasRows)
+            {
+                while (oraReader.Read())
+                {
+                   var c = new { IDPROC=oraReader.GetInt32(0),NOMBRE=oraReader.GetString(1)};
+                dependenciaList.Add(c);  
+                }
+            }       
+            return Json(dependenciaList);
+        }
         public JsonResult ListarRegistro()
         {
             int totalRecord = 0;
