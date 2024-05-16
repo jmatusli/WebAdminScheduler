@@ -321,16 +321,19 @@ namespace WebAdminScheduler.Controllers
         {
             var id_proc = dtodependencias.oDependencias.IDPROC;
             _DBContext.Database.OpenConnection();
-            String _query = "SELECT cpp.IDPROC,cpp.NOMBRE"
+            /*String _query = "SELECT cpp.IDPROC,cpp.NOMBRE"
             +" FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp "
             +" JOIN APP_SCL_ALTAMIRA.CP_DEPENDENCIAS cd on cd.IDPROC = cp.IDPROC "
             +" JOIN APP_SCL_ALTAMIRA.CP_PROCESOS cpp on cpp.IDPROC = cd.IDPROC_DEP "
-            + " WHERE cp.idproc = :id_proc";
+            + " WHERE cp.idproc = :id_proc";*/
+
+              String _query = "SELECT cp.IDPROC,cp.NOMBRE"
+            +" FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp WHERE DEPENDENCIA=1 ";
  
             Console.WriteLine(" EN EJECUCION "+_query);
             OracleCommand oraCommand = new OracleCommand(_query,
             (OracleConnection)_DBContext.Database.GetDbConnection());
-            oraCommand.Parameters.Add(new OracleParameter("id_proc", id_proc));
+            //oraCommand.Parameters.Add(new OracleParameter("id_proc", id_proc));
             OracleDataReader oraReader = oraCommand.ExecuteReader();
             
             List<object> dependenciaList = new List<object>();

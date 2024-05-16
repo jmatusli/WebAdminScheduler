@@ -127,11 +127,11 @@
       .text(item.nombre)
       .attr('value', item.idproc));
 
+      
+});
        $('#multiple-checkboxes').multiselect({
             includeSelectAllOption: true,
-            });
-});
-           
+            });     
       },
       error: function () {
         alert("Error while get data");
@@ -214,6 +214,9 @@ function destroy() {
 		network.on("oncontext", function (params) {
 		 nodeId=this.getNodeAt(params.pointer.DOM);
 		 if(nodeId!=undefined){
+                var { x: nodeX, y: nodeY } = network.canvasToDOM(
+                network.getPositions([nodeId])[nodeId]
+                );
 				params.event.preventDefault();
 				$(".custom-menu").finish().toggle(100);
 				$(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
