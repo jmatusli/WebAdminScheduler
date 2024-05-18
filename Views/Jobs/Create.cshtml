@@ -248,7 +248,7 @@
 
       
       <div class="col-auto">
-         <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia">Agregar Dependencia</button>
+         <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia" disabled>Agregar Dependencia</button>
       </div>
 
 
@@ -567,7 +567,7 @@
   e.stopPropagation();
   e.preventDefault();
 
-  if(nodes._data[nodeId].level+1==1){ 
+ 
   $(this).attr("disabled",true);
   	let nextlevel=nodes._data[nodeId].level+1;
 	//let nextnode=nodes.length+1;
@@ -582,9 +582,7 @@ console.log("=nodes.length+1",nodes.length+1)
   
     console.log("edges: ",JSON.stringify(edges));
 
-    }
-    else 
-    console.log("solo se permite un nivel para cargar dependencia",nodes._data[nodeId].level+1)
+    
   });
 
   $('.bd-example-modal-lg').on('shown.bs.modal', function() {
@@ -715,7 +713,8 @@ console.log("=nodes.length+1",nodes.length+1)
 		network.on("oncontext", function (params) {
      
 		nodeId=this.getNodeAt(params.pointer.DOM);
-		 
+		  if(nodes._data[nodeId].level+1==1)
+       { 
     if(nodeId!=undefined){
 		  var { x: nodeX, y: nodeY } = network.canvasToDOM(
       network.getPositions([nodeId])[nodeId]
@@ -730,6 +729,9 @@ console.log("=nodes.length+1",nodes.length+1)
 				left: nodeX + "px"
 				});
 		}
+    }
+       else 
+       console.log("solo se permite un nivel"); 
 	});
 
   network.on("hoverNode", function (params) {
@@ -745,11 +747,12 @@ console.log("=nodes.length+1",nodes.length+1)
     switch($(this).attr("data-action")) {
       
         case "first": 
-        $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
+
+          $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
         $(".bd-example-modal-sm").modal("show");
-	
-		console.log("seleccionaste first"); 
-		break;
+	   
+	  
+   	break;
         case "second":
         if(nodeId!=LastIdproc){ 
         nodes.remove(nodeId);
