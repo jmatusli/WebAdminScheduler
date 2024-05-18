@@ -335,6 +335,7 @@
 <script>
  var nodeId=0;
  var nextnode=0;
+ let procsDep=[];
   var params={}, selectedCrontab = 0;
   var LastIdproc="@ViewBag.LastIdproc";
   function recargartabla(objeto,value)
@@ -483,6 +484,13 @@
       
       var node = $('#txtNode').val();
 
+ 
+
+ 
+     
+
+ 
+
       var data_job = {
         "oProcesos" : {
           "IDCONEX" : id_conex,
@@ -502,7 +510,8 @@
           "COMPRESION" : compresion,
           "IDCRONTAB" : selectedCrontab,
           "NODE" : node
-        }
+        },
+        "oDependencias" : procsDep
       };
     
     if ((id_conex == "")) {  //COMPRUEBA CAMPOS VACIOS
@@ -573,7 +582,20 @@
  
     	nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
 		edges.add({ from: nodeId, to: nextnode });
- 
+
+   var arrayData=nodes._data;
+     procsDep=[];
+      var arData = $.map(arrayData,function(val,key) {
+      if(Number(val.id) !=nodeId) return val;
+      });
+      $(arData).each(function(index, element){
+
+     
+        procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element.id});
+   
+});
+  
+ console.log("lista de edges > ",edges);
 $(".bd-example-modal-sm").modal("hide");
     
   });
