@@ -713,8 +713,7 @@ console.log("=nodes.length+1",nodes.length+1)
 		network.on("oncontext", function (params) {
      
 		nodeId=this.getNodeAt(params.pointer.DOM);
-		  if(nodes._data[nodeId].level+1==1)
-       { 
+		 
     if(nodeId!=undefined){
 		  var { x: nodeX, y: nodeY } = network.canvasToDOM(
       network.getPositions([nodeId])[nodeId]
@@ -722,16 +721,22 @@ console.log("=nodes.length+1",nodes.length+1)
     
     		params.event.preventDefault();
 				$(".custom-menu").finish().toggle(100);
+
+         if(nodes._data[nodeId].level+1==1)
+       { 
+         $(".custom-menu #firstli").show();
 				$(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
-				$(".custom-menu").css({
+			 }
+        else 	
+        $(".custom-menu #firstli").hide();
+        $(".custom-menu").css({
  
 				top: nodeY + "px",
 				left: nodeX + "px"
 				});
-		}
+		 
     }
-       else 
-       console.log("solo se permite un nivel"); 
+       
 	});
 
   network.on("hoverNode", function (params) {
