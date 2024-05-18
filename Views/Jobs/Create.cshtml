@@ -246,9 +246,11 @@
         <input type="text" maxlength="10" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtNode" name="txtNode">
       </div>
 
+      
       <div class="col-auto">
-        <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia">Agregar Dependencia</button>
+         <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia">Agregar Dependencia</button>
       </div>
+
 
     </div>
   </div>
@@ -256,6 +258,8 @@
     <h4 style="text-align: center;">Registrar Crontab</h4>
   </div>
 </div>
+
+ 
 
 <div class="container">
   <table id="dt-crontab" class="display nowrap" width="100%">
@@ -321,6 +325,7 @@
         </div>      	
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-info btnaddDep">Guardar</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -328,7 +333,8 @@
 </div>
 
 <script>
-
+ var nodeId=0;
+ var nextnode=0;
   var params={}, selectedCrontab = 0;
   var LastIdproc="@ViewBag.LastIdproc";
   function recargartabla(objeto,value)
@@ -449,7 +455,7 @@
       }
     });
 
-    $("#txtDependencia").on("change",function() {
+     $("#txtDependencia").on("change",function() {
       if($(this).is(":checked")) {
         $("#btnDependencia").prop( "disabled", false ); //Enable
       }
@@ -556,6 +562,31 @@
 
 })      
 
+ $('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
+  console.log("esto es el evento click en adddep")
+  e.stopPropagation();
+  e.preventDefault();
+
+  if(nodes._data[nodeId].level+1==1){ 
+  $(this).attr("disabled",true);
+  	let nextlevel=nodes._data[nodeId].level+1;
+	//let nextnode=nodes.length+1;
+
+console.log("=nodes.length",nodes.length)
+
+console.log("=nodes.length+1",nodes.length+1)
+    	nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
+		edges.add({ from: nodeId, to: nextnode });
+
+    console.log("nodes: ",JSON.stringify(nodes));
+  
+    console.log("edges: ",JSON.stringify(edges));
+
+    }
+    else 
+    console.log("solo se permite un nivel para cargar dependencia",nodes._data[nodeId].level+1)
+  });
+
   $('.bd-example-modal-lg').on('shown.bs.modal', function() {
     draw();
   });
@@ -566,11 +597,28 @@
 
   $('.bd-example-modal-sm').on('shown.bs.modal', function() {
     $(".bd-example-modal-lg").addClass("custom-class");
+
+ 
+          $('#multiple-checkboxes').on("change",function(){
+ $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
+          nextnode=$(this).val();
+
+          })
+    
+
+
+
+
   });
   
   $('.bd-example-modal-sm').on('hidden.bs.modal', function() {
     $(".bd-example-modal-lg").removeClass("custom-class");
   });
+  
+
+
+
+  
         
     var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":LastIdproc}};
  
@@ -615,22 +663,17 @@
     destroy();
 
     nodes = new vis.DataSet([
-      {id: LastIdproc, label: 'Proc  '+LastIdproc,level:0},
-      {id: 2, label: 'Node 2',level:1},
-      {id: 3, label: 'Node 3',level:1},
-      {id: 4, label: 'Node 4',level:1},
-      {id: 5, label: 'Node 5',level:1}
+      {id: LastIdproc, label: LastIdproc,level:0},
+    
       ]);
 
     // create an array with edges
      edges = new vis.DataSet([
-        {from: LastIdproc, to: 2},
-        {from: LastIdproc, to: 3},
-        {from: LastIdproc, to: 4},
-        {from: LastIdproc, to: 5}
+      //  {from: LastIdproc, to: 2},
+         
     ]);        
 			
-    var nodeId=0;
+   
     // create a network
     var container = document.getElementById('mynetwork');
     var data = {
@@ -693,19 +736,18 @@
 	  $(".custom-menu").hide(100);
   });
 	
+
 	 $(".custom-menu li").click(function(){
     
    if(nodeId!=undefined){
  
-	let nextlevel=nodes._data[nodeId].level+1;
-	let nextnode=nodes.length+1;
+
     switch($(this).attr("data-action")) {
       
         case "first": 
-        
+        $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
         $(".bd-example-modal-sm").modal("show");
-		/*nodes.add({ id: nextnode, label: 'Node '+nextnode,level:nextlevel});
-		edges.add({ from: nodeId, to: nextnode });*/
+	
 		console.log("seleccionaste first"); 
 		break;
         case "second":
