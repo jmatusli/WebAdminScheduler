@@ -570,18 +570,11 @@
  
   $(this).attr("disabled",true);
   	let nextlevel=nodes._data[nodeId].level+1;
-	//let nextnode=nodes.length+1;
-
-console.log("=nodes.length",nodes.length)
-
-console.log("=nodes.length+1",nodes.length+1)
+ 
     	nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
 		edges.add({ from: nodeId, to: nextnode });
-
-    console.log("nodes: ",JSON.stringify(nodes));
-  
-    console.log("edges: ",JSON.stringify(edges));
-
+ 
+$(".bd-example-modal-sm").modal("hide");
     
   });
 
