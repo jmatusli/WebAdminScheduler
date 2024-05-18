@@ -246,11 +246,9 @@
         <input type="text" maxlength="10" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtNode" name="txtNode">
       </div>
 
-      
       <div class="col-auto">
-         <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia">Agregar Dependencia</button>
+        <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia">Agregar Dependencia</button>
       </div>
-
 
     </div>
   </div>
@@ -258,8 +256,6 @@
     <h4 style="text-align: center;">Registrar Crontab</h4>
   </div>
 </div>
-
- 
 
 <div class="container">
   <table id="dt-crontab" class="display nowrap" width="100%">
@@ -455,10 +451,10 @@
 
     $("#txtDependencia").on("change",function() {
       if($(this).is(":checked")) {
-        $("#btnDependencia").prop("disabled", true ); //Disable
+        $("#btnDependencia").prop( "disabled", false ); //Enable
       }
       else {
-        $("#btnDependencia").prop( "disabled", false ); //Enable
+        $("#btnDependencia").prop("disabled", true ); //Disable
       }
     });
 
