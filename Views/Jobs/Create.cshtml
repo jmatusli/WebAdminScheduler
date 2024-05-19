@@ -325,7 +325,7 @@
         </div>      	
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-info btnexport">exportar</button>
+      
         <button type="button" class="btn btn-info btnaddDep">Guardar</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -792,31 +792,6 @@ $(".bd-example-modal-sm").modal("hide");
   });
   
   }
-
-  function addConnections(elem, index) {
-                // need to replace this with a tree of the network, then get child direct children of the element
-                elem.connections = network.getConnectedNodes(index);
-            }
-function objectToArray(obj) {
-                return Object.keys(obj).map(function (key) {
-                  obj[key].id = key;
-                  return obj[key];
-                });
-            }
-    function exportNetwork() {
-              
-
-                var nodes = objectToArray(network.getPositions());
-
-                nodes.forEach(addConnections);
-
-                // pretty print node data
-                var exportValue = JSON.stringify(nodes, undefined, 2);
-
-                 console.log(exportValue);
-
-                
-            }
 
 /*fin grafo*/
  

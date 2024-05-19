@@ -322,7 +322,7 @@
   var params={};
   var table={};
   var idjob="";
-
+let procsDep=[];
   var idproc="@Model.IDPROC";
   params.idproc=idproc;
 
@@ -517,9 +517,36 @@
  $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
           nextnode=$(this).val();
 
-          })
-    
+          });
 
+       $('.bd-example-modal-sm').on('hidden.bs.modal', function() {
+    $(".bd-example-modal-lg").removeClass("custom-class");
+  });     
+    
+ $('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
+  console.log("esto es el evento click en adddep")
+  e.stopPropagation();
+  e.preventDefault();
+
+ 
+  $(this).attr("disabled",true);
+  	let nextlevel=nodes._data[nodeId].level+1;
+ 
+    	nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
+		edges.add({ from: nodeId, to: nextnode });
+
+   var arrayData=nodes._data;
+     procsDep=[];
+      var arData = $.map(arrayData,function(val,key) {
+      if(Number(val.id) !=nodeId) return val;
+      });
+      $(arData).each(function(index, element){
+
+     
+        procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
+   
+});
+});
 
 
 
@@ -590,7 +617,8 @@
       "COMPRESION" : $('#flexCheckUptCompresion').is(":checked") ? 1 : 0,
       "IDCRONTAB" : selectedCrontab,
       "NODE" : node
-    }
+    },
+     "oDependencias" : procsDep
   };
    
   if (idproc != 0) {
@@ -718,9 +746,11 @@ function getNodeById(data, id) {
   function draw(dataNodes) {
     destroy();
 
+ nodes=getNodeData(dataNodes.data);
+ edges= getEdgeData(dataNodes.data);
   var data = {
-      nodes: getNodeData(dataNodes.data),
-      edges: getEdgeData(dataNodes.data)
+      nodes: nodes,
+      edges: edges
   }
 
     // create a network
@@ -769,7 +799,7 @@ function getNodeById(data, id) {
     
     		params.event.preventDefault();
 				$(".custom-menu").finish().toggle(100);
-
+        console.log("los nodos aqui ",nodes);
          if(nodes._data[nodeId].level+1==1)
        { 
          $(".custom-menu #firstli").show();

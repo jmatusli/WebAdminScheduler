@@ -140,6 +140,19 @@ namespace WebAdminScheduler.Controllers
         
                 _DBContext.CP_PROCESOS.Update(procesost);
                 _DBContext.SaveChanges();
+
+
+                List<CP_DEPENDENCIAS> depProcs = dtoprocesos.oDependencias;
+                foreach(var dtoProc in depProcs)
+                {
+                    CP_DEPENDENCIAS dependencias=new CP_DEPENDENCIAS();
+                    dependencias.IDDEP=WACustomHelper.GetLastIDDEP(_DBContext);
+                    dependencias.IDPROC=procesost.IDPROC;
+                    dependencias.IDPROC_DEP=dtoProc.IDPROC_DEP;
+                    _DBContext.CP_DEPENDENCIAS.Add(dependencias);
+                    _DBContext.SaveChanges();
+                    
+                }     
             }
 
             return Json(procesost);
