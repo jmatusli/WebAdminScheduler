@@ -4,13 +4,63 @@
 <head>
   <link rel="stylesheet" href="~/css/datatables.min.css" />
   <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
+     <link rel="stylesheet" href="~/lib/bootstrap/3.3.4/css/bootstrap.min.css" /> 
   <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
+  <link rel="stylesheet" href="~/lib/Vis/dist/vis-network.min.css" rel="stylesheet" type="text/css"/>
   <script src="~/js/jquery-1.11.3.min.js"></script>
   <script src="~/js/pdfmake.min.js"></script>
   <script src="~/js/vfs_fonts.js"></script>
   <script src="~/js/datatables.min.js"></script>
   <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
   <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
+     <script src="~/lib/Vis/dist/vis.js"></script>
+   <script src="~/lib/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap-multiselect.js"></script>
+    <style>
+  #mynetwork {
+            width: 700px;
+            height: 800px;
+            border: 1px solid lightgray;
+            align:center;
+        }
+
+  	/* CSS3 */
+
+/* The whole thing */
+.custom-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/* Each of the items in the list */
+.custom-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+}
+
+.custom-menu li:hover {
+    background-color: #DEF;
+}      
+.bd-example-modal-lg.modal.custom-class {
+	z-index: 1029
+}
+
+.bd-example-modal-sm.custom-class {
+	z-index: 1050
+}
+  </style>
 </head>
 
 <h1>Editar Jobs</h1>
@@ -189,6 +239,11 @@
       <div class="col-auto">
         <input type="text" min="1" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtUptNode" name="txtUptNode">
       </div>
+
+      <div class="col-auto">
+         <button type="button" class="btn btn-info" id="btnEDependencia" data-target=".bd-example-modal-lg" name="btnEDependencia" disabled>Editar Dependencia</button>
+      </div>
+
     </div>
   </div>
   <div class="card-footer text-muted">
@@ -215,7 +270,54 @@
     </tbody>
   </table>
 </div>
+   <div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Dependencias</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      
+      </div>
+      <div class="modal-body">
+            <ul class='custom-menu'>
+  <li data-action="first" id="firstli">Agregar Dependencia</li>
+  <li data-action="second">Borrar Dependencia</li>
+  <li data-action="third">Cancelar</li>
+ 
+</ul>
+      		<div id="mynetwork">
+      			
+      		</div>        	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+   <div class="modal fade bd-example-modal-sm" id="bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="basicModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Proceso</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <strong>Seleccionar dependencia:</strong>
+          <select id="multiple-checkboxes">
+            <option value="0">Seleccione proceso</option>
+          </select>
+        </div>      	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info btnaddDep">Guardar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script> 
   var params={};
   var table={};
@@ -259,8 +361,10 @@
 
     if(dependencia == 1) {
       $("#checkUptDependencia").prop('checked', true);
+      $("#btnEDependencia").prop('disabled', false);
     } else {
       $("#checkUptDependencia").prop('checked', false);
+       $("#btnEDependencia").prop('disabled', true);
     }
 
     $("#txtUptIntentos").val(intentos);
@@ -345,7 +449,7 @@
           $('td:first-child', this).find('input').prop('checked', true);
         });
         selectedCrontab=table.rows( { selected: true }).data()[0].idcrontab;
-        console.log("selectedCrontab ", selectedCrontab)
+       
       }
     });
 
@@ -396,6 +500,30 @@
         }
       }
     });
+	
+	  $('.bd-example-modal-lg').on('shown.bs.modal', function() {
+    importNetwork(idproc);
+  });
+
+  $('#btnEDependencia').on('click', function() {
+    $(".bd-example-modal-lg").modal("show");
+  });
+
+  $('.bd-example-modal-sm').on('shown.bs.modal', function() {
+    $(".bd-example-modal-lg").addClass("custom-class");
+
+ 
+          $('#multiple-checkboxes').on("change",function(){
+ $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
+          nextnode=$(this).val();
+
+          })
+    
+
+
+
+
+  });
 
   });
 
@@ -436,7 +564,7 @@
       "NODE" : node
     }
   };
-  console.log("esto va ",data_job)
+   
   if (idproc != 0) {
     jQuery.ajax({
     method: "POST",
@@ -481,4 +609,189 @@
   $("#txtUptNode").val("");
 }
 }
+
+//importando grafo guardado.
+
+function getEdgeData(data) {
+                var networkEdges = [];
+
+                data.forEach(function(node) {
+                    // add the connection
+                    node.connections.forEach(function(connId, cIndex, conns) {
+                        networkEdges.push({from: node.id, to: connId});
+                        let cNode = getNodeById(data, connId);
+
+                        var elementConnections = cNode.connections;
+
+                        // remove the connection from the other node to prevent duplicate connections
+                        var duplicateIndex = elementConnections.findIndex(function(connection) {
+                          return connection == node.id; // double equals since id can be numeric or string
+                        });
+
+
+                        if (duplicateIndex != -1) {
+                          elementConnections.splice(duplicateIndex, 1);
+                        };
+                  });
+                });
+
+                return new vis.DataSet(networkEdges);
+            }
+
+function getNodeData(data) {
+                var networkNodes = [];
+
+                data.forEach(function(elem, index, array) {
+                    networkNodes.push({id: elem.id, label: String(elem.id), /*x: elem.x, y: elem.y,*/level:elem.level});
+                });
+
+                return new vis.DataSet(networkNodes);
+            }
+
+function getNodeById(data, id) {
+                for (var n = 0; n < data.length; n++) {
+                    if (data[n].id == id) {  // double equals since id can be numeric or string
+                      return data[n];
+                    }
+                };
+
+                throw 'Can not find id \'' + id + '\' in data';
+            }
+
+  function importNetwork(prc_id) {
+    if (prc_id != 0) {
+    jQuery.ajax({
+    method: "POST",
+    async: true,
+    data: {prcId:prc_id},
+    url: "@Url.Action("GetNodeData","Jobs")",
+
+    success: function (data) {
+      
+      draw(data)
+       }
+    });
+
+    }
+    
+    }
+
+  var nodes = null;
+  var edges = null;
+  var network = null;
+
+  function destroy() {
+    if (network !== null) {
+      network.destroy();
+      network = null;
+    }
+  }
+
+  function draw(dataNodes) {
+    destroy();
+
+  var data = {
+      nodes: getNodeData(dataNodes.data),
+      edges: getEdgeData(dataNodes.data)
+  }
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+
+	var options = {
+		edges: {
+			smooth: {
+				type: 'cubicBezier',
+				forceDirection:  'vertical',
+				roundness: 0.4
+			}
+		},
+		layout: {
+			hierarchical: {
+				direction: 'UD'
+			}
+		},
+		physics:false
+	};
+
+     network = new vis.Network(container, data, options);
+     network.moveTo({
+    position: {x: 0, y: 0},
+    offset: {x: 5, y: 5},
+    scale: 1,
+})
+    network.on("click", function (params) {
+       
+		 $(".custom-menu").hide(100);
+        
+    });
+    network.on("doubleClick", function (params) {
+      $(".custom-menu").hide(100);
+    });
+   
+		network.on("oncontext", function (params) {
+     
+		nodeId=this.getNodeAt(params.pointer.DOM);
+		 
+    if(nodeId!=undefined){
+		  var { x: nodeX, y: nodeY } = network.canvasToDOM(
+      network.getPositions([nodeId])[nodeId]
+    );
+    
+    		params.event.preventDefault();
+				$(".custom-menu").finish().toggle(100);
+
+         if(nodes._data[nodeId].level+1==1)
+       { 
+         $(".custom-menu #firstli").show();
+				$(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
+			 }
+        else 	
+        $(".custom-menu #firstli").hide();
+        $(".custom-menu").css({
+ 
+				top: nodeY + "px",
+				left: nodeX + "px"
+				});
+		 
+    }
+       
+	});
+
+  network.on("hoverNode", function (params) {
+	  $(".custom-menu").hide(100);
+  });
+	
+
+	 $(".custom-menu li").click(function(){
+    
+   if(nodeId!=undefined){
+ 
+
+    switch($(this).attr("data-action")) {
+      
+        case "first": 
+
+          $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
+        $(".bd-example-modal-sm").modal("show");
+	   
+	  
+   	break;
+        case "second":
+        if(nodeId!=LastIdproc){ 
+        nodes.remove(nodeId);
+        edges.remove(nodeId);
+      }
+	 
+		
+		break;
+      case "third": console.log("seleccionaste third"); break;
+    }
+  }
+    $(".custom-menu").hide(100);
+  });
+  
+  }
+    
 </script>
