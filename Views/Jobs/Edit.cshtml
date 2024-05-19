@@ -524,6 +524,34 @@
 
 
   });
+  
+  
+  
+      var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":idproc}};
+ 
+      $.ajax({
+        method: "POST",
+        async: true,
+        dataType: "json",
+        data: JSON.stringify(data_dependencias),
+        contentType: "application/json; charset=utf-8",
+        url: '@Url.Action("ListarDependencias", "Jobs")' ,
+        success: function (response) { 
+          $(response).each(function(index,item){
+            $('#multiple-checkboxes')
+            .append($('<option>')
+            .text(item.nombre)
+            .attr('value', item.idproc));
+          });
+          
+          $('#multiple-checkboxes').multiselect({
+            includeSelectAllOption: true,
+          });       
+      },
+      error: function () {
+        alert("Error while get data");
+      }
+    });
 
   });
 
@@ -779,7 +807,7 @@ function getNodeById(data, id) {
 	  
    	break;
         case "second":
-        if(nodeId!=LastIdproc){ 
+        if(nodeId!=idproc){ 
         nodes.remove(nodeId);
         edges.remove(nodeId);
       }
