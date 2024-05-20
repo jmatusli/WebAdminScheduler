@@ -146,11 +146,27 @@ namespace WebAdminScheduler.Controllers
                 foreach(var dtoProc in depProcs)
                 {
                     CP_DEPENDENCIAS dependencias=new CP_DEPENDENCIAS();
+
                     dependencias.IDDEP=WACustomHelper.GetLastIDDEP(_DBContext);
-                    dependencias.IDPROC=procesost.IDPROC;
+                  
+                    var qry = (from depend in _DBContext.CP_DEPENDENCIAS
+                    where depend.IDPROC_DEP ==dtoProc.IDPROC_DEP
+                    select depend).ToList().AsQueryable().FirstOrDefault();;
+
+                    if((qry?.IDDEP ?? 0)>0) //no existe el registro
+                    { Console.WriteLine("Reg already exists!");
+                    
+                    }
+                    else 
+                    {
+                   dependencias.IDPROC=procesost.IDPROC;
                     dependencias.IDPROC_DEP=dtoProc.IDPROC_DEP;
                     _DBContext.CP_DEPENDENCIAS.Add(dependencias);
                     _DBContext.SaveChanges();
+                    }
+                  
+                     
+                    
                     
                 }     
             }
