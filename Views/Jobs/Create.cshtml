@@ -781,6 +781,19 @@ $(".bd-example-modal-sm").modal("hide");
         if(nodeId!=LastIdproc){ 
         nodes.remove(nodeId);
         edges.remove(nodeId);
+
+           procsDep=[];
+         $(nodes._data).each(function(index, element){
+           
+           for(var i in element)
+       $(element [i]).each(function(index2, element2){
+        console.log("mielementox ",element2);
+  
+        if(LastIdproc!=element2.id)
+        procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element2.id});
+        });
+   
+});
       }
 		console.log("seleccionaste second"); 
 		

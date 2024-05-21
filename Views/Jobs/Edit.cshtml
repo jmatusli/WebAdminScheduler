@@ -538,11 +538,11 @@ let procsDep=[];
    var arrayData=nodes._data;
      procsDep=[];
       var arData = $.map(arrayData,function(val,key) {
-      if(Number(val.id) !=nodeId) return val;
+      /*if(Number(val.id) !=nodeId) */return val;
       });
       $(arData).each(function(index, element){
 
-     
+       if(element.id!=idproc)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
    
 });
@@ -773,6 +773,19 @@ function getNodeById(data, id) {
 		physics:false
 	};
 
+
+       $(nodes._data).each(function(index, element){
+           
+           for(var i in element)
+       $(element [i]).each(function(index2, element2){
+        console.log("mielementox ",element2);
+  
+        if(idproc!=element2.id)
+        procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
+        });
+   
+});
+
      network = new vis.Network(container, data, options);
      network.moveTo({
     position: {x: 0, y: 0},
@@ -838,8 +851,21 @@ function getNodeById(data, id) {
    	break;
         case "second":
         if(nodeId!=idproc){ 
+          console.log("mielemento nodes ",nodes);
         nodes.remove(nodeId);
         edges.remove(nodeId);
+        procsDep=[];
+         $(nodes._data).each(function(index, element){
+           
+           for(var i in element)
+       $(element [i]).each(function(index2, element2){
+        console.log("mielementox ",element2);
+  
+        if(idproc!=element2.id)
+        procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
+        });
+   
+});
       }
 	 
 		

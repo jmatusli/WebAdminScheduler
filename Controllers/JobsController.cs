@@ -143,15 +143,27 @@ namespace WebAdminScheduler.Controllers
 
 
                 List<CP_DEPENDENCIAS> depProcs = dtoprocesos.oDependencias;
+                var delRecords = (from c in _DBContext.CP_DEPENDENCIAS where c.IDPROC==procesost.IDPROC select c).ToList();
+                foreach (var c in delRecords)
+                {
+                _DBContext.CP_DEPENDENCIAS.Remove(c);
+                }
+                _DBContext.SaveChanges();
+
+        
+                
                 foreach(var dtoProc in depProcs)
                 {
                     CP_DEPENDENCIAS dependencias=new CP_DEPENDENCIAS();
 
                     dependencias.IDDEP=WACustomHelper.GetLastIDDEP(_DBContext);
-                  
+
+
+
                     var qry = (from depend in _DBContext.CP_DEPENDENCIAS
                     where depend.IDPROC_DEP ==dtoProc.IDPROC_DEP
                     select depend).ToList().AsQueryable().FirstOrDefault();;
+                 
 
                     if((qry?.IDDEP ?? 0)>0) //no existe el registro
                     { Console.WriteLine("Reg already exists!");
