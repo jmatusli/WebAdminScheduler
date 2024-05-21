@@ -4,7 +4,7 @@
 <head>
   <link rel="stylesheet" href="~/css/datatables.min.css" />
   <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
-     <link rel="stylesheet" href="~/lib/bootstrap/3.3.4/css/bootstrap.min.css" /> 
+  <link rel="stylesheet" href="~/lib/bootstrap/3.3.4/css/bootstrap.min.css" /> 
   <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
   <link rel="stylesheet" href="~/lib/Vis/dist/vis-network.min.css" rel="stylesheet" type="text/css"/>
   <script src="~/js/jquery-1.11.3.min.js"></script>
@@ -13,53 +13,55 @@
   <script src="~/js/datatables.min.js"></script>
   <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
   <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
-     <script src="~/lib/Vis/dist/vis.js"></script>
-   <script src="~/lib/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap-multiselect.js"></script>
-    <style>
-  #mynetwork {
-            width: 700px;
-            height: 450px;
-            border: 1px solid lightgray;
-            align:center;
-        }
+  <script src="~/lib/Vis/dist/vis.js"></script>
+  <script src="~/lib/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap-multiselect.js"></script>
+  
+  <style>
+    #mynetwork {
+      width: 700px;
+      height: 450px;
+      border: 1px solid lightgray;
+      align:center;
+    }
 
   	/* CSS3 */
 
-/* The whole thing */
-.custom-menu {
-    display: none;
-    z-index: 1000;
-    position: absolute;
-    overflow: hidden;
-    border: 1px solid #CCC;
-    white-space: nowrap;
-    font-family: sans-serif;
-    background: #FFF;
-    color: #333;
-    border-radius: 5px;
-    padding: 0;
-}
+    /* The whole thing */
+    .custom-menu {
+      display: none;
+      z-index: 1000;
+      position: absolute;
+      overflow: hidden;
+      border: 1px solid #CCC;
+      white-space: nowrap;
+      font-family: sans-serif;
+      background: #FFF;
+      color: #333;
+      border-radius: 5px;
+      padding: 0;
+    }
 
-/* Each of the items in the list */
-.custom-menu li {
-    padding: 8px 12px;
-    cursor: pointer;
-    list-style-type: none;
-    transition: all .3s ease;
-    user-select: none;
-}
+    /* Each of the items in the list */
+    .custom-menu li {
+      padding: 8px 12px;
+      cursor: pointer;
+      list-style-type: none;
+      transition: all .3s ease;
+      user-select: none;
+    }
 
-.custom-menu li:hover {
-    background-color: #DEF;
-}      
-.bd-example-modal-lg.modal.custom-class {
-	z-index: 1029
-}
+    .custom-menu li:hover {
+      background-color: #DEF;
+    }    
 
-.bd-example-modal-sm.custom-class {
-	z-index: 1050
-}
+    .bd-example-modal-lg.modal.custom-class {
+      z-index: 1029
+    }
+
+    .bd-example-modal-sm.custom-class {
+      z-index: 1050
+    }
   </style>
 </head>
 
@@ -322,7 +324,7 @@
   var params={};
   var table={};
   var idjob="";
-let procsDep=[];
+  let procsDep=[];
   var idproc="@Model.IDPROC";
   params.idproc=idproc;
 
@@ -345,6 +347,15 @@ let procsDep=[];
   var idcrontab = "@Model.IDCRONTAB";
   var selectedCrontab = "@Model.IDCRONTAB";
   
+    $("#checkUptDependencia").on("change",function() {
+      if($(this).is(":checked")) {
+        $("#btnEDependencia").prop( "disabled", false ); //Enable
+      }
+      else {
+        $("#btnEDependencia").prop("disabled", true ); //Disable
+      }
+    });
+
   String.prototype.decodeHTML = function() {
     return $('<div>').html(this).text();
   };
@@ -364,13 +375,12 @@ let procsDep=[];
       $("#btnEDependencia").prop('disabled', false);
     } else {
       $("#checkUptDependencia").prop('checked', false);
-       $("#btnEDependencia").prop('disabled', true);
+      $("#btnEDependencia").prop('disabled', true);
     }
 
     $("#txtUptIntentos").val(intentos);
     $("#txtUptEsperaIntento").val(espera_intento);
     $("#txtUptEstado").val(estado);
-
     $("#txtUptNode").val(node);
 
     if(ftp == 1) {
@@ -512,14 +522,12 @@ let procsDep=[];
   $('.bd-example-modal-sm').on('shown.bs.modal', function() {
     $(".bd-example-modal-lg").addClass("custom-class");
 
- 
-          $('#multiple-checkboxes').on("change",function(){
- $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
-          nextnode=$(this).val();
+    $('#multiple-checkboxes').on("change",function() {
+      $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
+        nextnode=$(this).val();
+    });
 
-          });
-
-       $('.bd-example-modal-sm').on('hidden.bs.modal', function() {
+  $('.bd-example-modal-sm').on('hidden.bs.modal', function() {
     $(".bd-example-modal-lg").removeClass("custom-class");
   });     
     
@@ -528,24 +536,22 @@ let procsDep=[];
   e.stopPropagation();
   e.preventDefault();
 
- 
   $(this).attr("disabled",true);
   	let nextlevel=nodes._data[nodeId].level+1;
  
-    	nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
+    nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
 		edges.add({ from: nodeId, to: nextnode });
 
-   var arrayData=nodes._data;
-     procsDep=[];
+    var arrayData=nodes._data;
+    procsDep=[];
       var arData = $.map(arrayData,function(val,key) {
       /*if(Number(val.id) !=nodeId) */return val;
       });
-      $(arData).each(function(index, element){
-
-       if(element.id!=idproc)
+      
+      $(arData).each(function(index, element) {
+        if(element.id!=idproc)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
-   
-});
+  });
 });
 
 //$(".bd-example-modal-sm").modal("hide");
