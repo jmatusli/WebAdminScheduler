@@ -524,7 +524,7 @@ let procsDep=[];
   });     
     
  $('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
-  console.log("esto es el evento click en adddep")
+
   e.stopPropagation();
   e.preventDefault();
 
@@ -778,7 +778,6 @@ function getNodeById(data, id) {
            
            for(var i in element)
        $(element [i]).each(function(index2, element2){
-        console.log("mielementox ",element2);
   
         if(idproc!=element2.id)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
@@ -812,7 +811,7 @@ function getNodeById(data, id) {
     
     		params.event.preventDefault();
 				$(".custom-menu").finish().toggle(100);
-        console.log("los nodos aqui ",nodes);
+
          if(nodes._data[nodeId].level+1==1)
        { 
          $(".custom-menu #firstli").show();
@@ -851,7 +850,7 @@ function getNodeById(data, id) {
    	break;
         case "second":
         if(nodeId!=idproc){ 
-          console.log("mielemento nodes ",nodes);
+   
         nodes.remove(nodeId);
         edges.remove(nodeId);
         procsDep=[];
@@ -859,7 +858,7 @@ function getNodeById(data, id) {
            
            for(var i in element)
        $(element [i]).each(function(index2, element2){
-        console.log("mielementox ",element2);
+
   
         if(idproc!=element2.id)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});

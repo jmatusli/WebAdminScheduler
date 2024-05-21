@@ -405,7 +405,7 @@
           $('td:first-child', this).find('input').prop('checked', true);
         });
         selectedCrontab=table.rows( { selected: true }).data()[0].idcrontab;
-        console.log("selectedCrontab ", selectedCrontab)
+
       }
     });
 
@@ -544,7 +544,6 @@
       return false;
     }
     else {
-      console.log("datajob ",data_job);
       $.ajax({
         method: "POST",
         async: true,
@@ -576,7 +575,7 @@
   exportNetwork();
   });
  $('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
-  console.log("esto es el evento click en adddep")
+
   e.stopPropagation();
   e.preventDefault();
 
@@ -599,7 +598,7 @@
    
 });
   
- console.log("lista de edges > ",edges);
+
 $(".bd-example-modal-sm").modal("hide");
     
   });
@@ -787,7 +786,7 @@ $(".bd-example-modal-sm").modal("hide");
            
            for(var i in element)
        $(element [i]).each(function(index2, element2){
-        console.log("mielementox ",element2);
+
   
         if(LastIdproc!=element2.id)
         procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element2.id});
@@ -795,7 +794,7 @@ $(".bd-example-modal-sm").modal("hide");
    
 });
       }
-		console.log("seleccionaste second"); 
+
 		
 		break;
       case "third": console.log("seleccionaste third"); break;
