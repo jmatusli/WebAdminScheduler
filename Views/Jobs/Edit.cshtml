@@ -531,9 +531,16 @@
   });     
     
  $('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
-
-  e.stopPropagation();
-  e.preventDefault();
+ let nodeTmp=getNode(nextnode);
+    if(nodeTmp!=undefined)
+    {
+        Swal.fire ('El nodo seleccionado ya fue agregado', 'error')
+       console.log("existe el nodo ",nodeTmp.id);
+    }
+    else 
+    {
+      e.stopPropagation();
+     e.preventDefault();
 
   $(this).attr("disabled",true);
   	let nextlevel=nodes._data[nodeId].level+1;
@@ -551,11 +558,16 @@
         if(element.id!=idproc)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
     });
-  });
+	
+	//$(".bd-example-modal-sm").modal("hide");
+    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}});
+  }
 
-  //$(".bd-example-modal-sm").modal("hide");
-    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
+  
+  
+  }); 
   });
+   
   
     var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":idproc}};
  
@@ -669,7 +681,10 @@
 }
 
 //importando grafo guardado.
-
+function getNode(nodeId){
+     var nodeObj= network.body.data.nodes._data[nodeId];
+     return nodeObj;  
+}
 function getEdgeData(data) {
   var networkEdges = [];
 

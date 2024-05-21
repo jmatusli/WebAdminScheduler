@@ -161,7 +161,7 @@ namespace WebAdminScheduler.Controllers
 
 
                     var qry = (from depend in _DBContext.CP_DEPENDENCIAS
-                    where depend.IDPROC_DEP ==dtoProc.IDPROC_DEP
+                    where depend.IDPROC_DEP ==dtoProc.IDPROC_DEP && depend.IDPROC==dtoprocesos.oProcesos.IDPROC
                     select depend).ToList().AsQueryable().FirstOrDefault();;
                  
 
