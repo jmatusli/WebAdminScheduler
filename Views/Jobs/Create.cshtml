@@ -20,7 +20,7 @@
   <style>
   #mynetwork {
             width: 700px;
-            height: 800px;
+            height: 450px;
             border: 1px solid lightgray;
             align:center;
         }
@@ -55,8 +55,11 @@
     background-color: #DEF;
 }      
 .bd-example-modal-lg.modal.custom-class {
-	z-index: 1029
+	z-index: 1029;
+
 }
+
+ 
 
 .bd-example-modal-sm.custom-class {
 	z-index: 1050
@@ -598,9 +601,10 @@
    
 });
   
+network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
 
 $(".bd-example-modal-sm").modal("hide");
-    
+ 
   });
 
   $('.bd-example-modal-lg').on('shown.bs.modal', function() {
@@ -714,11 +718,7 @@ $(".bd-example-modal-sm").modal("hide");
 	};
 
      network = new vis.Network(container, data, options);
-     network.moveTo({
-    position: {x: 0, y: 0},
-    offset: {x: 5, y: 5},
-    scale: 1,
-})
+ 
     network.on("click", function (params) {
        
 		 $(".custom-menu").hide(100);
@@ -760,6 +760,14 @@ $(".bd-example-modal-sm").modal("hide");
   network.on("hoverNode", function (params) {
 	  $(".custom-menu").hide(100);
   });
+
+ 
+
+network.once('initRedraw', function() {
+network.moveTo({offset:{x:120,y:0}, position: {x:120, y: 150}})
+})
+
+ 
 	
 
 	 $(".custom-menu li").click(function(){
