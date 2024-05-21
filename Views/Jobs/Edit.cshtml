@@ -272,54 +272,53 @@
     </tbody>
   </table>
 </div>
-   <div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Dependencias</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      
-      </div>
-      <div class="modal-body">
-            <ul class='custom-menu'>
-  <li data-action="first" id="firstli">Agregar Dependencia</li>
-  <li data-action="second">Borrar Dependencia</li>
-  <li data-action="third">Cancelar</li>
- 
-</ul>
-      		<div id="mynetwork">
-      			
-      		</div>        	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-   <div class="modal fade bd-example-modal-sm" id="bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="basicModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Proceso</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        <div class="">
-          <strong>Seleccionar dependencia:</strong>
-          <select id="multiple-checkboxes">
-            <option value="0">Seleccione proceso</option>
-          </select>
-        </div>      	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info btnaddDep">Guardar</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Dependencias</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <ul class='custom-menu'>
+            <li data-action="first" id="firstli">Agregar Dependencia</li>
+            <li data-action="second">Borrar Dependencia</li>
+            <li data-action="third">Cancelar</li>
+          </ul>
+          <div id="mynetwork">
+          </div>        	
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="modal fade bd-example-modal-sm" id="bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="basicModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Proceso</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="">
+            <strong>Seleccionar dependencia:</strong>
+            <select id="multiple-checkboxes">
+              <option value="0">Seleccione proceso</option>
+            </select>
+          </div>      	
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info btnaddDep">Guardar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <script> 
   var params={};
   var table={};
@@ -547,45 +546,42 @@
       var arData = $.map(arrayData,function(val,key) {
       /*if(Number(val.id) !=nodeId) */return val;
       });
-      
+
       $(arData).each(function(index, element) {
         if(element.id!=idproc)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
-  });
-});
-
-//$(".bd-example-modal-sm").modal("hide");
-    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
-
-  });
-  
-  
-  
-      var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":idproc}};
- 
-      $.ajax({
-        method: "POST",
-        async: true,
-        dataType: "json",
-        data: JSON.stringify(data_dependencias),
-        contentType: "application/json; charset=utf-8",
-        url: '@Url.Action("ListarDependencias", "Jobs")' ,
-        success: function (response) { 
-          $(response).each(function(index,item){
-            $('#multiple-checkboxes')
-            .append($('<option>')
-            .text(item.nombre)
-            .attr('value', item.idproc));
-          });
-          
-          $('#multiple-checkboxes').multiselect({
-            includeSelectAllOption: true,
-          });       
-      },
-      error: function () {
-        alert("Error while get data");
-      }
     });
+  });
+
+  //$(".bd-example-modal-sm").modal("hide");
+    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
+  });
+  
+    var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":idproc}};
+ 
+    $.ajax({
+      method: "POST",
+      async: true,
+      dataType: "json",
+      data: JSON.stringify(data_dependencias),
+      contentType: "application/json; charset=utf-8",
+      url: '@Url.Action("ListarDependencias", "Jobs")' ,
+      success: function (response) { 
+        $(response).each(function(index,item){
+          $('#multiple-checkboxes')
+          .append($('<option>')
+          .text(item.nombre)
+          .attr('value', item.idproc));
+        });
+        
+        $('#multiple-checkboxes').multiselect({
+          includeSelectAllOption: true,
+        });       
+    },
+    error: function () {
+      alert("Error while get data");
+    }
+  });
 
   });
 
@@ -625,7 +621,7 @@
       "IDCRONTAB" : selectedCrontab,
       "NODE" : node
     },
-     "oDependencias" : procsDep
+    "oDependencias" : procsDep
   };
    
   if (idproc != 0) {
@@ -641,8 +637,7 @@
       
       if(data.error)
       {
-      Swal.fire ('Duplicidad...', data.msg, 'error')
-
+        Swal.fire ('Duplicidad...', data.msg, 'error')
       }
       else
       Swal.fire({
@@ -676,50 +671,49 @@
 //importando grafo guardado.
 
 function getEdgeData(data) {
-                var networkEdges = [];
+  var networkEdges = [];
 
-                data.forEach(function(node) {
-                    // add the connection
-                    node.connections.forEach(function(connId, cIndex, conns) {
-                        networkEdges.push({from: node.id, to: connId});
-                        let cNode = getNodeById(data, connId);
+  data.forEach(function(node) {
+    // add the connection
+    node.connections.forEach(function(connId, cIndex, conns) {
+      networkEdges.push({from: node.id, to: connId});
+      let cNode = getNodeById(data, connId);
 
-                        var elementConnections = cNode.connections;
+      var elementConnections = cNode.connections;
 
-                        // remove the connection from the other node to prevent duplicate connections
-                        var duplicateIndex = elementConnections.findIndex(function(connection) {
-                          return connection == node.id; // double equals since id can be numeric or string
-                        });
+      // remove the connection from the other node to prevent duplicate connections
+      var duplicateIndex = elementConnections.findIndex(function(connection) {
+        return connection == node.id; // double equals since id can be numeric or string
+      });
 
+      if (duplicateIndex != -1) {
+        elementConnections.splice(duplicateIndex, 1);
+      };
+    });
+  });
 
-                        if (duplicateIndex != -1) {
-                          elementConnections.splice(duplicateIndex, 1);
-                        };
-                  });
-                });
-
-                return new vis.DataSet(networkEdges);
-            }
+  return new vis.DataSet(networkEdges);
+}
 
 function getNodeData(data) {
-                var networkNodes = [];
+  var networkNodes = [];
 
-                data.forEach(function(elem, index, array) {
-                    networkNodes.push({id: elem.id, label: String(elem.id), /*x: elem.x, y: elem.y,*/level:elem.level});
-                });
+  data.forEach(function(elem, index, array) {
+    networkNodes.push({id: elem.id, label: String(elem.id), /*x: elem.x, y: elem.y,*/level:elem.level});
+  });
 
-                return new vis.DataSet(networkNodes);
-            }
+  return new vis.DataSet(networkNodes);
+}
 
 function getNodeById(data, id) {
-                for (var n = 0; n < data.length; n++) {
-                    if (data[n].id == id) {  // double equals since id can be numeric or string
-                      return data[n];
-                    }
-                };
+  for (var n = 0; n < data.length; n++) {
+    if (data[n].id == id) {  // double equals since id can be numeric or string
+      return data[n];
+    }
+  };
 
-                throw 'Can not find id \'' + id + '\' in data';
-            }
+  throw 'Can not find id \'' + id + '\' in data';
+}
 
   function importNetwork(prc_id) {
     if (prc_id != 0) {
@@ -730,10 +724,9 @@ function getNodeById(data, id) {
     url: "@Url.Action("GetNodeData","Jobs")",
 
     success: function (data) {
-      
       draw(data)
-       }
-    });
+    }
+  });
 
     }
     
@@ -753,16 +746,15 @@ function getNodeById(data, id) {
   function draw(dataNodes) {
     destroy();
 
- nodes=getNodeData(dataNodes.data);
- edges= getEdgeData(dataNodes.data);
-  var data = {
+    nodes=getNodeData(dataNodes.data);
+    edges= getEdgeData(dataNodes.data);
+    var data = {
       nodes: nodes,
       edges: edges
-  }
+    }
 
     // create a network
     var container = document.getElementById('mynetwork');
-
 
 	var options = {
 		edges: {
@@ -780,23 +772,19 @@ function getNodeById(data, id) {
 		physics:false
 	};
 
-
-       $(nodes._data).each(function(index, element){
-           
-           for(var i in element)
-       $(element [i]).each(function(index2, element2){
-  
-        if(idproc!=element2.id)
-        procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
+      $(nodes._data).each(function(index, element) {
+        for(var i in element)
+        $(element [i]).each(function(index2, element2) {
+          if(idproc!=element2.id)
+          procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
         });
-   
-});
+      });
 
      network = new vis.Network(container, data, options);
  
     network.on("click", function (params) {
        
-		 $(".custom-menu").hide(100);
+		  $(".custom-menu").hide(100);
         
     });
     network.on("doubleClick", function (params) {
@@ -812,68 +800,60 @@ function getNodeById(data, id) {
       network.getPositions([nodeId])[nodeId]
     );
     
-    		params.event.preventDefault();
-				$(".custom-menu").finish().toggle(100);
+      params.event.preventDefault();
+      $(".custom-menu").finish().toggle(100);
 
-         if(nodes._data[nodeId].level+1==1)
-       { 
-         $(".custom-menu #firstli").show();
-				$(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
-			 }
-        else 	
-        $(".custom-menu #firstli").hide();
-        $(".custom-menu").css({
- 
-				top: nodeY + "px",
-				left: nodeX + "px"
-				});
-		 
+      if(nodes._data[nodeId].level+1==1)
+      { 
+        $(".custom-menu #firstli").show();
+        $(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
+      }
+      else 	
+      $(".custom-menu #firstli").hide();
+      $(".custom-menu").css({
+
+      top: nodeY + "px",
+      left: nodeX + "px"
+      });
     }
-       
 	});
 
   network.on("hoverNode", function (params) {
 	  $(".custom-menu").hide(100);
   });
 	
-network.once('initRedraw', function() {
-network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
-})
+  network.once('initRedraw', function() {
+    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
+  })
 
 	 $(".custom-menu li").click(function(){
     
    if(nodeId!=undefined){
  
-
     switch($(this).attr("data-action")) {
       
-        case "first": 
+      case "first": 
 
-          $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
-        $(".bd-example-modal-sm").modal("show");
+      $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
+      $(".bd-example-modal-sm").modal("show");
 	   
-	  
    	break;
-        case "second":
-        if(nodeId!=idproc){ 
-   
-        nodes.remove(nodeId);
-        edges.remove(nodeId);
-        procsDep=[];
-         $(nodes._data).each(function(index, element){
-           
-           for(var i in element)
-       $(element [i]).each(function(index2, element2){
-
+      case "second":
+      if(nodeId!=idproc){ 
   
-        if(idproc!=element2.id)
-        procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
+      nodes.remove(nodeId);
+      edges.remove(nodeId);
+      procsDep=[];
+        $(nodes._data).each(function(index, element) {
+          for(var i in element)
+          $(element [i]).each(function(index2, element2){
+
+          if(idproc!=element2.id)
+            procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
+          });
         });
-   
-});
       }
 	 
-		
 		break;
       case "third": console.log("seleccionaste third"); break;
     }
@@ -882,5 +862,4 @@ network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
   });
   
   }
-    
 </script>
