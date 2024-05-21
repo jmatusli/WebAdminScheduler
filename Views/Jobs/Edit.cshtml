@@ -19,7 +19,7 @@
     <style>
   #mynetwork {
             width: 700px;
-            height: 800px;
+            height: 450px;
             border: 1px solid lightgray;
             align:center;
         }
@@ -548,7 +548,8 @@ let procsDep=[];
 });
 });
 
-
+//$(".bd-example-modal-sm").modal("hide");
+    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
 
   });
   
@@ -786,11 +787,7 @@ function getNodeById(data, id) {
 });
 
      network = new vis.Network(container, data, options);
-     network.moveTo({
-    position: {x: 0, y: 0},
-    offset: {x: 5, y: 5},
-    scale: 1,
-})
+ 
     network.on("click", function (params) {
        
 		 $(".custom-menu").hide(100);
@@ -833,6 +830,9 @@ function getNodeById(data, id) {
 	  $(".custom-menu").hide(100);
   });
 	
+network.once('initRedraw', function() {
+network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
+})
 
 	 $(".custom-menu li").click(function(){
     
