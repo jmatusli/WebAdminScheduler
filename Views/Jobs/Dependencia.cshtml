@@ -1,8 +1,8 @@
 @model WebAdminScheduler.Models.CP_PROCESOS;
-@{
-    ViewData["Title"] = "Dependencia";
-}
 
+@{
+  ViewData["Title"] = "Dependencia";
+}
 <head>
     <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/3.3.4/css/bootstrap.min.css" /> 
@@ -21,53 +21,17 @@
     <script src="~/lib/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap-multiselect.js"></script>
     
-    <style type="text/css">
-        body {
-            font: 10pt sans;
-        }
-
-        #mynetwork {
-            width: 800px;
-            height: 800px;
-            border: 1px solid lightgray;
-            align:center;
-        }
-
-        /* CSS3 */
-
-        /* The whole thing */
-        .custom-menu {
-            display: none;
-            z-index: 1000;
-            position: absolute;
-            overflow: hidden;
-            border: 1px solid #CCC;
-            white-space: nowrap;
-            font-family: sans-serif;
-            background: #FFF;
-            color: #333;
-            border-radius: 5px;
-            padding: 0;
-        }
-
-        /* Each of the items in the list */
-        .custom-menu li {
-            padding: 8px 12px;
-            cursor: pointer;
-            list-style-type: none;
-            transition: all .3s ease;
-            user-select: none;
-        }
-
-        .custom-menu li:hover {
-            background-color: #DEF;
-        }
-    </style>
+  
+  <style>
+    #mynetwork {
+      width: 100%;
+      height: 450px;
+      border: 1px solid lightgray;
+      align:center;
+    }
+ </style>
 </head>
-
-<h1>Dependencia</h1>
-    <body onload="draw();">
-        <div class="card">
+  <div class="card">
             <div class="card-header">
                 Detalle
             </div>
@@ -79,165 +43,136 @@
                     </div>
                 </div>
             </div>
-            <div class="">
-                <strong>Seleccionar dependencia:</strong>
-                <select id="multiple-checkboxes">
-                    <option value="0">Seleccione proceso</option>
-                </select>
-            </div>
+         
         </div>
         <br />
-
-        <div class="container">
-            <ul class='custom-menu'>
-                <li data-action="first" id="firstli">Agregar Dependencia</li>
-                <li data-action="second">Borrar Dependencia</li>
-                <li data-action="third">Cancelar</li>
-            </ul>
-           <div id="mynetwork"></div>
-        </div>
-    </body>
-    
-    <script type="text/javascript">
-        var params={};
-
-        var idproc="@Model.IDPROC";
-        params.idproc=idproc;
-
-        $(document).ready(function() {
-            
-            var data_dependencias={oDependencias:{ "IDDEP" : 0, "IDPROC_DEP":0, "IDPROC":idproc}};
+    <div class="container">
+   <div id="mynetwork">
+          </div>       
+    </div>
+    <br />
  
-            $.ajax({
-                method: "POST",
-                async: true,
-                dataType: "json",
-                data: JSON.stringify(data_dependencias),
-                contentType: "application/json; charset=utf-8",
-                url: '@Url.Action("ListarDependencias", "Jobs")' ,
-                success: function (response) { 
-                    $(response).each(function(index,item) {
-                        $('#multiple-checkboxes')
-                        .append($('<option>')
-                        .text(item.nombre)
-                        .attr('value', item.idproc));
-                    });
-                    $('#multiple-checkboxes').multiselect({
-                        includeSelectAllOption: true,
-                    });     
-                },
-                error: function () {
-                    alert("Error while get data");
-                }
-            }); 
-        });
+<script> 
+ 
+  var idproc="@Model.IDPROC";
+  
+//importando grafo guardado.
+function getNode(nodeId){
+     var nodeObj= network.body.data.nodes._data[nodeId];
+     return nodeObj;  
+}
+function getEdgeData(data) {
+  var networkEdges = [];
 
-        var nodes = null;
-        var edges = null;
-        var network = null;
-        function destroy() {
-            if (network !== null) {
-                network.destroy();
-                network = null;
-            }
-        }
+  data.forEach(function(node) {
+    // add the connection
+    node.connections.forEach(function(connId, cIndex, conns) {
+      networkEdges.push({from: node.id, to: connId});
+      let cNode = getNodeById(data, connId);
 
-        function draw() {
-            destroy();
+      var elementConnections = cNode.connections;
 
-        nodes = new vis.DataSet([
-            {id: 1, label: 'Node 1',level:0},
-            {id: 2, label: 'Node 2',level:1},
-            {id: 3, label: 'Node 3',level:1},
-            {id: 4, label: 'Node 4',level:1},
-            {id: 5, label: 'Node 5',level:1}
-        ]);
+      // remove the connection from the other node to prevent duplicate connections
+      var duplicateIndex = elementConnections.findIndex(function(connection) {
+        return connection == node.id; // double equals since id can be numeric or string
+      });
 
-        // create an array with edges
-        edges = new vis.DataSet([
-            {from: 1, to: 2},
-            {from: 1, to: 3},
-            {from: 1, to: 4},
-            {from: 1, to: 5}
-        ]);        
-			
-        var nodeId=0;
-        // create a network
-        var container = document.getElementById('mynetwork');
-        var data = {
-            nodes: nodes,
-            edges: edges
-        };
+      if (duplicateIndex != -1) {
+        elementConnections.splice(duplicateIndex, 1);
+      };
+    });
+  });
 
-        var options = {
-            edges: {
-                smooth: {
-                    type: 'cubicBezier',
-                    forceDirection:  'vertical',
-                    roundness: 0.4
-                }
-            },
-            layout: {
-                hierarchical: {
-                    direction: 'UD'
-                }
-            },
-            physics:false
-        };
+  return new vis.DataSet(networkEdges);
+}
 
-        network = new vis.Network(container, data, options);
+function getNodeData(data) {
+  var networkNodes = [];
 
-        network.on("click", function (params) {
-            $(".custom-menu").hide(100);
-        });
+  data.forEach(function(elem, index, array) {
+    networkNodes.push({id: elem.id, label: String(elem.id), /*x: elem.x, y: elem.y,*/level:elem.level});
+  });
 
-        network.on("doubleClick", function (params) {
-            $(".custom-menu").hide(100);
-        });
+  return new vis.DataSet(networkNodes);
+}
+
+function getNodeById(data, id) {
+  for (var n = 0; n < data.length; n++) {
+    if (data[n].id == id) {  // double equals since id can be numeric or string
+      return data[n];
+    }
+  };
+
+  throw 'Can not find id \'' + id + '\' in data';
+}
+
+  function importNetwork(prc_id) {
+    if (prc_id != 0) {
+    jQuery.ajax({
+    method: "POST",
+    async: true,
+    data: {prcId:prc_id},
+    url: "@Url.Action("GetNodeData","Jobs")",
+
+    success: function (data) {
+      draw(data)
+    }
+  });
+
+    }
     
-            network.on("oncontext", function (params) {
-                nodeId=this.getNodeAt(params.pointer.DOM);
-                if(nodeId!=undefined) {
-                    var { x: nodeX, y: nodeY } = network.canvasToDOM(
-                        network.getPositions([nodeId])[nodeId]
-                    );
-                    params.event.preventDefault();
-                    $(".custom-menu").finish().toggle(100);
-                    $(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
-                    $(".custom-menu").css({
-                    top: params.event.pageY + "px",
-                    left: params.event.pageX + "px"
-                });
-            }
-        });
+    }
 
-        network.on("hoverNode", function (params) {
-            $(".custom-menu").hide(100);
-        });
-        
-        $(".custom-menu li").click(function() {
-        
-            if(nodeId!=undefined) {
-            
-                let nextlevel=nodes._data[nodeId].level+1;
-                let nextnode=nodes.length+1;
-                switch($(this).attr("data-action")) {
-                    case "first": 
-                    nodes.add({ id: nextnode, label: 'Node '+nextnode,level:nextlevel});
-                    edges.add({ from: nodeId, to: nextnode });
-                    console.log("seleccionaste first"); 
-                    break;
-                    case "second":
-                    nodes.remove(nodeId);
-                    edges.remove(nodeId);
+  var nodes = null;
+  var edges = null;
+  var network = null;
 
-                    console.log("seleccionaste second"); 
-                    
-                    break;
-                    case "third": console.log("seleccionaste third"); break;
-                }
-            }
-                $(".custom-menu").hide(100);
-            });
-        }
-    </script>
+  function destroy() {
+    if (network !== null) {
+      network.destroy();
+      network = null;
+    }
+  }
+
+  function draw(dataNodes) {
+    destroy();
+
+    nodes=getNodeData(dataNodes.data);
+    edges= getEdgeData(dataNodes.data);
+    var data = {
+      nodes: nodes,
+      edges: edges
+    }
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+	var options = {
+		edges: {
+			smooth: {
+				type: 'cubicBezier',
+				forceDirection:  'vertical',
+				roundness: 0.4
+			}
+		},
+		layout: {
+			hierarchical: {
+				direction: 'UD'
+			}
+		},
+		physics:false
+	};
+
+     network = new vis.Network(container, data, options);
+
+	
+  network.once('initRedraw', function() {
+    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
+  })
+
+   
+  
+  }
+  
+  importNetwork(idproc)
+</script>
