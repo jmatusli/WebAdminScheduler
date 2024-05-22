@@ -262,8 +262,6 @@
   </div>
 </div>
 
- 
-
 <div class="container">
   <table id="dt-crontab" class="display nowrap" width="100%">
     <thead>
@@ -407,10 +405,16 @@
         .each(function () { 
           $('td:first-child', this).find('input').prop('checked', true);
         });
-        selectedCrontab=table.rows( { selected: true }).data()[0].idcrontab;
-
+        selectedCrontab = table.rows( { selected: true }).data()[0].idcrontab;
       }
     });
+
+    @* if(!document.querySelector('selectedCrontab:checked')) {
+      alert('Error, selecciona un crontab asociado');
+      hasError = true;
+    } else {
+      alert("llenarlo");
+    } *@
 
     table.on('deselect', function (e, dt, type, indexes) {
       if (type === 'row') {
@@ -487,13 +491,6 @@
       var compresion = $('#flexCheckComprension').is(":checked")?1:0;  
       
       var node = $('#txtNode').val();
-
- 
-
- 
-     
-
- 
 
       var data_job = {
         "oProcesos" : {
@@ -574,48 +571,42 @@
 
 })      
 
- $('.bd-example-modal-sm .btnexport').on('click', function(e) {
-  exportNetwork();
+  $('.bd-example-modal-sm .btnexport').on('click', function(e) {
+    exportNetwork();
   });
- $('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
+  
+  $('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
 
   	let nextlevel=nodes._data[nodeId].level+1;
     let nodeTmp=getNode(nextnode);
     if(nodeTmp!=undefined)
     {
-        Swal.fire ('El nodo seleccionado ya fue agregado', 'error')
-       console.log("existe el nodo ",nodeTmp.id);}
+      Swal.fire ('El nodo seleccionado ya fue agregado', 'error')
+      console.log("existe el nodo ",nodeTmp.id);}
    else {
-     
-     
+    
   e.stopPropagation();
   e.preventDefault();
 
- 
   $(this).attr("disabled",true);   
-    	nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
+    nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
 		edges.add({ from: nodeId, to: nextnode });
 
    var arrayData=nodes._data;
-     procsDep=[];
-      var arData = $.map(arrayData,function(val,key) {
-      if(Number(val.id) !=nodeId) return val;
-      });
-      $(arData).each(function(index, element){
-
-     
-        procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element.id});
-   
-});
+    procsDep=[];
+    var arData = $.map(arrayData,function(val,key) {
+    if(Number(val.id) !=nodeId) return val;
+    });
+    $(arData).each(function(index, element) {
+      procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element.id});
+    });
   
-      network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
+    network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
 
-      $(".bd-example-modal-sm").modal("hide");
-
+    $(".bd-example-modal-sm").modal("hide");
 
     }
    
- 
   });
 
   $('.bd-example-modal-lg').on('shown.bs.modal', function() {
@@ -628,29 +619,17 @@
 
   $('.bd-example-modal-sm').on('shown.bs.modal', function() {
     $(".bd-example-modal-lg").addClass("custom-class");
-
- 
-          $('#multiple-checkboxes').on("change",function(){
- $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
-          nextnode=$(this).val();
-
-          })
+    $('#multiple-checkboxes').on("change",function(){
+    $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
+    nextnode=$(this).val();
+  })
     
-
-
-
-
   });
   
   $('.bd-example-modal-sm').on('hidden.bs.modal', function() {
     $(".bd-example-modal-lg").removeClass("custom-class");
   });
   
-
-
-
-  
-        
     var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":LastIdproc}};
  
       $.ajax({
@@ -689,25 +668,24 @@
       network = null;
     }
   }
-function getNode(nodeId){
-     var nodeObj= network.body.data.nodes._data[nodeId];
-     return nodeObj;  
-}
+
+  function getNode(nodeId){
+    var nodeObj= network.body.data.nodes._data[nodeId];
+    return nodeObj;  
+  }
+
   function draw() {
     destroy();
 
     nodes = new vis.DataSet([
       {id: LastIdproc, label: LastIdproc,level:0},
-    
-      ]);
+    ]);
 
     // create an array with edges
      edges = new vis.DataSet([
       //  {from: LastIdproc, to: 2},
-         
     ]);        
 			
-   
     // create a network
     var container = document.getElementById('mynetwork');
     var data = {
@@ -731,13 +709,12 @@ function getNode(nodeId){
 		physics:false
 	};
 
-     network = new vis.Network(container, data, options);
+    network = new vis.Network(container, data, options);
  
     network.on("click", function (params) {
-       
-		 $(".custom-menu").hide(100);
-        
+		  $(".custom-menu").hide(100);
     });
+
     network.on("doubleClick", function (params) {
       $(".custom-menu").hide(100);
     });
@@ -751,21 +728,21 @@ function getNode(nodeId){
       network.getPositions([nodeId])[nodeId]
     );
     
-    		params.event.preventDefault();
-				$(".custom-menu").finish().toggle(100);
+      params.event.preventDefault();
+      $(".custom-menu").finish().toggle(100);
 
-         if(nodes._data[nodeId].level+1==1)
-       { 
-         $(".custom-menu #firstli").show();
+      if(nodes._data[nodeId].level+1==1)
+      { 
+        $(".custom-menu #firstli").show();
 				$(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
-			 }
-        else 	
-        $(".custom-menu #firstli").hide();
-        $(".custom-menu").css({
- 
-				top: nodeY + "px",
-				left: nodeX + "px"
-				});
+			}
+      else 	
+      $(".custom-menu #firstli").hide();
+      $(".custom-menu").css({
+
+      top: nodeY + "px",
+      left: nodeX + "px"
+      });
 		 
     }
        
@@ -775,49 +752,38 @@ function getNode(nodeId){
 	  $(".custom-menu").hide(100);
   });
 
- 
-
 network.once('initRedraw', function() {
 network.moveTo({offset:{x:120,y:0}, position: {x:120, y: 150}})
 })
 
- 
-	
-
-	 $(".custom-menu li").click(function(){
+	$(".custom-menu li").click(function(){
     
-   if(nodeId!=undefined){
+   if(nodeId!=undefined) {
  
-
     switch($(this).attr("data-action")) {
       
-        case "first": 
-
-          $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
+      case "first": 
+        $('#multiple-checkboxes').multiselect('select', 0);$('#multiple-checkboxes').multiselect('refresh');
         $(".bd-example-modal-sm").modal("show");
 	   
-	  
    	break;
-        case "second":
-        if(nodeId!=LastIdproc){ 
-        nodes.remove(nodeId);
-        edges.remove(nodeId);
+      case "second":
+      if(nodeId!=LastIdproc){ 
+      nodes.remove(nodeId);
+      edges.remove(nodeId);
 
-           procsDep=[];
-         $(nodes._data).each(function(index, element){
+        procsDep=[];
+        $(nodes._data).each(function(index, element){
            
-           for(var i in element)
-       $(element [i]).each(function(index2, element2){
+        for(var i in element)
+        $(element [i]).each(function(index2, element2) {
 
-  
         if(LastIdproc!=element2.id)
         procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element2.id});
         });
-   
-});
-      }
+      });
+    }
 
-		
 		break;
       case "third": console.log("seleccionaste third"); break;
     }
