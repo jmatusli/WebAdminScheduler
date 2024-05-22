@@ -234,8 +234,8 @@
       </div>
       <div class="col-auto">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckComprension">
-          <label class="form-check-label" for="flexCheckComprension">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckCompresion">
+          <label class="form-check-label" for="flexCheckCompresion">
             COMPRESIÓN
           </label>
         </div>
@@ -335,11 +335,12 @@
 </div>
 
 <script>
- var nodeId=0;
- var nextnode=0;
- let procsDep=[];
+  var nodeId=0;
+  var nextnode=0;
+  let procsDep=[];
   var params={}, selectedCrontab = 0;
   var LastIdproc="@ViewBag.LastIdproc";
+
   function recargartabla(objeto,value)
   {
     params.estado=value;
@@ -378,13 +379,13 @@
           "render": function (data,row) { return '<input type="radio" name="select_all" class="dt-column-title" value="1" id="dt-crontab-select-item">';   }
         },
         { "data": "idcrontab", "name": "idcrontab", "autoWidth": true },
-          { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
-          { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
-          { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
-          { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
-          { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
-          { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
-          { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
+        { "data": "horA_INICIO", "name": "horA_INICIO", "autoWidth": true },
+        { "data": "horA_FIN", "name": "horA_FIN", "autoWidth": true },
+        { "data": "wdaY_M2S_EX", "name": "wdaY_M2S_EX", "autoWidth": true },
+        { "data": "daY_EX", "name": "daY_EX", "autoWidth": true },
+        { "data": "montH_EX", "name": "montH_EX", "autoWidth": true },
+        { "data": "repeaT_EVERY_MINS", "name": "repeaT_EVERY_MINS", "autoWidth": true },
+        { "data": "repeaT_AFTER_FINISH", "name": "repeaT_AFTER_FINISH", "autoWidth": true },
       ],
     
     select: {
@@ -408,13 +409,6 @@
         selectedCrontab = table.rows( { selected: true }).data()[0].idcrontab;
       }
     });
-
-    @* if(!document.querySelector('selectedCrontab:checked')) {
-      alert('Error, selecciona un crontab asociado');
-      hasError = true;
-    } else {
-      alert("llenarlo");
-    } *@
 
     table.on('deselect', function (e, dt, type, indexes) {
       if (type === 'row') {
@@ -488,7 +482,7 @@
       var estado = $('#txtEstado').val();
       var ftp = $('#flexCheckFtp').is(":checked")?1:0;
       var id_host = $('#txtIdHost').val();
-      var compresion = $('#flexCheckComprension').is(":checked")?1:0;  
+      var compresion = $('#flexCheckCompresion').is(":checked") ? 1 : 0;  
       
       var node = $('#txtNode').val();
 
@@ -518,31 +512,43 @@
     if ((id_conex == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo id_conex', 'error')
       return false;
-    } 
+    }
+
     if ((nombre == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo nombre', 'error')
       return false;
-    } 
+    }
+
     if ((descripcion == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo descripción', 'error')
       return false;
-    } 
+    }
+
     if ((path == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo path', 'error')
       return false;
-    } 
+    }
+
     if ((intentos == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo intento', 'error')
       return false;
-    }  
+    }
+
     if ((id_host == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo id_host', 'error')
       return false;
     }
+
     if ((node == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo node', 'error')
       return false;
     }
+
+    if(selectedCrontab == 0) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registrar un crontab asociado', 'error')
+      return false;
+    }
+    
     else {
       $.ajax({
         method: "POST",
@@ -583,7 +589,7 @@
     {
       Swal.fire ('El nodo seleccionado ya fue agregado', 'error')
       console.log("existe el nodo ",nodeTmp.id);}
-   else {
+    else {
     
   e.stopPropagation();
   e.preventDefault();
@@ -609,26 +615,26 @@
    
   });
 
-  $('.bd-example-modal-lg').on('shown.bs.modal', function() {
-    draw();
-  });
+    $('.bd-example-modal-lg').on('shown.bs.modal', function() {
+      draw();
+    });
 
-  $('#btnDependencia').on('click', function() {
-    $(".bd-example-modal-lg").modal("show");
-  });
+    $('#btnDependencia').on('click', function() {
+      $(".bd-example-modal-lg").modal("show");
+    });
 
-  $('.bd-example-modal-sm').on('shown.bs.modal', function() {
-    $(".bd-example-modal-lg").addClass("custom-class");
-    $('#multiple-checkboxes').on("change",function(){
-    $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
-    nextnode=$(this).val();
-  })
+    $('.bd-example-modal-sm').on('shown.bs.modal', function() {
+      $(".bd-example-modal-lg").addClass("custom-class");
+      $('#multiple-checkboxes').on("change",function(){
+      $('.bd-example-modal-sm .btnaddDep').attr("disabled",false);
+      nextnode=$(this).val();
+    })
     
   });
   
-  $('.bd-example-modal-sm').on('hidden.bs.modal', function() {
-    $(".bd-example-modal-lg").removeClass("custom-class");
-  });
+    $('.bd-example-modal-sm').on('hidden.bs.modal', function() {
+      $(".bd-example-modal-lg").removeClass("custom-class");
+    });
   
     var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":LastIdproc}};
  
