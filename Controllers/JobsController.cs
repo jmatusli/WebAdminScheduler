@@ -566,5 +566,39 @@ namespace WebAdminScheduler.Controllers
 
            });  
         }
+
+
+
+         [HttpPost]
+        public JsonResult GetAllNodeData(int prcId)
+        {
+
+        List<object> nodeDataList = new List<object>(); 
+        List<CP_DEPENDENCIAS> data = (from s in _DBContext.CP_DEPENDENCIAS.Where(x => x.IDPROC == prcId)
+                                select s).ToList().AsQueryable().ToList();
+        
+        var conectionsFirst = new ArrayList(); 
+        var conections = new ArrayList();
+        
+        foreach(var item in data)
+            {
+                Console.WriteLine("esto es un dato "+item.IDPROC_DEP);
+                conectionsFirst.Add(item.IDPROC_DEP);
+                conections = new ArrayList();
+                var c=new {id=item.IDPROC_DEP,connections=conections,level=1};
+                nodeDataList.Add(c);   
+                
+            }                     
+         
+ 
+        nodeDataList.Add(new { x=0,y=0,id=prcId,connections=conectionsFirst,level=0});
+    
+ 
+
+           return Json(new { 
+            Data = nodeDataList
+
+           });  
+        }
     }
 }
