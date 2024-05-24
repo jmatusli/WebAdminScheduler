@@ -510,7 +510,7 @@
       };
     
     if ((id_conex == "")) {  //COMPRUEBA CAMPOS VACIOS
-      Swal.fire ('Porfavor registre el campo id_conex', 'error')
+      Swal.fire ('Porfavor registre el campo id conexión', 'error')
       return false;
     }
 
@@ -534,8 +534,13 @@
       return false;
     }
 
+    if ((espera_intento == "")) {  //COMPRUEBA CAMPOS VACIOS
+      Swal.fire ('Porfavor registre el campo espera intento', 'error')
+      return false;
+    }
+
     if ((id_host == "")) {  //COMPRUEBA CAMPOS VACIOS
-      Swal.fire ('Porfavor registre el campo id_host', 'error')
+      Swal.fire ('Porfavor registre el campo id host', 'error')
       return false;
     }
 
