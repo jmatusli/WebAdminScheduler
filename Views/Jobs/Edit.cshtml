@@ -736,9 +736,11 @@ function getNodeById(data, id) {
     method: "POST",
     async: true,
     data: {prcId:prc_id},
-    url: "@Url.Action("GetNodeData","Jobs")",
+    url: "@Url.Action("GetAllNodeData","Jobs")",
 
     success: function (data) {
+
+      console.log("esto viene del getall ",data);
       draw(data)
     }
   });
