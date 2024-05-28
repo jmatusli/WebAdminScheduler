@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
     <script src="~/js/jquery-1.11.3.min.js"></script>
-    <script src="~/js/pdfmake.min.js"></script>
     <script src="~/js/vfs_fonts.js"></script>
     <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
     <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
@@ -190,47 +189,49 @@
     </body>
   }
   
-  <script> 
-    var LastIdNotif = "@ViewBag.LastIdNotif";
+<script> 
+	var LastIdNotif = "@ViewBag.LastIdNotif";
 
-    $(document).on("ready",function() {
-      $('#btnSave').on('click',function() {
-          
-        var recipients = $('#txtRecipients').val();
-        var notify_success = $('#txtNotifySuccess').val();
-        var notify_failure = $('#txtNotifyFailure').val();
-        var name = $('#txtName').val();
+	$(document).on("ready",function() {
+		$('#btnSave').on('click',function() {
+      var recipients = $('#txtRecipients').val();
+			var notify_success = $('#txtNotifySuccess').val();
+			var notify_failure = $('#txtNotifyFailure').val();
+			var name = $('#txtName').val();
+			
+			var data_notif={
+			  "oNotification": {
+				"RECIPIENTS" : recipients,
+				"NOTIFYSUCCESS" : notify_success,
+				"NOTIFYFAILURE" : notify_failure,
+				"NAME" : name
+			  }
+			};
 
-        var data_notif={
-          "oNotification": {
-            "RECIPIENTS" : recipients,
-            "NOTIFYSUCCESS" : notify_success,
-            "NOTIFYFAILURE" : notify_failure,
-            "NAME" : name
-          }
-        };
-
-        $.ajax({
-          method: "POST",
-          async: true,
-          dataType: "json",
-          data: JSON.stringify(data_notif),
-          contentType: "application/json; charset=utf-8",
-          url: '@Url.Action("Save", "Notification")' ,
-          success: function () {
+      $.ajax({
+			  method: "POST",
+			  async: true,
+			  dataType: "json",
+			  data: JSON.stringify(data_notif),
+			  contentType: "application/json; charset=utf-8",
+			  url: '@Url.Action("Save", "Notification")' ,
+			  success: function () {
           Swal.fire({
-          title: "Notificación registrada!",
-          text: "Click en aceptar para ver notificaciones registradas!",
-          icon: "success",
-          confirmButtonText: "Aceptar",
-        }).then((result) => {
-        if (result.isConfirmed) {
-          $(location).attr("href","@Url.Action("Index","Notification")")
-        }  
-      });
-    },
-    error: function () {
-      alert("Error while inserting data");
-    }
+            title: "Notificación registrada!",
+            text: "Click en aceptar para ver notificaciones registradas!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $(location).attr("href","@Url.Action("Index","Notification")")
+            }  
+          });
+        },
+        error: function () {
+        alert("Error while inserting data");
+		  }
+		});
+
     });
-  </script>
+	});
+</script>
