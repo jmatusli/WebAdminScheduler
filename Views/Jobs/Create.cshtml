@@ -248,13 +248,26 @@
       <div class="col-auto">
         <input type="text" maxlength="10" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtNode" name="txtNode">
       </div>
-
-      
       <div class="col-auto">
-         <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia" disabled>Agregar Dependencia</button>
+        <button type="button" class="btn btn-info" id="btnDependencia" data-target=".bd-example-modal-lg" name="btnDependencia" disabled>Agregar Dependencia</button>
       </div>
+    </div>
+    <br />
 
-
+    <div class="row g-4 align-items-center">
+      <div class="col-auto">
+        <label class="form-check-label" for="Notifications">
+          NOTIFICACIONES
+        </label>
+      </div>
+      <div class="col-auto">
+        <select class="form-select" name="txtNotifications" id="txtNotifications">
+          <option value="0">0 - Dummy Notification</option>
+          <option value="1">1 - Notification Success/Failure to BI members</option>
+          <option value="2">2 - Notification Success Only to BI members</option>
+          <option value="3">3 - Notification Failure Only to BI members</option>
+        </select>
+      </div>
     </div>
   </div>
   <div class="card-footer text-muted">
@@ -282,9 +295,7 @@
   </table>
 </div>
 
-        
-
-   <div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
+<div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -293,15 +304,13 @@
       
       </div>
       <div class="modal-body">
-            <ul class='custom-menu'>
-  <li data-action="first" id="firstli">Agregar Dependencia</li>
-  <li data-action="second">Borrar Dependencia</li>
-  <li data-action="third">Cancelar</li>
- 
-</ul>
-      		<div id="mynetwork">
-      			
-      		</div>        	
+        <ul class='custom-menu'>
+          <li data-action="first" id="firstli">Agregar Dependencia</li>
+          <li data-action="second">Borrar Dependencia</li>
+          <li data-action="third">Cancelar</li>
+        </ul>
+        <div id="mynetwork">
+        </div>        	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -310,7 +319,7 @@
   </div>
 </div>
 
-   <div class="modal fade bd-example-modal-sm" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
+  <div class="modal fade bd-example-modal-sm" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -343,7 +352,7 @@
 
   function recargartabla(objeto,value)
   {
-    params.estado=value;
+    params.estado = value;
     objeto.ajax.reload(null,false); //reload datatable ajax 
   }
 
@@ -476,11 +485,12 @@
       var parametro2 = $('#txtParametro2').val();
       var parametro3 = $('#txtParametro3').val();
       var parametro4 = $('#txtParametro4').val();
-      var dependencia = $('#txtDependencia').is(":checked")?1:0;
+      var dependencia = $('#txtDependencia').is(":checked") ? 1 : 0;
       var intentos = $('#txtIntentos').val();
       var espera_intento = $('#txtEsperaIntento').val();
       var estado = $('#txtEstado').val();
-      var ftp = $('#flexCheckFtp').is(":checked")?1:0;
+      var notificaciones = $('#txtNotifications').val();
+      var ftp = $('#flexCheckFtp').is(":checked") ? 1 : 0;
       var id_host = $('#txtIdHost').val();
       var compresion = $('#flexCheckCompresion').is(":checked") ? 1 : 0;  
       
@@ -500,6 +510,7 @@
           "INTENTOS" : intentos,
           "ESPERA_INTENTO" : espera_intento,
           "ESTADO" : "Activo",
+          "IDNOTIF" : 0,
           "FTP" : ftp,
           "IDHOST" : id_host,
           "COMPRESION" : compresion,

@@ -1,0 +1,146 @@
+@model WebAdminScheduler.Models.CP_NOTIFICATIONS;
+@{
+    ViewData["Title"] = "Edit";
+}
+<head>
+    <link rel="stylesheet" href="~/css/clockpicker.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
+    <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script src="~/js/vfs_fonts.js"></script>
+    <script src="~/js/datatables.min.js"></script>
+    <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
+    <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
+    <script src="~/js/clockpicker.js"></script>
+</head>	
+
+@using (Html.BeginForm("UpdateNotification", "Notification", FormMethod.Post))
+{
+    <body>
+        <h1>Notificaciones</h1>
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-4 align-items-center">
+                    <div class="col-auto">
+                        <label class="form-check-label" for="lblRecipients">
+                            Recipients
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" 
+                            data-placement="right" data-align="top" name="txtUptRecipients" id="txtUptRecipients" data-autoclose="true">
+                        </div>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <label class="form-check-label" for="lblNotifySuccess">
+                            Notify Success
+                        </label>
+                    </div>
+
+                    <div class="col-auto">
+                        <select class="form-select" name="txtUptNotifySuccess" id="txtUptNotifySuccess">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <label class="form-check-label" for="lblNotifyFailure">
+                            Notify Failure
+                        </label>
+                    </div>
+
+                    <div class="col-auto">
+                        <select class="form-select" name="txtUptNotifyFailure" id="txtUptNotifyFailure">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-auto">
+                            <label class="form-check-label" for="lblName">
+                                Name
+                            </label>
+                        </div>
+
+                        <div class="col-auto">
+                            <input type="text" min="1" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtUptName" name="txtUptName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <a id="btnSave" class="btn btn-primary">Guardar</a>
+            </div>
+        </div>
+    </body>
+}
+
+<script> 
+    var params={};
+    var idnotif="@ViewBag.IDNOTIF";
+
+    var recipients = "@Model.RECIPIENTS";
+    var notify_success = "@Model.NOTIFYSUCCESS";
+    var notify_failure = "@Model.NOTIFYFAILURE";
+    var name = "@Model.NAME";
+
+    $(document).ready( function () {
+        $("#txtUptRecipients").val(recipients);
+        $("#txtUptNotifySuccess").val(notify_success);
+        $("#txtUptNotifyFailure").val(notify_failure);
+        $("#txtUptName").val(name);
+    });
+
+    function Guardar() {
+        recipients = $('#txtUptRecipients').val();
+        notify_success = $('#txtUptNotifySuccess').val();
+        notify_failure = $('#txtUptNotifyFailure').val();
+        name = $('#txtUptName').val();
+
+        var data_notif = {
+            "oNotification": {
+            "IDNOTIF" : idnotif,
+            "RECIPIENTS" : recipients,
+            "NOTIFYSUCCESS" : notify_success,
+            "NOTIFYFAILURE" : notify_failure,
+            "NAME" : name
+        }
+    };
+
+    if (idcrontab != 0) {
+        jQuery.ajax({
+        method: "POST",
+        async: true,
+        dataType: "json",
+        data: JSON.stringify(data_cron),
+        contentType: "application/json; charset=utf-8",
+        url: "@Url.Action("Update","Calendario")",
+
+        success: function (data) {
+            Swal.fire({
+            title: "Calendario Actualizado!",
+            text: "Click en aceptar para ver calendarios!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $(location).attr("href","@Url.Action("Index","Calendario")")
+        }  
+    });
+}
+});
+} else {
+    $("#horaIni").val("");
+    $("#horaFin").val("");
+    $("#UptRepeatEveryMins").val("");
+}
+}
+</script>

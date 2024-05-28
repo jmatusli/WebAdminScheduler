@@ -243,9 +243,26 @@
       </div>
 
       <div class="col-auto">
-         <button type="button" class="btn btn-info" id="btnEDependencia" data-target=".bd-example-modal-lg" name="btnEDependencia" disabled>Editar Dependencia</button>
+        <button type="button" class="btn btn-info" id="btnEDependencia" data-target=".bd-example-modal-lg" name="btnEDependencia" disabled>Editar Dependencia</button>
       </div>
 
+    </div>
+    <br />
+
+    <div class="row g-4 align-items-center">
+      <div class="col-auto">
+        <label class="form-check-label" for="lblNotifications">
+          NOTIFICACIONES
+        </label>
+      </div>
+      <div class="col-auto">
+        <select class="form-select" name="txtUptNotifications" id="txtUptNotifications">
+          <option value="0">0 - Dummy Notification</option>
+          <option value="1">1 - Notification Success/Failure to BI members</option>
+          <option value="2">2 - Notification Success Only to BI members</option>
+          <option value="3">3 - Notification Failure Only to BI members</option>
+        </select>
+      </div>
     </div>
   </div>
   <div class="card-footer text-muted">
@@ -343,9 +360,12 @@
   var id_host = "@Model.IDHOST";
   var compresion = "@Model.COMPRESION";
   var node = "@Model.NODE";
+  var id_notif = "@Model.IDNOTIF";
   var idcrontab = "@Model.IDCRONTAB";
   var selectedCrontab = "@Model.IDCRONTAB";
   
+  console.log("id_notif", id_notif);
+
     $("#checkUptDependencia").on("change",function() {
       if($(this).is(":checked")) {
         $("#btnEDependencia").prop( "disabled", false ); //Enable
@@ -381,6 +401,7 @@
     $("#txtUptEsperaIntento").val(espera_intento);
     $("#txtUptEstado").val(estado);
     $("#txtUptNode").val(node);
+    $("#txtUptNotifications").val(id_notif);
 
     if(ftp == 1) {
       $("#flexUptCheckFtp").prop('checked', true);
@@ -557,18 +578,15 @@
       $(arData).each(function(index, element) {
         if(element.id!=idproc)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
-    });
+      });
 	
 	//$(".bd-example-modal-sm").modal("hide");
     network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}});
   }
 
-  
-  
   }); 
   });
    
-  
     var data_dependencias={oDependencias:{ "IDDEP" : 0,"IDPROC_DEP":0,"IDPROC":idproc}};
  
     $.ajax({
@@ -610,6 +628,7 @@
     espera_intento = $('#txtUptEsperaIntento').val();
     estado = $('#txtUptEstado').val();
     id_host = $('#txtUptIdHost').val();
+    id_notif = $('#txtUptNotifications').val();
     node = $('#txtUptNode').val();
 
     var data_job={
@@ -627,6 +646,7 @@
       "INTENTOS" : intentos,
       "ESPERA_INTENTO" : parseInt(espera_intento,10),
       "ESTADO" : estado,
+      "IDNOTIF" : id_notif,
       "FTP" : $('#flexUptCheckFtp').is(":checked") ? 1 : 0,
       "IDHOST" : parseInt(id_host,10),
       "COMPRESION" : $('#flexCheckUptCompresion').is(":checked") ? 1 : 0,
@@ -682,8 +702,8 @@
 
 //importando grafo guardado.
 function getNode(nodeId){
-     var nodeObj= network.body.data.nodes._data[nodeId];
-     return nodeObj;  
+  var nodeObj= network.body.data.nodes._data[nodeId];
+  return nodeObj;  
 }
 function getEdgeData(data) {
   var networkEdges = [];

@@ -33,6 +33,13 @@ namespace WebAdminScheduler.helpers
                   int LastIddep= (data?.IDDEP ?? 0)+1;
                   return LastIddep;
       }
+      public static int GetLastIDNOTIF(WebAdminSchedulerContext WAContext)
+      {
+         CP_NOTIFICATIONS data = (from s in WAContext.CP_NOTIFICATIONS.OrderByDescending(x => x.IDNOTIF)
+                           select s).ToList().AsQueryable().FirstOrDefault();
+                  int LastIdNotif = (data?.IDNOTIF ?? 0)+1;
+                  return LastIdNotif;
+      }
 
       public static  ArrayList getHijos(WebAdminSchedulerContext WAContext,int idproc)
       {

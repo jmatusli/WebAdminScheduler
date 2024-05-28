@@ -1,0 +1,239 @@
+@{  
+  ViewData["Title"] = "Crear";  
+}
+ <head>
+    <link rel="stylesheet" href="~/css/clockpicker.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
+    <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script src="~/js/pdfmake.min.js"></script>
+    <script src="~/js/vfs_fonts.js"></script>
+    <script src="~/js/datatables.min.js"></script>
+    <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
+    <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
+    <script src="~/js/clockpicker.js"></script>
+  <style>
+    .container{
+      width:100%!important;
+    }
+    .btn {
+      font-size: 14px;
+      padding: 6px 12px;
+      margin-bottom: 0;
+
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+    }
+
+    .btn:focus,
+    .btn:active:focus {
+      outline: thin dotted;
+      outline: 5px auto -webkit-focus-ring-color;
+      outline-offset: -2px;
+    }
+    .btn:hover,
+    .btn:focus {
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .btn:active {
+      background-image: none;
+      outline: 0;
+      -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    }
+  /* default
+  ---------------------------- */
+    .btn-default {
+      color: #333;
+      background-color: #fff;
+      border-color: #ccc;
+    }
+    .btn-default:focus {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: #8c8c8c;
+    }
+    
+    .btn-default:hover {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: #adadad;
+    }
+    .btn-default:active {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: #adadad;
+    }
+  .btn-primary {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-success {
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-warning {
+      color: #212529;
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-info {
+      color: #fff;
+      background-color: #17a2b8;
+      border-color: #17a2b8;  
+    }
+
+    .btn-light {
+      color: #212529;
+      background-color: #f8f9fa;
+      border-color: #f8f9fa;
+    }
+  </style>
+
+    <meta charset=utf-8 />
+    <title>Crear Notificaciones</title>
+  </head>
+
+  <hr />  
+  @using (Html.BeginForm("Save", "Notification", FormMethod.Post))
+  {
+    <body>
+      <h1>Notificaciones</h1>
+      <div class="card">
+        <div class="card-header">
+          Registro   (@ViewBag.LastIdNotif)
+        </div>
+        <div class="card-body">
+          <div class="row g-4 align-items-center">
+
+            <div class="col-auto">
+              <label class="form-check-label" for="lblRecipients">
+                Recipients
+              </label>
+            </div>
+            <div class="col-auto">
+              <div class="col-sm-12">
+                <input type="text" class="form-control" 
+                  data-placement="right" data-align="top" name="txtRecipients" id="txtRecipients" data-autoclose="true">
+              </div>
+            </div>
+          
+          <div class="col-auto">
+            <label class="form-check-label" for="lblNotifySuccess">
+              Notify Success
+            </label>
+          </div>
+
+          <div class="col-auto">
+            <select class="form-select" name="txtNotifySuccess" id="txtNotifySuccess">
+              <option value="0">0</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+          
+          <div class="col-auto">
+            <label class="form-check-label" for="lblNotifyFailure">
+              Notify Failure
+            </label>
+          </div>
+
+          <div class="col-auto">
+            <select class="form-select" name="txtNotifyFailure" id="txtNotifyFailure">
+              <option value="0">0</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+        </div>
+        <br />
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="row g-4 align-items-center">
+            <div class="col-auto">
+              <label class="form-check-label" for="lblName">
+                Name
+              </label>
+            </div>
+
+            <div class="col-auto">
+              <input type="text" min="1" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="txtName" name="txtName">
+            </div>
+            
+          </div>
+        </div>
+        </div>
+        <div class="card-footer text-muted">
+          <a id="btnSave" class="btn btn-primary">Guardar</a>
+        </div>
+      </div>
+    </body>
+  }
+  
+  <script> 
+    var LastIdNotif = "@ViewBag.LastIdNotif";
+
+    $(document).on("ready",function() {
+      $('#btnSave').on('click',function() {
+          
+        var recipients = $('#txtRecipients').val();
+        var notify_success = $('#txtNotifySuccess').val();
+        var notify_failure = $('#txtNotifyFailure').val();
+        var name = $('#txtName').val();
+
+        var data_notif={
+          "oNotification": {
+            "RECIPIENTS" : recipients,
+            "NOTIFYSUCCESS" : notify_success,
+            "NOTIFYFAILURE" : notify_failure,
+            "NAME" : name
+          }
+        };
+
+        $.ajax({
+          method: "POST",
+          async: true,
+          dataType: "json",
+          data: JSON.stringify(data_notif),
+          contentType: "application/json; charset=utf-8",
+          url: '@Url.Action("Save", "Notification")' ,
+          success: function () {
+          Swal.fire({
+          title: "Notificación registrada!",
+          text: "Click en aceptar para ver notificaciones registradas!",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        }).then((result) => {
+        if (result.isConfirmed) {
+          $(location).attr("href","@Url.Action("Index","Notification")")
+        }  
+      });
+    },
+    error: function () {
+      alert("Error while inserting data");
+    }
+  </script>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<h1>@ViewData["Title"]</h1>
+  <head>
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script src="~/js/pdfmake.min.js"></script>
+    <script src="~/js/vfs_fonts.js"></script>
+    <script src="~/js/datatables.min.js"></script>
+    <meta charset=utf-8 />
+    <title>Notificaciones</title>
+  </head>
+  <body>
+  
+  <h1>Notificaciones</h1>
+  <p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+  </p>
+ 
+  <div class="container">
+    <table id="dt-notification" class="display nowrap" width="100%">
+      <thead>
+        <tr style="font-size:13px;">
+          <th><input type="checkbox" name="select_all" class="dt-column-title" value="1" id="dt-notification-select-all"></th>
+          <th>ID NOTIF</th>
+          <th>RECIPIENTS</th>
+          <th>NOTIFYSUCCESS</th>
+          <th>NOTIFYFAILURE</th>
+          <th>NAME</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+<script> 
+  var params={};
+
+  function recargartabla(objeto,value)
+  {
+    params.estado=value;
+    objeto.ajax.reload(null,false); //reload datatable ajax 
+  }
+
+  $(document).ready( function () {
+    var table = $('#dt-notification').DataTable( {
+      "processing": true,
+      "serverSide": true,
+      "filter": true,
+      "scrollX":          true,
+      "sScrollX":         "50%",
+      "scrollY":            $(document).height() - 300,
+      "scrollCollapse":     true,
+      "ajax": {
+        "url": "@Url.Action("ListarNotifications","Notification")",
+        "type": "POST",
+        "datatype": "json",
+		    "data": function(d){
+          $.extend( d, params);    
+        }
+      },
+      "columnDefs": [{
+        'targets': 0,
+        orderable: false,
+        'render': function (data, type, full, meta){
+          return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+        }
+      },{
+      'targets': -1,
+      orderable: false,
+        'render': function (data, type, full, meta){
+        console.log("son los datos ",data);
+          return   '<a class="btn btn-success btn-sm" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info btn-sm" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Detalle/'+data.idcrontab+'">Detalle</a>';
+        }
+      }],
+      "columns": [
+        {
+          "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all-item">';   }
+        },
+          { "data": "IDNOTIF", "name": "IDNOTIF", "autoWidth": true },
+          { "data": "RECIPIENTS", "name": "RECIPIENTS", "autoWidth": true },
+          { "data": "NOTIFYSUCCESS", "name": "NOTIFYSUCCESS", "autoWidth": true },
+          { "data": "NOTIFYFAILURE", "name": "NOTIFYFAILURE", "autoWidth": true },
+          { "data": "NAME", "name": "NAME", "autoWidth": true },
+          { "data":null },
+      ],
+    
+    select: {
+    style: 'single',
+    selector: 'td:not(:last-child)' // no row selection on last column
+    },
+      "language": {
+      "url": "/lib/datatables/dist/locales/es/es.json"
+      }
+    });
+
+    // Handle click on "Select all" control
+    $('#dt-notification-select-all').on('click', function() {
+      // Get all rows with search applied
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+      // Check/uncheck checkboxes for all rows in the table
+      if(this.checked){
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        
+        var selData =   table.rows().select();
+        var selData =   table.rows(".selected").data();
+      }
+      else
+      {
+        var selData =   table.rows().deselect();
+      }
+    });
+
+    // Handle click on checkbox to set state of "Select all" control
+    $('#dt-notification tbody').on('change', 'input[type="checkbox"]', function() {
+      // If checkbox is not checked
+      if(!this.checked){
+        var el = $('#dt-notification-select-all').get(0);
+        // If "Select all" control is checked and has 'indeterminate' property
+        if(el && el.checked && ('indeterminate' in el)){
+          // Set visual state of "Select all" control
+          // as 'indeterminate'
+          el.indeterminate = true;
+        }
+      }
+    });
+      
+    table.on('select', function (e, dt, type, indexes) {
+      if (type === 'row'   ) {
+        var nodes = table
+        .rows(indexes)
+        .nodes()
+        .each(function () { 
+          $('td:first-child', this).find('input').prop('checked', true); 
+          });
+          //.find(':checkbox', 'td:first-child').checked = true; 
+        }
+      });
+
+      table.on('deselect', function (e, dt, type, indexes) {
+        if (type === 'row') {
+        $('#dt-notification-select-all').prop("checked",false);
+          table
+          .rows(indexes)
+          .nodes()
+          .each(function () { 
+            $('td:first-child', this).find('input').prop('checked', false); 
+          });
+        }
+      });
+    });
+</script> 
+</html>

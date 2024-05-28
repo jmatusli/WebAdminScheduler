@@ -56,6 +56,7 @@ namespace WebAdminScheduler.Controllers
             procesost.PARAMETRO3 = dtoprocesos.oProcesos.PARAMETRO3;
             procesost.PARAMETRO4 = dtoprocesos.oProcesos.PARAMETRO4;
             procesost.PATH = dtoprocesos.oProcesos.PATH;
+            procesost.IDNOTIF = dtoprocesos.oProcesos.IDNOTIF;
 
             _DBContext.CP_PROCESOS.Add(procesost);
             _DBContext.SaveChanges();
@@ -132,6 +133,7 @@ namespace WebAdminScheduler.Controllers
                 procesost.NODE = dtoprocesos.oProcesos.NODE;
                 procesost.NOMBRE = dtoprocesos.oProcesos.NOMBRE;
                 procesost.IDCRONTAB = dtoprocesos.oProcesos.IDCRONTAB;
+                procesost.IDNOTIF = dtoprocesos.oProcesos.IDNOTIF;
                 procesost.PARAMETRO1 = dtoprocesos.oProcesos.PARAMETRO1;
                 procesost.PARAMETRO2 = dtoprocesos.oProcesos.PARAMETRO2;
                 procesost.PARAMETRO3 = dtoprocesos.oProcesos.PARAMETRO3;
@@ -141,7 +143,6 @@ namespace WebAdminScheduler.Controllers
                 _DBContext.CP_PROCESOS.Update(procesost);
                 _DBContext.SaveChanges();
 
-
                 List<CP_DEPENDENCIAS> depProcs = dtoprocesos.oDependencias;
                 var delRecords = (from c in _DBContext.CP_DEPENDENCIAS where c.IDPROC==procesost.IDPROC select c).ToList();
                 foreach (var c in delRecords)
@@ -149,37 +150,29 @@ namespace WebAdminScheduler.Controllers
                 _DBContext.CP_DEPENDENCIAS.Remove(c);
                 }
                 _DBContext.SaveChanges();
-
         
-                
                 foreach(var dtoProc in depProcs)
                 {
                     CP_DEPENDENCIAS dependencias=new CP_DEPENDENCIAS();
 
                     dependencias.IDDEP=WACustomHelper.GetLastIDDEP(_DBContext);
 
-
-
                     var qry = (from depend in _DBContext.CP_DEPENDENCIAS
                     where depend.IDPROC_DEP ==dtoProc.IDPROC_DEP && depend.IDPROC==dtoprocesos.oProcesos.IDPROC
                     select depend).ToList().AsQueryable().FirstOrDefault();;
                  
-
                     if((qry?.IDDEP ?? 0)>0) //no existe el registro
                     { Console.WriteLine("Reg already exists!");
                     
                     }
                     else 
                     {
-                   dependencias.IDPROC=procesost.IDPROC;
-                    dependencias.IDPROC_DEP=dtoProc.IDPROC_DEP;
-                    _DBContext.CP_DEPENDENCIAS.Add(dependencias);
-                    _DBContext.SaveChanges();
+                        dependencias.IDPROC=procesost.IDPROC;
+                        dependencias.IDPROC_DEP=dtoProc.IDPROC_DEP;
+                        _DBContext.CP_DEPENDENCIAS.Add(dependencias);
+                        _DBContext.SaveChanges();
                     }
                   
-                     
-                    
-                    
                 }     
             }
 
@@ -533,8 +526,6 @@ namespace WebAdminScheduler.Controllers
             });
         }
 
-
-
        [HttpPost]
         public JsonResult GetNodeData(int prcId)
         {
@@ -547,41 +538,33 @@ namespace WebAdminScheduler.Controllers
         var conections = new ArrayList();
         
         foreach(var item in data)
-            {
-                Console.WriteLine("esto es un dato "+item.IDPROC_DEP);
-                conectionsFirst.Add(item.IDPROC_DEP);
-                conections = new ArrayList();
-                var c=new {id=item.IDPROC_DEP,connections=conections,level=1};
-                nodeDataList.Add(c);   
-                
-            }                     
+        {
+            Console.WriteLine("esto es un dato "+item.IDPROC_DEP);
+            conectionsFirst.Add(item.IDPROC_DEP);
+            conections = new ArrayList();
+            var c=new {id=item.IDPROC_DEP,connections=conections,level=1};
+            nodeDataList.Add(c);   
+            
+        }                     
          
- 
-        nodeDataList.Add(new { x=0,y=0,id=prcId,connections=conectionsFirst,level=0});
+            nodeDataList.Add(new { x=0,y=0,id=prcId,connections=conectionsFirst,level=0});
     
- 
-
-           return Json(new { 
-            Data = nodeDataList
-
+            return Json(new { 
+                Data = nodeDataList
            });  
         }
 
-
-
-         [HttpPost]
+        [HttpPost]
         public JsonResult GetAllNodeData(int prcId)
         {
 
-
-         List<object> nodeDataList2 = new List<object>(); 
-        List<List<object>> nodeDataList = new List<List<object>>(); 
-        nodeDataList=WACustomHelper.GetAllProcs(_DBContext,prcId);
-        
-         foreach(var item in nodeDataList)
+            List<object> nodeDataList2 = new List<object>(); 
+            List<List<object>> nodeDataList = new List<List<object>>(); 
+            nodeDataList=WACustomHelper.GetAllProcs(_DBContext,prcId);
+            
+            foreach(var item in nodeDataList)
             {
-            nodeDataList2.Add(item[0]);
-
+                nodeDataList2.Add(item[0]);
             }   
 
            return Json(new { 

@@ -23,5 +23,6 @@ namespace WebAdminScheduler.Models
 		public int COMPRESION { get; set; }
 		public int IDCRONTAB { get; set; }
         public string? NODE { get; set; }
+		public int IDNOTIF { get; set; }
     }
 }

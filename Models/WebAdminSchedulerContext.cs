@@ -20,6 +20,7 @@ namespace WebAdminScheduler.Models
         public  virtual DbSet<CP_REGISTRO> CP_REGISTRO { get; set; } = null!;
         public  virtual DbSet<CP_CONEXION> CP_CONEXION { get; set; } = null!;
         public  virtual DbSet<CP_DEPENDENCIAS> CP_DEPENDENCIAS { get; set; } = null!;
+        public  virtual DbSet<CP_NOTIFICATIONS> CP_NOTIFICATIONS { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         }
@@ -44,22 +45,22 @@ namespace WebAdminScheduler.Models
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
-                     entity.Property(e => e.WDAY_M2S_EX)
+                entity.Property(e => e.WDAY_M2S_EX)
                     .HasMaxLength(7)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.DAY_EX)
+                entity.Property(e => e.DAY_EX)
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.MONTH_EX)
+                entity.Property(e => e.MONTH_EX)
                     .HasMaxLength(70)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.REPEAT_EVERY_MINS)
+                entity.Property(e => e.REPEAT_EVERY_MINS)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.REPEAT_AFTER_FINISH)
+                entity.Property(e => e.REPEAT_AFTER_FINISH)
                     .IsUnicode(false);
             });
 
@@ -131,6 +132,28 @@ namespace WebAdminScheduler.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<CP_NOTIFICATIONS>(entity =>
+            {
+                entity.HasKey(e => e.IDNOTIF)
+                 .HasName("PK__Procesos__CRSFDF");
+
+                entity.ToTable("CP_NOTIFICATIONS");
+
+                entity.Property(e => e.RECIPIENTS)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+                  
+                entity.Property(e => e.NOTIFYSUCCESS)
+                    .IsUnicode(false);
+                    
+                entity.Property(e => e.NOTIFYFAILURE)
+                    .IsUnicode(false);
+                    
+                entity.Property(e => e.NAME)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<CP_REGISTRO>(entity =>
             {
                 entity.HasKey(e => e.IDREG)
@@ -150,15 +173,15 @@ namespace WebAdminScheduler.Models
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
-                     entity.Property(e => e.FEC_FINALIZO)
+                entity.Property(e => e.FEC_FINALIZO)
                     .HasMaxLength(7)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.ESTADO)
+                entity.Property(e => e.ESTADO)
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.FLAG_ALARMA)
+                entity.Property(e => e.FLAG_ALARMA)
                     .IsUnicode(false);
             });
 
@@ -181,15 +204,15 @@ namespace WebAdminScheduler.Models
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
-                     entity.Property(e => e.FEC_FINALIZO)
+                entity.Property(e => e.FEC_FINALIZO)
                     .HasMaxLength(7)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.ESTADO)
+                entity.Property(e => e.ESTADO)
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.FLAG_ALARMA)
+                entity.Property(e => e.FLAG_ALARMA)
                     .IsUnicode(false);
             });
 
@@ -228,11 +251,11 @@ namespace WebAdminScheduler.Models
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
-                     entity.Property(e => e.DLINK)
+                entity.Property(e => e.DLINK)
                     .HasMaxLength(7)
                     .IsUnicode(false);
 
-                    entity.Property(e => e.TIPO)
+                entity.Property(e => e.TIPO)
                     .HasMaxLength(500)
                     .IsUnicode(false);
             });
