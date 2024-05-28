@@ -53,62 +53,12 @@
     }
   /* default
   ---------------------------- */
-    .btn-default {
-      color: #333;
-      background-color: #fff;
-      border-color: #ccc;
-    }
-    .btn-default:focus {
-      color: #333;
-      background-color: #e6e6e6;
-      border-color: #8c8c8c;
-    }
-    
-    .btn-default:hover {
-      color: #333;
-      background-color: #e6e6e6;
-      border-color: #adadad;
-    }
-    .btn-default:active {
-      color: #333;
-      background-color: #e6e6e6;
-      border-color: #adadad;
-    }
-  .btn-primary {
+    .btn-primary {
       color: #fff;
       background-color: #007bff;
       border-color: #007bff;
     }
 
-    .btn-success {
-      color: #fff;
-      background-color: #28a745;
-      border-color: #28a745;
-    }
-
-    .btn-danger {
-      color: #fff;
-      background-color: #dc3545;
-      border-color: #dc3545;
-    }
-
-    .btn-warning {
-      color: #212529;
-      background-color: #ffc107;
-      border-color: #ffc107;
-    }
-
-    .btn-info {
-      color: #fff;
-      background-color: #17a2b8;
-      border-color: #17a2b8;  
-    }
-
-    .btn-light {
-      color: #212529;
-      background-color: #f8f9fa;
-      border-color: #f8f9fa;
-    }
   </style>
 
     <meta charset=utf-8 />
@@ -208,30 +158,41 @@
 			  }
 			};
 
-      $.ajax({
-			  method: "POST",
-			  async: true,
-			  dataType: "json",
-			  data: JSON.stringify(data_notif),
-			  contentType: "application/json; charset=utf-8",
-			  url: '@Url.Action("Save", "Notification")' ,
-			  success: function () {
-          Swal.fire({
-            title: "Notificación registrada!",
-            text: "Click en aceptar para ver notificaciones registradas!",
-            icon: "success",
-            confirmButtonText: "Aceptar",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              $(location).attr("href","@Url.Action("Index","Notification")")
-            }  
-          });
-        },
-        error: function () {
-        alert("Error while inserting data");
-		  }
-		});
+      if ((recipients == "")) {  //COMPRUEBA CAMPOS VACIOS
+        Swal.fire ('Porfavor registre el campo recipients', 'error')
+        return false;
+      }
 
+      if ((name == "")) {  //COMPRUEBA CAMPOS VACIOS
+        Swal.fire ('Porfavor registre el campo name', 'error')
+        return false;
+      }
+
+      else {
+        $.ajax({
+          method: "POST",
+          async: true,
+          dataType: "json",
+          data: JSON.stringify(data_notif),
+          contentType: "application/json; charset=utf-8",
+          url: '@Url.Action("Save", "Notification")' ,
+          success: function () {
+            Swal.fire({
+              title: "Notificación registrada!",
+              text: "Click en aceptar para ver notificaciones registradas!",
+              icon: "success",
+              confirmButtonText: "Aceptar",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                $(location).attr("href","@Url.Action("Index","Notification")")
+              }  
+            });
+          },
+          error: function () {
+            alert("Error while inserting data");
+          }
+        });
+      }
     });
 	});
 </script>
