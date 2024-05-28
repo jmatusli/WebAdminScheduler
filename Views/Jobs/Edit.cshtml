@@ -365,6 +365,32 @@
   var selectedCrontab = "@Model.IDCRONTAB";
   
   console.log("id_notif", id_notif);
+  var existeNombre=false;
+ function verifyName()
+{
+$.ajax({
+        method: "POST",
+        async: true,
+        
+        data:{"nombre":$("#txtUptNombre").val(),"prcid":idproc},
+         url: '@Url.Action("VerifyName", "Jobs")' ,
+        success: function (response) {
+
+          console.log("respuesta ",response);
+       if(response.error)
+       {
+        existeNombre=true;
+   Swal.fire (response.msg, 'error')
+
+       }
+       
+      },
+      error: function () {
+        alert("Error while inserting data");
+      }
+    });
+}
+
 
     $("#checkUptDependencia").on("change",function() {
       if($(this).is(":checked")) {
@@ -612,6 +638,15 @@
       alert("Error while get data");
     }
   });
+  
+  
+  
+  $("#txtUptNombre").blur(function(){
+ verifyName();
+});
+ $("#txtUptNombre").on("change",function(){
+  verifyName();
+});
 
   });
 
@@ -629,6 +664,7 @@
     estado = $('#txtUptEstado').val();
     id_host = $('#txtUptIdHost').val();
     id_notif = $('#txtUptNotifications').val();
+
     node = $('#txtUptNode').val();
 
     var data_job={
@@ -656,7 +692,7 @@
     "oDependencias" : procsDep
   };
    
-  if (idproc != 0) {
+   if (idproc != 0 && existeNombre==false) {
     jQuery.ajax({
     method: "POST",
     async: true,

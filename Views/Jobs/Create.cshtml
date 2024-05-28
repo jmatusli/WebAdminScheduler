@@ -356,6 +356,34 @@
     objeto.ajax.reload(null,false); //reload datatable ajax 
   }
 
+   var data_job = {}
+var existeNombre=false;
+ function verifyName()
+{
+$.ajax({
+        method: "POST",
+        async: true,
+        
+        data:{"nombre":$("#txtNombre").val()},
+         url: '@Url.Action("VerifyName", "Jobs")' ,
+        success: function (response) {
+
+          console.log("respuesta ",response);
+       if(response.error)
+       {
+        existeNombre=true;
+   Swal.fire (response.msg, 'error')
+
+       }
+       
+      },
+      error: function () {
+        alert("Error while inserting data");
+      }
+    });
+}
+
+
   $(document).ready( function () {
     var table = $('#dt-crontab').DataTable( {
       "processing": true,
@@ -529,6 +557,11 @@
       Swal.fire ('Porfavor registre el campo nombre', 'error')
       return false;
     }
+    else if(existeNombre)
+    {return false;}
+
+  
+    
 
     if ((descripcion == "")) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo descripción', 'error')
@@ -677,6 +710,17 @@
         alert("Error while get data");
       }
     });
+ 
+
+ $("#txtNombre").blur(function(){
+ verifyName();
+});
+ $("#txtNombre").on("change",function(){
+  verifyName();
+});
+
+
+
 });
 
   /*grafo*/

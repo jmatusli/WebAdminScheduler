@@ -10,6 +10,7 @@ using System.Data;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using Newtonsoft.Json;
 namespace WebAdminScheduler.Controllers
 {
     public class JobsController : Controller
@@ -572,5 +573,31 @@ namespace WebAdminScheduler.Controllers
 
            });  
         }
+       
+        
+        [HttpPost]
+        public JsonResult VerifyName(string nombre,int prcid = 0)
+        {
+            var error =false;
+            var msg="";
+           if(nombre==null || nombre=="") 
+           {  
+             error=true;
+             msg="El nombre del proceso no puede ir vacio";
+            }
+
+         List<CP_PROCESOS> data = (from s in _DBContext.CP_PROCESOS.Where(x => x.NOMBRE == nombre && x.IDPROC!=prcid)
+                                select s).ToList().AsQueryable().ToList();
+
+           if(data.Count()>0) 
+           {  
+             error=true;
+             msg="Ya existe un proceso registrado con ese nombre";
+            }                     
+           
+           return Json( new { error = error, msg =msg });  
+        }
+
+        
     }
 }
