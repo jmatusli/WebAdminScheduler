@@ -74,18 +74,18 @@
       orderable: false,
         'render': function (data, type, full, meta){
         console.log("son los datos ",data);
-          return   '<a class="btn btn-success btn-sm" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Edit/'+data.idcrontab+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info btn-sm" asp-route-idProc="'+data.idcrontab+'" href="/Calendario/Detalle/'+data.idcrontab+'">Detalle</a>';
+          return   '<a class="btn btn-success btn-sm" asp-route-idProc="'+data.idnotif+'" href="/Notification/Edit/'+data.idnotif+'">Editar</a>&nbsp;<a id="btnDetail" class="btn btn-info btn-sm" asp-route-idProc="'+data.idnotif+'" href="/Notification/Detalle/'+data.idnotif+'">Detalle</a>';
         }
       }],
       "columns": [
         {
           "render": function (data,row) { return '<input type="checkbox" name="select_all" class="dt-column-title" value="1" id="example-select-all-item">';   }
         },
-          { "data": "IDNOTIF", "name": "IDNOTIF", "autoWidth": true },
-          { "data": "RECIPIENTS", "name": "RECIPIENTS", "autoWidth": true },
-          { "data": "NOTIFYSUCCESS", "name": "NOTIFYSUCCESS", "autoWidth": true },
-          { "data": "NOTIFYFAILURE", "name": "NOTIFYFAILURE", "autoWidth": true },
-          { "data": "NAME", "name": "NAME", "autoWidth": true },
+          { "data": "idnotif", "name": "IDNOTIF", "autoWidth": true },
+          { "data": "recipients", "name": "RECIPIENTS", "autoWidth": true },
+          { "data": "notifysuccess", "name": "NOTIFYSUCCESS", "autoWidth": true },
+          { "data": "notifyfailure", "name": "NOTIFYFAILURE", "autoWidth": true },
+          { "data": "name", "name": "NAME", "autoWidth": true },
           { "data":null },
       ],
     

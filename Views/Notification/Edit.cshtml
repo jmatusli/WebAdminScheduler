@@ -3,16 +3,12 @@
     ViewData["Title"] = "Edit";
 }
 <head>
-    <link rel="stylesheet" href="~/css/clockpicker.css" />
-    <link rel="stylesheet" href="~/css/datatables.min.css" />
     <link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
     <link rel="stylesheet" href="~/lib/SweetAlert/dist/sweetalert2.min.css" />
     <script src="~/js/jquery-1.11.3.min.js"></script>
     <script src="~/js/vfs_fonts.js"></script>
-    <script src="~/js/datatables.min.js"></script>
     <script src="~/lib/SweetAlert/dist/sweetalert2.min.js"></script>
     <script src="~/lib/Toast/dist/jquery.toast.min.js"></script>
-    <script src="~/js/clockpicker.js"></script>
 </head>	
 
 @using (Html.BeginForm("UpdateNotification", "Notification", FormMethod.Post))
@@ -107,40 +103,41 @@
 
         var data_notif = {
             "oNotification": {
-            "IDNOTIF" : idnotif,
-            "RECIPIENTS" : recipients,
-            "NOTIFYSUCCESS" : notify_success,
-            "NOTIFYFAILURE" : notify_failure,
-            "NAME" : name
+                "IDNOTIF" : idnotif,
+                "RECIPIENTS" : recipients,
+                "NOTIFYSUCCESS" : notify_success,
+                "NOTIFYFAILURE" : notify_failure,
+                "NAME" : name
+            }
+        };
+
+        if (idcrontab != 0) {
+            jQuery.ajax({
+            method: "POST",
+            async: true,
+            dataType: "json",
+            data: JSON.stringify(data_cron),
+            contentType: "application/json; charset=utf-8",
+            url: "@Url.Action("Update","Notification")",
+
+            success: function (data) {
+                Swal.fire({
+                title: "Notificación Actualizada!",
+                text: "Click en aceptar para ver las notificaciones!",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(location).attr("href","@Url.Action("Index","Notification")")
+                }  
+            });
         }
-    };
-
-    if (idcrontab != 0) {
-        jQuery.ajax({
-        method: "POST",
-        async: true,
-        dataType: "json",
-        data: JSON.stringify(data_cron),
-        contentType: "application/json; charset=utf-8",
-        url: "@Url.Action("Update","Calendario")",
-
-        success: function (data) {
-            Swal.fire({
-            title: "Calendario Actualizado!",
-            text: "Click en aceptar para ver calendarios!",
-            icon: "success",
-            confirmButtonText: "Aceptar",
-        }).then((result) => {
-        if (result.isConfirmed) {
-            $(location).attr("href","@Url.Action("Index","Calendario")")
-        }  
     });
-}
-});
-} else {
-    $("#horaIni").val("");
-    $("#horaFin").val("");
-    $("#UptRepeatEveryMins").val("");
-}
+    } else {
+        $("#txtUptRecipients").val("");
+        $("#txtUptNotifySuccess").val("");
+        $("#txtUptNotifyFailure").val("");
+        $("#txtUptName").val("");
+    }
 }
 </script>

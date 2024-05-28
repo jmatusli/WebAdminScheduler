@@ -116,8 +116,8 @@ namespace WebAdminScheduler.Controllers
 			textOrder=" ORDER BY "+sortColumn+" "+sortColumnDirection;
 			 
 			_DBContext.Database.OpenConnection();
-            String _query="SELECT * FROM (SELECT cpn.*,row_number() over "
-            +"(ORDER BY cpn.idnotif DESC) line_number FROM APP_SCL_ALTAMIRA.CP_NOTIFICATIONS cc ) "
+            String _query="SELECT * FROM (SELECT cc.*,row_number() over "
+            +"(ORDER BY cc.idnotif DESC) line_number FROM APP_SCL_ALTAMIRA.CP_NOTIFICATIONS cc ) "
             +" WHERE line_number BETWEEN  "+(skip+1)+" AND "+(skip+pageSize)+" "+textSearch+" "+textOrder;
 	
 			OracleCommand oraCommand = new OracleCommand(_query, 

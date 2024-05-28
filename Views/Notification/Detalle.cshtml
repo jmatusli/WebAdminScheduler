@@ -18,23 +18,23 @@
             <div class="card-body">
                 <div class="row g-4 align-items-center">
                     <div class="col-auto">
-                        <label class="form-check-label" for="lblRecipients">
+                        <label class="form-check-label" for="Recipients">
                             Recipients
                         </label>
                     </div>
                     <div class="col-auto">
-                        <div class="col-sm-12">
+                        <div class="col-lg-12">
                             <input type="text" class="form-control" 
                             data-placement="right" data-align="top" name="lblRecipients" id="lblRecipients" data-autoclose="true" disabled>
                         </div>
                     </div>
                     
                     <div class="col-auto">
-                        <label class="form-check-label" for="lblNotifySuccess">
+                        <label class="form-check-label" for="NotifySuccess">
                             Notify Success
                         </label>
                     </div>
-
+                    
                     <div class="col-auto">
                         <select class="form-select" name="lblNotifySuccess" id="lblNotifySuccess" disabled>
                             <option value="0">0</option>
@@ -86,12 +86,13 @@
     var notify_failure = "@Model.NOTIFYFAILURE";
     var name = "@Model.NAME";
 
+    console.log("recipients", recipients);
+    console.log("notify_success", notify_success);
+
     $(document).on("ready",function() {
-        $("#txtRecipients").html(recipients);
-        $("#txtNotifySuccess").html(notify_success);
-        $("#txtNotifyFailure").val(notify_failure);
-        $("#txtName").val(name);
-    }
+        $("#lblRecipients").val(recipients);
+        $("#lblNotifySuccess").val(notify_success);
+        $("#lblNotifyFailure").val(notify_failure);
+        $("#lblName").val(name);
+    });
 </script>
-   
- 
