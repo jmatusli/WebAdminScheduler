@@ -102,7 +102,7 @@
         name = $('#txtUptName').val();
 
         var data_notif = {
-            "oNotification": {
+            "aaData": {
                 "IDNOTIF" : idnotif,
                 "RECIPIENTS" : recipients,
                 "NOTIFYSUCCESS" : notify_success,
@@ -111,7 +111,7 @@
             }
         };
 
-        if (idcrontab != 0) {
+        if (idnotif != 0) {
             jQuery.ajax({
             method: "POST",
             async: true,
