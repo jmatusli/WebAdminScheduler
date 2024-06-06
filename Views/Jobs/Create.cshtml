@@ -654,6 +654,9 @@ $.ajax({
     });
     $(arData).each(function(index, element) {
       procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element.id});
+     	
+      importNetwork(element.id);
+       
     });
   
     network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
@@ -724,9 +727,40 @@ $.ajax({
 });
 
   /*grafo*/
+  
   var nodes = null;
   var edges = null;
   var network = null;
+
+    function importNetwork(prc_id) {
+    if (prc_id != 0) {
+    jQuery.ajax({
+    method: "POST",
+    async: true,
+    data: {prcId:prc_id},
+    url: "@Url.Action("GetAllNodeData","Jobs")",
+
+    success: function (data) {
+      let elementid=0;
+      console.log("esto viene del getall ",data);
+       $(data.data).each(function(index, element){
+        if(element.id!=prc_id){
+          console.log("iterando  ",element.id);
+          elementid=element.id;
+       procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
+       
+      }
+        });
+
+        console.log("los nodos a procesar en el save serian ",procsDep)
+      draw(data,true,prc_id,elementid);
+    }
+  });
+
+    }
+    
+    }
+
 
   function destroy() {
     if (network !== null) {
@@ -736,12 +770,59 @@ $.ajax({
   }
 
   function getNode(nodeId){
-    var nodeObj= network.body.data.nodes._data[nodeId];
-    return nodeObj;  
-  }
+  var nodeObj= network.body.data.nodes._data[nodeId];
+  return nodeObj;  
+}
+function getEdgeData(data) {
+  var networkEdges = [];
 
-  function draw() {
+  data.forEach(function(node) {
+    // add the connection
+    node.connections.forEach(function(connId, cIndex, conns) {
+      networkEdges.push({from: node.id, to: connId});
+      let cNode = getNodeById(data, connId);
+
+      var elementConnections = cNode.connections;
+
+      // remove the connection from the other node to prevent duplicate connections
+      var duplicateIndex = elementConnections.findIndex(function(connection) {
+        return connection == node.id; // double equals since id can be numeric or string
+      });
+
+      if (duplicateIndex != -1) {
+        elementConnections.splice(duplicateIndex, 1);
+      };
+    });
+  });
+
+  return new vis.DataSet(networkEdges);
+}
+
+function getNodeData(data) {
+  var networkNodes = [];
+
+  data.forEach(function(elem, index, array) {
+    networkNodes.push({id: elem.id, label: String(elem.id), /*x: elem.x, y: elem.y,*/level:elem.level});
+  });
+
+  return new vis.DataSet(networkNodes);
+}
+
+function getNodeById(data, id) {
+  for (var n = 0; n < data.length; n++) {
+    if (data[n].id == id) {  // double equals since id can be numeric or string
+      return data[n];
+    }
+  };
+
+  throw 'Can not find id \'' + id + '\' in data';
+}
+ 
+  
+
+  function draw(dataNodes,flag=false,prcid=0,prccid=0) {
     destroy();
+
 
     nodes = new vis.DataSet([
       {id: LastIdproc, label: LastIdproc,level:0},
@@ -751,7 +832,46 @@ $.ajax({
      edges = new vis.DataSet([
       //  {from: LastIdproc, to: 2},
     ]);        
-			
+		
+    
+    if(flag)
+    {
+ 
+    nodestmp=getNodeData(dataNodes.data);
+    edgestmp= getEdgeData(dataNodes.data);
+    console.log("nodes inicial ",nodes);
+    
+    console.log("edges inicial ",edges);
+ console.log("edgestmp ",edgestmp);
+ 
+    datatmp=nodestmp._data;
+    extdatemp={};
+ for (let i in edgestmp) {
+            console.log("edgestmp  i ", edgestmp[i].from ," tooo ",edgestmp[i].to );
+      
+         }
+
+
+    for (let i in datatmp) {
+            console.log("nodes  i ", datatmp[i].level);
+      datatmp[i].level=datatmp[i].level+1;
+         }
+
+
+      nodestmp._data=datatmp;
+    console.log("nodes datatmp level up",datatmp);
+    $.extend( nodes._data, nodestmp._data );
+    $.extend( edges._data, edgestmp._data );
+     console.log("prccid ",prccid," prcid ",prcid);
+    if(prcid>0)
+    edges.add({ from: prcid, to: LastIdproc });
+    console.log("nodes extendido ",nodes);
+    
+    console.log("edges extendido ",edges);
+        console.log("procesos a registrar ",procsDep);
+
+    } 
+
     // create a network
     var container = document.getElementById('mynetwork');
     var data = {
