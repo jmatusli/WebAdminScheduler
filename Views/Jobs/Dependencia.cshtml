@@ -56,10 +56,11 @@
  
   var idproc="@Model.IDPROC";
   
+
 //importando grafo guardado.
 function getNode(nodeId){
-     var nodeObj= network.body.data.nodes._data[nodeId];
-     return nodeObj;  
+  var nodeObj= network.body.data.nodes._data[nodeId];
+  return nodeObj;  
 }
 function getEdgeData(data) {
   var networkEdges = [];
@@ -115,6 +116,8 @@ function getNodeById(data, id) {
     url: "@Url.Action("GetAllNodeData","Jobs")",
 
     success: function (data) {
+
+      console.log("esto viene del getall ",data);
       draw(data)
     }
   });
@@ -163,6 +166,7 @@ function getNodeById(data, id) {
 		physics:false
 	};
 
+
      network = new vis.Network(container, data, options);
 
 	
@@ -170,9 +174,8 @@ function getNodeById(data, id) {
     network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
   })
 
-   
+	 
   
   }
-  
   importNetwork(idproc)
 </script>
