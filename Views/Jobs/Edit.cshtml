@@ -365,7 +365,7 @@
   var id_notif = "@Model.IDNOTIF";
   var idcrontab = "@Model.IDCRONTAB";
   var selectedCrontab = "@Model.IDCRONTAB";
-  
+  let elementactu=0;
   console.log("id_notif", id_notif);
   var existeNombre=false;
  function verifyName()
@@ -596,7 +596,7 @@ $.ajax({
  
     nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
 		edges.add({ from: nodeId, to: nextnode });
-
+    elementactu=nextnode;
     var arrayData=nodes._data;
     procsDep=[];
       var arData = $.map(arrayData,function(val,key) {
@@ -606,6 +606,7 @@ $.ajax({
       $(arData).each(function(index, element) {
         if(element.id!=idproc)
         procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
+          importNetwork(element.id);
       });
 	
 	//$(".bd-example-modal-sm").modal("hide");
@@ -791,7 +792,8 @@ function getNodeById(data, id) {
   throw 'Can not find id \'' + id + '\' in data';
 }
 
-  function importNetwork(prc_id) {
+      function importNetwork(prc_id) {
+        console.log("para el import ",prc_id);
     if (prc_id != 0) {
     jQuery.ajax({
     method: "POST",
@@ -800,15 +802,27 @@ function getNodeById(data, id) {
     url: "@Url.Action("GetAllNodeData","Jobs")",
 
     success: function (data) {
-
+      let elementid=0;
       console.log("esto viene del getall ",data);
-      draw(data)
+       $(data.data).each(function(index, element){
+        if(element.id!=prc_id && element.id!=elementactu){
+          console.log("iterando  ",element.id);
+          elementid=element.id;
+       procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
+       
+      }
+        });
+
+        console.log("los nodos a procesar en el save serian ",procsDep)
+                console.log("data,true,prc_id,elementid ",prc_id,"---",elementid);
+      draw(data,true,prc_id,elementid);
     }
   });
 
     }
     
     }
+
 
   var nodes = null;
   var edges = null;
@@ -821,7 +835,7 @@ function getNodeById(data, id) {
     }
   }
 
-  function draw(dataNodes) {
+  function draw(dataNodes,flag=false,prcid=0,prccid=0) {
     destroy();
 
     nodes=getNodeData(dataNodes.data);
@@ -831,6 +845,53 @@ function getNodeById(data, id) {
       edges: edges
     }
 
+
+        
+    if(flag)
+    {
+ 
+    nodestmp=getNodeData(dataNodes.data);
+    edgestmp= getEdgeData(dataNodes.data);
+    console.log("nodes inicial ",nodes);
+    
+    console.log("edges inicial ",edges);
+ console.log("edgestmp ",edgestmp);
+
+ 
+  
+    datatmp=nodestmp._data;
+    extdatemp={};
+ for (let i in edgestmp) {
+            console.log("edgestmp  i ", edgestmp[i].from ," tooo ",edgestmp[i].to );
+      
+         }
+
+
+    for (let i in datatmp) {
+            console.log("nodes  i ", datatmp[i].level);
+      datatmp[i].level=datatmp[i].level+1;
+         }
+
+
+      nodestmp._data=datatmp;
+    console.log("nodes datatmp level up",datatmp);
+    $.extend( nodes._data, nodestmp._data );
+    $.extend( edges._data, edgestmp._data );
+     console.log("prccid ",prccid," prcid ",prcid);
+      console.log("nodes._data[idproc] ",nodes._data[idproc]);
+      if(nodes._data[idproc]==undefined)
+      {nodes.add({ id: idproc, label: idproc,level:0});
+      if(elementactu>0)
+		edges.add({ from: elementactu, to: idproc });
+    }
+    //if(prcid>0)
+   // edges.add({ from: prcid, to: idproc });
+    console.log("nodes extendido ",nodes);
+    
+    console.log("edges extendido ",edges);
+        console.log("procesos a registrar ",procsDep);
+
+    } 
     // create a network
     var container = document.getElementById('mynetwork');
 
@@ -853,7 +914,7 @@ function getNodeById(data, id) {
       $(nodes._data).each(function(index, element) {
         for(var i in element)
         $(element [i]).each(function(index2, element2) {
-          if(idproc!=element2.id)
+          if(idproc!=element2.id && element2.id!=elementactu)
           procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
         });
       });
@@ -886,8 +947,8 @@ function getNodeById(data, id) {
         $(".custom-menu #firstli").show();
         $(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
       }
-      else 	
-      $(".custom-menu #firstli").hide();
+      //else 	
+     // $(".custom-menu #firstli").hide();
       $(".custom-menu").css({
 
       top: nodeY + "px",
