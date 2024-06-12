@@ -41,11 +41,22 @@ namespace WebAdminScheduler.helpers
                   return LastIdNotif;
       }
 
+
+      public static CP_PROCESOS GetDataProc(WebAdminSchedulerContext WAContext,Int32 idproc)
+      {
+     
+        var q=(from d in WAContext.CP_PROCESOS
+       where d.IDPROC==idproc
+       select d).ToList().AsQueryable().FirstOrDefault();  
+
+       return q;        
+      }
+
       public static  ArrayList getHijos(WebAdminSchedulerContext WAContext,int idproc)
       {
          ArrayList conections = new ArrayList(); 
          WAContext.Database.OpenConnection();
-            String _query = "SELECT FP.parent_id FROM ("
+            String _query = "SELECT distinct FP.parent_id FROM ("
             + " WITH dependenciatree(id, parent_id, path) AS (" 
             + " SELECT  idPROC,0 parent_id,TO_CHAR(idPROC) AS path FROM "
             + "        APP_SCL_ALTAMIRA.CP_PROCESOS cp WHERE CP.IDPROC NOT IN( "
@@ -153,15 +164,15 @@ namespace WebAdminScheduler.helpers
                                 //nodos.Add(new { id=parentid,connections=conections,level=level});
                          
                              conections  =getHijos( WAContext,Int32.Parse(vpath));
-    
+                            CP_PROCESOS dataproc=  GetDataProc( WAContext,Int32.Parse(vpath));
+                              
                           if(conteoregistro==0)
                           {     
-                            
                                  Console.WriteLine("no existe el nivel 0");
                                  if(Int32.Parse(vpath)==idproc)
-                                 nodotmp.Add(new {  x=0,y=0,id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
+                                 nodotmp.Add(new {  x=0,y=0,title="("+dataproc.IDPROC+")"+dataproc.NOMBRE+"<BR/>"+dataproc.DESCRIPCION,id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
                                  else 
-                                  nodotmp.Add(new { id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
+                                  nodotmp.Add(new { title="("+dataproc.IDPROC+")"+dataproc.NOMBRE+"<BR/>"+dataproc.DESCRIPCION,id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
                              
                                 niveles.Add(nodotmp);
                                 listnodos.Add(Int32.Parse(vpath));
@@ -173,7 +184,7 @@ namespace WebAdminScheduler.helpers
                            nodotmp.Add(new { id=Int32.Parse(vpath),connections=conections,level=conteoniveles});
                                    if(!listnodos.Contains(Int32.Parse(vpath)))
                                   {
-                                  nodotmp2.Add(new { id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
+                                  nodotmp2.Add(new { title="("+dataproc.IDPROC+")"+dataproc.NOMBRE+"<BR/>"+dataproc.DESCRIPCION,id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
                                  niveles.Add(nodotmp2);
                                  listnodos.Add(Int32.Parse(vpath));
                                  conteonodos=conteonodos+1;

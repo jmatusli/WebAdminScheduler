@@ -377,7 +377,7 @@ namespace WebAdminScheduler.Controllers
             + " WHERE cp.idproc = :id_proc";*/
 
               String _query = "SELECT cp.IDPROC,cp.NOMBRE"
-            +" FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp WHERE DEPENDENCIA=1 ";
+            +" FROM APP_SCL_ALTAMIRA.CP_PROCESOS cp ";
  
             Console.WriteLine(" EN EJECUCION "+_query);
             OracleCommand oraCommand = new OracleCommand(_query,
