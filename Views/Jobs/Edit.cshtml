@@ -962,7 +962,7 @@ function utf8_decode(strData) {
 		var networkNodes = [];
 		
 		data.forEach(function(elem, index, array) {
-			networkNodes.push({id: elem.id, title:utf8_decode(elem.title),label: String(elem.id), /*x: elem.x, y: elem.y,*/level:elem.level,title:elem.title});
+		 	networkNodes.push({id: elem.id, title:utf8_decode(elem.title),label: String(elem.id), /*x: elem.x, y: elem.y,*/level:elem.level});
 		});
 		
 		return new vis.DataSet(networkNodes);
