@@ -878,25 +878,30 @@ function getNodeById(data, id) {
 
     } 
 
-   var data = {
-    nodes: nodes,
-    edges: edges
-  };
-  var options = {
-    physics:true,
-    configure:function (option, path) {
-      if (path.indexOf('smooth') !== -1 || option === 'smooth') {
-        return true;
-      }
-      return false;
-    },
-    edges: {
-      smooth: {
-        type: 'continuous'
-      }
-    }
-  };
-  var network = new vis.Network(container, data, options);
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+
+	var options = {
+		edges: {
+			smooth: {
+				type: 'cubicBezier',
+				forceDirection:  'vertical',
+				roundness: 0.4
+			}
+		},
+		layout: {
+			hierarchical: {
+				direction: 'UD'
+			}
+		},
+		physics:false
+	};
+
+    network = new vis.Network(container, data, options);
  
     network.on("click", function (params) {
 		  $(".custom-menu").hide(100);
