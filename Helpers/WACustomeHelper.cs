@@ -88,6 +88,23 @@ namespace WebAdminScheduler.helpers
             return  (conections.Count>0? conections:null);
             
       }
+
+       public static String Decode(string Path)
+    {
+        String text;
+        Byte[] bytes;
+        using (StreamReader sr = new StreamReader(Path))
+        {
+            text = sr.ReadToEnd();
+            UTF8Encoding Encoding = new UTF8Encoding();
+            bytes = Encoding.GetBytes(text);
+            text = Encoding.GetString(bytes);
+            return text;
+        }
+    } 
+
+
+
        public static  List<List<object>> GetAllProcs(WebAdminSchedulerContext WAContext,int idproc)
       {
          
@@ -170,9 +187,9 @@ namespace WebAdminScheduler.helpers
                           {     
                                  Console.WriteLine("no existe el nivel 0");
                                  if(Int32.Parse(vpath)==idproc)
-                                 nodotmp.Add(new {  x=0,y=0,title="("+dataproc.IDPROC+")"+dataproc.NOMBRE+"<BR/>"+dataproc.DESCRIPCION,id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
+                                 nodotmp.Add(new {  x=0,y=0,title="("+dataproc.IDPROC+")"+Decode(dataproc.NOMBRE)+"<BR/>"+Decode(dataproc.DESCRIPCION),id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
                                  else 
-                                  nodotmp.Add(new { title="("+dataproc.IDPROC+")"+dataproc.NOMBRE+"<BR/>"+dataproc.DESCRIPCION,id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
+                                  nodotmp.Add(new { title="("+dataproc.IDPROC+")"+Decode(dataproc.NOMBRE)+"<BR/>"+Decode(dataproc.DESCRIPCION),id=Int32.Parse(vpath),connections=(!conections.Contains(0)?conections:[]),level=conteoniveles});
                              
                                 niveles.Add(nodotmp);
                                 listnodos.Add(Int32.Parse(vpath));

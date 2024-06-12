@@ -2,6 +2,7 @@
 ViewData["Title"] = "Edit";
 }
 <head>
+<meta charset="utf-8">
 	<link rel="stylesheet" href="~/css/datatables.min.css" />
 	<link rel="stylesheet" href="~/lib/Toast/dist/jquery.toast.min.css" />
 	<link rel="stylesheet" href="~/lib/bootstrap/3.3.4/css/bootstrap.min.css" /> 
@@ -932,7 +933,7 @@ function utf8_decode(strData) {
 			node.connections.forEach(function(connId, cIndex, conns) {
 			  var color="";
   color=getRandomColor();
-				networkEdges.push({from: node.id, to: connId,arrows:'to',color: {
+				networkEdges.push({from: node.id, to: connId,arrows:'from',color: {
       color:color,
       highlight:color,
       hover: color,
