@@ -281,7 +281,7 @@ namespace WebAdminScheduler.Controllers
                     // cpprocesos.nombre=oraReader.GetString(2);
                     CP_PROCESOS cp_procesos = new CP_PROCESOS();
                     /*  cp_procesos.IDPROC */ var idproc= oraReader.GetInt32(0);
-                    /* cp_procesos.IDCONEX*/  var usuario= oraReader.GetString(18);
+                    /* cp_procesos.IDCONEX*/  var usuario= oraReader.GetString(19);
                     /*cp_procesos.NOMBRE*/ var nombre= oraReader.GetString(2);
                     /*cp_procesos.DESCRIPCION */var descripcion= oraReader.GetString(3);
 

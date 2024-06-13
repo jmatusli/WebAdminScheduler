@@ -364,6 +364,7 @@ ViewData["Title"] = "Edit";
 	params.idproc=idproc;
 	
 	var id_conex = "@Model.IDCONEX";
+	 
 	var nombre = "@Model.NOMBRE";
 	var descripcion = "@Model.DESCRIPCION";
 	var path = "@Model.PATH";
@@ -425,6 +426,8 @@ jQuery.ajax({
     includeFilterClearBtn: true,
     enableCaseInsensitiveFiltering: true
           });  
+		  
+		  $("#slcUptIdConex").val(id_conex).multiselect("refresh");
           
 	}
      
@@ -473,8 +476,7 @@ jQuery.ajax({
 	};
 	
 	$(document).ready( function () {
-		$("#slcUptIdConex").val(id_conex);
-		$("#txtUptNombre").val(nombre);
+		 $("#txtUptNombre").val(nombre);
 		$("#txtUptDescripcion").val(descripcion.decodeHTML());
 		$("#txtUptPath").val(path);
 		$("#txtUptParametro1").val(param1.decodeHTML());
