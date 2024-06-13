@@ -9,7 +9,7 @@ namespace WebAdminScheduler.Models
         public string? USUARIO { get; set; }
         public string? PASSWORD { get; set; }
         public string? SERVICIO { get; set; }
-        public string? DLINK { get; set; }
+        public string? DBLINK { get; set; }
         public string? TIPO { get; set; }
     }
 }

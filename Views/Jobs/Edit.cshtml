@@ -82,20 +82,30 @@ ViewData["Title"] = "Edit";
 		<a id="btnSaveJobs" onclick="GuardarJobs()" class="btn btn-primary">Guardar</a>
 	</div>
 	<div class="card-body">
-		<div class="row g-4 align-items-center">
+	<div class="container">
+		<div class="row">
 			<div class="col-auto">
 				<label for="TittleProc" class="col-form-label">IDPROC</label>
 			</div>
 			<div class="col-auto">
 				<label for="txtIdProc" class="col-form-label">@Model.IDPROC</label>
 			</div>
+			</div>
+			</div>
+		<br />	
+		<div class="container">
+		<div class="row">	
 			<div class="col-auto">
-				<label for="TittleConex" class="col-form-label">IDCONEX</label>
+				<label for="TittleConex" class="col-form-label">CONEXION</label>
 			</div>
 			<div class="col-auto">
-				<input type="number" min="1" class="form-control" data-placement="right" data-align="top" data-autoclose="true" id="IdUptConex" name="IdUptConex">
+			  <select class="form-control" id="slcUptIdConex">
+            <option value="0">Seleccione Conexion</option>
+          </select>
+			
 			</div>
 		</div>
+	 </div>
 		<br />
 		
 		<div class="container">
@@ -391,6 +401,37 @@ ViewData["Title"] = "Edit";
 	var network = null;
 	
 	/*******************************************/
+	function cargarDatos() {
+jQuery.ajax({
+    method: "POST",
+    async: true,
+    data: {},
+    url: "@Url.Action("ListConexions","Jobs")",
+
+    success: function (data) {
+      let elementid=0;
+      
+       $(data.data).each(function(index, element){
+          
+               $('#slcUptIdConex')
+            .append($('<option>')
+            .text(element.usuario)
+            .attr('value', element.idconex));
+          });
+          
+          $('#slcUptIdConex').multiselect({
+            includeSelectAllOption: true,
+             enableFiltering: true,
+    includeFilterClearBtn: true,
+    enableCaseInsensitiveFiltering: true
+          });  
+          
+	}
+     
+        });
+
+  }
+	
 	//funcion para validar existencia del nombre de un proceso.
 	function verifyName()
 	{
@@ -432,7 +473,7 @@ ViewData["Title"] = "Edit";
 	};
 	
 	$(document).ready( function () {
-		$("#IdUptConex").val(id_conex);
+		$("#slcUptIdConex").val(id_conex);
 		$("#txtUptNombre").val(nombre);
 		$("#txtUptDescripcion").val(descripcion.decodeHTML());
 		$("#txtUptPath").val(path);
@@ -691,12 +732,12 @@ ViewData["Title"] = "Edit";
 			verifyName();
 		});
 		
-	
+	cargarDatos()
 		
 	});//fin document ready jquery
 	
 	function GuardarJobs() {
-		id_conex = $('#IdUptConex').val();
+		id_conex = $('#slcUptIdConex').val();
 		nombre = $('#txtUptNombre').val();
 		descripcion = $('#txtUptDescripcion').val();
 		path = $('#txtUptPath').val();
@@ -766,7 +807,7 @@ ViewData["Title"] = "Edit";
 				}
 			});
 			} else {
-			$("#IdUptConex").val("");
+			$("#slcUptIdConex").val("");
 			$("#txtUptNombre").val("");
 			$("#txtUptDescripcion").val("");
 			$("#txtUptPath").val("");

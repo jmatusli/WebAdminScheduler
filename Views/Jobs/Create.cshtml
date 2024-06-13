@@ -77,20 +77,29 @@
   </div>
   <div class="card-body">
     
-     <div class="row g-4 align-items-center">
-      <div class="col-auto">
+<div class="container">
+      <div class="row">      
+		  <div class="col-auto">
         <label for="TittleConex" class="col-form-label"> Registro   (@ViewBag.LastIdproc)</label>
       </div>
        
     </div>   
+    </div>   
     <br /> 
-    <div class="row g-4 align-items-center">
+    <div class="container">
+      <div class="row">
       <div class="col-auto">
-        <label for="TittleConex" class="col-form-label">IDCONEX</label>
+        <label for="TittleConex" class="col-form-label">CONEXION</label>
       </div>
       <div class="col-auto">
-        <input type="number" min="1" class="form-control clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="txtIdConex" name="txtIdConex">
-      </div>
+        <div class="">
+            <select class="form-control" id="slcIdConex">
+            <option value="0">Seleccione Conexion</option>
+          </select>
+        </div> 
+	  
+	  </div>
+    </div>
     </div>
     <br />
 
@@ -508,7 +517,7 @@ $.ajax({
     });
 
     $("#saveJob").on("click",function() {
-      var id_conex = $('#txtIdConex').val();
+      var id_conex = $('#slcIdConex').val();
       var nombre = $('#txtNombre').val();
       var descripcion = $('#txtDescripcion').val();
       var path = $('#txtPath').val();
@@ -541,7 +550,7 @@ $.ajax({
           "INTENTOS" : intentos,
           "ESPERA_INTENTO" : espera_intento,
           "ESTADO" : "Activo",
-          "IDNOTIF" : 0,
+          "IDNOTIF" : notificaciones,
           "FTP" : ftp,
           "IDHOST" : id_host,
           "COMPRESION" : compresion,
@@ -626,7 +635,7 @@ $.ajax({
       }
     });
   }// Fin else
-
+  
 })      
 
   $('.bd-example-modal-sm .btnexport').on('click', function(e) {
@@ -728,7 +737,7 @@ $.ajax({
   verifyName();
 });
 
-
+ cargarDatos();
 
 });
 
@@ -737,7 +746,39 @@ $.ajax({
   var nodes = null;
   var edges = null;
   var network = null;
+function cargarDatos() {
+jQuery.ajax({
+    method: "POST",
+    async: true,
+    data: {},
+    url: "@Url.Action("ListConexions","Jobs")",
 
+    success: function (data) {
+      let elementid=0;
+      
+       $(data.data).each(function(index, element){
+          
+               $('#slcIdConex')
+            .append($('<option>')
+            .text(element.usuario)
+            .attr('value', element.idconex));
+          });
+          
+          $('#slcIdConex').multiselect({
+            includeSelectAllOption: true,
+             enableFiltering: true,
+    includeFilterClearBtn: true,
+    enableCaseInsensitiveFiltering: true
+          });  
+          
+	}
+     
+        });
+
+  }
+ 
+ 
+	
     function importNetwork(prc_id) {
     if (prc_id != 0) {
     jQuery.ajax({

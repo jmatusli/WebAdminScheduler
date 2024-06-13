@@ -598,6 +598,20 @@ namespace WebAdminScheduler.Controllers
            return Json( new { error = error, msg =msg });  
         }
 
+        [HttpPost]
+        public JsonResult ListConexions()
+        {
+      
+
+         List<CP_CONEXION> data = (from s in _DBContext.CP_CONEXION
+         orderby s.IDCONEX ascending
+                                select s).ToList().AsQueryable().ToList();
+                     
+           
+           return Json(new {Data = data });
+        }
+
+
         
     }
 }

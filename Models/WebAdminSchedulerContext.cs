@@ -251,7 +251,7 @@ namespace WebAdminScheduler.Models
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DLINK)
+                entity.Property(e => e.DBLINK)
                     .HasMaxLength(7)
                     .IsUnicode(false);
 
