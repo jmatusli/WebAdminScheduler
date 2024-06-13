@@ -770,6 +770,10 @@ jQuery.ajax({
     includeFilterClearBtn: true,
     enableCaseInsensitiveFiltering: true
           });  
+		  
+		   $("#slcIdConex").next().find("input[type='radio'] ").prop("checked", false);
+		  $("#slcIdConex").multiselect("clearSelection");
+		  $("#slcIdConex").val(0).multiselect("refresh");
           
 	}
      
