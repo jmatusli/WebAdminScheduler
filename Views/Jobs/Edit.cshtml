@@ -71,7 +71,13 @@ ViewData["Title"] = "Edit";
  color: rgb(26, 26, 26); 
  background: #D7DBDD!important; 
  border-radius: 10px!important; box-shadow: #717D7E 5px 5px 10px!important; position: relative;
- }
+ } 
+ .caret {
+position: absolute;
+left: 90%;
+top: 45%;
+background-repeat: no-repeat;
+}
 	</style>
 </head>
 
@@ -426,7 +432,8 @@ jQuery.ajax({
     includeFilterClearBtn: true,
     enableCaseInsensitiveFiltering: true
           });  
-		  
+		  $("#slcUptIdConex").next().find("input[type='radio'] ").prop("checked", false);
+		  $("#slcUptIdConex").multiselect("clearSelection");
 		  $("#slcUptIdConex").val(id_conex).multiselect("refresh");
           
 	}
