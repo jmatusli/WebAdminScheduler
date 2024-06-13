@@ -22,8 +22,8 @@ ViewData["Title"] = "Edit";
 	
 	<style>
 		#mynetwork {
-		width: 700px;
-		height: 450px;
+		width: 90vw;
+		height: 85%;
 		border: 1px solid lightgray;
 		align:center;
 		}
@@ -75,6 +75,14 @@ ViewData["Title"] = "Edit";
  .caret{
 display:none!important;
 }
+
+
+.modal-fullscreen {
+    width: 95vw !important;
+    max-width: none;
+    height: 90% !important;
+    
+}
 	</style>
 </head>
 
@@ -103,7 +111,7 @@ display:none!important;
 			</div>
 			<div class="col-auto">
 			  <select class="form-control" id="slcUptIdConex">
-            <option value="0">Seleccione Conexion</option>
+            <option value="-1">Seleccione Conexion</option>
           </select>
 			
 			</div>
@@ -314,7 +322,7 @@ display:none!important;
 </div>
 
 <div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="basicModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-fullscreen">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel">Dependencias</h4>
