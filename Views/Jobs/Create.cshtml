@@ -724,7 +724,7 @@ $.ajax({
           $(response).each(function(index,item){
             $('#multiple-checkboxes')
             .append($('<option>')
-            .text(item.nombre)
+            .text("("+item.idproc+")"+item.nombre)
             .attr('value', item.idproc));
           });
           
