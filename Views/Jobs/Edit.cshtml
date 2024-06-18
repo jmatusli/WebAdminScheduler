@@ -696,9 +696,9 @@ jQuery.ajax({
 						if(element.level==1)
 						procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
 						/*nodesnew= nodes;
-						edgesnew= edges;
+						edgesnew= edges;*/
 						   
-						importNetwork(element.id);*/
+						importNetwork(element.id);
 					});
 					
 					//$(".bd-example-modal-sm").modal("hide");
@@ -1053,7 +1053,7 @@ function utf8_decode(strData) {
 						if(element.level==1){
 							console.log("iterando  ",element);
 							//elementid=element.id;
-							procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
+							//procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
 							/*inclevelactu +=inclevelactu;
 							procsNet.push({ id: element.id, label: element.id,level:inclevelactu});
 					        edgeNet.push({ from: elementactu, to: element.id });
@@ -1084,7 +1084,7 @@ function utf8_decode(strData) {
 	
 	//funcion draw que se encarga de pintar el arbol de nodos
 	function draw(dataNodes,flag=false,prcid=0,prccid=0) {
-		destroy();
+		//destroy();
 		
 		nodestmp=getNodeData(dataNodes.data);
 		edgestmp= getEdgeData(dataNodes.data);
