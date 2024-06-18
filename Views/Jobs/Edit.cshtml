@@ -665,6 +665,7 @@ jQuery.ajax({
 			/* evento click boton modal para  agregar dependencia nodo */ 
 			
 			$('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
+				alert(nextnode)
 				let nodeTmp=getNode(nextnode);
 				if(nodeTmp!=undefined)
 				{
@@ -688,18 +689,20 @@ jQuery.ajax({
 					var arData = $.map(arrayData,function(val,key) {
 						if(Number(val.id) !=nodeId) return val;
 					});
+					console.log("arData ",arData);
 					
 					//verificamos si el proceso seleccionado ya ha sido agregado al arreglo procsDep usado al guardar.
 					$(arData).each(function(index, element) {
-						if(element.id!=idproc)
+						if(element.level==1)
 						procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
-						nodesnew= nodes;
+						/*nodesnew= nodes;
 						edgesnew= edges;
 						   
-						importNetwork(element.id);
+						importNetwork(element.id);*/
 					});
 					
 					//$(".bd-example-modal-sm").modal("hide");
+					console.log("emos actualizado esto ",procsDep)
 					network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}});
 				}
 				
@@ -1046,20 +1049,20 @@ function utf8_decode(strData) {
 					let elementid=0;
 					console.log("esto viene del getall ",data);
 					let inclevelactu=levelactu;
-				/* 	$(data.data).each(function(index, element){
-						if(element.id!=prc_id && element.id!=elementactu){
-							console.log("iterando  ",element.id);
-							elementid=element.id;
+					$(data.data).each(function(index, element){
+						if(element.level==1){
+							console.log("iterando  ",element);
+							//elementid=element.id;
 							procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
-							inclevelactu +=inclevelactu;
+							/*inclevelactu +=inclevelactu;
 							procsNet.push({ id: element.id, label: element.id,level:inclevelactu});
 					        edgeNet.push({ from: elementactu, to: element.id });
 							
 							console.log("edges ",edgeNet);
-							console.log("procsNet ",procsNet);
+							console.log("procsNet ",procsNet);*/
 						}
 					});
-				*/
+				
 					console.log("los nodos a procesar en el save serian ",procsDep)
 					console.log("data,true,prc_id,elementid ",prc_id,"---",elementid);
 					draw(data,true,prc_id,elementid);
@@ -1148,8 +1151,7 @@ for (let i in datatmp) {
     },
 	
   };
-  var network = new vis.Network(container, data, options);
-		
+  		
 		//recorrido de nodos actuales obtenidos en peticion 
 		/*$(nodes._data).each(function(index, element) {
 			for(var i in element)
@@ -1197,7 +1199,10 @@ for (let i in datatmp) {
 		network.on("oncontext", function (params) {
 			
 			nodeId=this.getNodeAt(params.pointer.DOM);
-			
+			nodoSelected=getNode(nodeId);
+			if(nodoSelected.level<=1)
+			{ 
+          
 			if(nodeId!=undefined){
 				var { x: nodeX, y: nodeY } = network.canvasToDOM(
 				network.getPositions([nodeId])[nodeId]
@@ -1208,8 +1213,13 @@ for (let i in datatmp) {
 				
 				//if(nodes._data[nodeId].level+1==1)
 				//{ 
-					$(".custom-menu #firstli").show();
-					$(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
+					
+					$(".custom-menu #firstli").hide();
+					if(nodoSelected.level==0){ 
+                     $(".custom-menu #firstli").show();
+                     $(".custom-menu #firstli").html("Agregar dependencia "+nodeId);
+					}
+					
 				//}
 				//else 	
 				// $(".custom-menu #firstli").hide();
@@ -1219,6 +1229,9 @@ for (let i in datatmp) {
 					left: nodeX + "px"
 				});
 			}
+			}
+			else 
+			return false;
 		});
 		/*fin evento para el menu contextual al dar click derecho en algun nodo*/
 	    	

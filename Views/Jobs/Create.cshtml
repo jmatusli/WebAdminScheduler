@@ -671,16 +671,16 @@ $.ajax({
 		edges.add({ from: nodeId, to: nextnode });
 
    var arrayData=nodes._data;
-    procsDep=[];
+
     var arData = $.map(arrayData,function(val,key) {
     if(Number(val.id) !=nodeId) return val;
     });
-    $(arData).each(function(index, element) {
-      procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element.id});
+    /*$(arData).each(function(index, element) {*/
+      procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":nextnode});/*1*/
      	
-      importNetwork(element.id);
+      importNetwork(nextnode);
        
-    });
+    /*});*/
   
     network.moveTo({offset:{x:120,y:50}, position: {x:120, y: 150}})
 
@@ -805,14 +805,15 @@ jQuery.ajax({
     success: function (data) {
       let elementid=0;
       console.log("esto viene del getall ",data);
-       $(data.data).each(function(index, element){
+    
+       /*$(data.data).each(function(index, element){
         if(element.id!=prc_id){
           console.log("iterando  ",element.id);
           elementid=element.id;
-       procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
+       procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id}); /*2*/
        
-      }
-        });
+     /* }
+        });*/
 
         console.log("los nodos a procesar en el save serian ",procsDep)
       draw(data,true,prc_id,elementid);
@@ -1025,9 +1026,11 @@ function getNodeById(data, id) {
   
 
   function draw(dataNodes,flag=false,prcid=0,prccid=0) {
-    destroy();
+   
 
-
+    if(!flag)
+    {
+    destroy();  
     nodes = new vis.DataSet([
       {id: LastIdproc, label: LastIdproc,level:0},
     ]);
@@ -1036,7 +1039,7 @@ function getNodeById(data, id) {
      edges = new vis.DataSet([
       //  {from: LastIdproc, to: 2},
     ]);        
-		
+		}
     
     if(flag)
     {
@@ -1167,7 +1170,7 @@ network.moveTo({offset:{x:120,y:0}, position: {x:120, y: 150}})
       nodes.remove(nodeId);
       edges.remove(nodeId);
 
-        procsDep=[];
+       /* procsDep=[];
         $(nodes._data).each(function(index, element){
            
         for(var i in element)
@@ -1176,7 +1179,7 @@ network.moveTo({offset:{x:120,y:0}, position: {x:120, y: 150}})
         if(LastIdproc!=element2.id)
         procsDep.push({"IDPROC":LastIdproc,"IDPROC_DEP":element2.id});
         });
-      });
+      });*/
     }
 
 		break;

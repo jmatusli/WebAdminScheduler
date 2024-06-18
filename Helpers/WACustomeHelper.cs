@@ -5,7 +5,8 @@ using Oracle.ManagedDataAccess.Client;
 using System.Collections;
 using System.Linq.Dynamic.Core;
 using WebAdminScheduler.Models;
-using System.Linq; 
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebAdminScheduler.helpers
 {
@@ -154,6 +155,7 @@ namespace WebAdminScheduler.helpers
                 String[] path2= oraReader.GetString(2).Split('-');
                 var level=oraReader.GetInt32(3);
                 path=  Enumerable.Reverse(path).ToArray();
+                
                   Console.WriteLine("longitud de matriz path "+path2.Count());
                  
  
@@ -170,7 +172,9 @@ namespace WebAdminScheduler.helpers
                          
                              conections  =getHijos( WAContext,Int32.Parse(vpath));
                             CP_PROCESOS dataproc=  GetDataProc( WAContext,Int32.Parse(vpath));
-                              
+                          
+                  
+                            
                           if(conteoregistro==0)
                           {     
                                  Console.WriteLine("no existe el nivel 0");
