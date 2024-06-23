@@ -571,7 +571,7 @@ $.ajax({
         "oDependencias" : procsDep
       };
     
-    if ((id_conex == "")) {  //COMPRUEBA CAMPOS VACIOS
+    if ((id_conex < 0)) {  //COMPRUEBA CAMPOS VACIOS
       Swal.fire ('Porfavor registre el campo id conexión', 'error')
       return false;
     }

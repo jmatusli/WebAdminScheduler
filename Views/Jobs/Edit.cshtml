@@ -1039,6 +1039,8 @@ function utf8_decode(strData) {
 	function importNetwork(prc_id) {
         console.log("para el import ",prc_id);
 		if (prc_id != 0) {
+
+
 			jQuery.ajax({
 				method: "POST",
 				async: true,
@@ -1049,10 +1051,12 @@ function utf8_decode(strData) {
 					let elementid=0;
 					console.log("esto viene del getall ",data);
 					let inclevelactu=levelactu;
+					console.log("procsDep inicial  ",procsDep);
 					$(data.data).each(function(index, element){
 						if(element.level==1){
 							console.log("iterando  ",element);
-							//elementid=element.id;
+				
+							elementid=element.id;
 							//procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
 							/*inclevelactu +=inclevelactu;
 							procsNet.push({ id: element.id, label: element.id,level:inclevelactu});
@@ -1104,7 +1108,9 @@ function utf8_decode(strData) {
 		nodes  =nodestmp; 
 		edges  =edgestmp; 
 	   }
-	      datatmp=nodes._data;
+	    			
+		
+		  datatmp=nodes._data;
 	   console.log("nodos extendidos ",nodes["_data"]);
 	   console.log("edges extendidos ",edges["_data"]);
 	
