@@ -665,7 +665,7 @@ jQuery.ajax({
 			/* evento click boton modal para  agregar dependencia nodo */ 
 			
 			$('.bd-example-modal-sm .btnaddDep').on('click', function(e) {
-				alert(nextnode)
+			 
 				let nodeTmp=getNode(nextnode);
 				if(nodeTmp!=undefined)
 				{
@@ -679,7 +679,8 @@ jQuery.ajax({
 					
 					$(this).attr("disabled",true);
 					let nextlevel=nodes._data[nodeId].level+1;
-					
+					 
+					 
 					nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
 					edges.add({ from: nodeId, to: nextnode });
 					elementactu=nextnode;
@@ -1069,6 +1070,14 @@ function utf8_decode(strData) {
 				
 					console.log("los nodos a procesar en el save serian ",procsDep)
 					console.log("data,true,prc_id,elementid ",prc_id,"---",elementid);
+
+					/*
+						nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
+				
+					
+					*/
+					console.log("midata  inicial ",nodes)
+					console.log("midata ",data.data)
 					draw(data,true,prc_id,elementid);
 				}
 			});
@@ -1092,21 +1101,26 @@ function utf8_decode(strData) {
 		
 		nodestmp=getNodeData(dataNodes.data);
 		edgestmp= getEdgeData(dataNodes.data);
-		
-		if(nodesnew!=null && edgesnew!=null){
+		console.log(" tiene _data ",nodestmp._data);
+		console.log(" tiene nodes x  ",nodes);
+		/*if(nodesnew!=null && edgesnew!=null){
 	    nodes=nodesnew;
 	    edges=edgesnew;
-		}   
+		}  */ 
 		   console.log("nodos extendidos ",nodes);
 	   console.log("edges extendidos ",edges);
 	   if(nodes!=null && edges!=null){
-	   $.extend( nodes, nodestmp);    
-	   $.extend( edges, edgestmp);    
+		 console.log("hay valores extendemos nodes con nodestmp ",nodes,"  nodestmp ",nodestmp);
+	   $.extend( nodes._data, nodestmp._data);    
+	   $.extend( edges._data, edgestmp._data);    
 	   }
 	   else
 	   {
+			 console.log("no hay valores extendemos nodes con nodestmp ",nodes);
 		nodes  =nodestmp; 
 		edges  =edgestmp; 
+
+		 console.log("no hay valores extendemos nodes con nodestmp ",nodes);
 	   }
 	    			
 		
@@ -1123,7 +1137,7 @@ for (let i in datatmp) {
  $.extend( nodes._data, nodestmp._data );
  
 
-	
+
 	 
 		// obtenemos el id del div que contendra la red de nodos
 		var container = document.getElementById('mynetwork');
