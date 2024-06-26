@@ -1,3 +1,5 @@
+@using WebAdminScheduler.Models
+@model dynamic
 @{
 ViewData["Title"] = "Edit";
 }
@@ -99,7 +101,7 @@ display:none!important;
 				<label for="TittleProc" class="col-form-label">IDPROC</label>
 			</div>
 			<div class="col-auto">
-				<label for="txtIdProc" class="col-form-label">@Model.IDPROC</label>
+				<label for="txtIdProc" class="col-form-label">@Model.process.IDPROC</label>
 			</div>
 			</div>
 			</div>
@@ -371,29 +373,30 @@ display:none!important;
 	var params={};
 	var table={};
 	var idjob="";
-	var idproc="@Model.IDPROC";
+	var idproc="@Model.process.IDPROC";
+ 
 	params.idproc=idproc;
 	
-	var id_conex = "@Model.IDCONEX";
+	var id_conex = "@Model.process.IDCONEX";
 	 
-	var nombre = "@Model.NOMBRE";
-	var descripcion = "@Model.DESCRIPCION";
-	var path = "@Model.PATH";
-	var param1 = "@Model.PARAMETRO1";
-	var param2 = "@Model.PARAMETRO2";
-	var param3 = "@Model.PARAMETRO3";
-	var param4 = "@Model.PARAMETRO4";
-	var dependencia = "@Model.DEPENDENCIA";
-	var intentos = "@Model.INTENTOS";
-	var espera_intento = "@Model.ESPERA_INTENTO";
-	var estado = "@Model.ESTADO";
-	var ftp = "@Model.FTP";
-	var id_host = "@Model.IDHOST";
-	var compresion = "@Model.COMPRESION";
-	var node = "@Model.NODE";
-	var id_notif = "@Model.IDNOTIF";
-	var idcrontab = "@Model.IDCRONTAB";
-	var selectedCrontab = "@Model.IDCRONTAB";
+	var nombre = "@Model.process.NOMBRE";
+	var descripcion = "@Model.process.DESCRIPCION";
+	var path = "@Model.process.PATH";
+	var param1 = "@Model.process.PARAMETRO1";
+	var param2 = "@Model.process.PARAMETRO2";
+	var param3 = "@Model.process.PARAMETRO3";
+	var param4 = "@Model.process.PARAMETRO4";
+	var dependencia = "@Model.process.DEPENDENCIA";
+	var intentos = "@Model.process.INTENTOS";
+	var espera_intento = "@Model.process.ESPERA_INTENTO";
+	var estado = "@Model.process.ESTADO";
+	var ftp = "@Model.process.FTP";
+	var id_host = "@Model.process.IDHOST";
+	var compresion = "@Model.process.COMPRESION";
+	var node = "@Model.process.NODE";
+	var id_notif = "@Model.process.IDNOTIF";
+	var idcrontab = "@Model.process.IDCRONTAB";
+	var selectedCrontab = "@Model.process.IDCRONTAB";
 	
 	/*declaracion variable usadas en nodos */
 	let procsDep=[];
@@ -411,7 +414,7 @@ display:none!important;
 	var nodes = null;
 	var edges = null;
 	var network = null;
-	
+
 	/*******************************************/
 	function cargarDatos() {
 jQuery.ajax({
@@ -444,6 +447,30 @@ jQuery.ajax({
 	}
      
         });
+
+
+jQuery.ajax({
+    method: "POST",
+    async: true,
+    data: {id:idproc},
+    url: "@Url.Action("ListDependencias","Jobs")",
+
+    success: function (data) {
+
+    
+$(data.data).each(function(index, element) {
+						 
+						procsDep.push({"IDPROC":element.idproc,"IDPROC_DEP":element.idproC_DEP});
+					 
+						 
+					});
+
+					 
+					
+	}});
+
+
+
 
   }
 	
@@ -749,7 +776,8 @@ jQuery.ajax({
 		$("#txtUptNombre").on("change",function(){
 			verifyName();
 		});
-		
+
+ 
 	cargarDatos()
 		
 	});//fin document ready jquery
@@ -1058,7 +1086,8 @@ function utf8_decode(strData) {
 							console.log("iterando  ",element);
 				
 							elementid=element.id;
-							//procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
+							procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
+								console.log("procsDep  ",procsDep);
 							/*inclevelactu +=inclevelactu;
 							procsNet.push({ id: element.id, label: element.id,level:inclevelactu});
 					        edgeNet.push({ from: elementactu, to: element.id });

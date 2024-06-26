@@ -11,6 +11,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using Newtonsoft.Json;
+using System.Dynamic;
 namespace WebAdminScheduler.Controllers
 {
     public class JobsController : Controller
@@ -102,9 +103,14 @@ namespace WebAdminScheduler.Controllers
         {
             CP_PROCESOS data = (from s in _DBContext.CP_PROCESOS.Where(x => x.IDPROC == id)
                                 select s).ToList().AsQueryable().FirstOrDefault();
+       
+ 
             ViewBag.IDPROC = id;
             //ViewBag.data=data;
-            return View(data);
+             dynamic object_model = new ExpandoObject();
+        object_model.process = data;
+  
+            return View(object_model);
         }
 
         [HttpPost]
@@ -605,6 +611,18 @@ namespace WebAdminScheduler.Controllers
 
          List<CP_CONEXION> data = (from s in _DBContext.CP_CONEXION
          orderby s.IDCONEX ascending
+                                select s).ToList().AsQueryable().ToList();
+                     
+           
+           return Json(new {Data = data });
+        }
+ [HttpPost]
+        public JsonResult ListDependencias(int id)
+        {
+      
+
+         List<CP_DEPENDENCIAS> data = (from s in _DBContext.CP_DEPENDENCIAS.Where(x => x.IDPROC == id)
+         orderby s.IDDEP ascending
                                 select s).ToList().AsQueryable().ToList();
                      
            
