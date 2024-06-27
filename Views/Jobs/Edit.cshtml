@@ -464,7 +464,7 @@ $(data.data).each(function(index, element) {
 					 
 						 
 					});
-
+console.log("dependencias encontradas para usar en el save no visualizacion ",procsDep)
 					 
 					
 	}});
@@ -707,22 +707,38 @@ $(data.data).each(function(index, element) {
 					$(this).attr("disabled",true);
 					let nextlevel=nodes._data[nodeId].level+1;
 					 
+                    var arrayData=nodes._data;
+				console.log("demostrando el edit ",arrayData);
+					var arData2 = $.map(arrayData,function(val,key) {
+						 return val;
+					});
+					 var index = arData2.findIndex(p => p.id == nextnode);
+if(index>=0){
+
+console.log("lo encontramos en el edit ",index);
+	
+	return false;
+}			
 					 
 					nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
 					edges.add({ from: nodeId, to: nextnode });
 					elementactu=nextnode;
 					levelactu=nextlevel;
-					var arrayData=nodes._data;
-					procsDep=[];
+					 arrayData=nodes._data;
+					//procsDep=[];
 					var arData = $.map(arrayData,function(val,key) {
 						if(Number(val.id) !=nodeId) return val;
 					});
 					console.log("arData ",arData);
 					
+							procsDep.push({"IDPROC":idproc,"IDPROC_DEP":nextnode});
+							  		
 					//verificamos si el proceso seleccionado ya ha sido agregado al arreglo procsDep usado al guardar.
 					$(arData).each(function(index, element) {
-						if(element.level==1)
-						procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element.id});
+			console.log("evaluamos datos para agregar a arreglo a guardar  ",element);
+								
+						
+						
 						/*nodesnew= nodes;
 						edgesnew= edges;*/
 						   
@@ -1065,6 +1081,23 @@ function utf8_decode(strData) {
 		throw 'Can not find id \'' + id + '\' in data';
 	}
 	/************************************************************************/
+
+	function getEdgeBetweenNodes(node1,node2) {
+    return edges.get().filter(function (edge) {
+        return (edge.from === node1 && edge.to === node2 )|| (edge.from === node2 && edge.to === node1);
+    });
+};
+
+function getEdgesOfNode(nodeId) {
+  return edges.get().filter(function (edge) {
+      if(edge.from === nodeId && edge.to !=idproc)
+	  nodes.remove(edge.to);
+	  if(edge.to === nodeId && edge.from !=idproc)
+	  nodes.remove(edge.from);
+
+    return edge.from != nodeId && edge.to != nodeId;
+  });
+}
 	function importNetwork(prc_id) {
         console.log("para el import ",prc_id);
 		if (prc_id != 0) {
@@ -1078,35 +1111,7 @@ function utf8_decode(strData) {
 				
 				success: function (data) {
 					let elementid=0;
-					console.log("esto viene del getall ",data);
-					let inclevelactu=levelactu;
-					console.log("procsDep inicial  ",procsDep);
-					$(data.data).each(function(index, element){
-						if(element.level==1){
-							console.log("iterando  ",element);
-				
-							elementid=element.id;
-							procsDep.push({"IDPROC":prc_id,"IDPROC_DEP":element.id});
-								console.log("procsDep  ",procsDep);
-							/*inclevelactu +=inclevelactu;
-							procsNet.push({ id: element.id, label: element.id,level:inclevelactu});
-					        edgeNet.push({ from: elementactu, to: element.id });
-							
-							console.log("edges ",edgeNet);
-							console.log("procsNet ",procsNet);*/
-						}
-					});
-				
-					console.log("los nodos a procesar en el save serian ",procsDep)
-					console.log("data,true,prc_id,elementid ",prc_id,"---",elementid);
-
-					/*
-						nodes.add({ id: nextnode, label: nextnode,level:nextlevel});
-				
-					
-					*/
-					console.log("midata  inicial ",nodes)
-					console.log("midata ",data.data)
+			 
 					draw(data,true,prc_id,elementid);
 				}
 			});
@@ -1315,16 +1320,17 @@ for (let i in datatmp) {
 					if(nodeId!=idproc){ 
 						
 						nodes.remove(nodeId);
-						edges.remove(nodeId);
-						procsDep=[];
-						$(nodes._data).each(function(index, element) {
-							for(var i in element)
-							$(element [i]).each(function(index2, element2){
-								
-								if(idproc!=element2.id)
-								procsDep.push({"IDPROC":idproc,"IDPROC_DEP":element2.id});
+					//	edges.remove(nodeId);
+                     edges = getEdgesOfNode(nodeId);
+					
+console.log("edges luego de borrar  ",edges,"  el edge con id ",nodeId);
+
+
+                       console.log("vamos a borrar del array ",procsDep)
+							procsDep = procsDep.filter(function( obj ) {
+							return obj.IDPROC_DEP !== nodeId;
 							});
-						});
+						 console.log("despues de borrar ",procsDep)
 					}
 					
 					break;
